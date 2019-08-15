@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>选择对象</title>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <style type="text/css">
+    	.mui-content{
+    		height: 100%;
+    		padding-top: 0.77rem;
+    	}
+    	.mui-content-cont{
+    		height: calc(100vh - 4.5rem);
+    		background: #FFFFFF;
+    			padding: 0rem 1rem;
+    	}
+    	/*复选框的样式*/
+    	.mui-checkbox input[type=checkbox]:before {
+			content: '\e413';
+			font-size: 1.5rem;
+		}
+		.li-label input[type=checkbox]:before {
+			font-size: 3rem;
+			border: none;
+			color: #edf1f6;
+		}
+		.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio] {
+		    left: 0px;
+		}
+		.mui-checkbox input[type=checkbox]:checked:before {
+			content: '\e443';
+		}
+		.li-label input[type=checkbox]:checked:before {
+			content: '';
+		}
+		.mui-checkbox.mui-left label, .mui-radio.mui-left label {
+			padding-left: 30px;
+			font-size: 1rem;
+			margin-top: -3px;
+		}
+		.mui-input-row label {
+		    padding: 11px 15px;
+		}
+		/*布局*/
+		.generations{
+			padding-top: 1rem;
+		}
+		.grade{
+			height: calc(100vh - 7.9rem);
+			overflow: auto;
+		}
+		.grade>li{
+			margin-bottom: 1rem;
+		}
+  		.grade-class>li{
+  			width: 33.33%;
+  			height: 4.07rem;
+  			margin-top: 3%;
+  		}
+  		.grade>li>.mui-left{
+  			margin-top: 0.5rem;
+  		}
+  		.grade-class-li div{
+  			width: 90%;
+  			margin: 0 auto;
+  			background: #edf1f6;
+  			height: 4.07rem;
+  			line-height: 4.08rem;
+  			text-align: center;
+  		}
+ 		.liAktv>div{
+ 			background: #E7f1ff;
+ 			color: #3B8BFF;
+ 		}
+ 		/*按钮*/
+ 		.bnt>div{
+ 			height: 3.7rem;
+ 			text-align: center;
+ 			line-height: 3.7rem;
+ 			font-size: 1rem;
+ 		}
+ 		.bnt-left{
+ 			width: 30%;
+ 			color: #3b8bff;
+ 		}
+ 		.bnt-rnt{
+ 			width: 70%;
+ 			background: #3b8bff;
+ 			color: #FFFFFF;
+ 		}
+    </style>
+</head>
+<body>
+	<div class="mui-content">
+		<div class="mui-content-cont">
+			<div class="generations">
+				<div  class="mui-input-row mui-checkbox  mui-left parent-input">
+					<label>全选</label>
+					<input id="parent-input" name="zhege " type="checkbox" >
+				</div>
+			</div>
+			<ul id="grade" class="grade">
+				<li>
+					<div class="mui-input-row mui-checkbox mui-left subset-input">
+						<label>高2008级</label>
+						<input name="zhege " type="checkbox" >
+					</div>
+					<ul class="grade-class flex">
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<div class="mui-input-row mui-checkbox mui-left subset-input">
+						<label>高2008级</label>
+						<input name="zhege " type="checkbox" >
+					</div>
+					<ul class="grade-class flex">
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<div class="mui-input-row mui-checkbox mui-left subset-input">
+						<label>高2008级</label>
+						<input name="zhege " type="checkbox" >
+					</div>
+					<ul class="grade-class flex">
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<div class="mui-input-row mui-checkbox mui-left subset-input">
+						<label>高2008级</label>
+						<input name="zhege " type="checkbox" >
+					</div>
+					<ul class="grade-class flex">
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<div class="mui-input-row mui-checkbox mui-left subset-input">
+						<label>高2008级</label>
+						<input name="zhege " type="checkbox" >
+					</div>
+					<ul class="grade-class flex">
+						<li class="grade-class-li">
+							<div>
+								高中一班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中二班
+							</div>
+						</li>
+						<li class="grade-class-li">
+							<div>
+								高中三班
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="bnt flex">
+			<div class="bnt-left">重置</div>
+			<div class="bnt-rnt">确定(10)</div>
+		</div>
+	</div>
+	
+	 <script type="text/javascript" charset="utf-8">
+      	mui.init();
+		//父级全选/父级反选 
+		mui('.parent-input').on('change', 'input', function() {
+		    if(this.checked?"true":"false" == true){
+		    	$("#grade :checkbox").prop("checked", true);  
+		    	$('.grade-class-li').addClass('liAktv')
+		    }else{
+		    	$("#grade :checkbox").prop("checked", false);
+		    	$('.grade-class-li').removeClass('liAktv')
+		    }
+		});
+		//设置全选复选框
+		$("#grade :checkbox").click(function(){
+			allchk();
+		});
+		function allchk(){
+			var chknum = $("#grade :checkbox").length;//选项总个数
+			var chk = 0;
+			$("#grade :checkbox").each(function () {  
+		        if($(this).prop("checked")==true){
+					chk++;
+				}
+		   });
+			if(chknum==chk){//全选
+				$("#parent-input").prop("checked",true);
+			}else{//不全选
+				$("#parent-input").prop("checked",false);
+			}
+		}
+		//年级全选
+		mui('.subset-input').on('change', 'input', function() {
+		    if(this.checked?"true":"false" == true){
+		    	$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
+		    }else{
+		    	$(this).parent('div').siblings('ul').find('li').removeClass('liAktv')
+		    }
+		});
+		//点击li
+		$('.grade-class-li').click(function  () {
+			if($(this).hasClass('liAktv')){
+				$(this).removeClass('liAktv')
+			}else{
+				$(this).addClass('liAktv')
+			}
+			var li = $(this).parent('ul').find('li').length;
+			var liAktv = $(this).parent('ul').find('.liAktv').length;
+			if(li == liAktv){
+				$(this).parent('ul').siblings('div').find('input').prop('checked',true)
+			}else{
+				$(this).parent('ul').siblings('div').find('input').prop('checked',false)
+			}
+			allchk();
+		})
+		//重置
+		$('.bnt-left').click(function  () {
+			$('input:checked').prop('checked',false)
+			$('.grade-class-li').removeClass('liAktv')
+		})
+		
+    </script> 
+</body>
+</html>
