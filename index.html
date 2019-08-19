@@ -7,106 +7,169 @@
 	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css"/>
     <style type="text/css">
     	.mui-content{
-    		padding: 0rem 1rem;
     		background: #FFFFFF;
     		height: 100%;
     		padding-top: 0.77rem;
     	}
+    	.mui-bar-nav~.mui-content {
+		    padding-top: 60px;
+		}
     	/*卡片*/
     	.card{
+    		padding: 0rem 1rem;
+    	}
+    	.card-cont{
     		height: 8rem;
     		width: 100%;
     		background: #4C9cFc;
     		border-radius: 0.67rem;
     		box-shadow: 0px 2.5px 13px 0px 
-		rgba(15, 22, 117, 0.24);
+			rgba(15, 22, 117, 0.24);
+    	}
+    	.card-cont-top{
+    		height: 5.3333rem;
+    		position: relative;
+    	}
+    	.card-cont-bnt{
+    		height: 2.667rem;
+    		background: url(img/home_img_class.png)no-repeat;
+    		background-size: 100% 100%;
+    	}
+    	.class-left{
+    		line-height: 7rem;
+    		text-indent: 1.67rem;
+    		font-size: 1.2rem;
+    		color: #fff;
+    	}
+    	.classRnt{
+    		color: #cadcfd;
+    		height: 2.1334rem;
+    		background: #67a4fc;
+    		width: 6.57rem;
+    		position: absolute;
+    		right: 0rem;
+    		top: 0.87rem;
+    		border-top-left-radius: 1.07rem;
+    		border-bottom-left-radius: 1.07rem;
+    		line-height: 2.1334;
+    	}
+    	.classRnt img{
+		    width: 1.5rem;
+		    height: 1.4rem;
+		    margin-top: 0.37rem;
+		    margin-left: 0.8rem;
+		    margin-right: 0.5rem;
     	}
     	/*菜单*/
-    	.menu{
-    		font-size: 0.93rem;
-    	}
-    	.menu>li{
-    		width: 33.333%;
-    		margin-top: 2.57rem;
-    	}
-    	.menu>li>div{
-    		width: 3.333rem;
-    		margin: 0 auto;
-    		text-align: center;
-    	}
-    	.menu>li>div>div{
-    		height: 3.333rem;
-    		border-radius:50% ;
-    		background: red;
-    		margin-bottom: 0.5rem;
-    	}
-    	.menu>li>div>div>img{
-    		height: 3.333rem;
-    		border-radius:50% ;
-    		margin-bottom: 0.5rem;
-    	}
+    	.mui-grid-view.mui-grid-9 {
+		    border-top: none; 
+		    border-left: none;
+		    background-color: #FFF;
+		    margin-top: 0.9rem;
+		}
+		.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+		    border-right: none;
+		    border-bottom: none;
+		}
+		.img{
+			width: 3.333rem;
+			height: 3.333rem;
+		}
     </style>
 </head>
 <body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">班牌发布平台</h1>
+	</header>
 	<div class="mui-content"> 
 		<!--卡片-->
 		<div class="card">
-			
+			<div class="card-cont">
+				<div class="card-cont-top flex">
+					<div class="class-left">
+						高中一班 <i class="iconfont icon-arrow-down"></i>
+					</div>
+					<div class="classRnt">
+						<img src="img/home_icon_wechat.png" alt="" />已绑定
+					</div>
+				</div>
+				<div class="card-cont-bnt"></div>
+			</div>
 		</div>
-		<!--菜单-->
-		<div class="menu flex">
-			<li onclick="notice()">
-	          <div>
-	          	<div>
-	          		<img src=""/>
-	          	</div>
-	          	<p>通知</p>
-	          </div>
-	        </li>
-	        <li>
-	          <div>
-	          	<div>
-	          		
-	          	</div>
-	          	<p>新闻</p>
-	          </div>
-	        </li>
-	        <li>
-	          <div>
-	          	<div>
-	          		
-	          	</div>
-	          	<p>图片</p>
-	          </div>
-	        </li>
-			<li>
-	          <div>
-	          	<div>
-	          		
-	          	</div>
-	          	<p>视频</p>
-	          </div>
-	        </li>
-	        <li>
-	          <div>
-	          	<div>
-	          		
-	          	</div>
-	          	<p>活动</p>
-	          </div>
-	        </li>
-	    </div>
+		<div id="notice"> 
+            <ul class="mui-table-view mui-grid-view mui-grid-9">
+                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#" class="notice">  
+                     	 <img class="img" src="img/home_btn_notice.png"/>
+                         <div class="mui-media-body">通知</div>
+                    </a>
+                 </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                          <img class="img" src="img/home_btn_news.png"/>
+                         <div class="mui-media-body">新闻</div>
+                    </a>
+                </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                          <img class="img" src="img/home_btn_picture.png"/>
+                         <div class="mui-media-body">图片</div>
+                    </a>
+                </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                        <img class="img" src="img/home_btn_video.png"/>
+                         <div class="mui-media-body">视频</div>
+                    </a>
+                </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                        <img class="img" src="img/home_btn_activity.png"/>
+                         <div class="mui-media-body">活动</div>
+                    </a>
+                </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                         <img class="img" src="img/home_btn_praise.png"/>
+                         <div class="mui-media-body">表彰</div>
+                    </a>
+                </li> 
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                          <img class="img" src="img/home_btn_criticism.png"/>
+                         <div class="mui-media-body">通报</div>
+                    </a>
+                </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                         <img class="img" src="img/home_btn_announcement.png"/>
+                         <div class="mui-media-body">公告</div>
+                    </a>
+                </li>  
+                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                         <img class="img" src="img/home_btn_school.png"/>
+                         <div class="mui-media-body">校宣</div>
+                    </a>
+                </li>  
+            </ul>
+       </div>
 	</div>
-	
 	 <script type="text/javascript" charset="utf-8">
-      	mui.init();
-      	//点击跳转
-      	function notice (type) {
-      		window.location.href="views/notice/index.html" 
-      	}
-      	
+	 	//初始化	
+      	mui.init({
+	    
+	  	});
+	  	mui("#notice").on('tap','.notice',function(){
+		  mui.openWindow({
+		    id:'index',
+		    url:'views/notice/index.html'
+		  });
+		})
     </script>
 </body>
 </html>

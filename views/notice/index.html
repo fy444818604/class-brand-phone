@@ -37,7 +37,7 @@
     		width: 50%;
     	}
     	.mui-table-view{
-    		height: calc(100vh - 6.7rem);
+    		height: calc(100vh - 9.6rem);
     		overflow: auto;
     	}
     	.mui-table-view-cell:after {
@@ -65,6 +65,10 @@
     </style>
 </head>
 <body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title"></h1>
+	</header>
 	<div class="mui-content" id="noticeT"> 
 		<ul class="flex nav mui-bar-nav">
 			<li class="color">
@@ -308,7 +312,7 @@
 			});
 		})(mui);
 		//发送通知
-		$('.add').on('click',function  () {
+		$('.add').on('tap',function  () {
 			window.location.href="add.html" 
 		})
   
