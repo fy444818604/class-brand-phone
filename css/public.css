@@ -71,7 +71,7 @@ body {
 	white-space: nowrap;
 	width: 100%;
 }
-/*选项卡*/
+/*选项卡样式*/
 .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
 	border-bottom: none;
 }
