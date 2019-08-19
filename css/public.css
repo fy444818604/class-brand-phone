@@ -52,3 +52,9 @@ html,body{
 	flex-direction:row;
 	flex-wrap:wrap;
 }
+.text-overflow{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}

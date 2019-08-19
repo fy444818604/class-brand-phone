@@ -10,19 +10,65 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
+		<style type="text/css">
+			.login-wrap {
+				margin-top: 85px;
+				padding: 0 8%;
+			}
+
+			.login-title {
+				font-size: 1.6rem;
+				color: #2f3133;
+				margin-bottom: 50px;
+			}
+
+			.login-input-cont {
+				position: relative;
+			}
+
+			.login-input-cont i {
+				position: absolute;
+				left: 10px;
+				top: 10px;
+			}
+
+			.login-input-cont input {
+				padding-left: 35px;
+				border-top: none;
+				border-left: none;
+				border-right: none;
+				background-color: transparent;
+			}
+			.login-btn{
+				border-radius: 22px;
+				background-color: #3B8BFF;
+				color: #FFFFFF;
+				margin-top: 40px;
+			}
+			.iconfont{
+				font-size: 1.466666rem;
+			}
+		</style>
 	</head>
 	<body>
-		<div class="login-wrap">
-			<div>班牌发布登陆</div>
-			<div>
-				<i class="iconfont icon-user"></i>
-				<input type="text" placeholder="请输入账号"/>
+		<div class="mui-content">
+			<div class="login-wrap">
+				<div class="login-title">班牌发布登陆</div>
+				<div class="mui-input-row login-input-cont">
+					<i class="iconfont icon-user"></i>
+					<input type="text" class="mui-input-clear" placeholder="请输入账号" />
+				</div>
+				<div class="mui-input-row login-input-cont">
+					<i class="iconfont icon-permissions"></i>
+					<input type="text" class="mui-input-clear" placeholder="请输入密码" />
+				</div>
+				<button type="button" class="mui-btn mui-btn-block login-btn">立即登陆</button>
 			</div>
-			<div>
-				<i class="iconfont icon-permissions"></i>
-				<input type="text" placeholder="请输入密码"/>
-			</div>
-			<button>立即登陆</button>
+			
 		</div>
 	</body>
+	<script>
+		mui.init();
+		
+	</script>
 </html>
