@@ -6,9 +6,13 @@
     <title>发通知</title>
     <script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/public.css"/>
     <style type="text/css">
+    	.mui-bar-nav~.mui-content {
+		    padding-top: 57px;
+		}
     	.mui-content{
     		padding-top: 0.87rem;
     	}
@@ -43,7 +47,7 @@
 		/*正文/标题*/
 		.theInput{
 			margin-top: 0.87rem;
-			height: calc(100vh - 11.61rem);
+			height: calc(100vh - 14.55rem);
 		}
 		input[type=text]{
 		  border: none;
@@ -77,7 +81,11 @@
     </style>
 </head>
 <body>
-	<div class="mui-content"> 
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">发布通知</h1>
+	</header>
+	<div class="mui-content add-notice"> 
 		<!--班级/对象-->
 		<ul class="mui-table-view">
 		    <li class="mui-table-view-cell flex">
@@ -92,9 +100,8 @@
 		    	<div class="theClass-left">
 		    		对象
 		    	</div>
-				<div class="theClass-rnt">请选择对象</div>
+				<div class="theClass-rnt jonsData">请选择对象</div>
 		    	<div><a class="mui-navigate-right"></a></div>
-		        
 		    </li>
 		</ul>
 		<!--标题/正文-->
@@ -137,6 +144,22 @@
 	
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
+      	var data;
+      	//接收参数
+		 window.onload = function(){
+            var data=$.cookie("data");
+		    var m=JSON.parse(data);
+		    var leh = m.length
+		    if(m != ''){
+		    	$('.jonsData').text(m[0]+'共'+leh+'个班级')
+		    	$('.jonsData').css('color','#000000')
+		    }else{
+		    	$('.jonsData').text('请选择对象')
+		    	$('.jonsData').css('color','#c0c4cc')
+		    }
+		    data = m;
+		    return data;
+      	}
       	//弹框取值赋值
       	mui('#picture').on('tap', '.top>li>a', function() {
       		$('.theClass-rnt a').text(this.innerHTML).css('color','#3b8bff');
@@ -145,8 +168,9 @@
       		mui("#picture").popover('toggle');
 		})
       	//选择对象
-		$('.objetAdd').on('click',function  () {
-			window.location.href="../../commonObject.html" 
+		$('.objetAdd').on('tap',function (){
+			/*window.location.href="../../commonObject.html" */
+			console.log(data)
 		})
     </script>
 </body>
