@@ -280,37 +280,6 @@
 	        $(this).addClass('color');
 	        $(this).find('div').css('border-bottom','0.14rem solid #3b8bff')
     	});
-    	//删除
-    	(function($) {
-			//第一个demo，拖拽后显示操作图标，点击操作图标删除元素；
-			$('#OA_task_1').on('tap', '.mui-btn', function(event) {
-				var elem = this;
-				var li = elem.parentNode.parentNode;
-				mui.confirm('确认删除该条记录？', '', btnArray, function(e) {
-					if (e.index == 0) {
-						
-					} else {
-						setTimeout(function() {
-							$.swipeoutClose(li);
-						}, 0);
-					}
-				});
-			});
-			var btnArray = ['确认', '取消'];
-			//第二个demo，向左拖拽后显示操作图标，释放后自动触发的业务逻辑
-			$('#OA_task_2').on('slideleft', '.mui-table-view-cell', function(event) {
-				var elem = this;
-				mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
-					if (e.index == 0) {
-						elem.parentNode.removeChild(elem);
-					} else {
-						setTimeout(function() {
-							$.swipeoutClose(elem);
-						}, 0);
-					}
-				});
-			});
-		})(mui);
 		//发送通知
 		$('.add').on('tap',function  () {
 			window.location.href="add.html" 

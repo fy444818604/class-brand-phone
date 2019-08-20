@@ -58,3 +58,16 @@ html,body{
 	white-space: nowrap;
 	width: 100%;
 }
+/*班级设置头部*/
+	.set-title-card{
+		font-size: 0.93rem;
+		padding: 2.1rem 2rem 0rem 2rem;
+	}
+	.set-title-card>p{
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: #000000;
+	}
+	.set-title-card-left{
+		margin-right: 2.23rem;
+	}

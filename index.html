@@ -164,12 +164,21 @@
       	mui.init({
 	    
 	  	});
+	  	mui(".card").on('tap','.class-left',function(){
+	  		console.log(1)
+		  mui.openWindow({
+		    id:'index',
+		    url:'views/classSet/index.html'
+		  });
+		})
 	  	mui("#notice").on('tap','.notice',function(){
 		  mui.openWindow({
 		    id:'index',
 		    url:'views/notice/index.html'
 		  });
 		})
+	  	
+	  	
     </script>
 </body>
 </html>

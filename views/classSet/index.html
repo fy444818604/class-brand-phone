@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>班级设置</title>
+	<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/public.css"/>
+    <style type="text/css">
+    	.mui-content{
+    		background: #FFFFFF;
+    		height: 100%;
+    		padding-top: 0.77rem;
+    	}
+    	/*标题*/
+    	.set-title{
+    		height: 6.5rem;
+    		background: url(../../img/class_img_bg.png)no-repeat;
+    		background-size: 100% 100%;
+    		padding: 0rem 1rem;
+    		padding-top: 1.033rem;
+    	}
+    	.set-title-card{
+    		height: 7.47rem;
+    		background-image: linear-gradient(
+				#ffffff, 
+				#ffffff), 
+			linear-gradient(90deg, 
+				#3281ff 0%, 
+				#3786ff 0%, 
+				#3b8bff 0%, 
+				rgba(59, 197, 255, 0.97) 100%), 
+			linear-gradient(
+				#d6ecff, 
+				#d6ecff);
+			background-blend-mode: normal, 
+				normal, 
+				normal;
+			box-shadow: 0px 2.5px 13px 0px 
+				rgba(15, 22, 117, 0.08);
+			border-radius: 5px;
+    	}
+    	
+    	/*菜单*/
+    	.mui-grid-view.mui-grid-9 {
+		    border-top: none; 
+		    border-left: none;
+		    background-color: #FFF;
+		    margin-top: 2.9rem;
+		}
+		.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+		    border-right: none;
+		    border-bottom: none;
+		}
+		.img{
+			width: 1.6rem;
+			height: 1.6rem;
+		}
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">班级设置</h1>
+	</header>
+	<div class="mui-content"> 
+		<div class="set-title">
+			<div class="set-title-card">
+				<p>高二三班</p>
+				<div class="flex">
+					<p class="set-title-card-left">班主任：杨老师</p>
+					<p>班级成员：55人</p>
+				</div>
+			</div>
+		</div>
+		<div id="notice"> 
+            <ul class="mui-table-view mui-grid-view mui-grid-9">
+                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#" class="notice">  
+                     	 <img class="img" src="../../img/class_btn_slogan.png"/>
+                         <div class="mui-media-body">班级口号</div>
+                    </a>
+                 </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                          <img class="img" src="../../img/class_btn_teacher.png"/>
+                         <div class="mui-media-body">科任老师</div>
+                    </a>
+                </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                          <img class="img" src="../../img/class_btn_committee.png"/>
+                         <div class="mui-media-body">班委会</div>
+                    </a>
+                </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                        <img class="img" src="../../img/class_btn_honor_class.png"/>
+                         <div class="mui-media-body">班级荣誉</div>
+                    </a>
+                </li>  
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="#">  
+                        <img class="img" src="../../img/class_btn_honor_personal.png"/>
+                         <div class="mui-media-body">个人荣誉</div>
+                    </a>
+                </li>  
+            </ul>
+       </div>
+	</div>
+	
+	 <script type="text/javascript" charset="utf-8">
+	 	//初始化	
+      	mui.init({
+	    
+	  	});
+    </script>
+</body>
+</html>
