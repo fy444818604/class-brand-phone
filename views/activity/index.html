@@ -17,17 +17,6 @@
 				height: calc(100vh - 141px);
 			}
 
-			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
-				border-bottom: none;
-			}
-
-			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span {
-				display: inline-block;
-				height: 100%;
-				padding: 0 0.4rem;
-				border-bottom: 2px solid #007aff;
-			}
-
 			.mui-content {
 				height: 100vh;
 			}
@@ -36,7 +25,7 @@
 				margin-bottom: 0;
 			}
 
-			.mui-table-view>li {
+			.activity-list .mui-table-view-cell {
 				height: 4rem;
 				line-height: 4rem;
 				padding: 0 1rem;
@@ -64,7 +53,7 @@
 					</a>
 				</div>
 			</div>
-			<div>
+			<div class="activity-list">
 				<div id="item1" class="mui-control-content mui-active">
 					<div id="scroll" class="mui-scroll-wrapper">
 						<div class="mui-scroll">
@@ -161,30 +150,34 @@
 					</ul>
 				</div>
 			</div>
-			<a href="add.html" class="mui-btn mui-btn-primary mui-btn-block">发活动</a>
+			<a type="button" href="#picture" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发活动</a>
+		</div>
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">报名</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">投票</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">问卷</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
 		</div>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
-			mui.init()
-				(function($) {
-					$('#scroll').scroll({
-						indicators: true //是否显示滚动条
-					});
-					var btnArray = ['确认', '取消'];
-					//第二个demo，向左拖拽后显示操作图标，释放后自动触发的业务逻辑
-					// $('#OA_task_2').on('slideleft', '.mui-btn', function(event) {
-					// 	var elem = this;
-					// 	mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
-					// 		if (e.index == 0) {
-					// 			elem.parentNode.removeChild(elem);
-					// 		} else {
-					// 			setTimeout(function() {
-					// 				$.swipeoutClose(elem);
-					// 			}, 0);
-					// 		}
-					// 	});
-					// });
-				})(mui);
+			(function($) {
+				mui.init()
+				$('#scroll').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
 		</script>
 	</body>
 
