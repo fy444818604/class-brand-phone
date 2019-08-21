@@ -53,6 +53,14 @@
 			.mui-btn-block{
 				margin-bottom: 0;
 			}
+			.icon-add{
+				color: #3B8BFF;
+				position: absolute;
+				right: 1rem;
+				font-size: 20px;
+				top: 50%;
+				margin-top: -12px;
+			}
 		</style>
 	</head>
 
@@ -85,25 +93,17 @@
 					</div>
 				</div>
 				<div class="mui-input-group">
-					<div class="mui-input-row Hauto mt12">
-						<div>选项</div>
-						<input type="text" placeholder="请输入选项内容">
+					<div class="mui-input-row mt12">
+						<label>问卷内容</label>
+						<i class="iconfont icon-add"></i>
 					</div>
+					
 					<div class="mui-input-row">
-						<div class="q-tips">
-							<div class="icon-btn">
-								<i class="iconfont icon-add"></i>
-								<span>添加选项</span>
-							</div>
-							<span>最多15个选项，每个选项不超过40个字符</span>
-						</div>
-					</div>
-					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
 						<a href="#mode">请选择模式</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
-					<div class="mui-input-row Hauto">
+					<div class="mui-input-row">
 						<label>结束时间</label>
 						<a href="#" data-options='{}' id="timeSelect">请选择时间</a>
 						<span class="mui-icon mui-icon-forward"></span>

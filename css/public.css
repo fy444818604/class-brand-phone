@@ -107,3 +107,27 @@ body {
 .Hauto {
 	height: auto !important;
 }
+
+.mui-btn-block{
+	padding: 10px 0;
+}
+
+::-webkit-input-placeholder {
+	color: #c0c4cc;
+	font-size: 1rem;
+}
+
+::-moz-placeholder {
+	color: #c0c4cc;
+	font-size: 1rem;
+}
+
+:-ms-input-placeholder {
+	color: #c0c4cc;
+	font-size: 1rem;
+}
+
+:-moz-placeholder {
+	color: #c0c4cc;
+	font-size: 1rem;
+}
