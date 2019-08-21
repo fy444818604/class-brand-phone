@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>班级口号</title>
 	<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../../css/public.css"/>
     <style type="text/css">
@@ -68,6 +69,31 @@
     		left: 0rem;
     		border-radius: 0rem;
     	}
+    	/*编辑框*/
+    	.sloganAdd{
+    		display: none;
+    		width: 100%;
+    		height: 100%;
+    		background: #f7f7f7;
+    		position: fixed;
+    		top: 0px;
+    		left: 0px;
+    		z-index: 999;
+    	}
+		.sloganAdd-cont{
+			margin-top: 3.9rem;
+			height: 8.07rem;
+			background: #FFFFFF;
+		}
+		.sloganAdd-cont>textarea{
+			border: none;
+		}
+		a{
+			color: ;
+		}
+		.slogan-zanwu{
+			
+		}
     </style>
 </head>
 <body>
@@ -98,13 +124,47 @@
 		</div>
 		<button type="button" class="mui-btn mui-btn-primary add-slogan">编辑口号</button>
 	</div>
-	
-	
+	<div class="sloganAdd">
+	<!--	<header class="mui-bar mui-bar-nav">
+			<a class="cancel">取消</a>
+			<h1 class="mui-title">编辑口号</h1>
+			<a class="determine">确定</a>
+			
+		</header>-->
+		<header class="mui-bar mui-bar-nav">
+			<a class="cancel mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择教师</h1>
+			<a  class="mui-btn determine  mui-btn-link mui-pull-right  ">完成</a>
+		</header>
+		<div class="sloganAdd-cont mui-input-row">
+			<textarea name="" id="" cols="30" rows="5" placeholder="多行文本框"></textarea>
+		</div>
+
+	</div>
 	 <script type="text/javascript" charset="utf-8">
 	 	//初始化	
       	mui.init({
 	    
 	  	});
+	  	//编辑
+	  	mui(".mui-content").on('tap','.add-slogan',function(){
+			$('.sloganAdd').show();
+		});
+	  	
+	  	//取消
+	  	mui(".sloganAdd").on('tap','.cancel',function(){
+			$('.sloganAdd').hide();
+		});
+		//确定
+		mui(".sloganAdd").on('tap','.determine',function(){
+			var addVal =  $('.sloganAdd-cont textarea').val();
+			if(addVal != ''){
+				$('.slogan-bnt').text(addVal)
+				$('.sloganAdd').hide();
+			}else{
+				mui.alert('口号不能为空')
+			}
+		}) 
     </script>
 </body>
 </html>
