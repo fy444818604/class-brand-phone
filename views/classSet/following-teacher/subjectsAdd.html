@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css"/>
+		<style type="text/css">
+			/*九宫格*/
+			.mui-grid-view.mui-grid-9 {
+			    border-top: 1px solid #eee;
+			    border-left: 1px solid #eee;
+			    background-color: #fff;
+			}
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell>a:not(.mui-btn) {
+			    padding: 0px 0;
+			    font-size: 1rem;
+			    height: 60px;
+			    line-height: 60px;
+			}
+			.icon-add{
+				font-size: 1.47rem;
+				color: #bfc3cc;
+			}
+			/*编辑框*/
+	    	.sloganAdd{
+	    		display: none;
+	    		width: 100%;
+	    		height: 100%;
+	    		background: #f7f7f7;
+	    		position: fixed;
+	    		top: 0px;
+	    		left: 0px;
+	    		z-index: 999;
+	    	}
+			.sloganAdd-cont{
+				margin-top: 3.9rem;
+			}
+			.sloganAdd-cont>input{
+				font-size: 1rem;
+				border: none;
+			    padding: 30px 15px;
+			}
+			.mui-icon-clear{
+				margin-top: 10px;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">选择科目</h1>
+		</header>
+		<div class="mui-content">
+	        <ul class="mui-table-view mui-grid-view mui-grid-9">
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+	            	<a href="#">
+                   		语文
+	            	</a>
+	            </li>
+	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+	            	<a href="#">
+	                   	数学
+	            	</a>
+	            </li>
+	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+	            	<a href="#">
+	                   	数学
+	            	</a>
+	            </li>
+	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+	            	<a href="#">
+	                   	数学
+	            	</a>
+	            </li>
+	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+	            	<a href="#">
+	                   	数学
+	            	</a>
+	            </li>
+	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+	            	<a href="#">
+	                   	数学
+	            	</a>
+	            </li>
+	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+	            	<a href="#">
+	                   	数学
+	            	</a>
+	            </li>
+	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+	            	<a href="#">
+	                   	思想品德与发展
+	            	</a>
+	            </li>
+	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
+	            	<a href="#">
+	                   	<i class="iconfont icon-add"></i>
+	            	</a>
+	            </li>
+	        </ul> 
+	        <!--设置科目的弹框-->
+	        <div id="sloganAdd" class="sloganAdd">
+	        	<header class="mui-bar mui-bar-nav">
+					<a class="cancel  mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<h1 class="mui-title">设置科目</h1>
+					<a  class="mui-btn determine  mui-btn-link mui-pull-right  ">完成</a>
+				</header>
+				<div class="sloganAdd-cont mui-input-row">
+					<input id="discipline" type="text" class="mui-input-clear" placeholder="数学">
+	        	</div>
+		</div>
+	</body>
+	<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		mui.init();
+		mui.ready(function() {
+			var addSubiects = document.querySelector('.addSubiects');
+			var cancel = document.querySelector('.cancel');
+			var determine = document.querySelector('.determine');
+			var sloganAdd = document.getElementById('sloganAdd')
+			//添加
+			addSubiects.addEventListener('tap', function() {
+				//打开添加设置科目的弹框
+				sloganAdd.style.display="block";
+			})
+			//取消
+			cancel.addEventListener('tap',function  () {
+				sloganAdd.style.display="none";
+			})
+			//完成操作
+			determine.addEventListener('tap',function  () {
+				var discipline = mui("#discipline")[0].value;
+				if(discipline != ''){
+					//完成操作
+				}else{
+					mui.alert('不能为空')
+				}
+			})
+		})
+	</script>
+</html>
