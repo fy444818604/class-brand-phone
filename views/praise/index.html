@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>表彰</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
+		<link href="../../css/public.css" rel="stylesheet" />
+		<style>
+			#scroll{
+				height: calc(100vh - 131px);
+			}
+			.mui-content{
+				height: 100vh;
+			}
+			.cri-list{
+				height: calc(100% - 87px);
+			}
+			.mui-btn-block{
+				margin-bottom: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">表彰</h1>
+		</header>
+		<div class="mui-content">
+			<div>
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					<a class="mui-control-item mui-active" href="#item1">
+						<span>班级</span>
+					</a>
+					<a class="mui-control-item" href="#item2">
+						<span>校级</span>
+					</a>
+				</div>
+			</div>
+			<div class="cri-list">
+				<div id="item1" class="mui-control-content mui-active">
+					<div id="scroll" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view" id="OA_task_2">
+								<li class="mui-table-view-cell">
+									<div class="mui-slider-right mui-disabled">
+										<a class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+									</div>
+									<div class="mui-slider-handle">
+										<div class="mui-table-cell">
+											左滑显示多功能菜单
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell">
+									<div class="mui-slider-right mui-disabled">
+										<a class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+									</div>
+									<div class="mui-slider-handle">
+										<div class="mui-table-cell">
+											左滑显示多功能菜单
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-3
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-4
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-5
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-6
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-7
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-8
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-9
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-10
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-11
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-12
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-13
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-14
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-15
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-16
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-17
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-18
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-19
+								</li>
+								<li class="mui-table-view-cell">
+									第一个选项卡子项-20
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="item2" class="mui-control-content">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							第二个选项卡子项-1
+						</li>
+						<li class="mui-table-view-cell">
+							第二个选项卡子项-2
+						</li>
+						<li class="mui-table-view-cell">
+							第二个选项卡子项-3
+						</li>
+					</ul>
+				</div>
+			</div>
+			<a type="button" href="add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发表彰</a>
+		</div>
+		<script src="../../js/mui.js"></script>
+		<script type="text/javascript">
+			(function($) {
+				mui.init()
+				$('#scroll').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+		</script>
+	</body>
+
+</html>
