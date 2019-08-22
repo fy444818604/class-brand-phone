@@ -177,7 +177,29 @@
 				$('#scroll').scroll({
 					indicators: true //是否显示滚动条
 				});
+				var listSearch = function(curr){
+					mui.ajax('http://192.168.10.59:8099/phone/active/selectpagebean.do',{
+						data:{
+							currentPage:curr,
+							pageSize:10,
+							activeLevel:1
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							console.log(data)
+						},
+						error:function(xhr,type,errorThrown){
+							
+						}
+					});
+				}
+				listSearch(1)
+				
 			})(mui);
+			
+			
 		</script>
 	</body>
 

@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>登陆</title>
-		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.js"></script>
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
 		<script type="text/javascript" charset="utf-8">
@@ -39,13 +39,15 @@
 				border-right: none;
 				background-color: transparent;
 			}
-			.login-btn{
+
+			.login-btn {
 				border-radius: 22px;
 				background-color: #3B8BFF;
 				color: #FFFFFF;
 				margin-top: 40px;
 			}
-			.iconfont{
+
+			.iconfont {
 				font-size: 1.466666rem;
 			}
 		</style>
@@ -56,19 +58,51 @@
 				<div class="login-title">班牌发布登陆</div>
 				<div class="mui-input-row login-input-cont">
 					<i class="iconfont icon-user"></i>
-					<input type="text" class="mui-input-clear" placeholder="请输入账号" />
+					<input type="text" class="mui-input-clear login-name" placeholder="请输入账号" />
 				</div>
 				<div class="mui-input-row login-input-cont">
 					<i class="iconfont icon-permissions"></i>
-					<input type="text" class="mui-input-clear" placeholder="请输入密码" />
+					<div class="mui-input-row mui-password">
+						<input type="password" class="mui-input-password login-pwd" placeholder="请输入密码">
+					</div>
 				</div>
 				<button type="button" class="mui-btn mui-btn-block login-btn">立即登陆</button>
 			</div>
-			
+
 		</div>
 	</body>
 	<script>
-		mui.init();
-		
+		mui.ready(function() {
+			mui.init();
+		})
+
+		var login = function() {
+			var loginName = document.querySelector('.login-name').value;
+			var loginPwd = document.querySelector('.login-pwd').value;
+			mui.ajax('http://192.168.10.59:8099/phone/login.do', {
+				data: {
+					loginName: loginName,
+					loginPwd: loginPwd
+				},
+				dataType:'json',//服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if(data.code == 200){
+						mui.openWindow({
+						  id:'index',
+						  url:'./activity/index.html'
+						});
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+
+				}
+			});
+		}
+
+		document.querySelector('.login-btn').addEventListener('tap', function() {
+			login()
+		})
 	</script>
 </html>
