@@ -62,18 +62,32 @@
     		font-size: 1.4rem;
     	}
     	.slogan-bnt>li{
-    		line-height: 2.4rem;
     		font-size: 1rem;
     	}
     	.slogan-bnt-left,.slogan-bnt-left>img{
-    		width: 2.4rem;
-    		height: 2.4rem;
+    		width: 5.333rem;
+    		height: 5.333rem;
     		margin-right: 0.93rem;
-    		border-radius: 50%;
+    		background: #f4f7fa;
     	}
     	.slogan-bnt-rnt{
-    		color: #909398;
-    		margin-left: 2.87rem;
+    		width: calc(100% - 6.263rem);
+    	}
+    	.slogan-bnt-rnt>p{
+    		font-size: 1rem;
+    		color: #000000;
+    		font-weight: 600;
+    		margin-bottom: 0.3rem;
+    	}
+    	.slogan-bnt-rnt>div{
+    		font-size: 0.8rem;
+    		color: #999999;
+    		line-height: 1.2rem;
+    		overflow: hidden;
+		 	text-overflow: ellipsis;
+		 	display: -webkit-box;
+		 	-webkit-line-clamp: 3;
+		 	-webkit-box-orient: vertical;
     	}
     	.mui-table-view-cell {
 		    padding: 15px 15px;
@@ -81,7 +95,7 @@
 		.mui-table-view-cell:after,.mui-table-view:before,.mui-table-view:after {
 		    background-color: #FFFFFF;
 		}
-    	.add-slogan{
+    	.add-classHonours{
     		width: 100%;
     		height: 3.07rem;
     		position: fixed;
@@ -119,20 +133,13 @@
 						<a class="mui-btn mui-btn-red">删除</a>
 					</div>
 					<div class="mui-slider-handle flex">
-						<div class="slogan-bnt-left"><img src="../../../img/class_btn_committee.png"/></div>
-			    		<div >田浩</div>
-			    		<div class="slogan-bnt-rnt">语文</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-orange"><i class="iconfont icon-edit"></i></a>
-						<a class="mui-btn mui-btn-red"><i class="iconfont icon-del"></i></a>
-					</div>
-					<div class="mui-slider-handle flex">
-						<div class="slogan-bnt-left"><img src="../../../img/class_btn_committee.png"/></div>
-			    		<div >田浩</div>
-			    		<div class="slogan-bnt-rnt">语文</div>
+						<div class="slogan-bnt-left"><img src=""/></div>
+			    		<div class="slogan-bnt-rnt">
+			    			<p>先进集体班级</p>
+			    			<div class="">
+			    				你说什么额阿达 卡奥术大师发发卡撒发啦拉了发是发安静的拉卡死了口袋里时卡看是开发死艾迪康说的大石街道发发好发发的发说的电风扇方式发发
+			    			</div>
+			    		</div>
 					</div>
 				</li>
 			</ul>
@@ -140,13 +147,21 @@
 				
 			</div>
 		</div>
-		<button type="button" class="mui-btn mui-btn-primary add-slogan">添加荣誉</button>
+		<button type="button" class="mui-btn mui-btn-primary add-classHonours">添加荣誉</button>
 	</div>
 	 <script type="text/javascript" charset="utf-8">
 	 	//初始化	
-      	mui.init({
-	    
-	  	});
+      	mui.init({});
+      	mui.ready(function() {
+      		var addaClassHonours = document.querySelector('.add-classHonours');
+      		//添加荣誉
+      		addaClassHonours.addEventListener('tap', function() {
+				mui.openWindow({
+				    id:'ClassHonoursAdd',
+				    url:'ClassHonoursAdd.html'
+			    });
+			})
+      	})
     </script>
 </body>
 </html>
