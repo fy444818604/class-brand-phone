@@ -34,6 +34,31 @@
 			.mui-table-view-cell:after {
 				left: 0;
 			}
+
+			.active-item {
+				display: flex;
+			}
+
+			.active-item>div:last-child {
+				text-align: right;
+				width: 55px;
+			}
+
+			.active-item>div:first-child {
+				margin-right: 5px;
+				color: #ed932a;
+			}
+
+			.active-item>div:nth-child(2) {
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				width: calc(100vw - 130px);
+			}
+
+			.end {
+				color: #c0c4cc !important;
+			}
 		</style>
 	</head>
 
@@ -55,99 +80,26 @@
 			</div>
 			<div class="activity-list">
 				<div id="item1" class="mui-control-content mui-active">
-					<div id="scroll" class="mui-scroll-wrapper">
+					<!--下拉刷新容器-->
+					<div id="refreshContainer" class="mui-scroll-wrapper">
 						<div class="mui-scroll">
-							<ul class="mui-table-view" id="OA_task_2">
-								<li class="mui-table-view-cell">
-									<div class="mui-slider-right mui-disabled">
-										<a class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
-									</div>
-									<div class="mui-slider-handle">
-										<div class="mui-table-cell">
-											左滑显示多功能菜单
-										</div>
-									</div>
-								</li>
-								<li class="mui-table-view-cell">
-									<div class="mui-slider-right mui-disabled">
-										<a class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
-									</div>
-									<div class="mui-slider-handle">
-										<div class="mui-table-cell">
-											左滑显示多功能菜单
-										</div>
-									</div>
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-3
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-4
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-5
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-6
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-7
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-8
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-9
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-10
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-11
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-12
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-13
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-14
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-15
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-16
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-17
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-18
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-19
-								</li>
-								<li class="mui-table-view-cell">
-									第一个选项卡子项-20
-								</li>
+							<!--数据列表-->
+							<ul class="mui-table-view mui-table-view-chevron" id="OA_task_2">
+
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div id="item2" class="mui-control-content">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							第二个选项卡子项-1
-						</li>
-						<li class="mui-table-view-cell">
-							第二个选项卡子项-2
-						</li>
-						<li class="mui-table-view-cell">
-							第二个选项卡子项-3
-						</li>
-					</ul>
+					<!--下拉刷新容器-->
+					<div id="refreshContainer1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<!--数据列表-->
+							<ul class="mui-table-view mui-table-view-chevron" id="OA_task_1">
+
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 			<a type="button" href="#picture" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发活动</a>
@@ -171,35 +123,184 @@
 			</ul>
 		</div>
 		<script src="../../js/mui.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript">
 			(function($) {
-				mui.init()
+				var curr = 1;
+				var count = 1;
+				var curr1 = 1;
+				var count1 = 1;
 				$('#scroll').scroll({
 					indicators: true //是否显示滚动条
 				});
-				var listSearch = function(curr){
-					mui.ajax('http://192.168.10.59:8099/phone/active/selectpagebean.do',{
-						data:{
-							currentPage:curr,
-							pageSize:10,
-							activeLevel:1
+				// 班级活动查询
+				var listSearch = function() {
+					var _this = this;
+					if (curr <= count) {
+						mui.ajax('http://192.168.10.59:8099/phone/active/selectpagebean.do', {
+							data: {
+								token: window.localStorage.getItem('token'),
+								currPage: curr,
+								pageSize: 10,
+								activeLevel: 2
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							success: function(data) {
+								_this.endPullupToRefresh(false);
+								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
+								var con = data.data.recordList;
+								count = data.data.pageCount;
+								var html = document.querySelector('#OA_task_2').innerHTML;
+								// console.log(con)
+								for (var i = 0; i < con.length; i++) {
+									html +=
+										`<li class="mui-table-view-cell" data-id="${con[i].activeId}" data-type="${con[i].activeType}">
+											<div class="mui-slider-right mui-disabled">
+												<a id="${con[i].activeId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+											</div>
+											<div class="mui-slider-handle">
+												<div class="mui-table-cell">
+													<div class="active-item">
+														<div class="${con[i].status == 1?'':'end' }">[${con[i].activeType}]</div>
+														<div>${con[i].activeTitile}</div>
+														<div>${con[i].createTime.substring(5,10)}</div>
+													</div>
+												</div>
+											</div>
+										</li>`
+								}
+								document.querySelector('#OA_task_2').innerHTML = html
+								curr++;
+							},
+							error: function(xhr, type, errorThrown) {
+
+							}
+						});
+					} else {
+						_this.endPullupToRefresh(true);
+					}
+				}
+				//校级活动查询
+				var listSearch1 = function() {
+					var _this = this;
+					if (curr1 <= count1) {
+						mui.ajax('http://192.168.10.59:8099/phone/active/selectpagebean.do', {
+							data: {
+								token: window.localStorage.getItem('token'),
+								currPage: curr1,
+								pageSize: 10,
+								activeLevel: 1
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							success: function(data) {
+								_this.endPullupToRefresh(false);
+								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
+								var con = data.data.recordList;
+								count1 = data.data.pageCount;
+								var html = document.querySelector('#OA_task_1').innerHTML;
+								for (var i = 0; i < con.length; i++) {
+									html +=
+										`<li class="mui-table-view-cell" data-id="${con[i].activeId}" data-type="${con[i].activeType}">
+											<div class="mui-slider-right mui-disabled">
+												<a id="${con[i].activeId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+											</div>
+											<div class="mui-slider-handle">
+												<div class="mui-table-cell">
+													<div class="active-item">
+														<div class="${con[i].status == 1?'':'end' }">[${con[i].activeType}]</div>
+														<div>${con[i].activeTitile}</div>
+														<div>${con[i].createTime.substring(5,10)}</div>
+													</div>
+												</div>
+											</div>
+										</li>`
+								}
+								document.querySelector('#OA_task_1').innerHTML = html
+								curr1++;
+							},
+							error: function(xhr, type, errorThrown) {
+
+							}
+						});
+					} else {
+						_this.endPullupToRefresh(true);
+					}
+				}
+
+
+				//删除活动
+				var activityDel = function(id) {
+					mui.ajax('http://192.168.10.59:8099/phone/active/delete.do', {
+						data: {
+							token: window.localStorage.getItem('token'),
+							id: id
 						},
-						dataType:'json',//服务器返回json格式数据
-						type:'post',//HTTP请求类型
-						timeout:10000,//超时时间设置为10秒；
-						success:function(data){
-							console.log(data)
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							if (data.code == 200) {
+								// curr = 1
+								// curr1 = 1
+								// listSearch()
+								// listSearch1()
+							}
 						},
-						error:function(xhr,type,errorThrown){
-							
+						error: function(xhr, type, errorThrown) {
+
 						}
 					});
 				}
-				listSearch(1)
-				
+				mui.init();
+				mui.ready(function() {
+					mui("#refreshContainer").pullRefresh({
+						up: {
+							height: 50, //可选.默认50.触发上拉加载拖动距离
+							auto: true, //可选,默认false.自动上拉加载一次
+							contentrefresh: '正在加载...',
+							contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+							callback: listSearch
+						},
+					})
+					mui("#refreshContainer1").pullRefresh({
+						up: {
+							height: 50, //可选.默认50.触发上拉加载拖动距离
+							auto: true, //可选,默认false.自动上拉加载一次
+							contentrefresh: '正在加载...',
+							contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+							callback: listSearch1
+						},
+					})
+					mui(".mui-table-view").on('tap', '.icon-del', function() {
+						var id = this.getAttribute("id");
+						var btnArray = ['否', '是'];
+						mui.confirm('确认要删除？', null, btnArray, function(e) {
+							if (e.index == 1) {
+								activityDel(id)
+							}
+						})
+					})
+					mui(".mui-table-view").on('tap', '.mui-table-view-cell', function(event) {
+						var id = this.dataset.id
+						if (this.dataset.type == "问卷") {
+							mui.openWindow({
+								id: 'index',
+								url: './quesDetail.html?id='+id
+							});
+						} else {
+							mui.openWindow({
+								id: 'index',
+								url: './signDetail.html?id='+id,
+							});
+						}
+					})
+				})
 			})(mui);
-			
-			
 		</script>
 	</body>
 

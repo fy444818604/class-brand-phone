@@ -25,6 +25,7 @@
 				border: 1px solid #ed932a;
 				border-radius: 4px;
 				padding: 2px 5px;
+				word-break: keep-all;
 			}
 			.active-detail-top{
 				padding: 22px 15px;
@@ -60,6 +61,12 @@
 				justify-content: space-between;
 				color: #303133;
 			}
+			.option-list>li>a>div:first-child{
+				width: 85%;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
 			.option-list>li{
 				position: relative;
 				height: 50px;
@@ -86,6 +93,14 @@
 				border-top: 1px solid #c8c7cc;
 				background-color: #FFFFFF;
 			}
+			.school{
+				color: #1E6ACC!important;
+				border: 1px solid #1E6ACC!important;
+			}
+			.stateEnd{
+				color: #9DA1A8!important;
+				border: 1px solid #9DA1A8!important;
+			}
 		</style>
 	</head>
 	<body>
@@ -95,12 +110,12 @@
 		</header>
 		<div class="mui-content">
 			<div class="active-detail-top">
-				<div class="active-detail-title">
+				<!-- <div class="active-detail-title">
 					<span>阳光体育大联赛乒乓联赛报名开始啦，请同学们踊跃参加</span>
 					<span>班</span>
 					<span>进行中</span>
-				</div>
-				<div class="active-detail-msg flex">
+				</div> -->
+				<!-- <div class="active-detail-msg flex">
 					<div class="flex">
 						<div>龙飞</div>
 						<div>05-06 12:21</div>
@@ -108,18 +123,18 @@
 					<div>
 						<div>高一3班等10个班牌</div>
 					</div>
-				</div>
-				<div class="active-cont">
+				</div> -->
+				<!-- <div class="active-cont">
 					为了推动学校体育活动的开展，丰富同学校园文化生活，培养学生们热爱乒乓球运动，营造和谐、健康的人文环境，学校决定于2019年6月8日至20日举办第四届“校园杯”乒乓球比赛请同学们积极参与。
-				</div>
+				</div> -->
 			</div>
 			<div class="option-wrap">
 				<div class="flex justify-bet option-title">
-					<div>多选</div>
+					<div></div>
 					<div>5个报名</div>
 				</div>
 				<ul class="option-list">
-					<li>
+					<!-- <li>
 						<a href="#">
 							<div>男子单人</div>
 							<div>1人</div>
@@ -142,17 +157,114 @@
 							<div>男子单人</div>
 							<div>1人</div>
 						</a>
-					</li>
+					</li> -->
 				</ul>
 				<div class="flex justify-bet option-btm">
-					<a href="#">4人参与</a>
-					<div>05-12 18:00截止</div>
+					<a href="#"></a>
+					<div></div>
 				</div>
 			</div>
 		</div>
 	</body>
 	<script src="../../js/mui.js"></script>
 	<script type="text/javascript">
+		var typelist = '';
+		var type = 1;
 		mui.init()
+		var search = function(id) {
+			mui.ajax('http://192.168.10.59:8099/phone/active/selectactiveforajax.do', {
+				data: {
+					token: window.localStorage.getItem('token'),
+					activeId: id
+				},
+				async:false,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					console.log(data)
+					var value = data.data;
+					typelist = value.activeType == 1?'投票':'报名',
+					type = value.activeType;
+					document.querySelector('.mui-title').innerHTML = typelist + "详情"
+					document.title = typelist + "详情"
+					var html = `<div class="active-detail-title">
+									<span>${value.activeTitile}</span>
+									<span class="${value.activeLevel == 1?'school':''}">${value.activeLevel == 1?'校':'班'}</span>
+									<span class="${value.state == 1?'':'stateEnd'}">${value.state == 1?'进行中':'已结束'}</span>
+								</div>
+								<div class="active-detail-msg flex">
+									<div class="flex">
+										<div>${value.nickName}</div>
+										<div>${value.endTime.substring(5,16)}</div>
+									</div>
+									<div>
+										<div>${value.boards.split(',')[0]}等${value.count}个班牌</div>
+									</div>
+								</div>
+								<div class="active-cont">
+									${value.activeContent}
+								</div>`
+					document.querySelector('.active-detail-top').innerHTML = html
+					document.querySelector('.option-btm>div').innerHTML = value.endTime.substring(5,16)+"截止";
+					document.querySelector('.option-title>div:first-child').innerHTML = value.choose==1?'单选':'多选'
+				},
+				error: function(xhr, type, errorThrown) {
+
+				}
+			});
+		}
+		var search1 = function(id){
+			console.log(id)
+			mui.ajax('http://192.168.10.59:8099/phone/votetitle/selectbyactive.do',{
+				data:{
+					token: window.localStorage.getItem('token'),
+					activeId:id
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
+					console.log(data)
+					var value = data.data;
+					var count = 0;
+					var html = '';
+					for(var i = 0;i<data.data.length;i++){
+						count += parseInt(value[i].titleUser)
+						html += `<li>
+									<a href="#" id="${value[i].voteTitileId}">
+										<div>${value[i].voteTitileContent}</div>
+										<div>${value[i].titleUser}人</div>
+									</a>
+								</li>`
+					}
+					document.querySelector('.option-title>div:last-child').innerHTML = count + "个" + typelist
+					document.querySelector('.option-list').innerHTML = html;
+					document.querySelector('.option-btm>a').innerHTML = data.data[0].totalUser+"人参与";
+				},
+				error:function(xhr,type,errorThrown){
+					
+				}
+			});
+		}
+		mui.ready(function() {
+			//活动id
+			var id = window.location.href.split('id=')[1].replace('#','');
+			search(id)
+			search1(id)
+			mui(".option-list").on('tap', 'a', function(event) {
+				var quesId = this.getAttribute("id")
+				mui.openWindow({
+					id: 'index',
+					url: './peoCheck.html?id='+quesId+'&type='+type
+				});
+			})
+			mui(".option-btm").on('tap', 'a', function(event) {
+				mui.openWindow({
+					id: 'index',
+					url: './detailCheck.html?id='+id+'&type='+type
+				});
+			})
+		})
 	</script>
 </html>

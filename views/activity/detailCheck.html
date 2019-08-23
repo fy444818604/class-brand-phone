@@ -70,9 +70,48 @@
 				</li>
 			</ul>
 		</div>
+		
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
+			var type = window.location.href.split('&type=')[1];
+			var types = type == 1?'投票':type == 2?'选择':'报名';
+			document.querySelector('.mui-title').innerHTML = '查看' + types + '人'
 			mui.init()
+			var search = function(id){
+				mui.ajax('http://192.168.10.59:8099/phone/active/selectuserbyactive.do',{
+					data:{
+						token: window.localStorage.getItem('token'),
+						activeId:id
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'get',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+						console.log(data)
+						var value = data.data;
+						var html = '';
+						if(value.length != 0){
+							for(var i = 0;i<value.length;i++){
+								html += `<li>
+											<img src="${value[i].userFace}" alt="">
+											<div class="peo-name text-overflow">${value[i].nickName}</div>
+											<div class="peo-class">${value[i].className}</div>
+										</li>`
+							}
+						}
+						document.querySelector('.peo-list').innerHTML = html;
+						document.querySelector('.peo-count').innerHTML = '共'+value.length+types
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+			}
+			mui.ready(function(){
+				//活动id
+				var id = window.location.href.split('&type=')[0].split('id=')[1];
+				search(id)
+			})
 		</script>
 	</body>
 
