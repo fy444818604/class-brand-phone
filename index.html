@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>班牌发布平台</title>
-	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/mui.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/public.css"/>
     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css"/>
@@ -150,7 +150,7 @@
                          <div class="mui-media-body">公告</div>
                     </a>
                 </li>  
-                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                     <a href="#">  
                          <img class="img" src="img/home_btn_school.png"/>
                          <div class="mui-media-body">校宣</div>
@@ -161,24 +161,41 @@
 	</div>
 	 <script type="text/javascript" charset="utf-8">
 	 	//初始化	
-      	mui.init({
-	    
-	  	});
-	  	mui(".card").on('tap','.class-left',function(){
-	  		console.log(1)
-		  mui.openWindow({
-		    id:'index',
-		    url:'views/classSet/index.html'
-		  });
-		})
+      	(function($) {
+			mui.init();
+			//获取参数
+			var url = location.search;   
+			var theRequest = new Object();  
+			if ( url.indexOf( "?" ) != -1 ) {  
+			  var str = url.substr( 1 );  
+			  var strs = str.split( "&" );  
+			  for ( var i = 0; i < strs.length; i++ ) {  
+			    theRequest[ strs[ i ].split( "=" )[ 0 ] ] = ( strs[ i ].split( "=" )[ 1 ] );  
+			  }
+			  if(theRequest.token == ''){
+			  	mui.openWindow({
+				    id:'login',
+				    url:'views/login.html'
+			  	});
+			  }
+			  if(theRequest.isCharge == 1){
+			  	mui(".card").on('tap','.class-left',function(){
+				  mui.openWindow({
+				    id:'index',
+				    url:'views/classSet/index.html?classId='+theRequest.classId+'&token='+theRequest.token
+				  });
+			    })
+			  }else{
+			  	mui.alert('你还不是班主任，请联系管理员')
+			  }
+			}
+		})(mui);
 	  	mui("#notice").on('tap','.notice',function(){
 		  mui.openWindow({
 		    id:'index',
 		    url:'views/notice/index.html'
 		  });
 		})
-	  	
-	  	
     </script>
 </body>
 </html>
