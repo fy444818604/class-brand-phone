@@ -169,6 +169,7 @@
 	<script src="../../js/mui.js"></script>
 	<script type="text/javascript">
 		var typelist = '';
+		var type = 1;
 		mui.init()
 		var search = function(id) {
 			mui.ajax('http://192.168.10.59:8099/phone/active/selectactiveforajax.do', {
@@ -184,6 +185,7 @@
 					console.log(data)
 					var value = data.data;
 					typelist = value.activeType == 1?'投票':'报名',
+					type = value.activeType;
 					document.querySelector('.mui-title').innerHTML = typelist + "详情"
 					document.title = typelist + "详情"
 					var html = `<div class="active-detail-title">
@@ -230,7 +232,7 @@
 					for(var i = 0;i<data.data.length;i++){
 						count += parseInt(value[i].titleUser)
 						html += `<li>
-									<a href="#">
+									<a href="#" id="${value[i].voteTitileId}">
 										<div>${value[i].voteTitileContent}</div>
 										<div>${value[i].titleUser}人</div>
 									</a>
@@ -247,9 +249,22 @@
 		}
 		mui.ready(function() {
 			//活动id
-			var id = window.location.href.split('id=')[1];
+			var id = window.location.href.split('id=')[1].replace('#','');
 			search(id)
 			search1(id)
+			mui(".option-list").on('tap', 'a', function(event) {
+				var quesId = this.getAttribute("id")
+				mui.openWindow({
+					id: 'index',
+					url: './peoCheck.html?id='+quesId+'&type='+type
+				});
+			})
+			mui(".option-btm").on('tap', 'a', function(event) {
+				mui.openWindow({
+					id: 'index',
+					url: './detailCheck.html?id='+id+'&type='+type
+				});
+			})
 		})
 	</script>
 </html>
