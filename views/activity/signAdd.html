@@ -13,17 +13,6 @@
 			.Hauto>div{
 				padding: 11px 15px;
 			}
-			.q-tips{
-				display: flex;
-				align-items: center;
-				height: 100%;
-				padding-left: 15px;
-			}
-			.q-tips>span{
-				font-size: 0.8rem;
-				margin-left: 15px;
-				color: #dcdfe6;
-			}
 			.icon-btn{
 				display: flex;
 				color: #3b8bff;
@@ -47,11 +36,23 @@
 				height: 100vh;
 			}
 			.add-form{
-				height: calc(100% - 46px);
+				height: calc(100% - 47px);
 				overflow: auto;
 			}
 			.mui-btn-block{
 				margin-bottom: 0;
+			}
+			#level-select,#mode-select{
+				display: inline-block;
+				width: 50%;
+			}
+			#opion-add{
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 99;
+				width: 100vw;
+				height: 100vh;
 			}
 		</style>
 	</head>
@@ -66,7 +67,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row mt12">
 						<label>级别</label>
-						<a href="#level">请选择级别</a>
+						<a href="#level" id="level-select">请选择级别</a>
 					</div>
 					<div class="mui-input-row">
 						<label>对象</label>
@@ -100,7 +101,7 @@
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
-						<a href="#mode">请选择模式</a>
+						<a href="#mode" id="mode-select">请选择模式</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row Hauto">
@@ -145,6 +146,7 @@
 				</li>
 			</ul>
 		</div>
+		<iframe src="./optionAdd.html" frameborder="no" border="0" id="opion-add"></iframe>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
@@ -171,6 +173,20 @@
 						});
 					}
 				}, false)
+				mui("#level").on('tap', 'a', function() {
+					var level = this.innerHTML.substring(0,1)
+					if(level != "<"){
+						document.querySelector('#level-select').innerHTML = level
+						mui('#level').popover('toggle');
+					}
+				})
+				mui("#mode").on('tap', 'a', function() {
+					var level = this.innerHTML;
+					if(level != "<b>取消</b>"){
+						document.querySelector('#mode-select').innerHTML = level
+						mui('#mode').popover('toggle');
+					}
+				})
 			})(mui);
 		</script>
 	</body>

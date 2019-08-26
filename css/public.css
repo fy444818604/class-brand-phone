@@ -65,7 +65,7 @@ body {
 	flex-wrap: wrap;
 }
 
-.justify-bet{
+.justify-bet {
 	justify-content: space-between;
 }
 
@@ -112,7 +112,7 @@ body {
 	height: auto !important;
 }
 
-.mui-btn-block{
+.mui-btn-block {
 	padding: 10px 0;
 }
 
@@ -134,4 +134,21 @@ body {
 :-moz-placeholder {
 	color: #c0c4cc;
 	font-size: 1rem;
+}
+
+.black {
+	color: #000000;
+}
+
+.q-tips {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding-left: 15px;
+}
+
+.q-tips>span {
+	font-size: 0.8rem;
+	margin-left: 15px;
+	color: #dcdfe6;
 }

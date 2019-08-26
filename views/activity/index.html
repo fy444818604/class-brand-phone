@@ -107,13 +107,13 @@
 		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a href="#">报名</a>
+					<a href="./signAdd.html" data-type="3">报名</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a href="#">投票</a>
+					<a href="./signAdd.html" data-type="1">投票</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a href="#">问卷</a>
+					<a href="#" data-type="2">问卷</a>
 				</li>
 			</ul>
 			<ul class="mui-table-view">
@@ -285,7 +285,7 @@
 							}
 						})
 					})
-					mui(".mui-table-view").on('tap', '.mui-table-view-cell', function(event) {
+					mui(".mui-content").on('tap', '.mui-table-view-cell', function(event) {
 						var id = this.dataset.id
 						if (this.dataset.type == "问卷") {
 							mui.openWindow({
@@ -296,6 +296,20 @@
 							mui.openWindow({
 								id: 'index',
 								url: './signDetail.html?id='+id,
+							});
+						}
+					})
+					mui("#picture").on('tap', '.mui-table-view-cell>a', function(event) {
+						var id = 1;
+						if (this.dataset.type == 2) {
+							mui.openWindow({
+								id: 'index',
+								url: './quesDetail.html?id='+id
+							});
+						} else {
+							mui.openWindow({
+								id: 'index',
+								url: './signAdd.html?id='+id,
 							});
 						}
 					})
