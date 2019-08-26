@@ -118,11 +118,11 @@
 						体育
 					</a>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
+				<!-- <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
 					<a href="javascript:0">
 						<i class="iconfont icon-add"></i>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 			<!--设置科目的弹框-->
 			<div id="sloganAdd" class="sloganAdd">
@@ -142,6 +142,21 @@
 		var classTeacherId = getQueryString("classTeacherId");
 		var workId = getQueryString("workId");
 		var subjectName = decodeURI(getQueryString('subjectName'));
+
+		(function($) {
+			getCss();
+		}(mui))
+
+		function getCss() {
+			var list = document.getElementsByClassName('click-operate');
+
+			for (var i = 0; i < list.length; i++) {
+				var text = list[i].innerHTML.trim();
+				if (text == subjectName) {
+					list[i].style.color = '#3B8BFF';
+				}
+			}
+		}
 
 		mui.init();
 		mui.ready(function() {
@@ -170,26 +185,14 @@
 				var discipline = mui("#discipline")[0].value;
 				if (discipline != '') {
 					//完成操作
-					// html1 = document.querySelector('.mui-table-view').remove(
-					// 	`<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
-					// 		<a href="javascript:0">
-					// 		<i class="iconfont icon-add"></i>
-					// 		</a>
-					// 	 </li>`);
-					var querySelector = document.querySelector('.mui-table-view')
-					querySelector.remove(querySelector.length-1);
-					html1 +=
+					html1 =
 						`</li>
 						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 							<a href="javascript:0">
 								${discipline}
 							</a>
-						</li>
-						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
-							<a href="javascript:0">
-								<i class="iconfont icon-add"></i>
-							</a>
 						</li>`;
+					html1 += document.querySelector('.mui-table-view').innerHTML;
 					document.querySelector('.mui-table-view').innerHTML = html1
 					sloganAdd.style.display = "none";
 
@@ -211,7 +214,7 @@
 
 		//添加/编辑
 		function operateTeacher(subjectName) {
-			if (classTeacherId && !classTeacherId.indexOf(undefined) && classTeacherId != '' && !classTeacherIdi.indexof(null)) {
+			if (classTeacherId && classTeacherId != undefined && classTeacherId != '' && classTeacherId != null) {
 				console.log("update")
 				mui.ajax('http://192.168.10.59:8099/phone/classteacher/update.do', {
 					data: {

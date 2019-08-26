@@ -143,12 +143,14 @@
 												<input type="checkbox" checked  value="${con[i].id}" />
 												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
 											</li>`
+									document.getElementById('done').classList.remove("mui-disabled");
 								} else {
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox"  value="${con[i].id}" />
 												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
 										</li>`
+
 								}
 
 							}
@@ -194,15 +196,21 @@
 							checkedValues.push(box.value);
 						}
 					});
-					console.log(checkedValues[0]);
+					// console.log(checkedValues[0]);
 					if (checkedValues.length > 0) {
-						if (classTeacherId && !classTeacherId.indexOf(undefined) && classTeacherId != '' && !classTeacherId.indexOf(null)) {
+						if (classTeacherId && !classTeacherId != undefined && classTeacherId != '' && classTeacherId != null) {
+							// console.log(subjectName)
+							// console.log(classTeacherId)
+							console.log("update")
 							//打开选择科目
 							mui.openWindow({
 								id: 'subjectUpdate',
 								url: 'subjectsAdd.html?workId=' + checkedValues[0] + '&classTeacherId=' + classTeacherId+'&subjectName='+subjectName
 							});
 						} else {
+							// console.log(subjectName)
+							// console.log(classTeacherId)
+							console.log("add")
 							mui.openWindow({
 								id: 'subjectAdd',
 								url: 'subjectsAdd.html?workId=' + checkedValues[0] + '&classTeacherId=' + classTeacherId
