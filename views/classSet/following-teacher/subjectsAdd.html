@@ -64,62 +64,62 @@
 		<div class="mui-content">
 			<ul class="mui-table-view mui-grid-view mui-grid-9">
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						语文
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						数学
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						英语
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						化学
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						物理
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						生物
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						历史
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						思想品德与政治
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						音乐
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						美术
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
+					<a href="javascript:0">
 						体育
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
-					<a href="#">
+					<a href="javascript:0">
 						<i class="iconfont icon-add"></i>
 					</a>
 				</li>
@@ -137,10 +137,10 @@
 			</div>
 		</div>
 	</body>
-	<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		var classTeacherId = window.location.href.split('classTeacherId=')[1];
-		var workId = window.location.href.split('workId=')[1];
+		var classTeacherId = getQueryString("classTeacherId");
+		var workId = getQueryString("workId");
 
 		mui.init();
 		mui.ready(function() {
@@ -148,8 +148,6 @@
 			var cancel = document.querySelector('.cancel');
 			var determine = document.querySelector('.determine');
 			var sloganAdd = document.getElementById('sloganAdd')
-			var subjectName = document.getElementsByClassName("mui-table-view-cell");
-			console.log(typeof subjectName);
 			//添加
 			addSubiects.addEventListener('tap', function() {
 				//打开添加设置科目的弹框
@@ -171,75 +169,42 @@
 					mui.alert('不能为空')
 				}
 			})
-			
-			mui('.mui-content').on('tap','a',function(){
-				
+
+			mui('.mui-content').on('tap', 'a', function() {
+				var subjectName = this.innerHTML.trim();
+				if (subjectName) {
+					operateTeacher(subjectName)
+				} else {
+					mui.alert('不能为空')
+				}
 			})
-
-			// //添加事件
-			// subjectName.addEventListener('tap', function() {
-			// 	var str = this.value;
-			// 	console.log(str);
-			// 	if (str != '') {
-			// 		//完成操作
-			// 		console.log(123);
-			// 		// operateTeacher(discipline);
-			// 	} else {
-			// 		mui.alert('不能为空')
-			// 	}
-			// })
-			// 
-			mui(".mui-table-view-cell").on('tap',function(){
-				this.forEach(function)
-			  // var str = this.value;
-			  // console.log(str);
-			  // if (str != '') {
-			  // 	//完成操作
-			  // 	console.log(123);
-			  // 	// operateTeacher(discipline);
-			  // } else {
-			  // 	mui.alert('不能为空')
-			  // }
-			}) 	
-
 
 		})
 
 		//添加/编辑
 		function operateTeacher(subjectName) {
-			if (classTeacherId) {
+			if (classTeacherId && classTeacherId.indexOf(undefined) && classTeacherId != '') {
+				console.log("update")
 				mui.ajax('http://192.168.10.59:8099/phone/classteacher/update.do', {
 					data: {
 						classTeacherId: classTeacherId,
 						classId: window.localStorage.getItem('classId'),
 						workId: workId,
+						token: window.localStorage.getItem('token'),
 						subjectName: subjectName
 					},
 					dataType: 'json', //服务器返回json格式数据
-					type: 'get', //HTTP请求类型
+					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						console.log("update");
-						mui.openWindow({
-							id: 'index',
-							// url:'./activity/index.html'
-							url: 'following-teacher/index.html'
-						});
-						// console.log(data.data)
-						// if (data.code == 200) {
-						// 	document.querySelector('#OA_task_1').innerHTML = '';
-						// 	var html = document.querySelector('#OA_task_1').innerHTML;
-						// 	var con = data.data;
-						// 	//								count = data.data.pageCount;
-						// 	for (var i = 0; i < con.length; i++) {
-						// 		html +=
-						// 			`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-						// 								<input type="checkbox" id="${con[i].id}" />
-						// 								<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
-						// 							</li>`
-						// 	}
-						// 	document.querySelector('#OA_task_1').innerHTML = html
-						// }
+						console.log(data);
+						if (data.code == 200) {
+							mui.openWindow({
+								id: 'index',
+								url: '/index.html'
+							});
+						}
+						
 					},
 					error: function(xhr, type, errorThrown) {
 
@@ -250,33 +215,20 @@
 					data: {
 						classId: window.localStorage.getItem('classId'),
 						workId: workId,
+						token: window.localStorage.getItem('token'),
 						subjectName: subjectName
 					},
 					dataType: 'json', //服务器返回json格式数据
-					type: 'get', //HTTP请求类型
+					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						console.log("add");
-						mui.openWindow({
-							id: 'index',
-							// url:'./activity/index.html'
-							url: 'following-teacher/index.html'
-						});
-						// console.log(data.data)
-						// if (data.code == 200) {
-						// 	document.querySelector('#OA_task_1').innerHTML = '';
-						// 	var html = document.querySelector('#OA_task_1').innerHTML;
-						// 	var con = data.data;
-						// 	//								count = data.data.pageCount;
-						// 	for (var i = 0; i < con.length; i++) {
-						// 		html +=
-						// 			`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-						// 								<input type="checkbox" id="${con[i].id}" />
-						// 								<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
-						// 							</li>`
-						// 	}
-						// 	document.querySelector('#OA_task_1').innerHTML = html
-						// }
+						console.log(data);
+						if (data.code == 200) {
+							mui.openWindow({
+								id: 'index',
+								url: '../following-teacher/index.html'
+							});
+						}
 					},
 					error: function(xhr, type, errorThrown) {
 
@@ -285,5 +237,20 @@
 			}
 
 		}
+		
+		function getQueryString(name) {
+		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		    var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+		    var r = window.location.search.substr(1).match(reg);
+		    var q = window.location.pathname.substr(1).match(reg_rewrite);
+		    if(r != null){
+		        return unescape(r[2]);
+		    }else if(q != null){
+		        return unescape(q[2]);
+		    }else{
+		        return null;
+		    }
+		}
+		
 	</script>
 </html>

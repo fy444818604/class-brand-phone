@@ -114,7 +114,7 @@
 		<script src="../../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			
-			var classTeacherId=window.location.href.split('classTeacherid=')[1]; 
+			var classTeacherId=getQueryString("classTeacherId"); 
 			mui.init();
 			(function($) {
 				existingTeacher('');
@@ -152,6 +152,19 @@
 				});
 			}
 			
+			function getQueryString(name) {
+			    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			    var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+			    var r = window.location.search.substr(1).match(reg);
+			    var q = window.location.pathname.substr(1).match(reg_rewrite);
+			    if(r != null){
+			        return unescape(r[2]);
+			    }else if(q != null){
+			        return unescape(q[2]);
+			    }else{
+			        return null;
+			    }
+			}		
 			
 			mui.ready(function() {
 				var header = document.querySelector('header.mui-bar');
