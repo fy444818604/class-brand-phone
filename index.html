@@ -166,29 +166,23 @@
 			//获取参数
 			var url = location.search;   
 			var theRequest = new Object();  
-			if ( url.indexOf( "?" ) != -1 ) {  
-			  var str = url.substr( 1 );  
-			  var strs = str.split( "&" );  
-			  for ( var i = 0; i < strs.length; i++ ) {  
-			    theRequest[ strs[ i ].split( "=" )[ 0 ] ] = ( strs[ i ].split( "=" )[ 1 ] );  
-			  }
-			  if(theRequest.token == ''){
+			  if(window.localStorage.getItem('token') == ''){
 			  	mui.openWindow({
 				    id:'login',
 				    url:'views/login.html'
 			  	});
 			  }
-			  if(theRequest.isCharge == 1){
+			  if( window.localStorage.getItem('isCharge') == 1){
 			  	mui(".card").on('tap','.class-left',function(){
 				  mui.openWindow({
 				    id:'index',
-				    url:'views/classSet/index.html?classId='+theRequest.classId+'&token='+theRequest.token
+				    url:'views/classSet/index.html'
 				  });
 			    })
 			  }else{
 			  	mui.alert('你还不是班主任，请联系管理员')
 			  }
-			}
+			/*}*/
 		})(mui);
 	  	mui("#notice").on('tap','.notice',function(){
 		  mui.openWindow({
