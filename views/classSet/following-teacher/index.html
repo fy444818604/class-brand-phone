@@ -161,8 +161,8 @@
 						type: 'get', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							if(data.code==200){
-								document.querySelector('#OA_task_1').innerHTML ='';
+							if (data.code == 200) {
+								document.querySelector('#OA_task_1').innerHTML = '';
 								var html = document.querySelector('#OA_task_1').innerHTML;
 								var con = data.data;
 								for (var i = 0; i < con.length; i++) {
@@ -170,7 +170,7 @@
 										`<li class="mui-table-view-cell" data-id="${con[i].classTeacherId}" data-data="${con[i]}">
 													<div class="mui-slider-right mui-disabled">
 														<a id="${con[i].classTeacherId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
-														<a  class="mui-btn mui-btn-red mui-icon iconfont icon-edit"></a>
+														<a id="${con[i].classTeacherId}&${con[i].workId}&${con[i].subjectName}" class="mui-btn mui-btn-red mui-icon iconfont icon-edit"   ></a>
 													</div>
 													<div class="mui-slider-handle flex">
 														<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].userFace}"/></div>
@@ -180,16 +180,16 @@
 											</li>`
 								}
 								document.querySelector('#OA_task_1').innerHTML = html
-							}else{
+							} else {
 								mui.alert(data.msg);
 							}
-							
+
 						},
 						error: function(xhr, type, errorThrown) {}
 					});
 				};
 				//删除任课老师
-				var activityDel = function(id) {
+				var delTeacher = function(id) {
 					mui.ajax('http://192.168.10.59:8099/phone/classteacher/delete.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
@@ -201,7 +201,7 @@
 						success: function(data) {
 							if (data.code == 200) {
 								listSearch();
-							}else{
+							} else {
 								mui.alert(data.msg)
 							}
 						},
@@ -211,6 +211,17 @@
 					});
 				}
 
+				//修改任课老师
+				var updateTeacher = function(id) {
+					var ids =id.split("&");
+					console.log(encodeURI(ids[2]));
+					mui.openWindow({
+						id: 'teacherUpdate',
+						url:'teacherAdd.html?classTeacherId='+ids[0]+'&workId='+ids[1]+'&subjectName='+encodeURI(ids[2])
+					});
+				}
+
+
 				mui.init();
 				mui.ready(function() {
 					mui(".mui-table-view").on('tap', '.icon-del', function() {
@@ -218,15 +229,21 @@
 						var btnArray = ['否', '是'];
 						mui.confirm('确认要删除？', null, btnArray, function(e) {
 							if (e.index == 1) {
-								activityDel(id)
+								delTeacher(id)
 							}
 						})
 					});
+					mui(".mui-table-view").on('tap', '.icon-edit', function() {
+						var id = this.getAttribute("id");
+						console.log(id);
+						updateTeacher(id);
+					});
+
 					//添加老师
 					mui(".mui-content").on('tap', '.add-slogan', function() {
 						//打开选择老师
 						mui.openWindow({
-							id: 'teacherAdd',
+							id: 'teacherUpdate',
 							url: 'teacherAdd.html'
 						});
 					})

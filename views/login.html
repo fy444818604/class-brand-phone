@@ -79,7 +79,6 @@
 		var login = function() {
 			var loginName = document.querySelector('.login-name').value;
 			var loginPwd = document.querySelector('.login-pwd').value;
-			console.log(123)
 			mui.ajax('http://192.168.10.59:8099/phone/login.do', {
 				data: {
 					loginName: loginName,

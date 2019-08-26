@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,7 +5,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../../../css/mui.indexedlist.css"/>
+		<link rel="stylesheet" type="text/css" href="../../../css/mui.indexedlist.css" />
 		<style>
 			html,
 			body {
@@ -88,9 +87,9 @@
 			<h1 class="mui-title">选择老师</h1>
 		</header>
 		<div class="mui-content">
-			<div id='list' class="mui-indexed-list">
+			<div id="list" class="mui-indexed-list">
 				<div class="mui-indexed-list-search mui-input-row mui-search">
-					<input type="search" id="search"   class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索老师">
+					<input type="search" id="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索老师">
 				</div>
 				<div class="mui-indexed-list-bar">
 				</div>
@@ -98,10 +97,10 @@
 				<div class="mui-indexed-list-inner">
 					<div class="mui-indexed-list-empty-alert">没有数据</div>
 					<div class="htOvfl">
-						<ul class="mui-table-view "  id="OA_task_1">
+						<ul class="mui-table-view " id="OA_task_1">
 						</ul>
 					</div>
-					
+
 				</div>
 				<!--按钮-->
 				<div class="anniu mui-row">
@@ -113,18 +112,20 @@
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
-			
-			var classTeacherId=getQueryString("classTeacherId"); 
+			var classTeacherId = getQueryString("classTeacherId");
+			var workId = getQueryString("workId");
+			var subjectName = decodeURI(getQueryString('subjectName'));
+
 			mui.init();
 			(function($) {
 				existingTeacher('');
 			}(mui))
 			//查询现有老师接口
-			function existingTeacher (str) {
+			function existingTeacher(str) {
 				mui.ajax('http://192.168.10.59:8099/phone/user/selectteacherlist.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						q:str
+						q: str
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'get', //HTTP请求类型
@@ -134,38 +135,47 @@
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var html = document.querySelector('#OA_task_1').innerHTML;
-								var con = data.data;
-//								count = data.data.pageCount;
-									for (var i = 0; i < con.length; i++) {
+							var con = data.data;
+							for (var i = 0; i < con.length; i++) {
+								if (workId == con[i].id) {
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-											<input type="checkbox"  value="${con[i].id}" />
-											<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+												<input type="checkbox" checked  value="${con[i].id}" />
+												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+											</li>`
+								} else {
+									html +=
+										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+												<input type="checkbox"  value="${con[i].id}" />
+												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
 										</li>`
 								}
+
+							}
 							document.querySelector('#OA_task_1').innerHTML = html
 						}
 					},
 					error: function(xhr, type, errorThrown) {
-						
+
 					}
 				});
 			}
-			
+
 			function getQueryString(name) {
-			    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-			    var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
-			    var r = window.location.search.substr(1).match(reg);
-			    var q = window.location.pathname.substr(1).match(reg_rewrite);
-			    if(r != null){
-			        return unescape(r[2]);
-			    }else if(q != null){
-			        return unescape(q[2]);
-			    }else{
-			        return null;
-			    }
-			}		
-			
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+				// console.log(window.location.search);
+				var r = window.location.search.substr(1).match(reg);
+				var q = window.location.pathname.substr(1).match(reg_rewrite);
+				if (r != null) {
+					return r[2];
+				} else if (q != null) {
+					return q[2];
+				} else {
+					return null;
+				}
+			}
+
 			mui.ready(function() {
 				var header = document.querySelector('header.mui-bar');
 				var list = document.getElementById('list');
@@ -174,7 +184,7 @@
 				//calc hieght
 				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
 				//create
-//				window.indexedList = new mui.IndexedList(list);
+				//				window.indexedList = new mui.IndexedList(list);
 				//点击完成
 				done.addEventListener('tap', function() {
 					var checkboxArray = [].slice.call(list.querySelectorAll('input[type="checkbox"]'));
@@ -186,12 +196,19 @@
 					});
 					console.log(checkedValues[0]);
 					if (checkedValues.length > 0) {
-						console.log(checkedValues)
-						//打开选择科目
-						  mui.openWindow({
-						    id:'teacherAdd',
-						    url:'subjectsAdd.html?workId='+checkedValues[0]+'&classTeacherId='+classTeacherId
-						  });
+						if (classTeacherId && !classTeacherId.indexOf(undefined) && classTeacherId != '' && !classTeacherId.indexOf(null)) {
+							//打开选择科目
+							mui.openWindow({
+								id: 'subjectUpdate',
+								url: 'subjectsAdd.html?workId=' + checkedValues[0] + '&classTeacherId=' + classTeacherId+'&subjectName='+subjectName
+							});
+						} else {
+							mui.openWindow({
+								id: 'subjectAdd',
+								url: 'subjectsAdd.html?workId=' + checkedValues[0] + '&classTeacherId=' + classTeacherId
+							});
+						}
+
 					} else {
 						mui.alert('你没有选择任何老师');
 					}
@@ -211,11 +228,11 @@
 						}
 					}
 				});
-				
-				search.addEventListener('keypress',function(event){
+
+				search.addEventListener('keypress', function(event) {
 					var str = document.getElementById("search").value;
-					if(event.keyCode==13){
-						document.activeElement.blur();//收起虚拟键盘
+					if (event.keyCode == 13) {
+						document.activeElement.blur(); //收起虚拟键盘
 						// console.log(str);
 						existingTeacher(str);
 						event.preventDefault(); // 阻止默认事件---阻止页面刷新

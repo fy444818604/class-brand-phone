@@ -64,57 +64,57 @@
 		<div class="mui-content">
 			<ul class="mui-table-view mui-grid-view mui-grid-9">
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						语文
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						数学
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						英语
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						化学
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						物理
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						生物
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						历史
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						思想品德与政治
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						音乐
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						美术
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="javascript:0">
+					<a href="javascript:0" class="click-operate">
 						体育
 					</a>
 				</li>
@@ -132,7 +132,7 @@
 					<a class="mui-btn determine  mui-btn-link mui-pull-right  ">完成</a>
 				</header>
 				<div class="sloganAdd-cont mui-input-row">
-					<input id="discipline" type="text" class="mui-input-clear" placeholder="数学">
+					<input id="discipline" type="text" class="mui-input-clear" placeholder="学科名称">
 				</div>
 			</div>
 		</div>
@@ -141,6 +141,7 @@
 	<script>
 		var classTeacherId = getQueryString("classTeacherId");
 		var workId = getQueryString("workId");
+		var subjectName = decodeURI(getQueryString('subjectName'));
 
 		mui.init();
 		mui.ready(function() {
@@ -149,8 +150,13 @@
 			var determine = document.querySelector('.determine');
 			var sloganAdd = document.getElementById('sloganAdd')
 			//添加
-			addSubiects.addEventListener('tap', function() {
-				//打开添加设置科目的弹框
+			// addSubiects.addEventListener('tap', function() {
+			// 	//打开添加设置科目的弹框
+			// 	sloganAdd.style.display = "block";
+			// })
+
+
+			mui('.mui-content').on('tap', '.addSubiects', function() {
 				sloganAdd.style.display = "block";
 			})
 			//取消
@@ -158,19 +164,41 @@
 				sloganAdd.style.display = "none";
 			})
 
+			var html1 = '';
 			//完成操作
-			determine.addEventListener('tap', function() {
+			mui(".mui-content").on('tap', ".determine", function() {
 				var discipline = mui("#discipline")[0].value;
 				if (discipline != '') {
 					//完成操作
-					console.log(123);
-					operateTeacher(discipline);
+					// html1 = document.querySelector('.mui-table-view').remove(
+					// 	`<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
+					// 		<a href="javascript:0">
+					// 		<i class="iconfont icon-add"></i>
+					// 		</a>
+					// 	 </li>`);
+					var querySelector = document.querySelector('.mui-table-view')
+					querySelector.remove(querySelector.length-1);
+					html1 +=
+						`</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+							<a href="javascript:0">
+								${discipline}
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
+							<a href="javascript:0">
+								<i class="iconfont icon-add"></i>
+							</a>
+						</li>`;
+					document.querySelector('.mui-table-view').innerHTML = html1
+					sloganAdd.style.display = "none";
+
 				} else {
 					mui.alert('不能为空')
 				}
 			})
 
-			mui('.mui-content').on('tap', 'a', function() {
+			mui('.mui-content').on('tap', '.click-operate', function() {
 				var subjectName = this.innerHTML.trim();
 				if (subjectName) {
 					operateTeacher(subjectName)
@@ -248,9 +276,9 @@
 			var r = window.location.search.substr(1).match(reg);
 			var q = window.location.pathname.substr(1).match(reg_rewrite);
 			if (r != null) {
-				return unescape(r[2]);
+				return r[2];
 			} else if (q != null) {
-				return unescape(q[2]);
+				return q[2];
 			} else {
 				return null;
 			}
