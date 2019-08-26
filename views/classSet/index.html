@@ -77,31 +77,31 @@
 		<div id="notice"> 
             <ul class="mui-table-view mui-grid-view mui-grid-9">
                  <li id="slogan" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="notice">  
+                    <a href="javascript:void(0)" class="notice">  
                      	 <img class="img" src="../../img/class_btn_slogan.png"/>
                          <div class="mui-media-body">班级口号</div>
                     </a>
                  </li>  
                 <li id="classroomTeacher" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="javascript:void(0)">  
                           <img class="img" src="../../img/class_btn_teacher.png"/>
                          <div class="mui-media-body">科任老师</div>
                     </a>
                 </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                <li id="classCadres" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="javascript:void(0)">  
                           <img class="img" src="../../img/class_btn_committee.png"/>
                          <div class="mui-media-body">班委会</div>
                     </a>
                 </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="javascript:void(0)>  
                         <img class="img" src="../../img/class_btn_honor_class.png"/>
                          <div class="mui-media-body">班级荣誉</div>
                     </a>
                 </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="javascript:void(0)">  
                         <img class="img" src="../../img/class_btn_honor_personal.png"/>
                          <div class="mui-media-body">个人荣誉</div>
                     </a>
@@ -144,16 +144,24 @@
 						}
 					}
 				});
+				
+				document.getElementById('classCadres').addEventListener('tap',function(){
+					mui.openWindow({
+					   id:'classCadres',
+					   url:'class-committee/index.html?classSlogan='+classSlogan+'&teacherT='+teacherT+'&membersT='+membersT+'&classNameT='+classNameT
+					});
+				})
+				
 				//点击口号
 			 	document.getElementById('slogan').addEventListener('tap',function(){/*tap表示单击屏幕，此处可换双击，滑动等等事件*/
                   	mui.openWindow({
-					   id:'index',
+					   id:'slogn',
 					   url:'class-slogan/index.html?classSlogan='+classSlogan+'&teacherT='+teacherT+'&membersT='+membersT+'&classNameT='+classNameT
 					});
             	});
             	document.getElementById('classroomTeacher').addEventListener('tap',function(){/*tap表示单击屏幕，此处可换双击，滑动等等事件*/
                   	mui.openWindow({
-					   id:'index',
+					   id:'classTeacher',
 					   url:'following-teacher/index.html?classSlogan='+classSlogan+'&teacherT='+teacherT+'&membersT='+membersT+'&classNameT='+classNameT
 					});
             	});
