@@ -183,7 +183,7 @@
 
 		//添加/编辑
 		function operateTeacher(subjectName) {
-			if (classTeacherId && classTeacherId.indexOf(undefined) && classTeacherId != '') {
+			if (classTeacherId && !classTeacherId.indexOf(undefined) && classTeacherId != '' && !classTeacherIdi.indexof(null)) {
 				console.log("update")
 				mui.ajax('http://192.168.10.59:8099/phone/classteacher/update.do', {
 					data: {
@@ -201,10 +201,12 @@
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',
-								url: '/index.html'
+								url: '../following-teacher/index.html'
 							});
+						} else {
+							mui.alert(data.msg)
 						}
-						
+
 					},
 					error: function(xhr, type, errorThrown) {
 
@@ -222,12 +224,14 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						console.log(data);
+						// console.log(data);
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',
 								url: '../following-teacher/index.html'
 							});
+						} else {
+							mui.alert(data.msg)
 						}
 					},
 					error: function(xhr, type, errorThrown) {
@@ -237,20 +241,19 @@
 			}
 
 		}
-		
+
 		function getQueryString(name) {
-		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-		    var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
-		    var r = window.location.search.substr(1).match(reg);
-		    var q = window.location.pathname.substr(1).match(reg_rewrite);
-		    if(r != null){
-		        return unescape(r[2]);
-		    }else if(q != null){
-		        return unescape(q[2]);
-		    }else{
-		        return null;
-		    }
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			var q = window.location.pathname.substr(1).match(reg_rewrite);
+			if (r != null) {
+				return unescape(r[2]);
+			} else if (q != null) {
+				return unescape(q[2]);
+			} else {
+				return null;
+			}
 		}
-		
 	</script>
 </html>

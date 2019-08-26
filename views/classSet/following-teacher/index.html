@@ -150,48 +150,43 @@
 				// 班级活动查询
 				var listSearch = function() {
 					var _this = this;
-					if (curr <= count) {
-						mui.ajax('http://192.168.10.59:8099/phone/classteacher/selectclassteacherbyclass.do', {
-							data: {
-								token: window.localStorage.getItem('token'),
-								currentPage: curr,
-								pageSize: 10,
-								classId: window.localStorage.getItem('classId')
-							},
-							dataType: 'json', //服务器返回json格式数据
-							type: 'get', //HTTP请求类型
-							timeout: 10000, //超时时间设置为10秒；
-							success: function(data) {
-								console.log(data.data)
+					mui.ajax('http://192.168.10.59:8099/phone/classteacher/selectclassteacherbyclass.do', {
+						data: {
+							token: window.localStorage.getItem('token'),
+							currentPage: curr,
+							pageSize: 10000,
+							classId: window.localStorage.getItem('classId')
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							if(data.code==200){
+								document.querySelector('#OA_task_1').innerHTML ='';
 								var html = document.querySelector('#OA_task_1').innerHTML;
 								var con = data.data;
-								//								count = data.data.pageCount;
-
 								for (var i = 0; i < con.length; i++) {
 									html +=
 										`<li class="mui-table-view-cell" data-id="${con[i].classTeacherId}" data-data="${con[i]}">
-												<div class="mui-slider-right mui-disabled">
-													<a id="${con[i].classTeacherId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
-													<a  class="mui-btn mui-btn-red mui-icon iconfont icon-edit"></a>
-												</div>
-												<div class="mui-slider-handle flex">
-													<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].userFace}"/></div>
-										    		<div >${con[i].nikeName}</div>
-										    		<div class="slogan-bnt-rnt">${con[i].subjectName}</div>
-												</div>
-										</li>`
+													<div class="mui-slider-right mui-disabled">
+														<a id="${con[i].classTeacherId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+														<a  class="mui-btn mui-btn-red mui-icon iconfont icon-edit"></a>
+													</div>
+													<div class="mui-slider-handle flex">
+														<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].userFace}"/></div>
+											    		<div >${con[i].nikeName}</div>
+											    		<div class="slogan-bnt-rnt">${con[i].subjectName}</div>
+													</div>
+											</li>`
 								}
-
-
 								document.querySelector('#OA_task_1').innerHTML = html
-								curr++;
-							},
-							error: function(xhr, type, errorThrown) {
+							}else{
+								mui.alert(data.msg);
 							}
-						});
-					} else {
-						
-					}
+							
+						},
+						error: function(xhr, type, errorThrown) {}
+					});
 				};
 				//删除任课老师
 				var activityDel = function(id) {
@@ -206,6 +201,8 @@
 						success: function(data) {
 							if (data.code == 200) {
 								listSearch();
+							}else{
+								mui.alert(data.msg)
 							}
 						},
 						error: function(xhr, type, errorThrown) {
