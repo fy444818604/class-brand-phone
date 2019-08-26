@@ -158,11 +158,9 @@
 	            }
 	             console.log(theRequest)
 				teacher.innerText='班主任：'+theRequest.teacherT
-				members.innerText='班主任：'+theRequest.membersT;
+				members.innerText='班级成员：'+theRequest.membersT+'人';
 				className.innerText=theRequest.classNameT;
 				sloganCont.innerText = theRequest.classSlogan;
-				clasID.value = theRequest.classId;
-				token.value = theRequest.token;
 	        }
 	    }
 	    GetRequest();
@@ -182,10 +180,10 @@
 			var textareaT = $('#textarea') 
 			var token = $('#token')
 			if(addVal != ''){
-				mui.ajax('http://192.168.10.59:8099/phone/classdetail/updatebyparam.do',{
+			mui.ajax('http://192.168.10.59:8099/phone/classdetail/updatebyparam.do',{
 					data:{
-						token:token,
-						classId:clasID.value,
+						token:window.localStorage.getItem('token'),
+						classId:window.localStorage.getItem('classId'),
 						classSlogan:textareaT.val()
 					},
 					dataType:'json',//服务器返回json格式数据
@@ -198,8 +196,6 @@
 						}
 					}
 				});
-				
-				
 				$('.slogan-bnt').text(addVal)
 				
 				$('.sloganAdd').hide();

@@ -98,8 +98,8 @@
 				<div class="mui-indexed-list-inner">
 					<div class="mui-indexed-list-empty-alert">没有数据</div>
 					<div class="htOvfl">
-						<ul class="mui-table-view " >
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+						<ul class="mui-table-view "  id="OA_task_1">
+						<!--	<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 								<input type="checkbox" />
 								<img src="../../../img/home_btn_activity.png"/>杨老师
 							</li>
@@ -138,7 +138,7 @@
 							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 								<input type="checkbox" />
 								<img src="../../../img/home_btn_activity.png"/>老师
-							</li>
+							</li>-->
 						</ul>
 					</div>
 					
@@ -150,10 +150,46 @@
 				</div>
 			</div>
 		</div>
-		<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
+			(function($) {
+				existingTeacher();
+			}(mui))
+			//查询现有老师接口
+			function existingTeacher () {
+				mui.ajax('http://192.168.10.59:8099/phone/user/selectteacherlist.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						q:''
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						console.log(data.data)
+						if (data.code == 200) {
+							var html = document.querySelector('#OA_task_1').innerHTML;
+								var con = data.data;
+//								count = data.data.pageCount;
+									for (var i = 0; i < con.length; i++) {
+									html +=
+										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+											<input type="checkbox" id="${con[i].id}" />
+											<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+										</li>`
+								}
+							document.querySelector('#OA_task_1').innerHTML = html
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						
+					}
+				});
+			}
+			
+			
 			mui.ready(function() {
 				var header = document.querySelector('header.mui-bar');
 				var list = document.getElementById('list');
@@ -161,7 +197,7 @@
 				//calc hieght
 				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
 				//create
-				window.indexedList = new mui.IndexedList(list);
+//				window.indexedList = new mui.IndexedList(list);
 				//点击完成
 				done.addEventListener('tap', function() {
 					var checkboxArray = [].slice.call(list.querySelectorAll('input[type="checkbox"]'));
