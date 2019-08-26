@@ -152,3 +152,24 @@ body {
 	margin-left: 15px;
 	color: #dcdfe6;
 }
+
+.state-img {
+	height: 20px;
+	width: 64px;
+}
+
+.state-wrap {
+	text-align: right;
+}
+
+.school-list-wrap {
+	padding: 0 16px 20px;
+}
+
+.school-list-img {
+	padding: 10px 0;
+}
+
+.school-list-img>img {
+	width: 100%;
+}
