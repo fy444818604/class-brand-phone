@@ -85,7 +85,6 @@
 		var login = function() {
 			var loginName = document.querySelector('.login-name').value;
 			var loginPwd = document.querySelector('.login-pwd').value;
-			console.log(123)
 			mui.ajax('http://192.168.10.59:8099/phone/login.do', {
 				data: {
 					loginName: loginName,
@@ -95,16 +94,21 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
+					console.log(data)
 					if(data.code == 200){
 						window.localStorage.setItem('token',data.data.token)
+						window.localStorage.setItem('classId',data.data.classId)
+						window.localStorage.setItem('isCharge',data.data.isCharge)
 						mui.openWindow({
 						  id:'index',
-						  url:'./activity/index.html'
+						  // url:'./activity/index.html'
+						  url:'../index.html'
 						});
 					}
 				},
 				error: function(xhr, type, errorThrown) {
-					// console.log(xhr)
+					console.log(123666)
+					console.log(xhr)
 				}
 			});
 		}

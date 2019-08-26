@@ -1,132 +1,145 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>科任老师</title>
-	<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../css/public.css"/>
-     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css"/>
-    <style type="text/css">
-    	.mui-content{
-    		background: #FFFFFF;
-    		height: 100%;
-    		padding-top: 0.77rem;
-    	}
-    	/*标题*/
-    	.set-title{
-    		height: 6.5rem;
-    		background: url(../../../img/class_img_bg.png)no-repeat;
-    		background-size: 100% 100%;
-    		padding: 0rem 1rem;
-    		padding-top: 1.033rem;
-    	}
-    	.set-title-card{
-    		height: 7.47rem;
-    		background-image: linear-gradient(
-				#ffffff, 
-				#ffffff), 
-			linear-gradient(90deg, 
-				#3281ff 0%, 
-				#3786ff 0%, 
-				#3b8bff 0%, 
-				rgba(59, 197, 255, 0.97) 100%), 
-			linear-gradient(
-				#d6ecff, 
-				#d6ecff);
-			background-blend-mode: normal, 
-				normal, 
-				normal;
-			box-shadow: 0px 2.5px 13px 0px 
-				rgba(15, 22, 117, 0.08);
-			border-radius: 5px;
-    	}
-    	/*老师*/
-    	.slogan{
-    		margin-top: 3.9rem;
-    	}
-    	.slogan-top{
-    		height: 1.9rem;
-    		line-height: 1.9rem;
-    		border-bottom: 0.07rem solid #ededed;
-    		font-size: 0.933rem;
-    		color: #303133;
-    		padding: 0rem 1rem;
-    	}
-    	.slogan-bnt{
-			height: calc(100vh - 18.3rem);
-			overflow: auto;
-    	}
-    	.slogan-bnt i{
-    		font-size: 1.4rem;
-    	}
-    	.slogan-bnt>li{
-    		line-height: 2.4rem;
-    		font-size: 1rem;
-    	}
-    	.slogan-bnt-left,.slogan-bnt-left>img{
-    		width: 2.4rem;
-    		height: 2.4rem;
-    		margin-right: 0.93rem;
-    		border-radius: 50%;
-    	}
-    	.slogan-bnt-rnt{
-    		color: #909398;
-    		margin-left: 2.87rem;
-    	}
-    	.mui-table-view-cell {
-		    padding: 15px 15px;
-		}
-		.mui-table-view-cell:after,.mui-table-view:before,.mui-table-view:after {
-		    background-color: #FFFFFF;
-		}
-    	.add-slogan{
-    		width: 100%;
-    		height: 3.07rem;
-    		position: fixed;
-    		bottom: 0rem;
-    		left: 0rem;
-    		border-radius: 0rem;
-    	}
-    	.mui-btn-orange{
-    		background: #ff9c00;
-    	}
-    </style>
-</head>
-<body>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">科任老师</h1>
-	</header>
-	<div class="mui-content"> 
-		<div class="set-title">
-			<div class="set-title-card">
-				<p id="className">高二三班</p>
-				<div class="flex">
-					<p class="set-title-card-left" id="teacher">班主任：杨老师</p>
-					<p id="members">班级成员：55人</p>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>科任老师</title>
+		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css" />
+		<style type="text/css">
+			.mui-content {
+				background: #FFFFFF;
+				height: 100%;
+				padding-top: 0.77rem;
+			}
+
+			/*标题*/
+			.set-title {
+				height: 6.5rem;
+				background: url(../../../img/class_img_bg.png)no-repeat;
+				background-size: 100% 100%;
+				padding: 0rem 1rem;
+				padding-top: 1.033rem;
+			}
+
+			.set-title-card {
+				height: 7.47rem;
+				background-image: linear-gradient(#ffffff,
+					#ffffff),
+					linear-gradient(90deg,
+					#3281ff 0%,
+					#3786ff 0%,
+					#3b8bff 0%,
+					rgba(59, 197, 255, 0.97) 100%),
+					linear-gradient(#d6ecff,
+					#d6ecff);
+				background-blend-mode: normal,
+					normal,
+					normal;
+				box-shadow: 0px 2.5px 13px 0px rgba(15, 22, 117, 0.08);
+				border-radius: 5px;
+			}
+
+			/*老师*/
+			.slogan {
+				margin-top: 3.9rem;
+			}
+
+			.slogan-top {
+				height: 1.9rem;
+				line-height: 1.9rem;
+				border-bottom: 0.07rem solid #ededed;
+				font-size: 0.933rem;
+				color: #303133;
+				padding: 0rem 1rem;
+			}
+
+			.slogan-bnt {
+				height: calc(100vh - 18.3rem);
+				overflow: auto;
+			}
+
+			.slogan-bnt i {
+				font-size: 1.4rem;
+			}
+
+			.slogan-bnt>li {
+				line-height: 2.4rem;
+				font-size: 1rem;
+			}
+
+			.slogan-bnt-left,
+			.slogan-bnt-left>img {
+				width: 2.4rem;
+				height: 2.4rem;
+				margin-right: 0.93rem;
+				border-radius: 50%;
+			}
+
+			.slogan-bnt-rnt {
+				color: #909398;
+				margin-left: 2.87rem;
+			}
+
+			.mui-table-view-cell {
+				padding: 15px 15px;
+			}
+
+			.mui-table-view-cell:after,
+			.mui-table-view:before,
+			.mui-table-view:after {
+				background-color: #FFFFFF;
+			}
+
+			.add-slogan {
+				width: 100%;
+				height: 3.07rem;
+				position: fixed;
+				bottom: 0rem;
+				left: 0rem;
+				border-radius: 0rem;
+			}
+
+			.mui-btn-orange {
+				background: #ff9c00;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">科任老师</h1>
+		</header>
+		<div class="mui-content">
+			<div class="set-title">
+				<div class="set-title-card">
+					<p id="className">高二三班</p>
+					<div class="flex">
+						<p class="set-title-card-left" id="teacher">班主任：杨老师</p>
+						<p id="members">班级成员：55人</p>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="slogan">
-			<div class="slogan-top">
-				科任老师9
+			<div class="slogan">
+				<div class="slogan-top">
+					科任老师9
+				</div>
+				<ul id="OA_task_1" class="mui-table-view slogan-bnt">
+
+				</ul>
+				<div class="slogan-zanwu">
+
+				</div>
 			</div>
-			<ul id="OA_task_1" class="mui-table-view slogan-bnt">
-				
-			</ul>
-			<div class="slogan-zanwu">
-				
-			</div>
+			<button type="button" class="mui-btn mui-btn-primary add-slogan">添加老师</button>
 		</div>
-		<button type="button" class="mui-btn mui-btn-primary add-slogan">添加老师</button>
-	</div>
-	 <script type="text/javascript" charset="utf-8">
-	 	//初始化	
-      	mui.init({});
-      	
-      	(function($) {
+		<script type="text/javascript" charset="utf-8">
+			//初始化	
+			mui.init({});
+
+			(function($) {
 				var curr = 1;
 				var count = 1;
 				var curr1 = 1;
@@ -137,48 +150,46 @@
 				// 班级活动查询
 				var listSearch = function() {
 					var _this = this;
-					if (curr <= count) {
-						mui.ajax('http://192.168.10.59:8099/phone/classteacher/selectclassteacherbyclass.do', {
-							data: {
-								token: window.localStorage.getItem('token'),
-								currentPage: curr,
-								pageSize: 10,
-								classId:window.localStorage.getItem('classId')
-							},
-							dataType: 'json', //服务器返回json格式数据
-							type: 'get', //HTTP请求类型
-							timeout: 10000, //超时时间设置为10秒；
-							success: function(data) {
-								console.log(data.data)
+					mui.ajax('http://192.168.10.59:8099/phone/classteacher/selectclassteacherbyclass.do', {
+						data: {
+							token: window.localStorage.getItem('token'),
+							currentPage: curr,
+							pageSize: 10000,
+							classId: window.localStorage.getItem('classId')
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							if (data.code == 200) {
+								document.querySelector('#OA_task_1').innerHTML = '';
 								var html = document.querySelector('#OA_task_1').innerHTML;
 								var con = data.data;
-//								count = data.data.pageCount;
-									for (var i = 0; i < con.length; i++) {
+								for (var i = 0; i < con.length; i++) {
 									html +=
-										`<li class="mui-table-view-cell" data-id="${con[i].classTeacherId}">
-											<div class="mui-slider-right mui-disabled">
-												<a id="${con[i].classTeacherId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
-											</div>
-											<div class="mui-slider-handle flex">
-												<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].userFace}"/></div>
-									    		<div >${con[i].nikeName}</div>
-									    		<div class="slogan-bnt-rnt">${con[i].subjectName}</div>
-											</div>
-										</li>`
+										`<li class="mui-table-view-cell" data-id="${con[i].classTeacherId}" data-data="${con[i]}">
+													<div class="mui-slider-right mui-disabled">
+														<a id="${con[i].classTeacherId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+														<a id="${con[i].classTeacherId}&${con[i].workId}&${con[i].subjectName}" class="mui-btn mui-btn-red mui-icon iconfont icon-edit"   ></a>
+													</div>
+													<div class="mui-slider-handle flex">
+														<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].userFace}"/></div>
+											    		<div >${con[i].nikeName}</div>
+											    		<div class="slogan-bnt-rnt">${con[i].subjectName}</div>
+													</div>
+											</li>`
 								}
-							document.querySelector('#OA_task_1').innerHTML = html
-								curr++;
-							},
-							error: function(xhr, type, errorThrown) {
-
+								document.querySelector('#OA_task_1').innerHTML = html
+							} else {
+								mui.alert(data.msg);
 							}
-						});
-					} else {
-						_this.endPullupToRefresh(true);
-					}
+
+						},
+						error: function(xhr, type, errorThrown) {}
+					});
 				};
 				//删除任课老师
-				var activityDel = function(id) {
+				var delTeacher = function(id) {
 					mui.ajax('http://192.168.10.59:8099/phone/classteacher/delete.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
@@ -190,6 +201,8 @@
 						success: function(data) {
 							if (data.code == 200) {
 								listSearch();
+							} else {
+								mui.alert(data.msg)
 							}
 						},
 						error: function(xhr, type, errorThrown) {
@@ -197,7 +210,18 @@
 						}
 					});
 				}
-				
+
+				//修改任课老师
+				var updateTeacher = function(id) {
+					var ids =id.split("&");
+					console.log(encodeURI(ids[2]));
+					mui.openWindow({
+						id: 'teacherUpdate',
+						url:'teacherAdd.html?classTeacherId='+ids[0]+'&workId='+ids[1]+'&subjectName='+encodeURI(ids[2])
+					});
+				}
+
+
 				mui.init();
 				mui.ready(function() {
 					mui(".mui-table-view").on('tap', '.icon-del', function() {
@@ -205,44 +229,48 @@
 						var btnArray = ['否', '是'];
 						mui.confirm('确认要删除？', null, btnArray, function(e) {
 							if (e.index == 1) {
-								activityDel(id)
+								delTeacher(id)
 							}
 						})
 					});
+					mui(".mui-table-view").on('tap', '.icon-edit', function() {
+						var id = this.getAttribute("id");
+						console.log(id);
+						updateTeacher(id);
+					});
+
 					//添加老师
-				  	mui(".mui-content").on('tap','.add-slogan',function(){
-					  //打开选择老师
-					  mui.openWindow({
-					    id:'teacherAdd',
-					    url:'teacherAdd.html'
-					  });
-					}) 
+					mui(".mui-content").on('tap', '.add-slogan', function() {
+						//打开选择老师
+						mui.openWindow({
+							id: 'teacherUpdate',
+							url: 'teacherAdd.html'
+						});
+					})
 				})
 				listSearch();
 			})(mui);
-      	
-      		//dom获取
-		  	var className = document.getElementById('className');
-		    var teacher = document.getElementById('teacher');
-		    var members = document.getElementById('members');
-		    function GetRequest() {
-		        var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
-		        var theRequest = new Object();
-		        if (url.indexOf("?") != -1) {
-		            var str = url.substr(1);
-		            strs = str.split("&");
-		            for (var i = 0; i < strs.length; i++) {
-		                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-		            }
-					teacher.innerText='班主任：'+theRequest.teacherT
-					members.innerText='班级成员：'+theRequest.membersT+'人';
-					className.innerText=theRequest.classNameT;
-		        }
-		    }
-	    	GetRequest();
-      	
-      	
-	  	
-    </script>
-</body>
+
+			//dom获取
+			var className = document.getElementById('className');
+			var teacher = document.getElementById('teacher');
+			var members = document.getElementById('members');
+
+			function GetRequest() {
+				var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+					teacher.innerText = '班主任：' + theRequest.teacherT
+					members.innerText = '班级成员：' + theRequest.membersT + '人';
+					className.innerText = theRequest.classNameT;
+				}
+			}
+			GetRequest();
+		</script>
+	</body>
 </html>
