@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,140 +8,282 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<!--标准mui.css-->
 		<link rel="stylesheet" href="../../../css/mui.min.css">
-		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css"/>
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css" />
 		<style type="text/css">
 			/*九宫格*/
 			.mui-grid-view.mui-grid-9 {
-			    border-top: 1px solid #eee;
-			    border-left: 1px solid #eee;
-			    background-color: #fff;
+				border-top: 1px solid #eee;
+				border-left: 1px solid #eee;
+				background-color: #fff;
 			}
+
 			.mui-grid-view.mui-grid-9 .mui-table-view-cell>a:not(.mui-btn) {
-			    padding: 0px 0;
-			    font-size: 1rem;
-			    height: 60px;
-			    line-height: 60px;
+				padding: 0px 0;
+				font-size: 1rem;
+				height: 60px;
+				line-height: 60px;
 			}
-			.icon-add{
+
+			.icon-add {
 				font-size: 1.47rem;
 				color: #bfc3cc;
 			}
+
 			/*编辑框*/
-	    	.sloganAdd{
-	    		display: none;
-	    		width: 100%;
-	    		height: 100%;
-	    		background: #f7f7f7;
-	    		position: fixed;
-	    		top: 0px;
-	    		left: 0px;
-	    		z-index: 999;
-	    	}
-			.sloganAdd-cont{
+			.sloganAdd {
+				display: none;
+				width: 100%;
+				height: 100%;
+				background: #f7f7f7;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				z-index: 999;
+			}
+
+			.sloganAdd-cont {
 				margin-top: 3.9rem;
 			}
-			.sloganAdd-cont>input{
+
+			.sloganAdd-cont>input {
 				font-size: 1rem;
 				border: none;
-			    padding: 30px 15px;
+				padding: 30px 15px;
 			}
-			.mui-icon-clear{
+
+			.mui-icon-clear {
 				margin-top: 10px;
 			}
-		
 		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">选择科目</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择科目</h1>
 		</header>
 		<div class="mui-content">
-	        <ul class="mui-table-view mui-grid-view mui-grid-9">
-	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-	            	<a href="#">
-                   		语文
-	            	</a>
-	            </li>
-	            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-	            	<a href="#">
-	                   	数学
-	            	</a>
-	            </li>
-	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-	            	<a href="#">
-	                   	数学
-	            	</a>
-	            </li>
-	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-	            	<a href="#">
-	                   	数学
-	            	</a>
-	            </li>
-	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-	            	<a href="#">
-	                   	数学
-	            	</a>
-	            </li>
-	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-	            	<a href="#">
-	                   	数学
-	            	</a>
-	            </li>
-	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-	            	<a href="#">
-	                   	数学
-	            	</a>
-	            </li>
-	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-	            	<a href="#">
-	                   	思想品德与发展
-	            	</a>
-	            </li>
-	             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
-	            	<a href="#">
-	                   	<i class="iconfont icon-add"></i>
-	            	</a>
-	            </li>
-	        </ul> 
-	        <!--设置科目的弹框-->
-	        <div id="sloganAdd" class="sloganAdd">
-	        	<header class="mui-bar mui-bar-nav">
+			<ul class="mui-table-view mui-grid-view mui-grid-9">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						语文
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						数学
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						英语
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						化学
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						物理
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						生物
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						历史
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						思想品德与政治
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						音乐
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						美术
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						体育
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 addSubiects">
+					<a href="#">
+						<i class="iconfont icon-add"></i>
+					</a>
+				</li>
+			</ul>
+			<!--设置科目的弹框-->
+			<div id="sloganAdd" class="sloganAdd">
+				<header class="mui-bar mui-bar-nav">
 					<a class="cancel  mui-icon mui-icon-left-nav mui-pull-left"></a>
 					<h1 class="mui-title">设置科目</h1>
-					<a  class="mui-btn determine  mui-btn-link mui-pull-right  ">完成</a>
+					<a class="mui-btn determine  mui-btn-link mui-pull-right  ">完成</a>
 				</header>
 				<div class="sloganAdd-cont mui-input-row">
 					<input id="discipline" type="text" class="mui-input-clear" placeholder="数学">
-	        	</div>
+				</div>
+			</div>
 		</div>
 	</body>
 	<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
+		var classTeacherId = window.location.href.split('classTeacherId=')[1];
+		var workId = window.location.href.split('workId=')[1];
+
 		mui.init();
 		mui.ready(function() {
 			var addSubiects = document.querySelector('.addSubiects');
 			var cancel = document.querySelector('.cancel');
 			var determine = document.querySelector('.determine');
 			var sloganAdd = document.getElementById('sloganAdd')
+			var subjectName = document.getElementsByClassName("mui-table-view-cell");
+			console.log(typeof subjectName);
 			//添加
 			addSubiects.addEventListener('tap', function() {
 				//打开添加设置科目的弹框
-				sloganAdd.style.display="block";
+				sloganAdd.style.display = "block";
 			})
 			//取消
-			cancel.addEventListener('tap',function  () {
-				sloganAdd.style.display="none";
+			cancel.addEventListener('tap', function() {
+				sloganAdd.style.display = "none";
 			})
+
 			//完成操作
-			determine.addEventListener('tap',function  () {
+			determine.addEventListener('tap', function() {
 				var discipline = mui("#discipline")[0].value;
-				if(discipline != ''){
+				if (discipline != '') {
 					//完成操作
-				}else{
+					console.log(123);
+					operateTeacher(discipline);
+				} else {
 					mui.alert('不能为空')
 				}
 			})
+			
+			mui('.mui-content').on('tap','a',function(){
+				
+			})
+
+			// //添加事件
+			// subjectName.addEventListener('tap', function() {
+			// 	var str = this.value;
+			// 	console.log(str);
+			// 	if (str != '') {
+			// 		//完成操作
+			// 		console.log(123);
+			// 		// operateTeacher(discipline);
+			// 	} else {
+			// 		mui.alert('不能为空')
+			// 	}
+			// })
+			// 
+			mui(".mui-table-view-cell").on('tap',function(){
+				this.forEach(function)
+			  // var str = this.value;
+			  // console.log(str);
+			  // if (str != '') {
+			  // 	//完成操作
+			  // 	console.log(123);
+			  // 	// operateTeacher(discipline);
+			  // } else {
+			  // 	mui.alert('不能为空')
+			  // }
+			}) 	
+
+
 		})
+
+		//添加/编辑
+		function operateTeacher(subjectName) {
+			if (classTeacherId) {
+				mui.ajax('http://192.168.10.59:8099/phone/classteacher/update.do', {
+					data: {
+						classTeacherId: classTeacherId,
+						classId: window.localStorage.getItem('classId'),
+						workId: workId,
+						subjectName: subjectName
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						console.log("update");
+						mui.openWindow({
+							id: 'index',
+							// url:'./activity/index.html'
+							url: 'following-teacher/index.html'
+						});
+						// console.log(data.data)
+						// if (data.code == 200) {
+						// 	document.querySelector('#OA_task_1').innerHTML = '';
+						// 	var html = document.querySelector('#OA_task_1').innerHTML;
+						// 	var con = data.data;
+						// 	//								count = data.data.pageCount;
+						// 	for (var i = 0; i < con.length; i++) {
+						// 		html +=
+						// 			`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+						// 								<input type="checkbox" id="${con[i].id}" />
+						// 								<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+						// 							</li>`
+						// 	}
+						// 	document.querySelector('#OA_task_1').innerHTML = html
+						// }
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+			} else {
+				mui.ajax('http://192.168.10.59:8099/phone/classteacher/insert.do', {
+					data: {
+						classId: window.localStorage.getItem('classId'),
+						workId: workId,
+						subjectName: subjectName
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						console.log("add");
+						mui.openWindow({
+							id: 'index',
+							// url:'./activity/index.html'
+							url: 'following-teacher/index.html'
+						});
+						// console.log(data.data)
+						// if (data.code == 200) {
+						// 	document.querySelector('#OA_task_1').innerHTML = '';
+						// 	var html = document.querySelector('#OA_task_1').innerHTML;
+						// 	var con = data.data;
+						// 	//								count = data.data.pageCount;
+						// 	for (var i = 0; i < con.length; i++) {
+						// 		html +=
+						// 			`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+						// 								<input type="checkbox" id="${con[i].id}" />
+						// 								<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+						// 							</li>`
+						// 	}
+						// 	document.querySelector('#OA_task_1').innerHTML = html
+						// }
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+			}
+
+		}
 	</script>
 </html>
