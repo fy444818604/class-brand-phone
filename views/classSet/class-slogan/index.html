@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>班级口号</title>
+    <script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/public.css"/>
+    <style type="text/css">
+    	.mui-content{
+    		background: #FFFFFF;
+    		height: 100%;
+    		padding-top: 0.77rem;
+    	}
+    	/*标题*/
+    	.set-title{
+    		height: 6.5rem;
+    		background: url(../../../img/class_img_bg.png)no-repeat;
+    		background-size: 100% 100%;
+    		padding: 0rem 1rem;
+    		padding-top: 1.033rem;
+    	}
+    	.set-title-card{
+    		height: 7.47rem;
+    		background-image: linear-gradient(
+				#ffffff, 
+				#ffffff), 
+			linear-gradient(90deg, 
+				#3281ff 0%, 
+				#3786ff 0%, 
+				#3b8bff 0%, 
+				rgba(59, 197, 255, 0.97) 100%), 
+			linear-gradient(
+				#d6ecff, 
+				#d6ecff);
+			background-blend-mode: normal, 
+				normal, 
+				normal;
+			box-shadow: 0px 2.5px 13px 0px 
+				rgba(15, 22, 117, 0.08);
+			border-radius: 5px;
+    	}
+    	/*口号*/
+    	.slogan{
+    		margin-top: 3.9rem;
+    	}
+    	.slogan-top{
+    		height: 1.9rem;
+    		line-height: 1.9rem;
+    		border-bottom: 0.07rem solid #ededed;
+    		font-size: 0.933rem;
+    		color: #303133;
+    		padding: 0rem 1rem;
+    	}
+    	.slogan-bnt{
+    		font-size: 1rem;
+    		padding: 1.333rem 1rem;
+    	}
+    	.slogan-zanwu{
+    		
+    	}
+    	.add-slogan{
+    		width: 100%;
+    		height: 3.07rem;
+    		position: fixed;
+    		bottom: 0rem;
+    		left: 0rem;
+    		border-radius: 0rem;
+    	}
+    	/*编辑框*/
+    	.sloganAdd{
+    		display: none;
+    		width: 100%;
+    		height: 100%;
+    		background: #f7f7f7;
+    		position: fixed;
+    		top: 0px;
+    		left: 0px;
+    		z-index: 999;
+    	}
+		.sloganAdd-cont{
+			margin-top: 3.9rem;
+			height: 8.07rem;
+			background: #FFFFFF;
+		}
+		.sloganAdd-cont>textarea{
+			border: none;
+		}
+		a{
+			color: ;
+		}
+		.slogan-zanwu{
+			
+		}
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">班级口号</h1>
+	</header>
+	<div class="mui-content"> 
+		<div class="set-title">
+			<div class="set-title-card">
+				<p id="className">高二三班</p>
+				<div class="flex">
+					<p class="set-title-card-left" id="teacher">班主任：杨老师</p>
+					<p id="members">班级成员：55人</p>
+				</div>
+			</div>
+		</div>
+		<div class="slogan">
+			<div class="slogan-top">
+				班级口号
+			</div>
+			<div class="slogan-bnt" id="sloganCont">
+				必胜，必胜，必胜必胜，必胜，必胜必胜，必胜，必胜必胜，必胜，必胜必胜，必胜，必胜必胜，必胜，必胜必胜，必胜，必胜必胜，必胜，必胜
+			</div>
+			<div class="slogan-zanwu">
+				
+			</div>
+		</div>
+		<button id="add-slogsan" type="button" class="mui-btn mui-btn-primary add-slogan">编辑口号</button>
+	</div>
+	<div class="sloganAdd">
+		<header class="mui-bar mui-bar-nav">
+			<a id="cancel" class="cancel  mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择教师</h1>
+			<a class="mui-btn determine  mui-btn-link mui-pull-right  ">完成</a>
+		</header>
+		<div class="sloganAdd-cont mui-input-row">
+			<textarea name="" id="textarea" cols="30" rows="5" placeholder="多行文本框"></textarea>
+		</div>
+
+	</div>
+	<input id="clasID" type="hidden" name=""  value="" />
+	<input type="hidden" name="" id="token" value="" />
+	 <script type="text/javascript" charset="utf-8">
+	 	//初始化	
+      	mui.init({});
+  	  	//dom获取
+	    var className = document.getElementById('className');
+	    var teacher = document.getElementById('teacher');
+	    var members = document.getElementById('members');
+	    var sloganCont = document.getElementById('sloganCont');
+	    var clasID = document.getElementById('clasID');
+	    var token = document.getElementById('token');
+	    function GetRequest() {
+	        var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+	        var theRequest = new Object();
+	        if (url.indexOf("?") != -1) {
+	            var str = url.substr(1);
+	            strs = str.split("&");
+	            for (var i = 0; i < strs.length; i++) {
+	                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+	            }
+	             console.log(theRequest)
+				teacher.innerText='班主任：'+theRequest.teacherT
+				members.innerText='班级成员：'+theRequest.membersT+'人';
+				className.innerText=theRequest.classNameT;
+				sloganCont.innerText = theRequest.classSlogan;
+	        }
+	    }
+	    GetRequest();
+      		
+      	
+	  	//编辑
+	  	document.getElementById('add-slogsan').addEventListener('tap',function(){/*tap表示单击屏幕，此处可换双击，滑动等等事件*/
+          	$('.sloganAdd').show();
+    	});
+	  	//取消
+	  	document.getElementById('cancel').addEventListener('tap',function(){/*tap表示单击屏幕，此处可换双击，滑动等等事件*/
+          	$('.sloganAdd').hide();
+    	});
+		//确定
+		mui(".sloganAdd").on('tap','.determine',function(){
+			var addVal =  $('.sloganAdd-cont textarea').val();
+			var textareaT = $('#textarea') 
+			var token = $('#token')
+			if(addVal != ''){
+			mui.ajax('http://192.168.10.59:8099/phone/classdetail/updatebyparam.do',{
+					data:{
+						token:window.localStorage.getItem('token'),
+						classId:window.localStorage.getItem('classId'),
+						classSlogan:textareaT.val()
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+						console.log(data)
+						if(data.code == 200){
+							
+						}
+					}
+				});
+				$('.slogan-bnt').text(addVal)
+				
+				$('.sloganAdd').hide();
+			}else{
+				mui.alert('口号不能为空')
+			}
+		}) 
+    </script>
+</body>
+</html>

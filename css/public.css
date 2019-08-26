@@ -1,0 +1,154 @@
+a,
+input,
+button {
+	/*清除点击阴影*/
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+input,
+button {
+	/*清除圆角*/
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+
+body {
+	margin: 0;
+	/*禁止选中文字*/
+	-webkit-user-select: none;
+}
+
+body * {
+	-webkit-user-select: none;
+	/*默认字体*/
+	font-family: helvetica;
+}
+
+body {
+	/*用户横竖屏切换的时候，禁止字体缩放*/
+	-webkit-text-size-adjust: 100%;
+}
+
+h1 {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+li {
+	list-style: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+html,
+body {
+	font-size: 15px;
+	height: 100%;
+}
+
+/*Flex布局*/
+.flex {
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.justify-bet {
+	justify-content: space-between;
+}
+
+.text-overflow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}
+
+/*班级设置头部*/
+.set-title-card {
+	font-size: 0.93rem;
+	padding: 2.1rem 2rem 0rem 2rem;
+}
+
+.set-title-card>p {
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: #000000;
+}
+
+.set-title-card-left {
+	margin-right: 2.23rem;
+}
+
+/*选项卡样式*/
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+	border-bottom: none;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active span {
+	display: inline-block;
+	height: 100%;
+	padding: 0 0.4rem;
+	border-bottom: 2px solid #007aff;
+}
+
+.mt12 {
+	margin-top: 12px;
+}
+
+.Hauto {
+	height: auto !important;
+}
+
+.mui-btn-block {
+	padding: 10px 0;
+}
+
+::-webkit-input-placeholder {
+	color: #c0c4cc;
+	font-size: 1rem;
+}
+
+::-moz-placeholder {
+	color: #c0c4cc;
+	font-size: 1rem;
+}
+
+:-ms-input-placeholder {
+	color: #c0c4cc;
+	font-size: 1rem;
+}
+
+:-moz-placeholder {
+	color: #c0c4cc;
+	font-size: 1rem;
+}
+
+.black {
+	color: #000000;
+}
+
+.q-tips {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding-left: 15px;
+}
+
+.q-tips>span {
+	font-size: 0.8rem;
+	margin-left: 15px;
+	color: #dcdfe6;
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>班级荣誉</title>
+	<script src="../../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/public.css"/>
+     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css"/>
+    <style type="text/css">
+    	.mui-content{
+    		background: #FFFFFF;
+    		height: 100%;
+    		padding-top: 0.77rem;
+    	}
+    	/*标题*/
+    	.set-title{
+    		height: 6.5rem;
+    		background: url(../../../img/class_img_bg.png)no-repeat;
+    		background-size: 100% 100%;
+    		padding: 0rem 1rem;
+    		padding-top: 1.033rem;
+    	}
+    	.set-title-card{
+    		height: 7.47rem;
+    		background-image: linear-gradient(
+				#ffffff, 
+				#ffffff), 
+			linear-gradient(90deg, 
+				#3281ff 0%, 
+				#3786ff 0%, 
+				#3b8bff 0%, 
+				rgba(59, 197, 255, 0.97) 100%), 
+			linear-gradient(
+				#d6ecff, 
+				#d6ecff);
+			background-blend-mode: normal, 
+				normal, 
+				normal;
+			box-shadow: 0px 2.5px 13px 0px 
+				rgba(15, 22, 117, 0.08);
+			border-radius: 5px;
+    	}
+    	/*口号*/
+    	.slogan{
+    		margin-top: 3.9rem;
+    	}
+    	.slogan-top{
+    		height: 1.9rem;
+    		line-height: 1.9rem;
+    		border-bottom: 0.07rem solid #ededed;
+    		font-size: 0.933rem;
+    		color: #303133;
+    		padding: 0rem 1rem;
+    	}
+    	.slogan-bnt{
+			height: calc(100vh - 18.3rem);
+			overflow: auto;
+    	}
+    	.slogan-bnt i{
+    		font-size: 1.4rem;
+    	}
+    	.slogan-bnt>li{
+    		font-size: 1rem;
+    	}
+    	.slogan-bnt-left,.slogan-bnt-left>img{
+    		width: 5.333rem;
+    		height: 5.333rem;
+    		margin-right: 0.93rem;
+    		background: #f4f7fa;
+    	}
+    	.slogan-bnt-rnt{
+    		width: calc(100% - 6.263rem);
+    	}
+    	.slogan-bnt-rnt>p{
+    		font-size: 1rem;
+    		color: #000000;
+    		font-weight: 600;
+    		margin-bottom: 0.3rem;
+    	}
+    	.slogan-bnt-rnt>div{
+    		font-size: 0.8rem;
+    		color: #999999;
+    		line-height: 1.2rem;
+    		overflow: hidden;
+		 	text-overflow: ellipsis;
+		 	display: -webkit-box;
+		 	-webkit-line-clamp: 3;
+		 	-webkit-box-orient: vertical;
+    	}
+    	.mui-table-view-cell {
+		    padding: 15px 15px;
+		}
+		.mui-table-view-cell:after,.mui-table-view:before,.mui-table-view:after {
+		    background-color: #FFFFFF;
+		}
+    	.add-classHonours{
+    		width: 100%;
+    		height: 3.07rem;
+    		position: fixed;
+    		bottom: 0rem;
+    		left: 0rem;
+    		border-radius: 0rem;
+    	}
+    	.mui-btn-orange{
+    		background: #ff9c00;
+    	}
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">班级荣誉</h1>
+	</header>
+	<div class="mui-content"> 
+		<div class="set-title">
+			<div class="set-title-card">
+				<p>高二三班</p>
+				<div class="flex">
+					<p class="set-title-card-left">班主任：杨老师</p>
+					<p>班级成员：55人</p>
+				</div>
+			</div>
+		</div>
+		<div class="slogan">
+			<div class="slogan-top">
+				班级荣誉19
+			</div>
+			<ul id="OA_task_1" class="mui-table-view slogan-bnt">
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle flex">
+						<div class="slogan-bnt-left"><img src=""/></div>
+			    		<div class="slogan-bnt-rnt">
+			    			<p>先进集体班级</p>
+			    			<div class="">
+			    				你说什么额阿达 卡奥术大师发发卡撒发啦拉了发是发安静的拉卡死了口袋里时卡看是开发死艾迪康说的大石街道发发好发发的发说的电风扇方式发发
+			    			</div>
+			    		</div>
+					</div>
+				</li>
+			</ul>
+			<div class="slogan-zanwu">
+				
+			</div>
+		</div>
+		<button type="button" class="mui-btn mui-btn-primary add-classHonours">添加荣誉</button>
+	</div>
+	 <script type="text/javascript" charset="utf-8">
+	 	//初始化	
+      	mui.init({});
+      	mui.ready(function() {
+      		var addaClassHonours = document.querySelector('.add-classHonours');
+      		//添加荣誉
+      		addaClassHonours.addEventListener('tap', function() {
+				mui.openWindow({
+				    id:'ClassHonoursAdd',
+				    url:'ClassHonoursAdd.html'
+			    });
+			})
+      	})
+    </script>
+</body>
+</html>

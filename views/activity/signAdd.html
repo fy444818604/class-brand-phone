@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<link href="../../css/public.css" rel="stylesheet" />
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
+		<style>
+			.Hauto>div{
+				padding: 11px 15px;
+			}
+			.icon-btn{
+				display: flex;
+				color: #3b8bff;
+			}
+			.icon-btn i{
+				margin-right: 5px;
+			}
+			.mui-input-row .mui-icon{
+				position: absolute;
+				right: 0.8rem;
+				top: 50%;
+				margin-top: -12px;
+				color: #c0c4cc;
+			}
+			.mui-input-row>a{
+				height: 40px;
+				line-height: 40px;
+				color: #c0c4cc;
+			}
+			.mui-content {
+				height: 100vh;
+			}
+			.add-form{
+				height: calc(100% - 47px);
+				overflow: auto;
+			}
+			.mui-btn-block{
+				margin-bottom: 0;
+			}
+			#level-select,#mode-select{
+				display: inline-block;
+				width: 50%;
+			}
+			#opion-add{
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 99;
+				width: 100vw;
+				height: 100vh;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">发报名</h1>
+		</header>
+		<div class="mui-content">
+			<div class="add-form">
+				<div class="mui-input-group">
+					<div class="mui-input-row mt12">
+						<label>级别</label>
+						<a href="#level" id="level-select">请选择级别</a>
+					</div>
+					<div class="mui-input-row">
+						<label>对象</label>
+						<a href="#level">请选择对象</a>
+						<span class="mui-icon mui-icon-forward"></span>
+					</div>
+				</div>
+				<div class="mui-input-group">
+					<div class="mui-input-row mt12">
+						<label>标题</label>
+						<input type="text" placeholder="请输入标题">
+					</div>
+					<div class="mui-input-row Hauto">
+						<div>正文</div>
+						<textarea id="textarea" rows="5" placeholder="请输入正文"></textarea>
+					</div>
+				</div>
+				<div class="mui-input-group">
+					<div class="mui-input-row Hauto mt12">
+						<div>选项</div>
+						<input type="text" placeholder="请输入选项内容">
+					</div>
+					<div class="mui-input-row">
+						<div class="q-tips">
+							<div class="icon-btn">
+								<i class="iconfont icon-add"></i>
+								<span>添加选项</span>
+							</div>
+							<span>最多15个选项，每个选项不超过40个字符</span>
+						</div>
+					</div>
+					<div class="mui-input-row Hauto">
+						<label>选择模式</label>
+						<a href="#mode" id="mode-select">请选择模式</a>
+						<span class="mui-icon mui-icon-forward"></span>
+					</div>
+					<div class="mui-input-row Hauto">
+						<label>结束时间</label>
+						<a href="#" data-options='{}' id="timeSelect">请选择时间</a>
+						<span class="mui-icon mui-icon-forward"></span>
+					</div>
+				</div>
+			</div>
+			<button type="button" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
+		</div>
+		<div id="mode" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">单选</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">多选，最多两项</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">多选，无限制</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#mode"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<div id="level" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">班级</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">校级</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#level"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<iframe src="./optionAdd.html" frameborder="no" border="0" id="opion-add"></iframe>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/mui.picker.min.js"></script>
+		<script type="text/javascript">
+			(function($) {
+				mui.init();
+				var result = document.querySelector('#timeSelect');
+				result.addEventListener('tap',function(){
+					var _self = this;
+					if(_self.picker) {
+						_self.picker.show(function (rs) {
+							result.innerText = rs.text;
+							_self.picker.dispose();
+							_self.picker = null;
+						});
+					} else {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						_self.picker = new $.DtPicker(options);
+						_self.picker.show(function(rs) {
+							result.innerText = rs.text;
+							_self.picker.dispose();
+							_self.picker = null;
+						});
+					}
+				}, false)
+				mui("#level").on('tap', 'a', function() {
+					var level = this.innerHTML.substring(0,1)
+					if(level != "<"){
+						document.querySelector('#level-select').innerHTML = level
+						mui('#level').popover('toggle');
+					}
+				})
+				mui("#mode").on('tap', 'a', function() {
+					var level = this.innerHTML;
+					if(level != "<b>取消</b>"){
+						document.querySelector('#mode-select').innerHTML = level
+						mui('#mode').popover('toggle');
+					}
+				})
+			})(mui);
+		</script>
+	</body>
+
+</html>
+
