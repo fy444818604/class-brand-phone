@@ -142,10 +142,13 @@
 			var teacher = document.getElementById('teacher');
 			var members = document.getElementById('members');
 
+			teacher.innerText = '班主任：' + window.localStorage.getItem('teacherT')
+			members.innerText = '班级成员：' + window.localStorage.getItem('membersT') + '人';
+			className.innerText = window.localStorage.getItem('classNameT');
+
 			(function($) {
 				listSearch();
-				GetRequest();
-				
+
 				//绑定删除事件
 				mui(".mui-content").on("tap", ".icon-del", function() {
 					var id = this.getAttribute("id");
@@ -216,7 +219,7 @@
 								</li>
 								`
 							}
-							document.getElementById("dataNumber").innerHTML = '科任老师' + con.length
+							document.getElementById("dataNumber").innerHTML = '班委' + con.length
 							document.querySelector('#OA_task_1').innerHTML = html
 						} else {
 							mui.alert(data.msg);
@@ -250,23 +253,6 @@
 
 					}
 				});
-			}
-
-
-			//初始化班级展示
-			function GetRequest() {
-				var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
-				var theRequest = new Object();
-				if (url.indexOf("?") != -1) {
-					var str = url.substr(1);
-					strs = str.split("&");
-					for (var i = 0; i < strs.length; i++) {
-						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-					}
-					teacher.innerText = '班主任：' + theRequest.teacherT
-					members.innerText = '班级成员：' + theRequest.membersT + '人';
-					className.innerText = theRequest.classNameT;
-				}
 			}
 		</script>
 	</body>

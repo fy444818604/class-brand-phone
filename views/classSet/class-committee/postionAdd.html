@@ -75,7 +75,7 @@
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
 					<a href="javascript:void(0)" class="click-operate">
-					   学习委员
+						学习委员
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -194,9 +194,9 @@
 	</body>
 	<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		var classTeacherId = getQueryString("classTeacherId");
+		var classCadresId = getQueryString("classCadresId");
 		var workId = getQueryString("workId");
-		var subjectName = decodeURI(getQueryString('subjectName'));
+		var postion = decodeURI(getQueryString('postion'));
 
 		(function($) {
 			getCss();
@@ -207,7 +207,7 @@
 
 			for (var i = 0; i < list.length; i++) {
 				var text = list[i].innerHTML.trim();
-				if (text == subjectName) {
+				if (text == postion) {
 					list[i].style.color = '#3B8BFF';
 				}
 			}
@@ -237,7 +237,7 @@
 					html1 =
 						`</li>
 						<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-							<a href="javascript:0">
+							<a href="javascript:0" class="click-operate >
 								${discipline}
 							</a>
 						</li>`;
@@ -251,9 +251,9 @@
 			})
 
 			mui('.mui-content').on('tap', '.click-operate', function() {
-				var subjectName = this.innerHTML.trim();
-				if (subjectName) {
-					operateTeacher(subjectName)
+				var postion = this.innerHTML.trim();
+				if (postion) {
+					operateClassCadre(postion)
 				} else {
 					mui.alert('不能为空')
 				}
@@ -262,16 +262,16 @@
 		})
 
 		//添加/编辑
-		function operateTeacher(subjectName) {
-			if (classTeacherId && classTeacherId != undefined && classTeacherId != '' && classTeacherId != null) {
+		function operateClassCadre(postion) {
+			if (notBlank(classCadresId)) {
 				console.log("update")
-				mui.ajax('http://192.168.10.59:8099/phone/classteacher/update.do', {
+				mui.ajax('http://192.168.10.59:8099/phone/classcadres/update.do', {
 					data: {
-						classTeacherId: classTeacherId,
+						classCadresId: classCadresId,
 						classId: window.localStorage.getItem('classId'),
 						workId: workId,
 						token: window.localStorage.getItem('token'),
-						subjectName: subjectName
+						postion: postion
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
@@ -281,7 +281,7 @@
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',
-								url: '../following-teacher/index.html'
+								url: '../class-committee/index.html'
 							});
 						} else {
 							mui.alert(data.msg)
@@ -293,12 +293,12 @@
 					}
 				});
 			} else {
-				mui.ajax('http://192.168.10.59:8099/phone/classteacher/insert.do', {
+				mui.ajax('http://192.168.10.59:8099/phone/classcadres/insert.do', {
 					data: {
 						classId: window.localStorage.getItem('classId'),
 						workId: workId,
 						token: window.localStorage.getItem('token'),
-						subjectName: subjectName
+						postion: postion
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
@@ -308,7 +308,7 @@
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',
-								url: '../following-teacher/index.html'
+								url: '../class-committee/index.html'
 							});
 						} else {
 							mui.alert(data.msg)
@@ -334,6 +334,30 @@
 			} else {
 				return null;
 			}
+		}
+
+		function notBlank(data) {
+			var isTrue = true;
+
+			if (!data) {
+				isTrue = false;
+			}
+			if (data == '') {
+				isTrue = false;
+			}
+			if (data == null) {
+				isTrue = false;
+			}
+			if (data == undefined) {
+				isTrue = false;
+			}
+			if (data == 'null') {
+				isTrue = false;
+			}
+			if (data == 'undefined') {
+				isTrue = false;
+			}
+			return isTrue;
 		}
 	</script>
 </html>

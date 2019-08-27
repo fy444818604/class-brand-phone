@@ -135,9 +135,8 @@
 			</div>
 			<button type="button" class="mui-btn mui-btn-primary add-slogan">添加老师</button>
 		</div>
-		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8" ></script>
-		<script type="text/javascript" charset="utf-8" >
-		
+		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
 			//初始化	
 			mui.init({});
 
@@ -181,7 +180,7 @@
 													</div>
 											</li>`
 								}
-								document.getElementById("dataNumber").innerHTML='科任老师'+con.length
+								document.getElementById("dataNumber").innerHTML = '科任老师' + con.length
 								document.querySelector('#OA_task_1').innerHTML = html
 							} else {
 								mui.alert(data.msg);
@@ -216,11 +215,11 @@
 
 				//修改任课老师
 				var updateTeacher = function(id) {
-					var ids =id.split("&");
+					var ids = id.split("&");
 					console.log(encodeURI(ids[2]));
 					mui.openWindow({
 						id: 'teacherUpdate',
-						url:'teacherAdd.html?classTeacherId='+ids[0]+'&workId='+ids[1]+'&subjectName='+encodeURI(ids[2])
+						url: 'teacherAdd.html?classTeacherId=' + ids[0] + '&workId=' + ids[1] + '&subjectName=' + encodeURI(ids[2])
 					});
 				}
 
@@ -259,21 +258,25 @@
 			var teacher = document.getElementById('teacher');
 			var members = document.getElementById('members');
 
-			function GetRequest() {
-				var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
-				var theRequest = new Object();
-				if (url.indexOf("?") != -1) {
-					var str = url.substr(1);
-					strs = str.split("&");
-					for (var i = 0; i < strs.length; i++) {
-						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-					}
-					teacher.innerText = '班主任：' + theRequest.teacherT
-					members.innerText = '班级成员：' + theRequest.membersT + '人';
-					className.innerText = theRequest.classNameT;
-				}
-			}
-			GetRequest();
+			// function GetRequest() {
+			// 	var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+			// 	var theRequest = new Object();
+			// 	if (url.indexOf("?") != -1) {
+			// 		var str = url.substr(1);
+			// 		strs = str.split("&");
+			// 		for (var i = 0; i < strs.length; i++) {
+			// 			theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+			// 		}
+			// 		teacher.innerText = '班主任：' + theRequest.teacherT
+			// 		members.innerText = '班级成员：' + theRequest.membersT + '人';
+			// 		className.innerText = theRequest.classNameT;
+			// 	}
+			// }
+			// GetRequest();
+			teacher.innerText = '班主任：' + window.localStorage.getItem('teacherT')
+			members.innerText = '班级成员：' + window.localStorage.getItem('membersT') + '人';
+			className.innerText = window.localStorage.getItem('classNameT');
+			// sloganCont.innerText = window.localStorage.getItem('classSlogan');
 		</script>
 	</body>
 </html>
