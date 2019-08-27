@@ -54,18 +54,75 @@
 				margin-bottom: 0;
 			}
 			.icon-add{
-				color: #3B8BFF;
+				font-size: 2.4rem;
 				position: absolute;
-				right: 1rem;
-				font-size: 20px;
+				left: 50%;
 				top: 50%;
-				margin-top: -12px;
+				width: 36px;
+				height: 36px;
+				margin-top: -18px;
+				margin-left: -18px;
+				color: #909399;
 			}
-			.school-bg{
+			.school-bg-wrap{
 				padding: 16px;
 			}
+			.school-bg{
+				padding-bottom: 56%;
+				position: relative;
+				background-color: #edf1f6;
+			}
 			.school-bg>img{
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				position: absolute;
 				width: 100%;
+				height: 100%;
+			}
+			.school-bg-edit{
+				text-align: center;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin: -21px 0 0 -45px;
+				color: #c0c4cc;
+			}
+			#bg-select{
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				border-radius: 0!important;
+			}
+			.bg-img-upload-wrap{
+				position: relative;
+				padding-bottom: 56%;
+				background-color: #edf1f6;
+				display: block;
+			}
+			.bg-img-upload-wrap input{
+				opacity: 0;
+			}
+			.bg-img-list>li{
+				position: relative;
+				padding-bottom: 56%;
+			}
+			.bg-img-list>li>img{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+			}
+			.bg-tab-wrap{
+				padding: 0 16px;
+				border-top: 1px solid #c8c7cc;
+			}
+			.bg-tip{
+				color: #909399;
+				margin-top: 18px;
+				margin-bottom: 12px;
 			}
 		</style>
 	</head>
@@ -78,8 +135,14 @@
 		<div class="mui-content">
 			<div class="add-form">
 				<div class="mui-input-group">
-					<div class="school-bg">
-						<img src="../../img/city-1.jpg" alt="">
+					<div class="school-bg-wrap">
+						<div class="school-bg">
+							<!-- <img src="../../img/city-1.jpg" alt=""> -->
+							<a class="school-bg-edit" href="#bg-select">
+								<i class="iconfont icon-edit"></i>
+								<div>点击设置背景</div>
+							</a>
+						</div>
 					</div>
 				</div>
 				<div class="mui-input-group">
@@ -161,6 +224,56 @@
 				</li>
 			</ul>
 		</div>
+		<div id="bg-select" class="mui-popover">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="#bg-select"></a>
+				<h1 class="mui-title">背景设置</h1>
+			</header>
+			<div class="mui-content" style="background-color: #FFFFFF;overflow: auto;">
+				<div>
+					<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+						<a class="mui-control-item mui-active" href="#item1">
+							<span>图片</span>
+						</a>
+						<a class="mui-control-item" href="#item2">
+							<span>颜色</span>
+						</a>
+						<a class="mui-control-item" href="#item3">
+							<span>视频</span>
+						</a>
+						<a class="mui-control-item" href="#item4">
+							<span>直播</span>
+						</a>
+					</div>
+				</div>
+				<div class="bg-tab-wrap">
+					<div id="item1" class="mui-control-content mui-active">
+						<div class="bg-tip">上传</div>
+						<label for="bg-img-upload" class="bg-img-upload-wrap">
+							<i class="iconfont icon-add"></i>
+							<input type="file" id="bg-img-upload">
+						</label>
+						<div class="bg-tip">推荐</div>
+						<div>
+							<ul class="bg-img-list">
+								<li>
+									<img src="../../img/city-1.jpg" alt="">
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="item2" class="mui-control-content">
+						2
+					</div>
+					<div id="item3" class="mui-control-content">
+						3
+					</div>
+					<div id="item4" class="mui-control-content">
+						4
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
@@ -208,6 +321,24 @@
 						});
 					}
 				}, false)
+				document.querySelector('#bg-img-upload').addEventListener('change',function(){
+					var files = this.files;
+					var file;
+					if (files && files.length) {
+					    file = files[0];
+					    if (/^image\/\w+/.test(file.type)) {
+					        blobURL = URL.createObjectURL(file);
+					        console.log(blobURL)
+							var html = document.querySelector('.bg-img-list').innerHTML;
+							html += `<li>
+										<img src="${blobURL}" alt="">
+									</li>`
+							document.querySelector('.bg-img-list').innerHTML = html;
+					    } else {
+					        mui.alert('请选择图片文件');
+					    }
+					}
+				})
 			})(mui);
 		</script>
 	</body>
