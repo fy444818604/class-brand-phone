@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>新增班级荣誉</title>
+		<title>新增个人荣誉</title>
 
 		<link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/public.css" />
@@ -91,64 +91,62 @@
 				<div class="classHonuours-icon">
 					<a class="classHonuours-icon-top" href="javascript:void(0)" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
 						<input type="file" id="file" />
-						<img id="classHonorIcon" src="../../../img/honner_new_img_honner.png" alt="" />
+						<img id="userHonorIcon" src="../../../img/honner_new_img_honner.png" alt="" />
 						<p>请选择图标</p>
 					</a>
 					<div>
-						<input type="hidden" id="imgUrl" />
+						<input id="imgUrl" type="hidden" />
 					</div>
 				</div>
 				<!--描述-->
 				<div class="describe">
 					<div class="describe-title flex">
+						<div><label>对象</label></div>
+						<div>
+							<input id="nickName" class="mui-input-clear" type="text" placeholder="请选择对象" />
+							<input id="workId" type="hidden" />
+						</div>
+					</div>
+
+					<div class="describe-title flex">
 						<div><label>表彰事项</label></div>
 						<div>
-							<input id="classHonorName" class="mui-input-clear" type="text" placeholder="请输入表彰事项">
+							<input id="userHonorName" class="mui-input-clear" type="text" placeholder="请输入表彰事项" />
 						</div>
 					</div>
 					<div class="" style="margin-top: 1.033rem;">
 						<label>表彰说明</label>
-						<textarea class="textarea" id="classHonorRemark" rows="10" cols="30" contenteditable="true" placeholder="请输入表彰说明内容"></textarea>
+						<textarea class="textarea" id="userHonorRemark" rows="10" cols="30" contenteditable="true" placeholder="请输入表彰说明内容"></textarea>
 					</div>
 				</div>
 			</div>
 			<button type="button" class="mui-btn mui-btn-primary add-classHonours">发布</button>
-			<!--选择框-->
-			<!-- <div id="picture" class="mui-popover mui-popover-action ">
-		    <ul class="mui-table-view">
-		        <li class="mui-table-view-cell">
-		            <a href="#">按钮1</a>
-		        </li>
-		        <li class="mui-table-view-cell">
-		            <a href="#">按钮2</a>
-		        </li>
-		    </ul>
-		    <ul class="mui-table-view">
-		        <li class="mui-table-view-cell">
-		            <a href="#picture"><b>取消</b></a>
-		        </li>
-		    </ul>-->
-			<!-- </div> -->
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//获取DOM对象
-			var classHonorIcon = document.getElementById('classHonorIcon');
-			var classHonorRemark = document.getElementById('classHonorRemark');
-			var classHonorName = document.getElementById('classHonorName');
+			var nickName = document.getElementById('nickName');
+			var userHonorIcon = document.getElementById('userHonorIcon');
+			var userHonorRemark = document.getElementById('userHonorRemark');
+			var userHonorName = document.getElementById('userHonorName');
+			var userHonorId = getQueryString("userHonorId");
+			var workId = window.localStorage.getItem('workId');
+			var type = getQueryString("type");
 
-			var classHonorId = getQueryString("classHonorId");
-
-			//初始化数据	
-			console.log(classHonorId);
-			if (notBlank(classHonorId)) {
-				classHonorIcon.setAttribute('src', 'http://192.168.10.59:	8099' + window.localStorage.getItem('classHonorIcon'))
-				classHonorRemark.value = window.localStorage.getItem('classHonorRemark');
-				classHonorName.value = window.localStorage.getItem('classHonorName');
+			if (type == 1) {
+				nickName.value = window.localStorage.getItem('nickName')
 			} else {
-				classHonorIcon.setAttribute('src', " ");
-				classHonorRemark.value = "";
-				classHonorName.value = "";
+				if (notBlank(userHonorId)) {
+					nickName.value = window.localStorage.getItem('nickName')
+					userHonorIcon.setAttribute('src', 'http://192.168.10.59:8099' + window.localStorage.getItem('userHonorIcon'))
+					userHonorRemark.value = window.localStorage.getItem('userHonorRemark');
+					userHonorName.value = window.localStorage.getItem('userHonorName');
+				} else {
+					nickName.value = "";
+					userHonorIcon.setAttribute('src', "");
+					userHonorRemark.value = "";
+					userHonorName.value = "";
+				}
 			}
 
 
@@ -156,11 +154,14 @@
 			//初始化	
 			mui.init({});
 			mui.ready(function() {
+				mui()
 
+				//文件上传
 				mui(".mui-content").on("change", "#file", function() {
 					var formData = new FormData();
 					var files = this.files;
 					formData.append("file", files[0]);
+					console.log(formData);
 					mui.ajax('http://192.168.10.59:8099/uploadimg.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
@@ -173,7 +174,8 @@
 							// console.log(data);
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
-								document.getElementById("classHonorIcon").setAttribute("src", "http://192.168.10.59:8099" + data.data)
+								document.getElementById("userHonorIcon").setAttribute("src", "http://192.168.10.59:8099" + data.data)
+								window.localStorage.setItem('userHonorIcon', data.data)
 							} else {
 								mui.alert(data.msg)
 							}
@@ -185,22 +187,33 @@
 					});
 				})
 
-				mui(".mui-content").on("tap", ".add-classHonours", function() {
-					operateClassHonor();
-				})
-			})
+				//选择对象	
+				mui(".mui-content").on("tap", "#nickName", function() {
+					window.localStorage.setItem('userHonorName', userHonorName.value)
+					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
+					mui.openWindow({
+						id: 'index',
+						url: '../user-honor/studentAdd.html?userHonorId=' + userHonorId+"&type="+type
+					});
+				});
 
-			//添加、编辑班级荣誉	
-			function operateClassHonor() {
-				if (notBlank(classHonorId)) {
-					mui.ajax('http://192.168.10.59:8099/phone/classhonor/update.do', {
+				mui(".mui-content").on("tap", ".add-classHonours", function() {
+					operateUserHonor();
+				})
+			});
+
+			//添加、编辑个人荣誉
+			function operateUserHonor() {
+				if (notBlank(userHonorId)) {
+					mui.ajax('http://192.168.10.59:8099/phone/userhonor/update.do', {
 						data: {
-							classHonorId: classHonorId,
+							userHonorId: userHonorId,
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),
-							classHonorRemark: classHonorRemark.value,
-							classHonorName: classHonorName.value,
-							classHonorIcon: document.getElementById("imgUrl").value
+							workId: window.localStorage.getItem('workId'),
+							userHonorRemark: userHonorRemark.value,
+							userHonorName: userHonorName.value,
+							userHonorIcon: document.getElementById("imgUrl").value
 						},
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -210,7 +223,7 @@
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
-									url: '../class-honor/index.html'
+									url: '../user-honor/index.html'
 								});
 							} else {
 								mui.alert(data.msg)
@@ -223,13 +236,14 @@
 					});
 				} else {
 
-					mui.ajax('http://192.168.10.59:8099/phone/classhonor/insert.do', {
+					mui.ajax('http://192.168.10.59:8099/phone/userhonor/insert.do', {
 						data: {
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),
-							classHonorRemark: classHonorRemark.value,
-							classHonorName: classHonorName.value,
-							classHonorIcon: document.getElementById("imgUrl").value
+							workId: window.localStorage.getItem('workId'),
+							userHonorRemark: userHonorRemark.value,
+							userHonorName: userHonorName.value,
+							userHonorIcon: document.getElementById("imgUrl").value
 						},
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -239,7 +253,7 @@
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
-									url: '../class-honor/index.html'
+									url: '../user-honor/index.html'
 								});
 							} else {
 								mui.alert(data.msg)

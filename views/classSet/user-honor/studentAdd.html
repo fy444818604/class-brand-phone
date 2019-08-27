@@ -113,9 +113,9 @@
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
-			var classCadresId = getQueryString("classCadresId");
-			var workId = getQueryString("workId");
-			var postion = decodeURI(getQueryString('postion'));
+			var workId = window.localStorage.getItem("workId");
+			var userHonorId = getQueryString("userHonorId");
+			var type = getQueryString("type");
 
 			mui.init();
 			(function($) {
@@ -126,7 +126,7 @@
 				mui.ajax('http://192.168.10.59:8099/phone/user/selectstudentlistbyclassid.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						classId:window.localStorage.getItem('classId'),
+						classId: window.localStorage.getItem('classId'),
 						q: str
 					},
 					dataType: 'json', //服务器返回json格式数据
@@ -143,14 +143,14 @@
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox" checked  value="${con[i].id}" />
-												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+												<img src="http://192.168.10.59:8099${con[i].face}"/><span>${con[i].text}</span>
 											</li>`
 									document.getElementById('done').classList.remove("mui-disabled");
 								} else {
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox"  value="${con[i].id}" />
-												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+												<img src="http://192.168.10.59:8099${con[i].face}"/><span>${con[i].text}</span>
 										</li>`
 
 								}
@@ -164,7 +164,8 @@
 					}
 				});
 			}
-
+			
+			//获取参数
 			function getQueryString(name) {
 				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 				var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
@@ -179,6 +180,7 @@
 				}
 			}
 
+
 			mui.ready(function() {
 				var header = document.querySelector('header.mui-bar');
 				var list = document.getElementById('list');
@@ -190,32 +192,27 @@
 				//				window.indexedList = new mui.IndexedList(list);
 				//点击完成
 				done.addEventListener('tap', function() {
-					var checkboxArray = [].slice.call(list.querySelectorAll('input[type="checkbox"]'));
 					var checkedValues = [];
-					checkboxArray.forEach(function(box) {
-						if (box.checked) {
-							checkedValues.push(box.value);
+					var checkedText = [];
+					mui('#OA_task_1>li').each(function(i, v) {
+						if (v.childNodes[1].checked) {
+							checkedValues.push(v.childNodes[1].value);
+							checkedText.push(v.childNodes[4].innerHTML)
 						}
-					});
-					if (checkedValues.length > 0) {
-						if (classCadresId && !classCadresId != undefined && classCadresId != '' && classCadresId != null) {
-							console.log("update")
-							//打开职位
-							mui.openWindow({
-								id: 'postionUpdate',
-								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId+'&postion='+postion
-							});
-						} else {
-							console.log("add")
-							mui.openWindow({
-								id: 'postionAdd',
-								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId
-							});
-						}
-
+					})
+					if (checkedValues.length > 0 && checkedText.length > 0) {
+						window.localStorage.setItem('nickName', checkedText[0])
+						window.localStorage.setItem('workId', checkedValues[0])
+						mui.openWindow({
+							id: 'userHonorAdd',
+							url: 'userHonorAdd.html?type='+type+'&userHonorId=' + userHonorId
+						});
 					} else {
-						mui.alert('你没有选择班委');
+						mui.alert('你没有选择对象');
 					}
+
+
+
 				}, false);
 				//统计完成数量
 				mui('.mui-indexed-list-inner').on('change', 'input', function() {

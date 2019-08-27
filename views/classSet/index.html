@@ -100,7 +100,7 @@
                          <div class="mui-media-body">班级荣誉</div>
                     </a>
                 </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                <li id="userHonor"  class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                     <a href="javascript:void(0)">  
                         <img class="img" src="../../img/class_btn_honor_personal.png"/>
                          <div class="mui-media-body">个人荣誉</div>
@@ -150,9 +150,16 @@
 					}
 				});
 				
+				document.getElementById('userHonor').addEventListener('tap',function(){
+					mui.openWindow({
+					   id:'userHonor',
+					   url:'user-honor/index.html'
+					});
+				})
+				
 				document.getElementById('classHonor').addEventListener('tap',function(){
 					mui.openWindow({
-					   id:'classCadres',
+					   id:'classHonor',
 					   url:'class-honor/index.html'
 					});
 				})
