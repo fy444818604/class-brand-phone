@@ -67,6 +67,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row mt12">
 						<label>级别</label>
+						<input type="hidden" id="activeLevel" />
 						<a href="#level" id="level-select">请选择级别</a>
 					</div>
 					<div class="mui-input-row">
@@ -78,7 +79,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row mt12">
 						<label>标题</label>
-						<input type="text" placeholder="请输入标题">
+						<input type="text" id="activeTitile" placeholder="请输入标题">
 					</div>
 					<div class="mui-input-row Hauto">
 						<div>正文</div>
@@ -102,11 +103,14 @@
 					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
 						<a href="#mode" id="mode-select">请选择模式</a>
+						<input  type="hidden" id="activeChoose"/>
+						<input  type="hidden" id="activeChooseCount"/>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>结束时间</label>
-						<a href="#" data-options='{}' id="timeSelect">请选择时间</a>
+						<input type="hidden" id="activeEndTime" />
+						<a href="#"	  data-options='{}' id="timeSelect">请选择时间</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 				</div>
@@ -115,14 +119,14 @@
 		</div>
 		<div id="mode" class="mui-popover mui-popover-action mui-popover-bottom">
 			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#">单选</a>
+				<li class="mui-table-view-cell ">
+					<a href="#" id="activeChoose&1&1">单选</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">多选，最多两项</a>
+				<li class="mui-table-view-cell ">
+					<a href="#" id="activeChoose&2&2">多选，最多两项</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">多选，无限制</a>
+				<li class="mui-table-view-cell ">
+					<a href="#" id="activeChoose&2&10000">多选，无限制</a>
 				</li>
 			</ul>
 			<ul class="mui-table-view">
@@ -133,11 +137,11 @@
 		</div>
 		<div id="level" class="mui-popover mui-popover-action mui-popover-bottom">
 			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#">班级</a>
+				<li class="mui-table-view-cell activeLevel-level">
+					<a href="#" id="activeLevel&2">班级</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">校级</a>
+				<li class="mui-table-view-cell activeLevel-level">
+					<a href="#" id="activeLevel&1" >校级</a>
 				</li>
 			</ul>
 			<ul class="mui-table-view">
@@ -146,10 +150,17 @@
 				</li>
 			</ul>
 		</div>
-		<iframe src="./optionAdd.html" frameborder="no" border="0" id="opion-add"></iframe>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
+			//获取dom对象
+			var activeLevel = document.getElementById("activeLevel");
+			var activeTitile =document.getElementById("activeTitile");
+			var activeContent=document.getElementById("activeContent");
+			var activeChoose =document.getElementById("activeChoose");
+			var activeChooseCount =document.getElementById("activeChooseCount");
+			var activeChooseCount =document.getElementById("activeChooseCount");
+			
 			(function($) {
 				mui.init();
 				var result = document.querySelector('#timeSelect');
@@ -160,6 +171,7 @@
 							result.innerText = rs.text;
 							_self.picker.dispose();
 							_self.picker = null;
+							document.getElementById("activeEndTime").value= rs.text;
 						});
 					} else {
 						var optionsJson = this.getAttribute('data-options') || '{}';
@@ -170,23 +182,35 @@
 							result.innerText = rs.text;
 							_self.picker.dispose();
 							_self.picker = null;
+							document.getElementById("activeEndTime").value= rs.text;
 						});
 					}
+					
 				}, false)
 				mui("#level").on('tap', 'a', function() {
 					var level = this.innerHTML.substring(0,1)
+					var id = this.getAttribute("id");
+					var ids =id.split("&");
 					if(level != "<"){
 						document.querySelector('#level-select').innerHTML = level
 						mui('#level').popover('toggle');
+						document.getElementById("activeLevel").value= ids[1];
+						
 					}
 				})
 				mui("#mode").on('tap', 'a', function() {
 					var level = this.innerHTML;
+					var id = this.getAttribute("id");
+					var ids =id.split("&");
 					if(level != "<b>取消</b>"){
 						document.querySelector('#mode-select').innerHTML = level
 						mui('#mode').popover('toggle');
+						document.getElementById("activeChoose").value= ids[1];
+						document.getElementById("activeChooseCount").value= ids[2];
 					}
 				})
+				
+				
 			})(mui);
 		</script>
 	</body>

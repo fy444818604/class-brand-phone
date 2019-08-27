@@ -302,11 +302,13 @@
 					mui("#picture").on('tap', '.mui-table-view-cell>a', function(event) {
 						var id = 1;
 						if (this.dataset.type == 2) {
+							console.log(222)
 							mui.openWindow({
 								id: 'index',
-								url: './quesDetail.html?id='+id
+								url: './quesAdd.html?id='+id
 							});
 						} else {
+							console.log(111)
 							mui.openWindow({
 								id: 'index',
 								url: './signAdd.html?id='+id,
