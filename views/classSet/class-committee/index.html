@@ -13,7 +13,7 @@
 				height: 100%;
 				padding-top: 0.77rem;
 			}
-			
+
 			/*标题*/
 			.set-title {
 				height: 6.5rem;
@@ -22,7 +22,7 @@
 				padding: 0rem 1rem;
 				padding-top: 1.033rem;
 			}
-			
+
 			.set-title-card {
 				height: 7.47rem;
 				background-image: linear-gradient(#ffffff,
@@ -40,12 +40,12 @@
 				box-shadow: 0px 2.5px 13px 0px rgba(15, 22, 117, 0.08);
 				border-radius: 5px;
 			}
-			
+
 			/*老师*/
 			.slogan {
 				margin-top: 3.9rem;
 			}
-			
+
 			.slogan-top {
 				height: 1.9rem;
 				line-height: 1.9rem;
@@ -54,21 +54,21 @@
 				color: #303133;
 				padding: 0rem 1rem;
 			}
-			
+
 			.slogan-bnt {
 				height: calc(100vh - 18.3rem);
 				overflow: auto;
 			}
-			
+
 			.slogan-bnt i {
 				font-size: 1.4rem;
 			}
-			
+
 			.slogan-bnt>li {
 				line-height: 2.4rem;
 				font-size: 1rem;
 			}
-			
+
 			.slogan-bnt-left,
 			.slogan-bnt-left>img {
 				width: 2.4rem;
@@ -76,22 +76,22 @@
 				margin-right: 0.93rem;
 				border-radius: 50%;
 			}
-			
+
 			.slogan-bnt-rnt {
 				color: #909398;
 				margin-left: 2.87rem;
 			}
-			
+
 			.mui-table-view-cell {
 				padding: 15px 15px;
 			}
-			
+
 			.mui-table-view-cell:after,
 			.mui-table-view:before,
 			.mui-table-view:after {
 				background-color: #FFFFFF;
 			}
-			
+
 			.add-slogan {
 				width: 100%;
 				height: 3.07rem;
@@ -100,7 +100,7 @@
 				left: 0rem;
 				border-radius: 0rem;
 			}
-			
+
 			.mui-btn-orange {
 				background: #ff9c00;
 			}
@@ -117,36 +117,15 @@
 					<p id="className">高二三班</p>
 					<div class="flex">
 						<p class="set-title-card-left" id="teacher">班主任：杨老师</p>
-						<p id="members">班级成员：55人</p>
+						<p id="members">班级成员：0人</p>
 					</div>
 				</div>
 			</div>
 			<div class="slogan">
-				<div class="slogan-top">
-					班委会9
+				<div class="slogan-top" id="dataNumber">
+					班委会0
 				</div>
 				<ul id="OA_task_1" class="mui-table-view slogan-bnt">
-					<!-- <li class="mui-table-view-cell">
-					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-red">删除</a>
-					</div>
-					<div class="mui-slider-handle flex">
-						<div class="slogan-bnt-left"><img src="../../../img/class_btn_committee.png"/></div>
-			    		<div >田浩</div>
-			    		<div class="slogan-bnt-rnt">语文</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell">
-					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-orange"><i class="iconfont icon-edit"></i></a>
-						<a class="mui-btn mui-btn-red"><i class="iconfont icon-del"></i></a>
-					</div>
-					<div class="mui-slider-handle flex">
-						<div class="slogan-bnt-left"><img src="../../../img/class_btn_committee.png"/></div>
-			    		<div >田浩</div>
-			    		<div class="slogan-bnt-rnt">语文</div>
-					</div>
-				</li> -->
 				</ul>
 				<div class="slogan-zanwu">
 
@@ -158,66 +137,123 @@
 		<script type="text/javascript" charset="utf-8">
 			//初始化	
 			mui.init({});
-
-			(function($) {
-				var curr = 1;
-				// 班级活动查询
-				var listSearch = function() {
-					var _this = this;
-					mui.ajax('http://192.168.10.59:8099/phone/classcadres/selectclasscadresbyclass.do', {
-						data: {
-							token: window.localStorage.getItem('token'),
-							currentPage: curr,
-							pageSize: 10000,
-							classId: window.localStorage.getItem('classId')
-						},
-						dataType: 'json', //服务器返回json格式数据
-						type: 'post', //HTTP请求类型
-						timeout: 10000, //超时时间设置为10秒；
-						success: function(data) {
-							console.log(data);
-							if (data.code == 200) {
-								document.querySelector('#OA_task_1').innerHTML = '';
-								var html = document.querySelector('#OA_task_1').innerHTML;
-								var con = data.data;
-
-								for (var i = 0; i < con.length; i++) {
-									html +=
-										`
-									<li class="mui-table-view-cell">
-										<div class="mui-slider-right mui-disabled">
-											<a class="mui-btn mui-btn-red mui-icon iconfont  icon-del" id="${con[i].classCadresId}" >删除</a>
-											<a class="mui-btn mui-btn-red mui-icon iconfont icon-edit" id="${con[i].classCadresId}&${con[i].workId}&${con[i].postion}" >编辑</a>
-										</div>
-										<div class="mui-slider-handle flex">
-											<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].userFace}"/></div>
-											<div >${con[i].nickName}</div>
-											<div class="slogan-bnt-rnt">${con[i].postion}</div>
-										</div>
-									</li>
-									`
-								}
-								document.querySelector('#OA_task_1').innerHTML = html
-							} else {
-								mui.alert(data.msg);
-							}
-
-						},
-						error: function(xhr, type, errorThrown) {
-							console.log(xhr);
-						}
-					});
-				};
-				listSearch();
-			}(mui));
-
-
-
 			//dom获取
 			var className = document.getElementById('className');
 			var teacher = document.getElementById('teacher');
 			var members = document.getElementById('members');
 
+			(function($) {
+				listSearch();
+				GetRequest();
+				
+				//绑定删除事件
+				mui(".mui-content").on("tap", ".icon-del", function() {
+					var id = this.getAttribute("id");
+					var btnArray = ['否', '是'];
+					mui.confirm('确认要删除？', null, btnArray, function(e) {
+						if (e.index == 1) {
+							deleteclassCadres(id);
+						}
+					})
+
+				});
+
+				//修改班委
+				mui(".mui-content").on('tap', '.icon-edit', function() {
+					var id = this.getAttribute("id");
+					var ids = id.split("&");
+					console.log(encodeURI(ids[2]));
+					mui.openWindow({
+						id: 'teacherUpdate',
+						url: 'studentAdd.html?classCadresId=' + ids[0] + '&workId=' + ids[1] + '&postion=' + encodeURI(ids[2])
+					});
+				});
+
+				// 添加班委
+				mui(".mui-content").on('tap', '.add-slogan', function() {
+					//打开选择班委
+					mui.openWindow({
+						id: 'student',
+						url: 'studentAdd.html'
+					});
+				})
+			}(mui));
+
+			// 班委查询
+			function listSearch() {
+				var curr = 1;
+				var _this = this;
+				mui.ajax('http://192.168.10.59:8099/phone/classcadres/selectclasscadresbyclass.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						currentPage: curr,
+						pageSize: 10000,
+						classId: window.localStorage.getItem('classId')
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						console.log(data);
+						if (data.code == 200) {
+							document.querySelector('#OA_task_1').innerHTML = '';
+							var html = document.querySelector('#OA_task_1').innerHTML;
+							var con = data.data;
+
+							for (var i = 0; i < con.length; i++) {
+								html +=
+									`
+								<li class="mui-table-view-cell">
+									<div class="mui-slider-right mui-disabled">
+										<a class="mui-btn mui-btn-red mui-icon iconfont  icon-del" id="${con[i].classCadresId}" >删除</a>
+										<a class="mui-btn mui-btn-red mui-icon iconfont  icon-edit" id="${con[i].classCadresId}&${con[i].workId}&${con[i].postion}" >编辑</a>
+									</div>
+									<div class="mui-slider-handle flex">
+										<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].userFace}"/></div>
+										<div >${con[i].nickName}</div>
+										<div class="slogan-bnt-rnt">${con[i].postion}</div>
+									</div>
+								</li>
+								`
+							}
+							document.getElementById("dataNumber").innerHTML = '科任老师' + con.length
+							document.querySelector('#OA_task_1').innerHTML = html
+						} else {
+							mui.alert(data.msg);
+						}
+
+					},
+					error: function(xhr, type, errorThrown) {
+						console.log(xhr);
+					}
+				});
+			};
+
+			//删除班委
+			function deleteclassCadres(id) {
+				mui.ajax('http://192.168.10.59:8099/phone/classcadres/delete.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						classCadresId: id
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == 200) {
+							listSearch();
+						} else {
+							mui.alert(data.msg)
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+			}
+
+
+			//初始化班级展示
 			function GetRequest() {
 				var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
 				var theRequest = new Object();
@@ -232,7 +268,6 @@
 					className.innerText = theRequest.classNameT;
 				}
 			}
-			GetRequest();
 		</script>
 	</body>
 </html>

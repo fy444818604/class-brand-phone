@@ -123,8 +123,8 @@
 				</div>
 			</div>
 			<div class="slogan">
-				<div class="slogan-top">
-					科任老师9
+				<div class="slogan-top" id="dataNumber">
+					科任老师0
 				</div>
 				<ul id="OA_task_1" class="mui-table-view slogan-bnt">
 
@@ -181,6 +181,7 @@
 													</div>
 											</li>`
 								}
+								document.getElementById("dataNumber").innerHTML='科任老师'+con.length
 								document.querySelector('#OA_task_1').innerHTML = html
 							} else {
 								mui.alert(data.msg);
