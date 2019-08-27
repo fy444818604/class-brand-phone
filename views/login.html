@@ -49,7 +49,13 @@
 
 			.iconfont {
 				font-size: 1.466666rem;
-			}
+
+				.school-edit {
+					width: 36px;
+					height: 36px;
+					border-radius: 100%;
+					background-color: rgba(255, 255, 255, .56);
+				}
 		</style>
 	</head>
 	<body>
@@ -79,25 +85,27 @@
 		var login = function() {
 			var loginName = document.querySelector('.login-name').value;
 			var loginPwd = document.querySelector('.login-pwd').value;
-			mui.ajax('http://192.168.38.175:8080/phone/login.do', {
+			mui.ajax('http://192.168.10.59:8099/phone/login.do', {
 				data: {
 					loginName: loginName,
 					loginPwd: loginPwd
 				},
-				dataType:'json',//服务器返回json格式数据
+				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					if(data.code == 200){
-						window.localStorage.setItem('token',data.data.token)
+					if (data.code == 200) {
+						window.localStorage.setItem('token', data.data.token)
+						window.localStorage.setItem('classId', data.data.classId)
+							window.localStorage.setItem('isCharge', data.data.isCharge)
 						mui.openWindow({
-						  id:'index',
-						  url:'../index.html'
+							id: 'index',
+							 // url:'./activity/index.html'
+							url: '../index.html'
 						});
 					}
 				},
-				error: function(xhr, type, errorThrown) {
-				}
+				error: function(xhr, type, errorThrown) {}
 			});
 		}
 
