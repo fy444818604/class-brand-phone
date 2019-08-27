@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../css/mui.indexedlist.css" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				overflow: hidden;
+			}
+			.mui-bar {
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			#done.mui-disabled{
+				color: gray;
+			}
+			.mui-indexed-list-bar{
+				display: none;
+			}
+			/*搜索*/
+			input[type=search]{
+				height: 44px;
+				line-height: 44px;
+				background: #FFFFFF;
+				border-radius: 0px;
+			}
+		
+			.mui-search .mui-placeholder {
+			    line-height: 44px;
+				height: 44px;
+			}
+			.mui-table-view-cell {
+			    padding: 11px 15px;
+			}
+			.mui-table-view-cell img{
+				width: 2.4rem;
+				height: 2.4rem;
+				border-radius: 50%;
+				vertical-align: middle;
+				margin-right: 0.87rem;
+			}
+			.mui-table-view-cell:after {
+			    left: 108px;
+			    height: 1px;
+			}
+			.mui-table-view-cell.mui-checkbox input[type=checkbox]{
+				top: 16.5px;	
+			}
+			
+			.htOvfl{
+				height: calc(100vh - 8.7rem);
+				overflow: auto;
+			}
+			/*按钮*/
+			.anniu{
+				position: fixed;
+				bottom: 0px;
+				left: 0px;
+				width: 100%;
+				height: 3.07rem;
+			}
+			.anniu button{
+				border-radius: 0px;
+				height: 100%;
+				font-size: 1.07rem;
+			}
+			.anniu .reset{
+				width: 32%;
+				background: #ebf3ff;
+				color: #3B8BFF;
+				border: 0.07rem solid #ebf3ff;
+			}
+			.anniu .mui-btn-primary{
+				width: 68%;
+				margin-left: -1.5%;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择班委</h1>
+		</header>
+		<div class="mui-content">
+			<div id="list" class="mui-indexed-list">
+				<div class="mui-indexed-list-search mui-input-row mui-search">
+					<input type="search" id="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索班委
+					">
+				</div>
+				<div class="mui-indexed-list-bar">
+				</div>
+				<div class="mui-indexed-list-alert"></div>
+				<div class="mui-indexed-list-inner">
+					<div class="mui-indexed-list-empty-alert">没有数据</div>
+					<div class="htOvfl">
+						<ul class="mui-table-view " id="OA_task_1">
+						</ul>
+					</div>
+
+				</div>
+				<!--按钮-->
+				<div class="anniu mui-row">
+					<button type="button" class="mui-btn reset">重置</button>
+					<button id="done" type="button" class="mui-btn mui-btn-primary mui-disabled">确定</button>
+				</div>
+			</div>
+		</div>
+		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			var classCadresId = getQueryString("classCadresId");
+			var workId = getQueryString("workId");
+			var postion = decodeURI(getQueryString('postion'));
+
+			mui.init();
+			(function($) {
+				existingTeacher('');
+			}(mui))
+			//查询现有学生接口
+			function existingTeacher(str) {
+				mui.ajax('http://192.168.10.59:8099/phone/user/selectstudentlistbyclassid.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						classId:window.localStorage.getItem('classId'),
+						q: str
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						// console.log(data.data)
+						if (data.code == 200) {
+							document.querySelector('#OA_task_1').innerHTML = '';
+							var html = document.querySelector('#OA_task_1').innerHTML;
+							var con = data.data;
+							for (var i = 0; i < con.length; i++) {
+								if (workId == con[i].id) {
+									html +=
+										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+												<input type="checkbox" checked  value="${con[i].id}" />
+												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+											</li>`
+									document.getElementById('done').classList.remove("mui-disabled");
+								} else {
+									html +=
+										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+												<input type="checkbox"  value="${con[i].id}" />
+												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+										</li>`
+
+								}
+
+							}
+							document.querySelector('#OA_task_1').innerHTML = html
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+			}
+
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				var q = window.location.pathname.substr(1).match(reg_rewrite);
+				if (r != null) {
+					return r[2];
+				} else if (q != null) {
+					return q[2];
+				} else {
+					return null;
+				}
+			}
+
+			mui.ready(function() {
+				var header = document.querySelector('header.mui-bar');
+				var list = document.getElementById('list');
+				var done = document.getElementById('done');
+				var search = document.getElementById('search');
+				//calc hieght
+				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+				//create
+				//				window.indexedList = new mui.IndexedList(list);
+				//点击完成
+				done.addEventListener('tap', function() {
+					var checkboxArray = [].slice.call(list.querySelectorAll('input[type="checkbox"]'));
+					var checkedValues = [];
+					checkboxArray.forEach(function(box) {
+						if (box.checked) {
+							checkedValues.push(box.value);
+						}
+					});
+					if (checkedValues.length > 0) {
+						if (classCadresId && !classCadresId != undefined && classCadresId != '' && classCadresId != null) {
+							console.log("update")
+							//打开职位
+							mui.openWindow({
+								id: 'postionUpdate',
+								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId+'&postion='+postion
+							});
+						} else {
+							console.log("add")
+							mui.openWindow({
+								id: 'postionAdd',
+								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId
+							});
+						}
+
+					} else {
+						mui.alert('你没有选择班委');
+					}
+				}, false);
+				//统计完成数量
+				mui('.mui-indexed-list-inner').on('change', 'input', function() {
+					var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
+					var value = count ? "确定(" + count + ")" : "确定";
+					done.innerHTML = value;
+					if (count) {
+						if (done.classList.contains("mui-disabled")) {
+							done.classList.remove("mui-disabled");
+						}
+					} else {
+						if (!done.classList.contains("mui-disabled")) {
+							done.classList.add("mui-disabled");
+						}
+					}
+				});
+
+				search.addEventListener('keypress', function(event) {
+					var str = document.getElementById("search").value;
+					if (event.keyCode == 13) {
+						document.activeElement.blur(); //收起虚拟键盘
+						existingTeacher(str);
+						event.preventDefault(); // 阻止默认事件---阻止页面刷新
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
