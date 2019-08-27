@@ -1,306 +1,309 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>班牌发布平台</title>
-	<script src="js/mui.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/public.css"/>
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css"/>
-    <style type="text/css">
-    	.mui-content{
-    		background: #FFFFFF;
-    		height: 100%;
-    		padding-top: 0.77rem;
-    	}
-    	.mui-bar-nav~.mui-content {
-		    padding-top: 60px;
-		}
-    	/*卡片*/
-    	.card{
-    		padding: 0rem 1rem;
-    	}
-    	.card-cont{
-    		height: 8rem;
-    		width: 100%;
-    		background: #4C9cFc;
-    		border-radius: 0.67rem;
-    		box-shadow: 0px 2.5px 13px 0px 
-			rgba(15, 22, 117, 0.24);
-    	}
-    	.card-cont-top{
-    		height: 5.3333rem;
-    		position: relative;
-    	}
-    	.card-cont-bnt{
-    		height: 2.667rem;
-    		background: url(img/home_img_class.png)no-repeat;
-    		background-size: 100% 100%;
-    	}
-    	.class-left{
-    		line-height: 7rem;
-    		text-indent: 1.67rem;
-    		font-size: 1.2rem;
-    		color: #fff;
-    	}
-    	.classRnt{
-    		color: #cadcfd;
-    		height: 2.1334rem;
-    		background: #67a4fc;
-    		width: 6.57rem;
-    		position: absolute;
-    		right: 0rem;
-    		top: 0.87rem;
-    		border-top-left-radius: 1.07rem;
-    		border-bottom-left-radius: 1.07rem;
-    		line-height: 2.1334;
-    	}
-    	.classRnt img{
-		    width: 1.5rem;
-		    height: 1.4rem;
-		    margin-top: 0.37rem;
-		    margin-left: 0.8rem;
-		    margin-right: 0.5rem;
-    	}
-    	/*菜单*/
-    	.mui-grid-view.mui-grid-9 {
-		    border-top: none; 
-		    border-left: none;
-		    background-color: #FFF;
-		    margin-top: 0.9rem;
-		}
-		.mui-grid-view.mui-grid-9 .mui-table-view-cell {
-		    border-right: none;
-		    border-bottom: none;
-		}
-		.img{
-			width: 3.333rem;
-			height: 3.333rem;
-		}
-    </style>
-</head>
-<body>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">班牌发布平台</h1>
-	</header>
-	<div class="mui-content"> 
-		<!--卡片-->
-		<div class="card">
-			<div class="card-cont">
-				<div class="card-cont-top flex">
-					<div class="class-left">
-						高中一班 <i class="iconfont icon-arrow-down"></i>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>班牌发布平台</title>
+		<script src="js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css" />
+		<style type="text/css">
+			.mui-content {
+				background: #FFFFFF;
+				height: 100%;
+				padding-top: 0.77rem;
+			}
+
+			.mui-bar-nav~.mui-content {
+				padding-top: 60px;
+			}
+
+			/*卡片*/
+			.card {
+				padding: 0rem 1rem;
+			}
+
+			.card-cont {
+				height: 8rem;
+				width: 100%;
+				background: #4C9cFc;
+				border-radius: 0.67rem;
+				box-shadow: 0px 2.5px 13px 0px rgba(15, 22, 117, 0.24);
+			}
+
+			.card-cont-top {
+				height: 5.3333rem;
+				position: relative;
+			}
+
+			.card-cont-bnt {
+				height: 2.667rem;
+				background: url(img/home_img_class.png)no-repeat;
+				background-size: 100% 100%;
+			}
+
+			.class-left {
+				line-height: 7rem;
+				text-indent: 1.67rem;
+				font-size: 1.2rem;
+				color: #fff;
+			}
+
+			.classRnt {
+				color: #cadcfd;
+				height: 2.1334rem;
+				background: #67a4fc;
+				width: 6.57rem;
+				position: absolute;
+				right: 0rem;
+				top: 0.87rem;
+				border-top-left-radius: 1.07rem;
+				border-bottom-left-radius: 1.07rem;
+				line-height: 2.1334;
+			}
+
+			.classRnt img {
+				width: 1.5rem;
+				height: 1.4rem;
+				margin-top: 0.37rem;
+				margin-left: 0.8rem;
+				margin-right: 0.5rem;
+			}
+
+			/*菜单*/
+			.mui-grid-view.mui-grid-9 {
+				border-top: none;
+				border-left: none;
+				background-color: #FFF;
+				margin-top: 0.9rem;
+			}
+
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				border-right: none;
+				border-bottom: none;
+			}
+
+			.img {
+				width: 3.333rem;
+				height: 3.333rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">班牌发布平台</h1>
+		</header>
+		<div class="mui-content">
+			<!--卡片-->
+			<div class="card">
+				<div class="card-cont">
+					<div class="card-cont-top flex">
+						<div class="class-left">
+							高中一班 <i class="iconfont icon-arrow-down"></i>
+						</div>
+						<div class="classRnt">
+
+						</div>
 					</div>
-					<div class="classRnt">
-						
-					</div>
+					<div class="card-cont-bnt"></div>
 				</div>
-				<div class="card-cont-bnt"></div>
+			</div>
+			<div id="notice">
+				<ul class="mui-table-view mui-grid-view mui-grid-9">
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="notice">
+							<img class="img" src="img/home_btn_notice.png" />
+							<div class="mui-media-body">通知</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="news">
+							<img class="img" src="img/home_btn_news.png" />
+							<div class="mui-media-body">新闻</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="picture">
+							<img class="img" src="img/home_btn_picture.png" />
+							<div class="mui-media-body">图片</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="video">
+							<img class="img" src="img/home_btn_video.png" />
+							<div class="mui-media-body">视频</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="activity">
+							<img class="img" src="img/home_btn_activity.png" />
+							<div class="mui-media-body">活动</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="praise">
+							<img class="img" src="img/home_btn_praise.png" />
+							<div class="mui-media-body">表彰</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="criticism">
+							<img class="img" src="img/home_btn_criticism.png" />
+							<div class="mui-media-body">通报</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="bulletin">
+							<img class="img" src="img/home_btn_announcement.png" />
+							<div class="mui-media-body">公告</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+						<a href="#" class="school">
+							<img class="img" src="img/home_btn_school.png" />
+							<div class="mui-media-body">校宣</div>
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
-		<div id="notice"> 
-            <ul class="mui-table-view mui-grid-view mui-grid-9">
-                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="notice">  
-                     	 <img class="img" src="img/home_btn_notice.png"/>
-                         <div class="mui-media-body">通知</div>
-                    </a>
-                 </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="news">  
-                          <img class="img" src="img/home_btn_news.png"/>
-                         <div class="mui-media-body">新闻</div>
-                    </a>
-                </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="picture">  
-                          <img class="img" src="img/home_btn_picture.png"/>
-                         <div class="mui-media-body">图片</div>
-                    </a>
-                </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="video">  
-                        <img class="img" src="img/home_btn_video.png"/>
-                         <div class="mui-media-body">视频</div>
-                    </a>
-                </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="activity">  
-                        <img class="img" src="img/home_btn_activity.png"/>
-                         <div class="mui-media-body">活动</div>
-                    </a>
-                </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="praise">  
-                         <img class="img" src="img/home_btn_praise.png"/>
-                         <div class="mui-media-body">表彰</div>
-                    </a>
-                </li> 
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="criticism">  
-                          <img class="img" src="img/home_btn_criticism.png"/>
-                         <div class="mui-media-body">通报</div>
-                    </a>
-                </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="bulletin">  
-                         <img class="img" src="img/home_btn_announcement.png"/>
-                         <div class="mui-media-body">公告</div>
-                    </a>
-                </li>  
-                <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#" class="school">  
-                         <img class="img" src="img/home_btn_school.png"/>
-                         <div class="mui-media-body">校宣</div>
-                    </a>
-                </li>  
-            </ul>
-       </div>
-	</div>
-	 <script type="text/javascript" charset="utf-8">
-	 	//初始化	
-      	(function($) {
-			mui.init();
-			//获取参数
-			var url = location.search;   
-			var theRequest = new Object();  
-			if ( url.indexOf( "?" ) != -1 ) {  
-			  var str = url.substr( 1 );  
-			  var strs = str.split( "&" );  
-			  for ( var i = 0; i < strs.length; i++ ) {  
-			    theRequest[ strs[ i ].split( "=" )[ 0 ] ] = ( strs[ i ].split( "=" )[ 1 ] );  
-			  }
-			  if(theRequest.token == ''){
-			  	mui.openWindow({
-				    id:'login',
-				    url:'views/login.html'
-			  	});
-			  }
-			  if(theRequest.isCharge == 1){
-			  	mui(".card").on('tap','.class-left',function(){
-				  mui.openWindow({
-				    id:'index',
-				    url:'views/classSet/index.html?classId='+theRequest.classId+'&token='+theRequest.token
-				  });
-			    })
-			  }else{
-			  	mui.alert('你还不是班主任，请联系管理员')
-			  }
-			}
-		})(mui);
-	  	mui("#notice").on('tap','.notice',function(){
-		  mui.openWindow({
-		    id:'index',
-		    url:'views/notice/index.html'
-		  });
-		})	  	
-		mui("#notice").on('tap','.news',function(){
-		  mui.openWindow({
-		    id:'index',
-		    url:'views/news/index.html'
-		  });
-		})
-		mui("#notice").on('tap','.picture',function(){
-		  mui.openWindow({
-		    id:'index',
-		    url:'views/picture/index.html'
-		  });
-		})
-		mui("#notice").on('tap','.video',function(){
-		  mui.openWindow({
-		    id:'index',
-		    url:'views/video/index.html'
-		  });
-		})
-		mui("#notice").on('tap','.activity',function(){
-		  mui.openWindow({
-		    id:'index',
-		    url:'views/activity/index.html'
-		  });
-		})
-		mui("#notice").on('tap','.praise',function(){
-		  mui.openWindow({
-		    id:'index',
-		    url:'views/praise/index.html'
-		  });
-		})
-		mui("#notice").on('tap','.criticism',function(){
-		  mui.openWindow({
-		    id:'index',
-		    url:'views/criticism/index.html'
-		  });
-		})
-		mui("#notice").on('tap','.bulletin',function(e){
-			e.detail.gesture.preventDefault();
-			mui.prompt('','请输入授权密码','授权密码',['取消','确认'],function(e) {
-					if (e.index == 1) {
-						checkPassword(e.value);
-					} 
-				});
-		})
-		mui("#notice").on('tap','.school',function(e){
-			mui.openWindow({
-			  id:'index',
-			  url:'views/school/index.html'
-			});
-		})
-		var checkPassword = function(password) {
-			mui.ajax('http://192.168.38.175:8080/phone/checkpushpassword.do', {
-				data: {
-					token: window.localStorage.getItem('token'),
-					password: password
-				},
-				dataType:'json',//服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				success: function(data) {
-					if(data.code == 200){
+		<script type="text/javascript" charset="utf-8">
+			//初始化	
+			(function($) {
+				mui.init();
+				//获取参数
+				var url = location.search;
+				var theRequest = new Object();
+				if (window.localStorage.getItem('token') == '') {
+					mui.openWindow({
+						id: 'login',
+						url: 'views/login.html'
+					});
+				}
+				if (window.localStorage.getItem('isCharge') == 1) {
+					mui(".card").on('tap', '.class-left', function() {
 						mui.openWindow({
-						  id:'index',
-						  url:'views/bulletin/index.html?check='+password
+							id: 'index',
+							url: 'views/classSet/index.html'
 						});
-					}else{
-						mui.alert(data.msg)
-					}
-				},
-				error: function(xhr, type, errorThrown) {
-					// console.log(xhr)
+					})
+				} else {
+					mui.alert('你还不是班主任，请联系管理员')
 				}
-			});
-		}
-		
-		var checkWeChat = function() {
-			mui.ajax('http://192.168.38.175:8080/phone/selectbindwechat.do', {
-				data: {
-					token: window.localStorage.getItem('token')
-				},
-				dataType:'json',//服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				success: function(data) {
-					if(data.data!=null && data.data!=""){
-						document.querySelector('.classRnt').innerHTML = `<img src="img/home_icon_wechat.png" alt="" />已绑定`
-					}else{
-						document.querySelector('.classRnt').innerHTML = `<img src="img/home_icon_wechat.png" alt="" />未绑定`
-					}
-				},
-				error: function(xhr, type, errorThrown) {
-					// console.log(xhr)
-				}
-			});
-		}
-		
-		mui.ready(function() {
-			checkWeChat();
-			document.querySelector('.classRnt').addEventListener('tap',function(){
+			})(mui);
+			mui("#notice").on('tap', '.notice', function() {
 				mui.openWindow({
 					id: 'index',
-					url: 'views/weChat/bind.html'
+					url: 'views/notice/index.html'
 				});
 			})
-		});
-    </script>
-</body>
+			mui("#notice").on('tap', '.news', function() {
+				mui.openWindow({
+					id: 'index',
+					url: 'views/news/index.html'
+				});
+			})
+			mui("#notice").on('tap', '.picture', function() {
+				mui.openWindow({
+					id: 'index',
+					url: 'views/picture/index.html'
+				});
+			})
+			mui("#notice").on('tap', '.video', function() {
+				mui.openWindow({
+					id: 'index',
+					url: 'views/video/index.html'
+				});
+			})
+			mui("#notice").on('tap', '.activity', function() {
+				mui.openWindow({
+					id: 'index',
+					url: 'views/activity/index.html'
+				});
+			})
+			mui("#notice").on('tap', '.praise', function() {
+				mui.openWindow({
+					id: 'index',
+					url: 'views/praise/index.html'
+				});
+			})
+			mui("#notice").on('tap', '.criticism', function() {
+				mui.openWindow({
+					id: 'index',
+					url: 'views/criticism/index.html'
+				});
+			})
+			mui("#notice").on('tap', '.bulletin', function(e) {
+				e.detail.gesture.preventDefault();
+				mui.prompt('', '请输入授权密码', '授权密码', ['取消', '确认'], function(e) {
+					if (e.index == 1) {
+						checkPassword(e.value);
+					}
+				});
+			})
+			mui("#notice").on('tap', '.school', function(e) {
+				mui.openWindow({
+					id: 'index',
+					url: 'views/school/index.html'
+				});
+			})
+			var checkPassword = function(password) {
+				mui.ajax('http://192.168.38.175:8080/phone/checkpushpassword.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						password: password
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == 200) {
+							mui.openWindow({
+								id: 'index',
+								url: 'views/bulletin/index.html?check=' + password
+							});
+						} else {
+							mui.alert(data.msg)
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						// console.log(xhr)
+					}
+				});
+			}
+
+			var checkWeChat = function() {
+				mui.ajax('http://192.168.38.175:8080/phone/selectbindwechat.do', {
+					data: {
+						token: window.localStorage.getItem('token')
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.data != null && data.data != "") {
+							document.querySelector('.classRnt').innerHTML = `<img src="img/home_icon_wechat.png" alt="" />已绑定`
+						} else {
+							document.querySelector('.classRnt').innerHTML = `<img src="img/home_icon_wechat.png" alt="" />未绑定`
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						// console.log(xhr)
+					}
+				});
+			}
+
+			mui.ready(function() {
+				checkWeChat();
+				document.querySelector('.classRnt').addEventListener('tap', function() {
+					mui.openWindow({
+						id: 'index',
+						url: 'views/weChat/bind.html'
+					});
+				})
+			});
+		</script>
+	</body>
 </html>
