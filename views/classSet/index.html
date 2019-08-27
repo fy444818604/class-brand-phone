@@ -77,31 +77,53 @@
 		<div id="notice"> 
             <ul class="mui-table-view mui-grid-view mui-grid-9">
                  <li id="slogan" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+<<<<<<< HEAD
                     <a href="#" class="notice">  
+=======
+                    <a href="javascript:void(0)" class="notice">  
+>>>>>>> remotes/origin/master
                      	 <img class="img" src="../../img/class_btn_slogan.png"/>
                          <div class="mui-media-body">班级口号</div>
                     </a>
                  </li>  
+<<<<<<< HEAD
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                     <a href="#">  
+=======
+                <li id="classroomTeacher" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="javascript:void(0)">  
+>>>>>>> remotes/origin/master
                           <img class="img" src="../../img/class_btn_teacher.png"/>
                          <div class="mui-media-body">科任老师</div>
                     </a>
                 </li>  
+<<<<<<< HEAD
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                     <a href="#">  
+=======
+                <li id="classCadres" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <a href="javascript:void(0)">  
+>>>>>>> remotes/origin/master
                           <img class="img" src="../../img/class_btn_committee.png"/>
                          <div class="mui-media-body">班委会</div>
                     </a>
                 </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+<<<<<<< HEAD
                     <a href="#">  
+=======
+                    <a href="javascript:void(0)">  
+>>>>>>> remotes/origin/master
                         <img class="img" src="../../img/class_btn_honor_class.png"/>
                          <div class="mui-media-body">班级荣誉</div>
                     </a>
                 </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+<<<<<<< HEAD
                     <a href="#">  
+=======
+                    <a href="javascript:void(0)">  
+>>>>>>> remotes/origin/master
                         <img class="img" src="../../img/class_btn_honor_personal.png"/>
                          <div class="mui-media-body">个人荣誉</div>
                     </a>
@@ -116,6 +138,7 @@
 			mui.init()
 			//获取参数
 			var url = location.search;   
+<<<<<<< HEAD
 			var theRequest = new Object();  
 			if ( url.indexOf( "?" ) != -1 ) {  
 			  var str = url.substr( 1 );  
@@ -123,6 +146,8 @@
 			  for ( var i = 0; i < strs.length; i++ ) {  
 			    theRequest[ strs[ i ].split( "=" )[ 0 ] ] = ( strs[ i ].split( "=" )[ 1 ] );  
 			  } 
+=======
+>>>>>>> remotes/origin/master
 			  //dom获取
 			  var className = document.getElementById('className');
 			  var teacher = document.getElementById('teacher');
@@ -132,22 +157,36 @@
 			  	var classSlogan,teacherT,membersT,classNameT;
 				mui.ajax('http://192.168.10.59:8099/phone/classdetail/selcetclassdetailbyid.do',{
 					data:{
+<<<<<<< HEAD
 						classId:theRequest.classId,
 						token:theRequest.token
+=======
+						classId: window.localStorage.getItem('classId'),
+						token: window.localStorage.getItem('token')
+>>>>>>> remotes/origin/master
 					},
 					dataType:'json',//服务器返回json格式数据
 					type:'get',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
+<<<<<<< HEAD
 						if(data.code == 200){
 							console.log(data)
 							className.innerText=data.data.classDetail.className;
 							teacher.innerText = '班主任：'+data.data.classDetail.nickName
 							members.innerText = '班级成员：'+data.data.classDetail.total
+=======
+						console.log(data)
+						if(data.code == 200){
+							className.innerText=data.data.classDetail.className;
+							teacher.innerText = '班主任：'+data.data.classDetail.nickName
+							members.innerText = '班级成员：'+data.data.classDetail.total+'人'
+>>>>>>> remotes/origin/master
 							classSlogan = data.data.classDetail.classSlogan;
 							teacherT = data.data.classDetail.nickName;
 							membersT = data.data.classDetail.total;
 							classNameT = data.data.classDetail.className;
+<<<<<<< HEAD
 						}
 					}
 				});
@@ -160,6 +199,39 @@
             	});
 			}
 			}
+=======
+							
+							window.localStorage.setItem('classSlogan',classSlogan)
+							window.localStorage.setItem('teacherT',teacherT)
+							window.localStorage.setItem('membersT',membersT)
+							window.localStorage.setItem('classNameT',classNameT)
+						}
+					}
+				});
+				
+				document.getElementById('classCadres').addEventListener('tap',function(){
+					mui.openWindow({
+					   id:'classCadres',
+					   url:'class-committee/index.html'
+					});
+				})
+				
+				//点击口号
+			 	document.getElementById('slogan').addEventListener('tap',function(){/*tap表示单击屏幕，此处可换双击，滑动等等事件*/
+					mui.openWindow({
+					   id:'slogn',
+					   url:'class-slogan/index.html'
+					});
+            	});
+            	document.getElementById('classroomTeacher').addEventListener('tap',function(){/*tap表示单击屏幕，此处可换双击，滑动等等事件*/
+                  	mui.openWindow({
+					   id:'classTeacher',
+					   url:'following-teacher/index.html'
+					});
+            	});
+			}
+		/*	}*/
+>>>>>>> remotes/origin/master
 			classInformation(1);
 		})(mui);
     </script>

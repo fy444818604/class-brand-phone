@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> remotes/origin/master
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,11 +5,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
-<<<<<<< HEAD
-		<link rel="stylesheet" type="text/css" href="../../../css/mui.indexedlist.css"/>
-=======
 		<link rel="stylesheet" type="text/css" href="../../../css/mui.indexedlist.css" />
->>>>>>> remotes/origin/master
 		<style>
 			html,
 			body {
@@ -92,18 +84,13 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">选择老师</h1>
+			<h1 class="mui-title">选择班委</h1>
 		</header>
 		<div class="mui-content">
-<<<<<<< HEAD
-			<div id='list' class="mui-indexed-list">
-				<div class="mui-indexed-list-search mui-input-row mui-search">
-					<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索机场">
-=======
 			<div id="list" class="mui-indexed-list">
 				<div class="mui-indexed-list-search mui-input-row mui-search">
-					<input type="search" id="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索老师">
->>>>>>> remotes/origin/master
+					<input type="search" id="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索班委
+					">
 				</div>
 				<div class="mui-indexed-list-bar">
 				</div>
@@ -111,118 +98,41 @@
 				<div class="mui-indexed-list-inner">
 					<div class="mui-indexed-list-empty-alert">没有数据</div>
 					<div class="htOvfl">
-<<<<<<< HEAD
-						<ul class="mui-table-view "  id="OA_task_1">
-						<!--	<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>杨老师
-							</li>
-							<li  class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>谢老师
-							</li>
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>王老师
-							</li>
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>老师
-							</li>
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>老师
-							</li>
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>老师
-							</li>
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>老师
-							</li>
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>老师
-							</li>
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>老师
-							</li>
-							<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-								<input type="checkbox" />
-								<img src="../../../img/home_btn_activity.png"/>老师
-							</li>-->
-						</ul>
-					</div>
-					
-=======
 						<ul class="mui-table-view " id="OA_task_1">
 						</ul>
 					</div>
 
->>>>>>> remotes/origin/master
 				</div>
 				<!--按钮-->
 				<div class="anniu mui-row">
 					<button type="button" class="mui-btn reset">重置</button>
-<<<<<<< HEAD
-					<button id='done' type="button" class="mui-btn mui-btn-primary mui-disabled">确定</button>
-=======
 					<button id="done" type="button" class="mui-btn mui-btn-primary mui-disabled">确定</button>
->>>>>>> remotes/origin/master
 				</div>
 			</div>
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
-<<<<<<< HEAD
-			mui.init();
-			(function($) {
-				existingTeacher();
-			}(mui))
-			//查询现有老师接口
-			function existingTeacher () {
-				mui.ajax('http://192.168.10.59:8099/phone/user/selectteacherlist.do', {
-					data: {
-						token: window.localStorage.getItem('token'),
-						q:''
-=======
-			var classTeacherId = getQueryString("classTeacherId");
+			var classCadresId = getQueryString("classCadresId");
 			var workId = getQueryString("workId");
-			var subjectName = decodeURI(getQueryString('subjectName'));
+			var postion = decodeURI(getQueryString('postion'));
 
 			mui.init();
 			(function($) {
 				existingTeacher('');
 			}(mui))
-			//查询现有老师接口
+			//查询现有学生接口
 			function existingTeacher(str) {
-				mui.ajax('http://192.168.10.59:8099/phone/user/selectteacherlist.do', {
+				mui.ajax('http://192.168.10.59:8099/phone/user/selectstudentlistbyclassid.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
+						classId:window.localStorage.getItem('classId'),
 						q: str
->>>>>>> remotes/origin/master
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'get', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-<<<<<<< HEAD
-						console.log(data.data)
-						if (data.code == 200) {
-							var html = document.querySelector('#OA_task_1').innerHTML;
-								var con = data.data;
-//								count = data.data.pageCount;
-									for (var i = 0; i < con.length; i++) {
-									html +=
-										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-											<input type="checkbox" id="${con[i].id}" />
-											<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
-										</li>`
-								}
-=======
 						// console.log(data.data)
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
@@ -246,19 +156,10 @@
 								}
 
 							}
->>>>>>> remotes/origin/master
 							document.querySelector('#OA_task_1').innerHTML = html
 						}
 					},
 					error: function(xhr, type, errorThrown) {
-<<<<<<< HEAD
-						
-					}
-				});
-			}
-			
-			
-=======
 
 					}
 				});
@@ -278,34 +179,10 @@
 				}
 			}
 
->>>>>>> remotes/origin/master
 			mui.ready(function() {
 				var header = document.querySelector('header.mui-bar');
 				var list = document.getElementById('list');
 				var done = document.getElementById('done');
-<<<<<<< HEAD
-				//calc hieght
-				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
-				//create
-//				window.indexedList = new mui.IndexedList(list);
-				//点击完成
-				done.addEventListener('tap', function() {
-					var checkboxArray = [].slice.call(list.querySelectorAll('input[type="checkbox"]'));
-					console.log(checkboxArray)
-					var checkedValues = [];
-					checkboxArray.forEach(function(box) {
-						if (box.checked) {
-							checkedValues.push(box.parentNode.innerText);
-						}
-					});
-					if (checkedValues.length > 0) {
-						console.log(checkedValues)
-						//打开选择科目
-						  mui.openWindow({
-						    id:'teacherAdd',
-						    url:'subjectsAdd.html'
-						  });
-=======
 				var search = document.getElementById('search');
 				//calc hieght
 				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
@@ -321,24 +198,23 @@
 						}
 					});
 					if (checkedValues.length > 0) {
-						if (classTeacherId && !classTeacherId != undefined && classTeacherId != '' && classTeacherId != null) {
+						if (classCadresId && !classCadresId != undefined && classCadresId != '' && classCadresId != null) {
 							console.log("update")
-							//打开选择科目
+							//打开职位
 							mui.openWindow({
-								id: 'subjectUpdate',
-								url: 'subjectsAdd.html?workId=' + checkedValues[0] + '&classTeacherId=' + classTeacherId+'&subjectName='+subjectName
+								id: 'postionUpdate',
+								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId+'&postion='+postion
 							});
 						} else {
 							console.log("add")
 							mui.openWindow({
-								id: 'subjectAdd',
-								url: 'subjectsAdd.html?workId=' + checkedValues[0] + '&classTeacherId=' + classTeacherId
+								id: 'postionAdd',
+								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId
 							});
 						}
 
->>>>>>> remotes/origin/master
 					} else {
-						mui.alert('你没有选择任何老师');
+						mui.alert('你没有选择班委');
 					}
 				}, false);
 				//统计完成数量
@@ -356,12 +232,6 @@
 						}
 					}
 				});
-<<<<<<< HEAD
-			});
-		</script>
-	</body>
-</html>
-=======
 
 				search.addEventListener('keypress', function(event) {
 					var str = document.getElementById("search").value;
@@ -375,4 +245,3 @@
 		</script>
 	</body>
 </html>
->>>>>>> remotes/origin/master

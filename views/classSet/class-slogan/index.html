@@ -147,6 +147,7 @@
 	    var sloganCont = document.getElementById('sloganCont');
 	    var clasID = document.getElementById('clasID');
 	    var token = document.getElementById('token');
+<<<<<<< HEAD
 	    function GetRequest() {
 	        var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
 	        var theRequest = new Object();
@@ -165,6 +166,13 @@
 	    }
 	    GetRequest();
       		
+=======
+		
+      	teacher.innerText='班主任：'+window.localStorage.getItem('teacherT')
+      	members.innerText='班级成员：'+window.localStorage.getItem('membersT')+'人';
+      	className.innerText=window.localStorage.getItem('classNameT');
+      	sloganCont.innerText =window.localStorage.getItem('classSlogan');	
+>>>>>>> remotes/origin/master
       	
 	  	//编辑
 	  	document.getElementById('add-slogsan').addEventListener('tap',function(){/*tap表示单击屏幕，此处可换双击，滑动等等事件*/
