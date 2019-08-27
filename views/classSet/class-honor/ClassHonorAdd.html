@@ -89,8 +89,8 @@
 			<div class="classHonuours">
 				<!--图标-->
 				<div class="classHonuours-icon">
-					<a class="classHonuours-icon-top" href="javascript:void(0)"  class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" >
-						<input type="file" id="file"/>
+					<a class="classHonuours-icon-top" href="javascript:void(0)" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+						<input type="file" id="file" />
 						<img id="classHonorIcon" src="../../../img/honner_new_img_honner.png" alt="" />
 						<p>请选择图标</p>
 					</a>
@@ -136,30 +136,32 @@
 			var classHonorIcon = document.getElementById('classHonorIcon');
 			var classHonorRemark = document.getElementById('classHonorRemark');
 			var classHonorName = document.getElementById('classHonorName');
-			var classHonorId = window.localStorage.getItem('classHonorId');
+			
+			var classHonorId = getQueryString("classHonorId");
 			
 			//初始化数据	
-			if(notBlank(classHonorId)){
-				classHonorIcon.setAttribute('src', 'http://192.168.10.59:8099' + window.localStorage.getItem('classHonorIcon'))
-				classHonorRemark.innerText = window.localStorage.getItem('classHonorRemark');
+			console.log(classHonorId);
+			if (notBlank(classHonorId)) {
+				classHonorIcon.setAttribute('src', 'http://192.168.10.59:	8099' + window.localStorage.getItem('classHonorIcon'))
+				classHonorRemark.value = window.localStorage.getItem('classHonorRemark');
 				classHonorName.value = window.localStorage.getItem('classHonorName');
-			}else{
+			} else {
 				classHonorIcon.setAttribute('src', " ");
 				classHonorRemark.innerText = "";
-				classHonorName.value ="";
+				classHonorName.value = "";
 			}
-				
-	
+
+
 
 			//初始化	
 			mui.init({});
 			mui.ready(function() {
-				
-				mui(".mui-content").on("change","#file",function(){
-					var formData =  new FormData();
-					var file =document.getElementById("file");
+
+				mui(".mui-content").on("change", "#file", function() {
+					var formData = new FormData();
+					var file = document.getElementById("file");
 					var files = this.files;
-					formData.append("file",files[0]);
+					formData.append("file", files[0]);
 					mui.ajax('http://192.168.10.59:8099/uploadimg.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
@@ -169,38 +171,37 @@
 						cache: false,
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							console.log(data);
+							// console.log(data);
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
-								document.getElementById("classHonorIcon").setAttribute("src","http://192.168.10.59:8099"+data.data)
+								document.getElementById("classHonorIcon").setAttribute("src", "http://192.168.10.59:8099" + data.data)
 							} else {
 								mui.alert(data.msg)
 							}
-									
+
 						},
 						error: function(xhr, type, errorThrown) {
-									
+
 						}
 					});
 				})
-					
-				mui(".mui-content").on("tap",".add-classHonours",function(){
+
+				mui(".mui-content").on("tap", ".add-classHonours", function() {
 					operateClassHonor();
 				})
 			})
-			
+
 			//添加、编辑班级荣誉	
 			function operateClassHonor() {
 				if (notBlank(classHonorId)) {
-					console.log("update")
 					mui.ajax('http://192.168.10.59:8099/phone/classhonor/update.do', {
 						data: {
 							classHonorId: classHonorId,
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),
-							classHonorRemark: classHonorRemark.innerHTML,
+							classHonorRemark: classHonorRemark.value,
 							classHonorName: classHonorName.value,
-							classHonorIcon:document.getElementById("imgUrl").value
+							classHonorIcon: document.getElementById("imgUrl").value
 						},
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -215,21 +216,21 @@
 							} else {
 								mui.alert(data.msg)
 							}
-				
+
 						},
 						error: function(xhr, type, errorThrown) {
-				
+
 						}
 					});
 				} else {
-						
+
 					mui.ajax('http://192.168.10.59:8099/phone/classhonor/insert.do', {
 						data: {
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),
-							classHonorRemark: classHonorRemark.innerHTML,
+							classHonorRemark: classHonorRemark.value,
 							classHonorName: classHonorName.value,
-							classHonorIcon:document.getElementById("imgUrl").value
+							classHonorIcon: document.getElementById("imgUrl").value
 						},
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -246,9 +247,23 @@
 							}
 						},
 						error: function(xhr, type, errorThrown) {
-				
+							console.log(xhr);
 						}
 					});
+				}
+			}
+
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				var q = window.location.pathname.substr(1).match(reg_rewrite);
+				if (r != null) {
+					return r[2];
+				} else if (q != null) {
+					return q[2];
+				} else {
+					return null;
 				}
 			}
 

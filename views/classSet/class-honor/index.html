@@ -191,14 +191,14 @@
 				mui(".mui-content").on('tap', '.icon-edit', function() {
 					var id = this.getAttribute("id");
 					var ids = id.split("&");
-					window.localStorage.setItem('classHonorId', ids[0])
+					// window.localStorage.setItem('classHonorId', ids[0])
 					window.localStorage.setItem('classHonorName', ids[1])
 					window.localStorage.setItem('classHonorIcon', ids[2])
 					window.localStorage.setItem('classHonorRemark', ids[3])
 					//修改/添加班级荣誉
 					mui.openWindow({
 						id: 'classHonor',
-						url: 'ClassHonorAdd.html'
+						url: 'ClassHonorAdd.html?classHonorId='+ids[0]
 					});
 				});
 
