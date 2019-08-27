@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>登陆</title>
+		<title>登录</title>
 		<script src="../js/mui.js"></script>
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
@@ -79,7 +79,6 @@
 		var login = function() {
 			var loginName = document.querySelector('.login-name').value;
 			var loginPwd = document.querySelector('.login-pwd').value;
-			console.log(123)
 			mui.ajax('http://192.168.38.175:8080/phone/login.do', {
 				data: {
 					loginName: loginName,

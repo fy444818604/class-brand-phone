@@ -39,17 +39,78 @@
 					<textarea id="textarea" rows="5" placeholder="请输入公告内容详情"></textarea>
 				</div>
 			</div>
-			<button type="button" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
+			<button type="button" class="mui-btn mui-btn-primary mui-btn-block push">发布</button>
 		</div>
 	</body>
 	<script src="../../js/mui.js"></script>
 	<script>
+		var check ="";
+		var rolling = 1;
+		var systemAnnouncementId = 0;
 		mui.init();
-		mui.ready(function() {
-			mui("#mySwitch").switch().toggle();
-			document.querySelector('.mui-switch').addEventListener('toggle', function(event) {
-				console.log(event.detail.isActive)
+		var getData = function() {
+			mui.ajax('http://192.168.38.175:8080/phone/selectpublicannouncement.do', {
+				data: {
+					token: window.localStorage.getItem('token')
+				},
+				dataType:'json',//服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if(data.code == 200){
+						var obj = data.data;
+						document.querySelector('#textarea').innerHTML = obj.systemAnnouncementContent;
+						id = obj.systemAnnouncementId;
+						if(obj.rolling==2){
+							mui("#mySwitch").switch().toggle();
+						}
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+				}
 			});
+		}
+		
+		var submitData = function() {
+			mui.ajax('http://192.168.38.175:8080/phone/updatepublicannouncement.do', {
+				data: {
+					token: window.localStorage.getItem('token'),
+					systemAnnouncementId:systemAnnouncementId,
+					systemAnnouncementContent:document.querySelector('#textarea').innerHTML,
+					rolling:rolling,
+					check:check
+				},
+				dataType:'json',//服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if(data.code == 200){
+						mui.alert("发布成功")
+					}else{
+						mui.alert(data.msg)
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+				}
+			});
+		}
+		
+		mui.ready(function() {
+			check = window.location.href.split('check=')[1].replace('#','');
+			getData();
+			// mui("#mySwitch").switch().toggle();
+			document.querySelector('.mui-switch').addEventListener('toggle', function(event) {
+				if(event.detail.isActive){
+					rolling = 1
+				}else{
+					rolling = 2
+				}
+			});
+			
+			document.querySelector('.push').addEventListener('tap',function(){
+				submitData();
+			})
 		});
+		
 	</script>
 </html>

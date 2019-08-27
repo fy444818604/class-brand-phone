@@ -109,7 +109,7 @@
                     </a>
                  </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="#" class="news">  
                           <img class="img" src="img/home_btn_news.png"/>
                          <div class="mui-media-body">新闻</div>
                     </a>
@@ -127,31 +127,31 @@
                     </a>
                 </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="#" class="activity">  
                         <img class="img" src="img/home_btn_activity.png"/>
                          <div class="mui-media-body">活动</div>
                     </a>
                 </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="#" class="praise">  
                          <img class="img" src="img/home_btn_praise.png"/>
                          <div class="mui-media-body">表彰</div>
                     </a>
                 </li> 
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="#" class="criticism">  
                           <img class="img" src="img/home_btn_criticism.png"/>
                          <div class="mui-media-body">通报</div>
                     </a>
                 </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="#" class="bulletin">  
                          <img class="img" src="img/home_btn_announcement.png"/>
                          <div class="mui-media-body">公告</div>
                     </a>
                 </li>  
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <a href="#">  
+                    <a href="#" class="">  
                          <img class="img" src="img/home_btn_school.png"/>
                          <div class="mui-media-body">校宣</div>
                     </a>
@@ -195,6 +195,12 @@
 		    id:'index',
 		    url:'views/notice/index.html'
 		  });
+		})	  	
+		mui("#notice").on('tap','.news',function(){
+		  mui.openWindow({
+		    id:'index',
+		    url:'views/news/index.html'
+		  });
 		})
 		mui("#notice").on('tap','.picture',function(){
 		  mui.openWindow({
@@ -208,6 +214,56 @@
 		    url:'views/video/index.html'
 		  });
 		})
+		mui("#notice").on('tap','.activity',function(){
+		  mui.openWindow({
+		    id:'index',
+		    url:'views/activity/index.html'
+		  });
+		})
+		mui("#notice").on('tap','.praise',function(){
+		  mui.openWindow({
+		    id:'index',
+		    url:'views/praise/index.html'
+		  });
+		})
+		mui("#notice").on('tap','.criticism',function(){
+		  mui.openWindow({
+		    id:'index',
+		    url:'views/criticism/index.html'
+		  });
+		})
+		mui("#notice").on('tap','.bulletin',function(e){
+			e.detail.gesture.preventDefault();
+			mui.prompt('','请输入授权密码','授权密码',['取消','确认'],function(e) {
+					if (e.index == 1) {
+						checkPassword(e.value);
+					} 
+				});
+		})
+		var checkPassword = function(password) {
+			mui.ajax('http://192.168.38.175:8080/phone/checkpushpassword.do', {
+				data: {
+					token: window.localStorage.getItem('token'),
+					password: password
+				},
+				dataType:'json',//服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if(data.code == 200){
+						mui.openWindow({
+						  id:'index',
+						  url:'views/bulletin/index.html?check='+password
+						});
+					}else{
+						mui.alert(data.msg)
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					// console.log(xhr)
+				}
+			});
+		}
     </script>
 </body>
 </html>
