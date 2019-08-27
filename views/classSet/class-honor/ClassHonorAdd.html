@@ -137,38 +137,42 @@
 			var classHonorRemark = document.getElementById('classHonorRemark');
 			var classHonorName = document.getElementById('classHonorName');
 			var classHonorId = window.localStorage.getItem('classHonorId');
-			classHonorIcon.setAttribute('src', 'http://192.168.10.59:8099' + window.localStorage.getItem('classHonorIcon'))
-			classHonorRemark.innerText = window.localStorage.getItem('classHonorRemark');
-			classHonorName.value = window.localStorage.getItem('classHonorName');
+			
+			//初始化数据	
+			if(notBlank(classHonorId)){
+				classHonorIcon.setAttribute('src', 'http://192.168.10.59:8099' + window.localStorage.getItem('classHonorIcon'))
+				classHonorRemark.innerText = window.localStorage.getItem('classHonorRemark');
+				classHonorName.value = window.localStorage.getItem('classHonorName');
+			}else{
+				classHonorIcon.setAttribute('src', " ");
+				classHonorRemark.innerText = "";
+				classHonorName.value ="";
+			}
+				
+	
 
 			//初始化	
 			mui.init({});
 			mui.ready(function() {
+				
 				mui(".mui-content").on("change","#file",function(){
-					var formData = new new FormData(form);
-					formData.append()
-					
-					mui.ajax('http://192.168.10.59:8099/phone/classhonor/update.do', {
-						data: {
-							classCadresId: classCadresId,
-							classId: window.localStorage.getItem('classId'),
-							token: window.localStorage.getItem('token'),
-							classHonorRemark: classHonorRemark.innerHTML,
-							classHonorName: classHonorName.innerHTML,
-							classHonorIcon:document.getElementById("imgUrl").value
-						},
+					var formData =  new FormData();
+					var file =document.getElementById("file");
+					var files = this.files;
+					formData.append("file",files[0]);
+					mui.ajax('http://192.168.10.59:8099/uploadimg.do', {
+						data: formData,
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
 						processData: false,
 						contentType: false,
+						cache: false,
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
 							console.log(data);
 							if (data.code == 200) {
-								mui.openWindow({
-									id: 'index',
-									url: '../class-honor/index.html'
-								});
+								document.getElementById("imgUrl").value = data.data;
+								document.getElementById("classHonorIcon").setAttribute("src","http://192.168.10.59:8099"+data.data)
 							} else {
 								mui.alert(data.msg)
 							}
@@ -179,19 +183,23 @@
 						}
 					});
 				})
+					
+				mui(".mui-content").on("tap",".add-classHonours",function(){
+					operateClassHonor();
+				})
 			})
 			
 			//添加、编辑班级荣誉	
 			function operateClassHonor() {
-				if (notBlank(classCadresId)) {
+				if (notBlank(classHonorId)) {
 					console.log("update")
 					mui.ajax('http://192.168.10.59:8099/phone/classhonor/update.do', {
 						data: {
-							classCadresId: classCadresId,
+							classHonorId: classHonorId,
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),
 							classHonorRemark: classHonorRemark.innerHTML,
-							classHonorName: classHonorName.innerHTML,
+							classHonorName: classHonorName.value,
 							classHonorIcon:document.getElementById("imgUrl").value
 						},
 						dataType: 'json', //服务器返回json格式数据
@@ -214,12 +222,13 @@
 						}
 					});
 				} else {
+						
 					mui.ajax('http://192.168.10.59:8099/phone/classhonor/insert.do', {
 						data: {
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),
 							classHonorRemark: classHonorRemark.innerHTML,
-							classHonorName: classHonorName.innerHTML,
+							classHonorName: classHonorName.value,
 							classHonorIcon:document.getElementById("imgUrl").value
 						},
 						dataType: 'json', //服务器返回json格式数据

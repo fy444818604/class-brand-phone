@@ -191,7 +191,6 @@
 				mui(".mui-content").on('tap', '.icon-edit', function() {
 					var id = this.getAttribute("id");
 					var ids = id.split("&");
-					console.log(encodeURI(ids[2]));
 					window.localStorage.setItem('classHonorId', ids[0])
 					window.localStorage.setItem('classHonorName', ids[1])
 					window.localStorage.setItem('classHonorIcon', ids[2])
