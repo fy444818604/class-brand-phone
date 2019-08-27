@@ -74,7 +74,26 @@
 			line-height: 3.07rem;
 			text-align: center;
 		}
-	
+		.bg-img-upload-wrap{
+			position: relative;
+			padding-bottom: 56%;
+			background-color: #edf1f6;
+			display: block;
+		}
+		.bg-img-upload-wrap input{
+			opacity: 0;
+		}
+		.icon-add{
+			font-size: 2.4rem;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 36px;
+			height: 36px;
+			margin-top: -18px;
+			margin-left: -18px;
+			color: #909399;
+		}
     </style>
 </head>
 <body>
@@ -105,6 +124,10 @@
 		<ul class="mui-table-view theInput">
 		    <li class="mui-table-view-cell flex">
 		    	<div class="theClass-left">图片</div>
+				<label for="bg-img-upload" class="bg-img-upload-wrap">
+					<i class="iconfont icon-add"></i>
+					<input type="file" id="bg-img-upload">
+				</label>
 		    	<ul>
 		    		
 		    		
@@ -139,21 +162,53 @@
 	    </ul>
 	</div>
 	<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
-      	var data;
-      	//弹框取值赋值
-      	mui('#picture').on('tap', '.top>li>a', function() {
-      		$('.theClass-rnt a').text(this.innerHTML).css('color','#3b8bff');
-      		$('#picture>ul>li>a').css('color','#303133')
-      		$(this).css('color','#3b8bff');
-      		mui("#picture").popover('toggle');
-		})
-      	//选择对象
-		$('.objetAdd').on('tap',function (){
-			/*window.location.href="../../commonObject.html" */
-			console.log(data)
+		var level = 2;
+		var boardIds = "e3e36ac0ef5f446cb2a97e2f15631822";
+		var insert = function() {
+			var _this = this;
+			var content = $('#content').val();
+			mui.ajax('http://192.168.38.175:8080/phone/insertimage.do', {
+				data: {
+					token: window.localStorage.getItem('token'),
+					boardIds: boardIds,
+					title: content,
+					level: level
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if(data.code==200){
+						mui.openWindow({
+							id: 'index',
+							url: './index.html'
+						});
+					}else{
+						mui.alert(data.msg)
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+	
+				}
+			});
+		}
+		mui.ready(function() {
+			//弹框取值赋值
+			mui('#picture').on('tap', '.top>li>a', function() {
+				$('#level').text(this.dataset.type == 1?"校":"班").css('color','#3b8bff'),
+				level = this.dataset.type;
+				$('#picture>ul>li>a').css('color','#303133')
+				$(this).css('color','#3b8bff');
+				mui("#picture").popover('toggle');
+			})
+			
+			document.querySelector('.add').addEventListener('tap',function(){
+				insert();
+			})
 		})
     </script>
 </body>

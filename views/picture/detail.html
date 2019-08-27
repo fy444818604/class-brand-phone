@@ -79,6 +79,11 @@
 			width: 70%;
 			color: #3B8BFF;
 		}
+		.picture{
+			height: 61pt;
+			width: 108pt;
+			float: left;
+		}
     </style>
 </head>
 <body>
@@ -118,9 +123,6 @@
 		    	</div>
 		    </li>
 		</ul>
-		<div class="add">
-			发布
-		</div>
 	</div>
 	<script src="../../js/mui.js"></script>
 	<script type="text/javascript" charset="utf-8">
@@ -160,7 +162,7 @@
 					for (var i = 0; i < value.length; i++) {
 						html +=
 							`<li>
-								<img src="${value[i]}"></img>
+								<img class="picture" src="http://192.168.38.98:8080/${value[i]}"></img>
 							</li>`
 					}
 					document.querySelector('#images').innerHTML = html
