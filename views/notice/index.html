@@ -1,290 +1,290 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>通知</title>
-    <script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/public.css"/>
-   
-    <style type="text/css">
-    	.nav{
-    		height: 3.63rem;
-    		border-bottom: 0.07rem solid #e4e4e4;
-    		background: #FFFFFF;
-    		width: 100%;
-    	}
-    	.nav>li{
-    		width: 50%;
-    	}
-    	.nav-div{
-    		width: ;
-    		padding: 1.02rem 0;
-    		width: 3rem;
-    		border-bottom: 0.14rem solid #3b8bff;
-    		margin: 0 auto;
-    		text-align: center;
-    	}
-    	.nav-bodex{
-    		border: none;
-    	}
-    	.color{
-    		color: #3d8cff;
-    	}
-    	.mui-slider-handle>div{
-    		width: 50%;
-    	}
-    	.mui-table-view{
-    		height: calc(100vh - 9.6rem);
-    		overflow: auto;
-    	}
-    	.mui-table-view-cell:after {
-		    background: none;
-		}
-		.mui-table-view-cell {
-		    padding: 15px 15px;
-		    border-bottom: 0.07rem solid #E4E4E4;
-		}
-		.mui-table-view:before {
-		    background-color: none;
-		}
-		.mui-table-view:after {
-    		background: none;
-		}
-		/*发送通知*/
-		.add{
-			height: 3.07rem;
-			background: #3B8BFF;
-			color: #FFFFFF;
-			font-size: 1.07rem;
-			line-height: 3.07rem;
-			text-align: center;
-		}
-    </style>
-</head>
-<body>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title"></h1>
-	</header>
-	<div class="mui-content" id="noticeT"> 
-		<ul class="flex nav mui-bar-nav">
-			<li class="color">
-				<div class="nav-div">
-					班级
+
+	<head>
+		<meta charset="utf-8">
+		<title>通知</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
+		<link href="../../css/public.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+
+			.mui-control-content {
+				height: calc(100vh - 131px);
+			}
+
+			.mui-content {
+				height: 100vh;
+			}
+
+			.mui-btn-block {
+				margin-bottom: 0;
+			}
+
+			.activity-list .mui-table-view-cell {
+				height: 4rem;
+				line-height: 4rem;
+				padding: 0 1rem;
+			}
+
+			.mui-table-view-cell:after {
+				left: 0;
+			}
+
+			.active-item {
+				display: flex;
+			}
+
+			.active-item>div:last-child {
+				text-align: right;
+				width: 55px;
+			}
+
+			.active-item>div:first-child {
+				margin-right: 5px;
+				color: #ed932a;
+			}
+
+			.active-item>div:nth-child(2) {
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				width: calc(100vw - 130px);
+			}
+
+			.end {
+				color: #c0c4cc !important;
+			}
+			/*新增样式*/
+			.addsTybe-left{
+				width: 80%;
+			}
+			.addsTybe-rnt{
+				width: 20%;
+				text-align: right;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">通知</h1>
+		</header>
+		<div class="mui-content">
+			<div>
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+					<a class="mui-control-item mui-active" href="#item1">
+						<span>班级</span>
+					</a>
+					<a class="mui-control-item" href="#item2">
+						<span>校级</span>
+					</a>
 				</div>
-			</li>
-			<li>
-				<div class="nav-div nav-bodex">
-					校级
-				</div>
-			</li>
-		</ul>
-		<!--列表-->
-		<ul id="OA_task_1" class="mui-table-view" style=" border: none;">
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
+			</div>
+			<div class="activity-list">
+				<div id="item1" class="mui-control-content mui-active">
+					<!--下拉刷新容器-->
+					<div id="refreshContainer" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<!--数据列表-->
+							<ul class="mui-table-view mui-table-view-chevron" id="OA_task_2">
+
+							</ul>
+						</div>
 					</div>
 				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
+				<div id="item2" class="mui-control-content">
+					<!--下拉刷新容器-->
+					<div id="refreshContainer1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<!--数据列表-->
+							<ul class="mui-table-view mui-table-view-chevron" id="OA_task_1">
+
+							</ul>
+						</div>
 					</div>
 				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-				<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-				<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-				<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle flex">
-					<div>
-						1
-					</div>
-					<div style="text-align: right;color: #909399;">
-						2
-					</div>
-				</div>
-			</li>
-		</ul>
-		<div class="add">
-			发通知
+			</div>
+			<a id="add" class="mui-btn mui-btn-primary mui-btn-block">发通知</a>
 		</div>
-	</div>
-	 <script type="text/javascript" charset="utf-8">
-      	mui.init();
-      	//导航切换效果
-      	$('.nav').on('click', 'li', function(e){
-	       	$('.nav li').removeClass('color');
-	       	$('.nav li').find('div').css('border-bottom','none')
-	        $(this).addClass('color');
-	        $(this).find('div').css('border-bottom','0.14rem solid #3b8bff')
-    	});
-		//发送通知
-		$('.add').on('tap',function  () {
-			window.location.href="add.html" 
-		})
-  
-    </script>
-</body>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script type="text/javascript">
+			(function($) {
+				var curr = 1;
+				var count = 1;
+				var curr1 = 1;
+				var count1 = 1;
+				$('#scroll').scroll({
+					indicators: true //是否显示滚动条
+				});
+				// 班级通知查询
+				var listSearch = function() {
+					var _this = this;
+					if (curr <= count) {
+						mui.ajax('http://192.168.38.175:8080/phone/selectnotice.do', {
+							data: {
+								token: window.localStorage.getItem('token'),
+								currPage: curr,
+								pageSize: 10,
+								level: 2
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							success: function(data) {
+								_this.endPullupToRefresh(false);
+								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
+								var con = data.data;
+								count = parseInt(data.data.length/10)+1;
+								var html = document.querySelector('#OA_task_2').innerHTML;
+								// console.log(con)
+								for (var i = 0; i < con.length; i++) {
+									html +=
+										`<li class="mui-table-view-cell" data-id="${con[i].id}">
+											<div class="mui-slider-right mui-disabled">
+												<a id="${con[i].id}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+											</div>
+											<div class="mui-slider-handle">
+												<div class="mui-table-cell flex">
+													<div class="addsTybe-left">${con[i].text}</div>
+													<div class="addsTybe-rnt">${con[i].date}</div>
+												</div>
+											</div>
+										</li>`
+								}
+								document.querySelector('#OA_task_2').innerHTML = html
+								curr++;
+							},
+							error: function(xhr, type, errorThrown) {
+
+							}
+						});
+					} else {
+						_this.endPullupToRefresh(true);
+					}
+				}
+				//校级通知查询
+				var listSearch1 = function() {
+					var _this = this;
+					if (curr1 <= count1) {
+						mui.ajax('http://192.168.38.175:8080/phone/selectnotice.do', {
+							data: {
+								token: window.localStorage.getItem('token'),
+								currPage: curr1,
+								pageSize: 10,
+								level: 1
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							success: function(data) {
+								_this.endPullupToRefresh(false);
+								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
+								var con = data.data;
+								count1 = parseInt(data.data.length/10)+1;
+								var html = document.querySelector('#OA_task_1').innerHTML;
+								for (var i = 0; i < con.length; i++) {
+									html +=
+										`<li class="mui-table-view-cell" data-id="${con[i].id}">
+											<div class="mui-slider-right mui-disabled">
+												<a id="${con[i].id}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+											</div>
+											<div class="mui-slider-handle">
+												<div class="mui-table-cell flex">
+													<div class="addsTybe-left">${con[i].text}</div>
+													<div class="addsTybe-rnt">${con[i].date}</div>
+												</div>
+											</div>
+										</li>`
+								}
+								document.querySelector('#OA_task_1').innerHTML = html
+								curr1++;
+							},
+							error: function(xhr, type, errorThrown) {
+
+							}
+						});
+					} else {
+						_this.endPullupToRefresh(true);
+					}
+				}
+
+
+				//删除活动
+				var activityDel = function(id) {
+					mui.ajax('http://192.168.38.175:8080/phone/deletenotice.do', {
+						data: {
+							token: window.localStorage.getItem('token'),
+							id: id
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							if (data.code == 200) {
+								// curr = 1
+								// curr1 = 1
+								// listSearch()
+								// listSearch1()
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+
+						}
+					});
+				}
+				mui.init();
+				mui.ready(function() {
+					mui("#refreshContainer").pullRefresh({
+						up: {
+							height: 50, //可选.默认50.触发上拉加载拖动距离
+							auto: true, //可选,默认false.自动上拉加载一次
+							contentrefresh: '正在加载...',
+							contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+							callback: listSearch
+						},
+					})
+					mui("#refreshContainer1").pullRefresh({
+						up: {
+							height: 50, //可选.默认50.触发上拉加载拖动距离
+							auto: true, //可选,默认false.自动上拉加载一次
+							contentrefresh: '正在加载...',
+							contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+							callback: listSearch1
+						},
+					})
+					mui(".mui-table-view").on('tap', '.icon-del', function() {
+						var id = this.getAttribute("id");
+						var btnArray = ['否', '是'];
+						mui.confirm('确认要删除？', null, btnArray, function(e) {
+							if (e.index == 1) {
+								activityDel(id)
+							}
+						})
+					})
+					mui(".mui-content").on('tap', '.mui-table-view-cell', function(event) {
+						var id = this.dataset.id
+						mui.openWindow({
+							id: 'index',
+							url: './detail.html?id='+id
+						});
+					})
+					document.querySelector('#add').addEventListener('tap',function(){
+						mui.openWindow({
+							id: 'index',
+							url: './add.html'
+						});
+					})
+				})
+			})(mui);
+		</script>
+	</body>
 </html>
