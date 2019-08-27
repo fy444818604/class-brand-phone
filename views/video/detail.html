@@ -107,10 +107,10 @@
 		<ul class="mui-table-view theInput">
 		    <li class="mui-table-view-cell flex">
 		    	<div class="theClass-left">视频</div>
-		    	<ul id="images">
+		    	<div id="video">
 		    		
 		    		
-		    	</ul>
+		    	</div>
 		    </li>
 		    <li class="mui-table-view-cell" style="background: #FFFFFF;">
 		    	<div class="theClass-left">说明</div>
@@ -153,14 +153,7 @@
 				success: function(data) {
 					console.log(data);
 					var value = data.data;
-					var html = "";
-					for (var i = 0; i < value.length; i++) {
-						html +=
-							`<li>
-								<img src="${value[i]}"></img>
-							</li>`
-					}
-					document.querySelector('#images').innerHTML = html
+					document.querySelector('#video').innerHTML = `<video style="width:160pt;height:120pt" src="http://192.168.38.98:8080/${value}" autoplay="autoplay" controls="controls"></video>`
 				},
 				error: function(xhr, type, errorThrown) {
 					
