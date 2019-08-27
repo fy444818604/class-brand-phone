@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>发视频</title>
-	<link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/public.css"/>
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
+	<link href="../../css/public.css" rel="stylesheet" />
     <style type="text/css">
     	.mui-bar-nav~.mui-content {
 		    padding-top: 57px;
@@ -65,7 +66,7 @@
 	    	font-size: 1rem;
 	  		padding: 10px 0px;
 	    }
-	    /*发送通知*/
+	    /*发送视频*/
 		.add{
 			height: 3.07rem;
 			background: #3B8BFF;
@@ -74,32 +75,89 @@
 			line-height: 3.07rem;
 			text-align: center;
 		}
-		.bg-img-upload-wrap{
+		/*视频*/
+		.shiPing{
 			position: relative;
-			padding-bottom: 56%;
-			background-color: #edf1f6;
-			display: block;
+			height: 12.933rem;
+			width: 100%;
+			margin-top: 0.8rem;
 		}
-		.bg-img-upload-wrap input{
-			opacity: 0;
-		}
-		.icon-add{
-			font-size: 2.4rem;
+		.shiPing-cont{
 			position: absolute;
-			left: 50%;
-			top: 50%;
-			width: 36px;
-			height: 36px;
-			margin-top: -18px;
-			margin-left: -18px;
-			color: #909399;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+			display: none;
 		}
+		/*上传视频*/
+		/*a  upload */
+		.a-upload {
+		    padding: 4px 10px;
+		    height: 100%;
+		    width: 100%;
+		    position: relative;
+		    cursor: pointer;
+		    color: #888;
+		   	background: url(../../img/beijingUP.png)no-repeat;
+		   	background-size: 100% 100%;
+		    border: 1px solid #ddd;
+		    border-radius: 4px;
+		    overflow: hidden;
+		    display: inline-block;
+		    *display: inline;
+		    *zoom: 1
+		}
+		
+		.a-upload  input {
+		    position: absolute;
+		    font-size: 100px;
+		    right: 0;
+		    top: 0;
+		    opacity: 0;
+		    filter: alpha(opacity=0.5);
+		    cursor: pointer;
+		}
+		.icon-close{
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			color: #FFFFFF;
+			font-size: 22px;
+			background-image: linear-gradient(
+				#000000, 
+				#000000), 
+			linear-gradient(
+				#394246, 
+				#394246);
+			background-blend-mode: normal, 
+				normal;
+			border-radius: 50%;
+			opacity: 0.1;
+		}
+		.bofang{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-left: -4rem;
+			margin-top: -4rem;
+			width: 8rem;
+			height: 8rem;
+			line-height: 8rem;
+			text-align: center;
+		}
+		.bofang>i{
+			font-size: 5rem;
+			color: #FFFFFF;
+			font-weight: 100;
+		}
+
     </style>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">发视频</h1>
+		<h1 class="mui-title">发布视频</h1>
 	</header>
 	<div class="mui-content add-notice"> 
 		<!--班级/对象-->
@@ -108,7 +166,7 @@
 		    	<div class="theClass-left">
 		    		级别
 		    	</div>
-				<div class="theClass-rnt"><a href="#picture">请选择级别</a></div>
+				<div class="theClass-rnt"><a href="#picture" id="level">请选择级别</a></div>
 		    	<div><a class="mui-navigate-right"></a></div>
 		        
 		    </li>
@@ -122,21 +180,27 @@
 		</ul>
 		<!--标题/正文-->
 		<ul class="mui-table-view theInput">
-		    <li class="mui-table-view-cell flex">
-		    	<div class="theClass-left">视频</div>
-				<label for="bg-img-upload" class="bg-img-upload-wrap">
-					<i class="iconfont icon-add"></i>
-					<input type="file" id="bg-img-upload">
-				</label>
-		    	<ul>
-		    		
-		    		
-		    	</ul>
-		    </li>
+			<li class="mui-table-view-cell flex">
+				<div class="theClass-left">视频</div>
+				<div class="shiPing">
+					<!--上传按钮-->
+					<a href="javascript:;" class="a-upload" id="a-upload">
+						<input class="form-control" type="file" value="上传" style="height:100%; "id="video" name="video"/>
+					</a>
+					<!--展示视频-->
+					<div class="shiPing-cont">
+						<video style="width: 100%; height: 100%;" src="../../img/7004e5f1e64f882b26149f87ea610d8d.mp4" id="video0" ></video>
+						<i id="icon-close" class="iconfont icon-close"></i>
+						<div class="bofang">
+							<i id="iconvideo_" class="iconfont iconvideo_"></i>
+						</div>
+					</div>	
+				</div>
+			</li>
 		    <li class="mui-table-view-cell" style="background: #FFFFFF;">
-		    	<div class="theClass-left">说明</div>
+		    	<div class="theClass-left">正文</div>
 		    	<div>
-		    		<textarea rows="10" cols="10" contenteditable="true" placeholder="请输入视频说明内容"></textarea
+		    		<textarea id="content" rows="10" cols="30" contenteditable="true" placeholder="请输入正文内容"></textarea>
 		    	</div>
 		    </li>
 		</ul>
@@ -149,10 +213,10 @@
 	<div id="picture" class="mui-popover mui-popover-action ">
 	    <ul class="mui-table-view top"> 
 	        <li class="mui-table-view-cell">
-	            <a href="#">班级发布</a>
+	            <a href="#" data-type="2">班级发布</a>
 	        </li>
 	        <li class="mui-table-view-cell">
-	            <a href="#">校级发布</a>
+	            <a href="#" data-type="1">校级发布</a>
 	        </li>
 	    </ul>
 	     <ul class="mui-table-view">
@@ -161,25 +225,26 @@
 	        </li>
 	    </ul>
 	</div>
-	<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/mui.js"></script>
     <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
 		var level = 2;
 		var boardIds = "e3e36ac0ef5f446cb2a97e2f15631822";
+		var formData = new FormData();
 		var insert = function() {
 			var _this = this;
-			var content = $('#content').val();
+			formData.append("token",window.localStorage.getItem('token'));
+			formData.append("title",$('#content').val());
+			formData.append("boardIds",boardIds);
 			mui.ajax('http://192.168.38.175:8080/phone/insertvideo.do', {
-				data: {
-					token: window.localStorage.getItem('token'),
-					boardIds: boardIds,
-					title: content,
-					level: level
-				},
+				data: formData,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
+				processData: false,
+				contentType: false,
+				cache: false,
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
 					if(data.code==200){
@@ -210,6 +275,46 @@
 				insert();
 			})
 		})
+		
+		//取消
+		mui(".shiPing").on('tap','.icon-close',function(){
+			$('.shiPing-cont').hide();
+			$('#video').val('')
+		}) 
+		mui(".shiPing").on('tap','.bofang',function(){
+			video0 ();
+		}) 
+		//播放暂停
+		var video01 = document.getElementById('video0')
+		function video0 () {
+			if(video01.paused){
+				video01.play();
+				$('.iconvideo_').hide();
+			}else{
+				video01.pause();
+				$('.iconvideo_').show();
+			}
+		}
+		document.querySelector('#video').addEventListener('change',function(){
+			formData.append('inputVideo',this.files[0])
+			var objUrl = getObjectURL(this.files[0]) ;
+			if(objUrl){
+				 $("#video0").attr("src", objUrl) ;  
+				$('.shiPing-cont').show();
+			}
+		})
+		//建立一个可存取到该file的url
+		function getObjectURL(file) {
+			 var url = null ;
+			 if (window.createObjectURL!=undefined) { // basic
+				 url = window.createObjectURL(file) ;
+			 } else if (window.URL!=undefined) { // mozilla(firefox)
+				 url = window.URL.createObjectURL(file) ;
+			 } else if (window.webkitURL!=undefined) { // webkit or chrome
+				 url = window.webkitURL.createObjectURL(file) ;
+			 }
+			 return url ;
+		 }
     </script>
 </body>
 </html>

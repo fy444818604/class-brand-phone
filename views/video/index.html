@@ -56,7 +56,7 @@
 			.end {
 				color: #c0c4cc !important;
 			}
-			/*新增样式*/
+		
 		</style>
 	</head>
 
@@ -137,22 +137,20 @@
 								// console.log(con)
 								for (var i = 0; i < con.length; i++) {
 									html +=
-										`<li class="mui-table-view-cell" data-id="${con[i].id}">
+										`<li class="mui-table-view-cell" data-id="${con[i].id}" >
 											<div class="mui-slider-right mui-disabled">
 												<a  class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 											</div>
 											<div class="mui-slider-handle">
-												<div class="mui-table-cell">
-													<div class="active-item">
-														<div>
-															<img src="http://192.168.38.98:8080/${con[i].img}"/>
-														</div>
-														<div>
-															<p class="opo">${con[i].text}</p>
-															<p class="poo">${con[i].date}</p>
-														</div>
-													</div>
+												<div class="">
+													<video src="http://192.168.38.98:8080/${con[i].video}" controls="controls"  width="100%" height="193"></video>
 												</div>
+												<div class="" style="margin-top: 0.1rem;">
+													${con[i].text}
+												</div>
+												<p >
+													${con[i].date}
+												</p>
 											</div>
 										</li>`
 								}
@@ -189,22 +187,20 @@
 								var html = document.querySelector('#OA_task_1').innerHTML;
 								for (var i = 0; i < con.length; i++) {
 									html +=
-										`<li class="mui-table-view-cell" data-id="${con[i].id}">
+										`<li class="mui-table-view-cell" data-id="${con[i].id}" >
 											<div class="mui-slider-right mui-disabled">
 												<a  class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 											</div>
 											<div class="mui-slider-handle">
-												<div class="mui-table-cell">
-													<div class="active-item">
-														<div>
-															<img src="http://192.168.38.98:8080/${con[i].img}"/>
-														</div>
-														<div>
-															<p class="opo">${con[i].text}</p>
-															<p class="poo">${con[i].date}</p>
-														</div>
-													</div>
+												<div class="">
+													<video src="http://192.168.38.98:8080/${con[i].video}" controls="controls"  width="100%" height="193"></video>
 												</div>
+												<div class="" style="margin-top: 0.1rem;">
+													${con[i].text}
+												</div>
+												<p >
+													${con[i].date}
+												</p>
 											</div>
 										</li>`
 								}
