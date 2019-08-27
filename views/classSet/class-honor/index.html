@@ -205,6 +205,9 @@
 				// 添加班级荣誉
 				mui(".mui-content").on('tap', '.add-classHonours', function() {
 					//修改/添加班级荣誉
+					window.localStorage.removeItem('classHonorName')
+					window.localStorage.removeItem('classHonorIcon')
+					window.localStorage.removeItem('classHonorRemark')
 					mui.openWindow({
 						id: 'classHonor',
 						url: 'ClassHonorAdd.html'
