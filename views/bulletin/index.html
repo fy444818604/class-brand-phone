@@ -43,6 +43,7 @@
 		</div>
 	</body>
 	<script src="../../js/mui.js"></script>
+    <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 	var check ="";
 	var rolling = 1;
@@ -60,7 +61,7 @@
 				if(data.code == 200){
 					var obj = data.data;
 					document.querySelector('#textarea').innerHTML = obj.systemAnnouncementContent;
-					id = obj.systemAnnouncementId;
+					systemAnnouncementId = obj.systemAnnouncementId;
 					if(obj.rolling==2){
 						mui("#mySwitch").switch().toggle();
 					}
@@ -76,7 +77,7 @@
 			data: {
 				token: window.localStorage.getItem('token'),
 				systemAnnouncementId:systemAnnouncementId,
-				systemAnnouncementContent:document.querySelector('#textarea').innerHTML,
+				systemAnnouncementContent:$("#textarea").val(),
 				rolling:rolling,
 				check:check
 			},
