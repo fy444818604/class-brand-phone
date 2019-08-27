@@ -79,6 +79,112 @@
 			width: 70%;
 			color: #3B8BFF;
 		}
+		
+		.objTchu {
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+			background: red;
+			z-index: 99999;
+			display: none;
+		
+		}
+		
+		.mui-content {
+			height: 100%;
+			padding-top: 0.77rem;
+		}
+		
+		.mui-content-cont {
+			height: calc(100vh - 6.66rem);
+			background: #FFFFFF;
+			padding: 0rem 1rem;
+		}
+		
+		/*复选框的样式*/
+		.mui-checkbox input[type=checkbox]:before {
+			content: '\e413';
+			font-size: 1.5rem;
+		}
+		
+		.li-label input[type=checkbox]:before {
+			font-size: 3rem;
+			border: none;
+			color: #edf1f6;
+		}
+		
+		.mui-checkbox.mui-left input[type=checkbox],
+		.mui-radio.mui-left input[type=radio] {
+			left: 0px;
+		}
+		
+		.mui-checkbox input[type=checkbox]:checked:before {
+			content: '\e443';
+		}
+		
+		.li-label input[type=checkbox]:checked:before {
+			content: '';
+		}
+		
+		.mui-checkbox.mui-left label,
+		.mui-radio.mui-left label {
+			padding-left: 30px;
+			font-size: 1rem;
+			margin-top: -3px;
+		}
+		
+		.mui-input-row label {
+			padding: 11px 15px;
+		}
+		
+		/*布局*/
+		.generations {
+			padding-top: 1rem;
+		}
+		
+		.grade {
+			height: calc(100vh - 7.9rem);
+			overflow: auto;
+		}
+		
+		.grade>li {
+			margin-bottom: 1rem;
+		}
+		
+		.grade-class>li {
+			width: 33.33%;
+			height: 4.07rem;
+			margin-top: 3%;
+		}
+		
+		.grade>li>.mui-left {
+			margin-top: 0.5rem;
+		}
+		
+		.grade-class-li div {
+			width: 90%;
+			margin: 0 auto;
+			background: #edf1f6;
+			height: 4.07rem;
+			line-height: 4.08rem;
+			text-align: center;
+		}
+		
+		/*按钮*/
+		.bnt>div {
+			height: 3.7rem;
+			text-align: center;
+			line-height: 3.7rem;
+			font-size: 1rem;
+		}
+		
+		.bnt-rnt {
+			width: 100%;
+			background: #3b8bff;
+			color: #FFFFFF;
+		}
     </style>
 </head>
 <body>
@@ -117,7 +223,25 @@
 		    </li>
 		</ul>
 	</div>
+	
+	<!-- 对象弹出层 -->
+	<div class="objTchu">
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">选择对象</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-cont">
+				<ul id="grade" class="grade">
+				</ul>
+			</div>
+			<div class="bnt flex">
+				<div class="bnt-left"></div>
+				<div class="bnt-rnt">确定</div>
+			</div>
+		</div>
+	</div>
 	<script src="../../js/mui.js"></script>
+	<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
 		var search = function(id) {
@@ -162,7 +286,33 @@
 						}
 					}
 					var str = boardName+"等"+count+"个班牌";
-					document.querySelector('#object').innerHTML = str
+					document.querySelector('#object').innerHTML = str;
+					
+					var con = data.data;
+					$('#grade').empty();
+					var html = "";
+					for (var i = 0; i < con.length; i++) {
+						var obj = con[i];
+						html += '<li data-id = "'+obj.id+'">';
+						if(obj.grade != ""){
+							html +=
+									'<div class="mui-input-row mui-checkbox mui-left subset-input">'+
+									'	<label style="text-align: left;">"'+con[i].name+'"</label>'+
+									'</div>';
+						}
+						var list = obj.list;
+							html +=
+									'<ul class="grade-class flex">'
+									for(var j=0;j<list.length;j++){
+									html +=	'	<li data-ids = "'+list[j].id+'" class="grade-class-li">'+
+										'		<div>'+list[j].name+'</div>'+
+										'	</li>'
+									}
+									html +='</ul>';
+						
+						html +='</li>';
+					}
+					document.querySelector('#grade').innerHTML = html;
 				},
 				error: function(xhr, type, errorThrown) {
 					
@@ -173,6 +323,13 @@
 			//活动id
 			var id = window.location.href.split('id=')[1].replace('#','');
 			search(id)
+			document.querySelector('.objetAdd').addEventListener('tap', function() {
+				$('.objTchu').css('display', 'block');
+			})
+		})
+		//确定
+		$('.bnt-rnt').on('tap',function  () {
+			$('.objTchu').css('display', 'none');
 		})
 		
     </script>
