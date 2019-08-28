@@ -223,7 +223,7 @@
 		    <li class="mui-table-view-cell flex">
 		    	<div class="theClass-left">标题</div>
 		    	<div>
-		    		<input id="title" class="mui-input-clear" type="text" placeholder="请输入帐号">
+		    		<input id="title" class="mui-input-clear" type="text" placeholder="请输入标题">
 		    	</div>
 		    </li>
 		    <li class="mui-table-view-cell" style="background: #FFFFFF;">
@@ -335,7 +335,6 @@
 		
 		//班级数据
 		function objectData () {
-			console.log(window.localStorage.getItem('token'))
 			mui.ajax('http://192.168.38.175:8080/phone/selectboard.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
@@ -372,6 +371,9 @@
 						html +='</li>';
 					}
 					document.querySelector('#grade').innerHTML = html;
+					
+					$('input:checked').prop('checked',false)
+					$('.grade-class-li').removeClass('liAktv')
 					claDIAN ();
 					nianji();
 					nianji12 ();

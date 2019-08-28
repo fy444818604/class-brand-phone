@@ -518,6 +518,10 @@
 							html +='</li>';
 						}
 						document.querySelector('#grade').innerHTML = html;
+						
+						$('input:checked').prop('checked',false);
+						$('.grade-class-li').removeClass('liAktv');
+						
 						claDIAN ();
 						nianji();
 						nianji12 ();

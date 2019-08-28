@@ -97,12 +97,14 @@
 					if (data.code == 200) {
 						window.localStorage.setItem('token', data.data.token)
 						window.localStorage.setItem('classId', data.data.classId)
-							window.localStorage.setItem('isCharge', data.data.isCharge)
+						window.localStorage.setItem('isCharge', data.data.isCharge)
 						mui.openWindow({
 							id: 'index',
 							 // url:'./activity/index.html'
 							url: '../index.html'
 						});
+					}else{
+						mui.alert(data.msg);
 					}
 				},
 				error: function(xhr, type, errorThrown) {}
