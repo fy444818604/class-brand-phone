@@ -75,6 +75,122 @@
 			line-height: 3.07rem;
 			text-align: center;
 		}
+		
+		.objTchu {
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+			background: red;
+			z-index: 99999;
+			display: none;
+		
+		}
+		
+		.mui-content {
+			height: 100%;
+			padding-top: 0.77rem;
+		}
+		
+		.mui-content-cont {
+			height: calc(100vh - 6.66rem);
+			background: #FFFFFF;
+			padding: 0rem 1rem;
+		}
+		
+		/*复选框的样式*/
+		.mui-checkbox input[type=checkbox]:before {
+			content: '\e413';
+			font-size: 1.5rem;
+		}
+		
+		.li-label input[type=checkbox]:before {
+			font-size: 3rem;
+			border: none;
+			color: #edf1f6;
+		}
+		
+		.mui-checkbox.mui-left input[type=checkbox],
+		.mui-radio.mui-left input[type=radio] {
+			left: 0px;
+		}
+		
+		.mui-checkbox input[type=checkbox]:checked:before {
+			content: '\e443';
+		}
+		
+		.li-label input[type=checkbox]:checked:before {
+			content: '';
+		}
+		
+		.mui-checkbox.mui-left label,
+		.mui-radio.mui-left label {
+			padding-left: 30px;
+			font-size: 1rem;
+			margin-top: -3px;
+		}
+		
+		.mui-input-row label {
+			padding: 11px 15px;
+		}
+		
+		/*布局*/
+		.generations {
+			padding-top: 1rem;
+		}
+		
+		.grade {
+			height: calc(100vh - 7.9rem);
+			overflow: auto;
+		}
+		
+		.grade>li {
+			margin-bottom: 1rem;
+		}
+		
+		.grade-class>li {
+			width: 33.33%;
+			height: 4.07rem;
+			margin-top: 3%;
+		}
+		
+		.grade>li>.mui-left {
+			margin-top: 0.5rem;
+		}
+		
+		.grade-class-li div {
+			width: 90%;
+			margin: 0 auto;
+			background: #edf1f6;
+			height: 4.07rem;
+			line-height: 4.08rem;
+			text-align: center;
+		}
+		
+		.liAktv>div {
+			background: #E7f1ff;
+			color: #3B8BFF;
+		}
+		
+		/*按钮*/
+		.bnt>div {
+			height: 3.7rem;
+			text-align: center;
+			line-height: 3.7rem;
+			font-size: 1rem;
+		}
+		
+		.bnt-left {
+			width: 30%;
+			color: #3b8bff;
+		}
+		
+		.bnt-rnt {
+			width: 70%;
+			background: #3b8bff;
+			color: #FFFFFF;
+		}
 	
     </style>
 </head>
@@ -107,7 +223,7 @@
 		    <li class="mui-table-view-cell flex">
 		    	<div class="theClass-left">标题</div>
 		    	<div>
-		    		<input id="title" class="mui-input-clear" type="text" placeholder="请输入帐号">
+		    		<input id="title" class="mui-input-clear" type="text" placeholder="请输入标题">
 		    	</div>
 		    </li>
 		    <li class="mui-table-view-cell" style="background: #FFFFFF;">
@@ -121,7 +237,28 @@
 			发布
 		</div>
 	</div>
-	
+	<!-- 对象弹出层 -->
+	<div class="objTchu">
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">选择对象</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-cont">
+				<div class="generations">
+					<div class="mui-input-row mui-checkbox  mui-left parent-input">
+						<label style="text-align: left;">全选</label>
+						<input id="parent-input" name="zhege " type="checkbox">
+					</div>
+				</div>
+				<ul id="grade" class="grade">
+				</ul>
+			</div>
+			<div class="bnt flex">
+				<div class="bnt-left">重置</div>
+				<div class="bnt-rnt">确定</div>
+			</div>
+		</div>
+	</div>
 	<!--级别弹出层-->
 	<div id="picture" class="mui-popover mui-popover-action ">
 	    <ul class="mui-table-view top"> 
@@ -188,6 +325,144 @@
 			document.querySelector('.add').addEventListener('tap',function(){
 				insert();
 			})
+			
+			
+			document.querySelector('.objetAdd').addEventListener('tap', function() {
+				$('.objTchu').css('display', 'block');
+				objectData();
+			})
+		})
+		
+		//班级数据
+		function objectData () {
+			mui.ajax('http://192.168.38.175:8080/phone/selectboard.do', {
+				data: {
+					token: window.localStorage.getItem('token'),
+					level:level
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					var con = data;
+					$('#grade').empty();
+					var html = "";
+					for (var i = 0; i < con.length; i++) {
+						var obj = con[i];
+						html += '<li data-id = "'+obj.id+'">';
+						if(obj.grade != ""){
+							html +=
+									'<div class="mui-input-row mui-checkbox mui-left subset-input">'+
+									'	<label style="text-align: left;">"'+con[i].name+'"</label>'+
+									'	<input name="zhege " type="checkbox" >'+
+									'</div>';
+						}
+						var list = obj.list;
+						
+							html +=
+									'<ul class="grade-class flex">'
+									for(var j=0;j<list.length;j++){
+									html +=	'	<li data-ids = "'+list[j].id+'" class="grade-class-li">'+
+										'		<div>'+list[j].name+'</div>'+
+										'	</li>'
+									}
+									html +='</ul>';
+						
+						html +='</li>';
+					}
+					document.querySelector('#grade').innerHTML = html;
+					
+					$('input:checked').prop('checked',false)
+					$('.grade-class-li').removeClass('liAktv')
+					claDIAN ();
+					nianji();
+					nianji12 ();
+				},
+				error: function(xhr, type, errorThrown) {
+			
+				}
+			});
+		};
+		//父级全选/父级反选 
+		mui('.parent-input').on('change', 'input', function() {
+			if(this.checked?"true":"false" == true){
+				$("#grade :checkbox").prop("checked", true);  
+				$('.grade-class-li').addClass('liAktv')
+			}else{
+				$("#grade :checkbox").prop("checked", false);
+				$('.grade-class-li').removeClass('liAktv')
+			}
+		});
+		//设置全选复选框
+		function nianji () {
+			$("#grade :checkbox").click(function(){
+				allchk();
+			});
+		}
+		function allchk(){
+			var chknum = $(".grade-class").length;//选项总个数
+			var chk = $(".liAktv").length;
+			
+			if(chknum==chk){//全选
+				$("#parent-input").prop("checked",true);
+			}else{//不全选
+				$("#parent-input").prop("checked",false);
+			}
+		}
+		//年级全选
+		function nianji12 () {
+			mui('.subset-input').on('change', 'input', function() {
+				if(this.checked?"true":"false" == true){
+					$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
+				}else{
+					$(this).parent('div').siblings('ul').find('li').removeClass('liAktv')
+				}
+			});
+		}
+		//点击班级	
+		function claDIAN () {
+			$('.grade-class-li').click(function  () {
+				if($(this).hasClass('liAktv')){
+					$(this).removeClass('liAktv')
+				}else{
+					$(this).addClass('liAktv');
+				}
+				var li = $(this).parent('ul').find('li').length;
+				var liAktv = $(this).parent('ul').find('.liAktv').length;
+				if(li == liAktv){
+					$(this).parent('ul').siblings('div').find('input').prop('checked',true)
+				}else{
+					$(this).parent('ul').siblings('div').find('input').prop('checked',false)
+				}
+				allchk();
+			})
+		}
+		//重置
+		$('.bnt-left').click(function  () {
+			$('input:checked').prop('checked',false)
+			$('.grade-class-li').removeClass('liAktv')
+		})
+		//确定
+		$('.bnt-rnt').on('tap',function  () {
+			var data = [];
+			var s = '';
+			$('.liAktv').each(function(){
+				data.push($(this).find('div').text());
+				var  src = $(this).attr('data-ids')+','
+				s = src + s;
+			});
+			if(data == ''){
+				mui.alert( '请选择一项或多项' )
+			}else{
+				$('.objTchu').css('display', 'none');
+				var lastIndex = s.lastIndexOf(',');
+				if (lastIndex > -1) {
+					ids = s.substring(0, lastIndex) + s.substring(lastIndex + 1, s.length);
+					boardIds = ids;
+					var boardName = data[0]+"等"+data.length+"个班牌";
+					$('.jonsData').text(boardName).css('color','#000');
+				}
+			}
 		})
     </script>
 </body>

@@ -230,10 +230,9 @@
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
 							if (data.code == 200) {
-								// curr = 1
-								// curr1 = 1
-								// listSearch()
-								// listSearch1()
+								window.location.reload();
+							}else{
+								mui.alert(data.msg)
 							}
 						},
 						error: function(xhr, type, errorThrown) {

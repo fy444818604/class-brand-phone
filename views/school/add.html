@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
 		<link href="../../css/public.css" rel="stylesheet" />
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
+		<script src="../../js/colorpicker.js"></script>
 		<style>
 			.Hauto>div{
 				padding: 11px 15px;
@@ -89,7 +90,7 @@
 				margin: -21px 0 0 -45px;
 				color: #c0c4cc;
 			}
-			#bg-select{
+			#bg-select,#top-title,#main-title,#bottom-title,#down-title{
 				position: fixed;
 				top: 0;
 				left: 0;
@@ -109,6 +110,7 @@
 			.bg-img-list>li{
 				position: relative;
 				padding-bottom: 56%;
+				margin-bottom: 16px;
 			}
 			.bg-img-list>li>img{
 				width: 100%;
@@ -118,12 +120,46 @@
 			.bg-tab-wrap{
 				padding: 0 16px;
 				border-top: 1px solid #c8c7cc;
+				height: calc(100vh - 131px);
+				overflow: auto;
 			}
 			.bg-tip{
 				color: #909399;
 				margin-top: 18px;
 				margin-bottom: 12px;
 			}
+			.video-wrap{
+				width: 100%;
+				min-height: 100px;
+				background-color: #000000;
+				position: absolute;
+				z-index: -1;
+				top: 34px;
+			}
+			.video-wrap>video{
+				width: 100%;
+			}
+			
+			.picker {
+				width: 100%;
+				height: 200px;
+				position: absolute;
+				left: 0;
+				top: 20px;
+			}
+			.picker-wrap{
+				position: relative;
+				height: 100%;
+				width: 100%;
+			}
+			.picker-wrap>.picker{
+				position: relative;
+				top: 0;
+			}
+			.login-input-cont {
+				position: relative;
+			}
+			
 		</style>
 	</head>
 
@@ -169,22 +205,22 @@
 				<div class="mui-input-group mt12">
 					<div class="mui-input-row">
 						<label>上标题</label>
-						<a href="#level">设置上标题</a>
+						<a href="#top-title">设置上标题</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row">
 						<label>主标题</label>
-						<a href="#level">设置主标题</a>
+						<a href="#main-title">设置主标题</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row">
 						<label>下标题</label>
-						<a href="#level">设置下标题</a>
+						<a href="#bottom-title">设置下标题</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row">
 						<label>倒计时</label>
-						<a href="#level">设置倒计时</a>
+						<a href="#down-title">设置倒计时</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 				</div>
@@ -229,7 +265,7 @@
 				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="#bg-select"></a>
 				<h1 class="mui-title">背景设置</h1>
 			</header>
-			<div class="mui-content" style="background-color: #FFFFFF;overflow: auto;">
+			<div class="mui-content fourth" style="background-color: #FFFFFF;">
 				<div>
 					<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
 						<a class="mui-control-item mui-active" href="#item1">
@@ -263,15 +299,94 @@
 						</div>
 					</div>
 					<div id="item2" class="mui-control-content">
-						2
+						<div class="picker" id="color-picker"></div>
 					</div>
 					<div id="item3" class="mui-control-content">
-						3
+						<div class="bg-tip">上传</div>
+						<label for="bg-video-upload" class="bg-img-upload-wrap" id="video-upload">
+							<i class="iconfont icon-add"></i>
+							<input type="file" id="bg-video-upload">
+						</label>
+						<div class="video-wrap">
+
+						</div>
 					</div>
 					<div id="item4" class="mui-control-content">
-						4
+						<div class="mui-input-group">
+							<div class="mui-input-row mt12">
+								<label>地址</label>
+								<input type="text" placeholder="请输入直播地址">
+							</div>
+						</div>
 					</div>
 				</div>
+				<a href="#bg-select" class="mui-btn mui-btn-primary mui-btn-block">确定</a>
+			</div>
+		</div>
+		<div id="top-title" class="mui-popover">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="#top-title"></a>
+				<h1 class="mui-title">上标题设置</h1>
+			</header>
+			<div class="mui-content">
+				<div class="picker-wrap">
+					<div class="picker" id="color-picker1"></div>
+					<div class="mui-input-row login-input-cont">
+						<input type="text" class="mui-input-clear login-name" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
+					</div>
+				</div>
+				<a href="#top-title" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
+			</div>
+		</div>
+		<div id="main-title" class="mui-popover">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="#main-title"></a>
+				<h1 class="mui-title">主标题设置</h1>
+			</header>
+			<div class="mui-content">
+				<div class="picker-wrap">
+					<div class="picker" id="color-picker2"></div>
+					<div class="mui-input-row login-input-cont">
+						<input type="text" class="mui-input-clear login-name" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
+					</div>
+				</div>
+				<a href="#main-title" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
+			</div>
+		</div>
+		<div id="bottom-title" class="mui-popover">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="#bottom-title"></a>
+				<h1 class="mui-title">下标题设置</h1>
+			</header>
+			<div class="mui-content">
+				<div class="picker-wrap">
+					<div class="picker" id="color-picker3"></div>
+					<div class="mui-input-row login-input-cont">
+						<input type="text" class="mui-input-clear login-name" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
+					</div>
+				</div>
+				<a href="#bottom-title" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
+			</div>
+		</div>
+
+		<div id="down-title" class="mui-popover">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="#down-title"></a>
+				<h1 class="mui-title">倒计时设置</h1>
+			</header>
+			<div class="mui-content">
+				<div class="picker-wrap">
+					<div class="picker" id="color-picker4"></div>
+					<div class="mui-input-row mt12" style="background: #FFFFFF;">
+						<label>结束时间</label>
+						<a href="#" data-options='{}' id="timeSelect2">请选择结束时间</a>
+						<span class="mui-icon mui-icon-forward"></span>
+					</div>
+					<div class="mui-input-row login-input-cont">
+						<input type="text" class="mui-input-clear login-name" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
+					</div>
+				</div>
+				<a href="#down-title" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
 			</div>
 		</div>
 		<script src="../../js/mui.js"></script>
@@ -279,12 +394,50 @@
 		<script type="text/javascript">
 			(function($) {
 				mui.init();
+
+				var obj = document.getElementById("picker");
+				var a = Colorpicker.create({
+					el: "color-picker",
+					color: "#000fff",
+					change: function(elem, hex) {
+						elem.style.backgroundColor = hex;
+					}
+				})
+				var a = Colorpicker.create({
+					el: "color-picker1",
+					color: "#000fff",
+					change: function(elem, hex) {
+						elem.style.backgroundColor = hex;
+					}
+				})
+				var a = Colorpicker.create({
+					el: "color-picker2",
+					color: "#000fff",
+					change: function(elem, hex) {
+						elem.style.backgroundColor = hex;
+					}
+				})
+				var a = Colorpicker.create({
+					el: "color-picker3",
+					color: "#000fff",
+					change: function(elem, hex) {
+						elem.style.backgroundColor = hex;
+					}
+				})
+				var a = Colorpicker.create({
+					el: "color-picker4",
+					color: "#000fff",
+					change: function(elem, hex) {
+						elem.style.backgroundColor = hex;
+					}
+				})
 				var result = document.querySelector('#timeSelect');
 				var result1 = document.querySelector('#timeSelect1');
-				result.addEventListener('tap',function(){
+				var result2 = document.querySelector('#timeSelect2');
+				result.addEventListener('tap', function() {
 					var _self = this;
-					if(_self.picker) {
-						_self.picker.show(function (rs) {
+					if (_self.picker) {
+						_self.picker.show(function(rs) {
 							result.innerText = rs.text;
 							_self.picker.dispose();
 							_self.picker = null;
@@ -301,10 +454,10 @@
 						});
 					}
 				}, false)
-				result1.addEventListener('tap',function(){
+				result1.addEventListener('tap', function() {
 					var _self = this;
-					if(_self.picker) {
-						_self.picker.show(function (rs) {
+					if (_self.picker) {
+						_self.picker.show(function(rs) {
 							result1.innerText = rs.text;
 							_self.picker.dispose();
 							_self.picker = null;
@@ -321,22 +474,62 @@
 						});
 					}
 				}, false)
-				document.querySelector('#bg-img-upload').addEventListener('change',function(){
+				result2.addEventListener('tap', function() {
+					var _self = this;
+					if (_self.picker) {
+						_self.picker.show(function(rs) {
+							result2.innerText = rs.text;
+							_self.picker.dispose();
+							_self.picker = null;
+						});
+					} else {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						_self.picker = new $.DtPicker(options);
+						_self.picker.show(function(rs) {
+							result2.innerText = rs.text;
+							_self.picker.dispose();
+							_self.picker = null;
+						});
+					}
+				}, false)
+				document.querySelector('#bg-img-upload').addEventListener('change', function() {
 					var files = this.files;
 					var file;
 					if (files && files.length) {
-					    file = files[0];
-					    if (/^image\/\w+/.test(file.type)) {
-					        blobURL = URL.createObjectURL(file);
-					        console.log(blobURL)
+						file = files[0];
+						if (/^image\/\w+/.test(file.type)) {
+							blobURL = URL.createObjectURL(file);
+							console.log(blobURL)
 							var html = document.querySelector('.bg-img-list').innerHTML;
 							html += `<li>
 										<img src="${blobURL}" alt="">
 									</li>`
 							document.querySelector('.bg-img-list').innerHTML = html;
-					    } else {
-					        mui.alert('请选择图片文件');
-					    }
+						} else {
+							mui.alert('请选择图片文件');
+						}
+					}
+				})
+				document.querySelector('#bg-video-upload').addEventListener('change', function() {
+					var files = this.files;
+					var file;
+					if (files && files.length) {
+						file = files[0];
+						blobURL = URL.createObjectURL(file);
+						console.log(blobURL)
+						document.querySelector('#video-upload').style.display = 'none';
+						document.querySelector('.video-wrap').style.zIndex = 99;
+						var html = `<video src="${blobURL}" autoplay="autoplay" loop="loop"></video>`;
+						document.querySelector('.video-wrap').innerHTML = html;
+					}
+				})
+				mui('#segmentedControl').on('tap', 'a', function() {
+					if (this.innerHTML.indexOf('直播') != -1) {
+						document.querySelector('.fourth').style.background = '#efeff4'
+					} else {
+						document.querySelector('.fourth').style.background = '#FFFFFF'
 					}
 				})
 			})(mui);

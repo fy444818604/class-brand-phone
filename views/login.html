@@ -85,7 +85,7 @@
 		var login = function() {
 			var loginName = document.querySelector('.login-name').value;
 			var loginPwd = document.querySelector('.login-pwd').value;
-			mui.ajax('http://192.168.10.59:8099/phone/login.do', {
+			mui.ajax('http://192.168.38.175:8080/phone/login.do', {
 				data: {
 					loginName: loginName,
 					loginPwd: loginPwd
@@ -97,12 +97,14 @@
 					if (data.code == 200) {
 						window.localStorage.setItem('token', data.data.token)
 						window.localStorage.setItem('classId', data.data.classId)
-							window.localStorage.setItem('isCharge', data.data.isCharge)
+						window.localStorage.setItem('isCharge', data.data.isCharge)
 						mui.openWindow({
 							id: 'index',
 							 // url:'./activity/index.html'
 							url: '../index.html'
 						});
+					}else{
+						mui.alert(data.msg);
 					}
 				},
 				error: function(xhr, type, errorThrown) {}
