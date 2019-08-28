@@ -185,9 +185,10 @@
 			}
 			.addLI-title{
 				font-size: 1rem;
-				padding: 10px 1rem;
 				margin: 0px;
-				color: ##303133;
+			}
+			.addLI-title>input{
+				color: #000000;
 			}
 			.addLI>li{
 				height: 3rem;
@@ -207,6 +208,9 @@
 				color: #FFFFFF;
 				text-align: center;
 				line-height: 1.07rem;
+			}
+			#showQues{
+				padding-left: 1rem;
 			}
 		</style>
 	</head>
@@ -242,11 +246,11 @@
 				</div>
 				<div class="mui-input-group">
 					<div class="mui-input-row flex justify-bet mt12 Hauto" style="padding: 0 15px; align-items: center;">
-						<div>选项</div>
+						<div style="padding: 0px 0px;">选项</div>
 						<a class="iconfont icon-add" href="#option" style="color: #3B8BFF;"></a>
-						<div id="showQues">
-
-						</div>
+					</div>
+					<div id="showQues">
+						
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
@@ -327,7 +331,7 @@
 				<div class="mui-input-group" style="height: calc(100vh - 103px);">
 
 					<div class="mui-input-row Hauto mt12" id="queAdd">
-						<div class="quesDiv mui-input-row Hauto mt12">
+						<div class="quesDiv mui-input-row Hauto mt12" style="padding: 6px 0px;">
 							<p class="addLI-title">
 								<input type="text" class="quesTitle " placeholder="请输入题目内容" maxlength="40">
 							</p>
@@ -493,7 +497,7 @@
 				var html =
 					`<li class="flex">
 							    <div class="addLI-left">
-									<input type="text" class="quesOption mui-input-clear" placeholder="请输入选项内容" maxlength="40">
+									<input style="color:#c0c4cc;" type="text" class="quesOption mui-input-clear" placeholder="请输入选项内容" maxlength="40">
 								</div>
 								<div class="addLI-rnt">
 									<i class="iconfont icon-close"></i>
@@ -530,6 +534,7 @@
 						var html = "";
 						for (var i = 0; i < con.length; i++) {
 							var obj = con[i];
+							console.log(obj)
 							html += '<li data-id = "' + obj.id + '">';
 							if (obj.grade != "") {
 								html +=
@@ -579,7 +584,7 @@
 			}
 
 			function allchk() {
-				var chknum = $(".grade-class").length; //选项总个数
+				var chknum = $(".grade-class-li").length; //选项总个数
 				var chk = $(".liAktv").length;
 
 				if (chknum == chk) { //全选
@@ -654,7 +659,7 @@
 				}
 				
 				//拼装数据
-				var questionnaireTitleVos = []
+				var questionnaireTitleVos = []	
 				var arr = $(".quesDiv1");
 				for (var i = 0; i < arr.length; i++) {
 					var obj = arr[i];
@@ -673,7 +678,6 @@
 						optionList:optionList1
 					}
 					questionnaireTitleVos.push(dataVo);
-					console.log(questionnaireTitleVos);
 				}
 					
 				console.log(questionnaireTitleVos);	
@@ -701,11 +705,10 @@
 					success: function(data) {
 						// console.log(data);
 						if (data.code == 200) {
-							console.log(data);
-							// mui.openWindow({
-							// 	id: 'index',
-							// 	url: '../class-committee/index.html'
-							// });
+							mui.openWindow({
+								id: 'index',
+								url: '../activity/index.html'
+							});
 						} else {
 							mui.alert(data.msg)
 						}
