@@ -173,3 +173,7 @@ body {
 .school-list-img>img {
 	width: 100%;
 }
+
+#segmentedControl>a{
+	touch-action: none;
+}
