@@ -493,7 +493,7 @@
 				var html =
 					`<li class="flex">
 							    <div class="addLI-left">
-									<input type="text" class="voteTitle mui-input-clear" placeholder="请输入选项内容" maxlength="40">
+									<input type="text" class="quesOption mui-input-clear" placeholder="请输入选项内容" maxlength="40">
 								</div>
 								<div class="addLI-rnt">
 									<i class="iconfont icon-close"></i>
@@ -652,17 +652,33 @@
 					activeEndTime: getTimeStamp(activeEndTime.value),
 					pubType: 2
 				}
-
-				//添加选项	
-				var voteTitleArr = []
-				for (var i = 0; i < voteOption.length; i++) {
-					var obj = {
-						voteTitileContent: voteOption[i].value
+				
+				//拼装数据
+				var questionnaireTitleVos = []
+				var arr = $(".quesDiv1");
+				for (var i = 0; i < arr.length; i++) {
+					var obj = arr[i];
+					var options = $(obj).find(".quesOption");
+					var optionList1 = [];
+					for (var j = 0; j < options.length; j++) {
+						var obj1 =options[j];
+						var data1 ={
+							qestionTitileOptionContent:$(obj1).val()
+						}
+						optionList1.push(data1);
 					}
-					voteTitleArr.push(obj);
+					var  quesTitle =  $(obj).find(".quesTitle")[0];
+					var dataVo = {
+						qestionTitileContent: $(quesTitle).val(),
+						optionList:optionList1
+					}
+					questionnaireTitleVos.push(dataVo);
+					console.log(questionnaireTitleVos);
 				}
+					
+				console.log(questionnaireTitleVos);	
 				//判断
-				if (voteTitleArr.length <= 0) {
+				if (questionnaireTitleVos.length <= 0) {
 					mui.alert("选项不能为空！");
 					return;
 				}
@@ -675,7 +691,7 @@
 				mui.ajax('http://192.168.10.59:8099/phone/active/operateactive.do', {
 					data: {
 						active: JSON.stringify(data),
-						voteTitles: JSON.stringify(voteTitleArr),
+						questionnaireTitleVos: JSON.stringify(questionnaireTitleVos),
 						token: window.localStorage.getItem('token'),
 						boardIds: boardIds.join(",")
 					},
