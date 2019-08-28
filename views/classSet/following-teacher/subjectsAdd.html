@@ -7,7 +7,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<!--标准mui.css-->
-		<link rel="stylesheet" href="../../../css/mui.min.css">
+		<link rel="stylesheet" href="../../../css/mui.css">
 		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css" />
 		<style type="text/css">
 			/*九宫格*/
@@ -180,6 +180,7 @@
 
 			var html1 = '';
 			//完成操作
+			
 			mui(".mui-content").on('tap', ".determine", function() {
 				var discipline = mui("#discipline")[0].value;
 				if (discipline != '') {
@@ -213,7 +214,7 @@
 
 		//添加/编辑
 		function operateTeacher(subjectName) {
-			if (classTeacherId && classTeacherId != undefined && classTeacherId != '' && classTeacherId != null) {
+			if (notBlank(classTeacherId)) {
 				console.log("update")
 				mui.ajax('http://192.168.10.59:8099/phone/classteacher/update.do', {
 					data: {
@@ -285,5 +286,30 @@
 				return null;
 			}
 		}
+		
+		function notBlank(data) {
+			var isTrue = true;
+		
+			if (!data) {
+				isTrue = false;
+			}
+			if (data == '') {
+				isTrue = false;
+			}
+			if (data == null) {
+				isTrue = false;
+			}
+			if (data == undefined) {
+				isTrue = false;
+			}
+			if (data == 'null') {
+				isTrue = false;
+			}
+			if (data == 'undefined') {
+				isTrue = false;
+			}
+			return isTrue;
+		}
+		
 	</script>
 </html>
