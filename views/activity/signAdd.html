@@ -54,13 +54,142 @@
 				width: 100vw;
 				height: 100vh;
 			}
+			.mui-content {
+				height: 100%;
+				padding-top: 0.77rem;
+			}
+
+			.mui-content-cont {
+				height: calc(100vh - 6.66rem);
+				background: #FFFFFF;
+				padding: 0rem 1rem;
+			}
+
+			/*复选框的样式*/
+			.mui-checkbox input[type=checkbox]:before {
+				content: '\e413';
+				font-size: 1.5rem;
+			}
+
+			.li-label input[type=checkbox]:before {
+				font-size: 3rem;
+				border: none;
+				color: #edf1f6;
+			}
+
+			.mui-checkbox.mui-left input[type=checkbox],
+			.mui-radio.mui-left input[type=radio] {
+				left: 0px;
+			}
+
+			.mui-checkbox input[type=checkbox]:checked:before {
+				content: '\e443';
+			}
+
+			.li-label input[type=checkbox]:checked:before {
+				content: '';
+			}
+
+			.mui-checkbox.mui-left label,
+			.mui-radio.mui-left label {
+				padding-left: 30px;
+				font-size: 1rem;
+				margin-top: -3px;
+			}
+
+			.mui-input-row label {
+				padding: 11px 15px;
+			}
+
+			/*布局*/
+			.generations {
+				padding-top: 1rem;
+			}
+
+			.grade {
+				height: calc(100vh - 7.9rem);
+				overflow: auto;
+			}
+
+			.grade>li {
+				margin-bottom: 1rem;
+			}
+
+			.grade-class>li {
+				width: 33.33%;
+				height: 4.07rem;
+				margin-top: 3%;
+			}
+
+			.grade>li>.mui-left {
+				margin-top: 0.5rem;
+			}
+
+			.grade-class-li div {
+				width: 90%;
+				margin: 0 auto;
+				background: #edf1f6;
+				height: 4.07rem;
+				line-height: 4.08rem;
+				text-align: center;
+			}
+
+			.liAktv>div {
+				background: #E7f1ff;
+				color: #3B8BFF;
+			}
+
+			/*按钮*/
+			.bnt>div {
+				height: 3.7rem;
+				text-align: center;
+				line-height: 3.7rem;
+				font-size: 1rem;
+			}
+
+			.bnt-left {
+				width: 30%;
+				color: #3b8bff;
+			}
+
+			.bnt-rnt {
+				width: 70%;
+				background: #3b8bff;
+				color: #FFFFFF;
+			}
+			
+			.objTchu {
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+				background: red;
+				z-index: 99999;
+				display: none;
+
+			}
+			.icon-btn{
+				display: flex;
+				color: #3b8bff;
+			}
+			.icon-btn i{
+				margin-right: 5px;
+			}
+			#option{
+				position: fixed;
+				width: 100vw;
+				height: 100vh;
+				left: 0;
+				top: 0;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">发报名</h1>
+			<h1 class="mui-title" id="titleName"></h1>
 		</header>
 		<div class="mui-content">
 			<div class="add-form">
@@ -70,9 +199,9 @@
 						<input type="hidden" id="activeLevel" />
 						<a href="#level" id="level-select">请选择级别</a>
 					</div>
-					<div class="mui-input-row">
+					<div class="mui-input-row objetAdd">
 						<label>对象</label>
-						<a href="#level">请选择对象</a>
+						<a href="#" id="boardName">请选择对象</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 				</div>
@@ -83,39 +212,33 @@
 					</div>
 					<div class="mui-input-row Hauto">
 						<div>正文</div>
-						<textarea id="textarea" rows="5" placeholder="请输入正文"></textarea>
+						<textarea id="activeContent" rows="5" placeholder="请输入正文"></textarea>
 					</div>
 				</div>
 				<div class="mui-input-group">
-					<div class="mui-input-row Hauto mt12">
+					<div class="mui-input-row flex justify-bet mt12 Hauto" style="padding: 0 15px; align-items: center;">
 						<div>选项</div>
-						<input type="text" placeholder="请输入选项内容">
-					</div>
-					<div class="mui-input-row">
-						<div class="q-tips">
-							<div class="icon-btn">
-								<i class="iconfont icon-add"></i>
-								<span>添加选项</span>
-							</div>
-							<span>最多15个选项，每个选项不超过40个字符</span>
+						<a class="iconfont icon-add" href="#option" style="color: #3B8BFF;"></a>
+						<div id="showVoteTitle">
+
 						</div>
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
 						<a href="#mode" id="mode-select">请选择模式</a>
-						<input  type="hidden" id="activeChoose"/>
-						<input  type="hidden" id="activeChooseCount"/>
+						<input type="hidden" id="activeChoose" />
+						<input type="hidden" id="activeChooseCount" />
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>结束时间</label>
 						<input type="hidden" id="activeEndTime" />
-						<a href="#"	  data-options='{}' id="timeSelect">请选择时间</a>
+						<a href="javascript:void(0)" data-options='{}' id="timeSelect">请选择时间</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 				</div>
 			</div>
-			<button type="button" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
+			<button type="button" id="submitBtn" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
 		</div>
 		<div id="mode" class="mui-popover mui-popover-action mui-popover-bottom">
 			<ul class="mui-table-view">
@@ -141,7 +264,7 @@
 					<a href="#" id="activeLevel&2">班级</a>
 				</li>
 				<li class="mui-table-view-cell activeLevel-level">
-					<a href="#" id="activeLevel&1" >校级</a>
+					<a href="#" id="activeLevel&1">校级</a>
 				</li>
 			</ul>
 			<ul class="mui-table-view">
@@ -150,28 +273,85 @@
 				</li>
 			</ul>
 		</div>
+		<!-- 对象弹出层 -->
+		<div class="objTchu" id="objTchu">
+			<header class="mui-bar mui-bar-nav">
+				<h1 class="mui-title">选择对象</h1>
+			</header>
+			<div class="mui-content">
+				<div class="mui-content-cont">
+					<div class="generations">
+						<div class="mui-input-row mui-checkbox  mui-left parent-input">
+							<label style="text-align: left;">全选</label>
+							<input id="parent-input" name="zhege " type="checkbox">
+						</div>
+					</div>
+					<ul id="grade" class="grade">
+					</ul>
+				</div>
+				<div class="bnt flex">
+					<div class="bnt-left">重置</div>
+					<div class="bnt-rnt">确定</div>
+				</div>
+			</div>
+		</div>
+		<!-- 添加选项 -->
+		<div id="option" class="mui-popover">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" href="#option"></a>
+				<h1 class="mui-title">添加选项</h1>
+			</header>
+			<div class="mui-content">
+				<div class="mui-input-group" style="height: calc(100vh - 103px);">
+					<div class="mui-input-row Hauto mt12" id="voteTitleDiv">
+						<input type="text" class="voteTitle mui-input-clear" placeholder="请输入选项内容" maxlength="40">
+					</div>
+					<div class="mui-input-row">
+						<div class="q-tips">
+							<div class="icon-btn">
+								<i class="iconfont icon-add"></i>
+								<span>添加选项</span>
+							</div>
+							<span>最多15个选项，每个选项不超过40个字符</span>
+						</div>
+					</div>
+				</div>
+				<a href="#option" id="voteBtn" class="mui-btn mui-btn-primary mui-btn-block">确定</a>
+			</div>
+		</div>
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
 			//获取dom对象
+			var activeType = getQueryString("type");
 			var activeLevel = document.getElementById("activeLevel");
-			var activeTitile =document.getElementById("activeTitile");
-			var activeContent=document.getElementById("activeContent");
-			var activeChoose =document.getElementById("activeChoose");
-			var activeChooseCount =document.getElementById("activeChooseCount");
-			var activeChooseCount =document.getElementById("activeChooseCount");
-			
+			var activeTitile = document.getElementById("activeTitile");
+			var activeContent = document.getElementById("activeContent");
+			var activeChoose = document.getElementById("activeChoose");
+			var activeChooseCount = document.getElementById("activeChooseCount");
+			var activeEndTime = document.getElementById("activeEndTime");
+			var boardIds = [];
+			var boardNames = [];
+			var voteOption = [];
+
+			if (activeType == 1) {
+				titleName.innerHTML = "创建投票"
+			} else {
+				titleName.innerHTML = "创建报名"
+			}
+
 			(function($) {
 				mui.init();
 				var result = document.querySelector('#timeSelect');
-				result.addEventListener('tap',function(){
+				result.addEventListener('tap', function() {
 					var _self = this;
-					if(_self.picker) {
-						_self.picker.show(function (rs) {
+					if (_self.picker) {
+						_self.picker.show(function(rs) {
 							result.innerText = rs.text;
 							_self.picker.dispose();
 							_self.picker = null;
-							document.getElementById("activeEndTime").value= rs.text;
+							document.getElementById("activeEndTime").value = rs.text;
 						});
 					} else {
 						var optionsJson = this.getAttribute('data-options') || '{}';
@@ -182,38 +362,345 @@
 							result.innerText = rs.text;
 							_self.picker.dispose();
 							_self.picker = null;
-							document.getElementById("activeEndTime").value= rs.text;
+							document.getElementById("activeEndTime").value = rs.text;
 						});
 					}
-					
+
 				}, false)
 				mui("#level").on('tap', 'a', function() {
-					var level = this.innerHTML.substring(0,1)
+					var level = this.innerHTML.substring(0, 1)
 					var id = this.getAttribute("id");
-					var ids =id.split("&");
-					if(level != "<"){
+					var ids = id.split("&");
+					if (level != "<") {
 						document.querySelector('#level-select').innerHTML = level
 						mui('#level').popover('toggle');
-						document.getElementById("activeLevel").value= ids[1];
-						
+						document.getElementById("activeLevel").value = ids[1];
+
 					}
 				})
 				mui("#mode").on('tap', 'a', function() {
 					var level = this.innerHTML;
 					var id = this.getAttribute("id");
-					var ids =id.split("&");
-					if(level != "<b>取消</b>"){
+					var ids = id.split("&");
+					if (level != "<b>取消</b>") {
 						document.querySelector('#mode-select').innerHTML = level
 						mui('#mode').popover('toggle');
-						document.getElementById("activeChoose").value= ids[1];
-						document.getElementById("activeChooseCount").value= ids[2];
+						document.getElementById("activeChoose").value = ids[1];
+						document.getElementById("activeChooseCount").value = ids[2];
+					}
+				});
+				var objTchu = document.getElementById('objTchu')
+				document.querySelector('.objetAdd').addEventListener('tap', function() {
+					//判断是不是选择了级别
+					if (notBlank(activeLevel.value)) {
+						//判断是不是有选择班牌的权限
+						mui.ajax('http://192.168.10.59:8099/phone/active/jugeboardpower.do', {
+							data: {
+								token: window.localStorage.getItem('token'),
+								activeLevel: activeLevel.value
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'get', //HTTP请求类型
+							timeout: 10000, //超时时间设置为10秒；
+							success: function(data) {
+								if (data.code == 200) {
+									boardIds = [];
+									boardNames = [];
+									objTchu.style.display = 'block';
+									objectData();
+								} else {
+									mui.alert(data.msg)
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+
+							}
+						});
+					} else {
+						mui.alert("请选择级别");
+					}
+
+				})
+
+				//提交	
+				document.querySelector('#submitBtn').addEventListener('tap', function() {
+					operateActive();
+				})
+
+				//添加input	
+				mui("#option").on("tap", ".icon-btn", function() {
+					var voteTitles = document.getElementsByClassName("voteTitle");
+					var voteTitleDiv = document.getElementById("voteTitleDiv");
+					if (voteTitles.length < 15) {
+						//创建对象
+						var input = document.createElement("input");
+						input.type = "text";
+						input.className = "voteTitle";
+						input.placeholder = "请输入选项内容";
+						input.maxlength = 40;
+						voteTitleDiv.appendChild(input);
+					} else {
+						mui.alert("最多15个选项");
+					}
+
+				})
+
+				//展示添加的input	
+				document.querySelector('#voteBtn').addEventListener('tap', function() {
+					voteOption = [];
+					console.log(voteOption.length);
+					var voteTitles = document.getElementsByClassName("voteTitle");
+					for (var i = 0; i < voteTitles.length; i++) {
+						var input = voteTitles[i].cloneNode();
+						input.className = "voteTitleCop"
+						voteOption.push(input);
+					}
+					console.log(voteOption.length);
+					var showVoteTitle = document.getElementById("showVoteTitle");
+					showVoteTitle.innerHTML = "";
+					for (var i = 0; i < voteOption.length; i++) {
+						var input = voteOption[i]
+						showVoteTitle.appendChild(input);
 					}
 				})
-				
-				
+
 			})(mui);
+
+			//班级数据
+			function objectData() {
+				console.log(window.localStorage.getItem('token'))
+				mui.ajax('http://192.168.10.59:8099/phone/selectboard.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						level: activeLevel.value
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var con = data;
+						$('#grade').empty();
+						var html = "";
+						for (var i = 0; i < con.length; i++) {
+							var obj = con[i];
+							html += '<li data-id = "' + obj.id + '">';
+							if (obj.grade != "") {
+								html +=
+									'<div class="mui-input-row mui-checkbox mui-left subset-input">' +
+									'	<label style="text-align: left;">"' + con[i].name + '"</label>' +
+									'	<input name="zhege " type="checkbox" >' +
+									'</div>';
+							}
+							var list = obj.list;
+
+							html +=
+								'<ul class="grade-class flex">'
+							for (var j = 0; j < list.length; j++) {
+								html += '	<li data-ids = "' + list[j].id + '" class="grade-class-li">' +
+									'		<div>' + list[j].name + '</div>' +
+									'	</li>'
+							}
+							html += '</ul>';
+
+							html += '</li>';
+						}
+						document.querySelector('#grade').innerHTML = html;
+						claDIAN();
+						nianji();
+						nianji12();
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+			};
+			//父级全选/父级反选 
+			mui('.parent-input').on('change', 'input', function() {
+				if (this.checked ? "true" : "false" == true) {
+					$("#grade :checkbox").prop("checked", true);
+					$('.grade-class-li').addClass('liAktv')
+				} else {
+					$("#grade :checkbox").prop("checked", false);
+					$('.grade-class-li').removeClass('liAktv')
+				}
+			});
+			//设置全选复选框
+			function nianji() {
+				$("#grade :checkbox").click(function() {
+					allchk();
+				});
+			}
+
+			function allchk() {
+				var chknum = $(".grade-class").length; //选项总个数
+				var chk = $(".liAktv").length;
+
+				if (chknum == chk) { //全选
+					$("#parent-input").prop("checked", true);
+				} else { //不全选
+					$("#parent-input").prop("checked", false);
+				}
+			}
+			//年级全选
+			function nianji12() {
+				mui('.subset-input').on('change', 'input', function() {
+					if (this.checked ? "true" : "false" == true) {
+						$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
+					} else {
+						$(this).parent('div').siblings('ul').find('li').removeClass('liAktv')
+					}
+				});
+			}
+			//点击班级	
+			function claDIAN() {
+				$('.grade-class-li').click(function() {
+					if ($(this).hasClass('liAktv')) {
+						$(this).removeClass('liAktv')
+					} else {
+						$(this).addClass('liAktv');
+					}
+					var li = $(this).parent('ul').find('li').length;
+					var liAktv = $(this).parent('ul').find('.liAktv').length;
+					if (li == liAktv) {
+						$(this).parent('ul').siblings('div').find('input').prop('checked', true)
+					} else {
+						$(this).parent('ul').siblings('div').find('input').prop('checked', false)
+					}
+					allchk();
+				})
+			}
+
+
+			//重置
+			$(".bnt-left").on("tap", function() {
+				$('input:checked').prop('checked', false)
+				$('.grade-class-li').removeClass('liAktv')
+			})
+
+			//确定
+			$('.bnt-rnt').on('tap', function() {
+				$('.liAktv').each(function() {
+					boardIds.push($(this).attr('data-ids'));
+					boardNames.push($(this).find('div').text())
+					console.log(boardIds)
+					console.log(boardNames);
+					objTchu.style.display = 'none';
+				});
+				if (boardIds.length <= 0) {
+					mui.alert('请选择一项或多项')
+				} else {
+					document.getElementById("boardName").innerHTML = boardNames[0] + "等" + boardNames.length + "个班牌";
+				}
+			})
+			//操作活动
+			function operateActive() {
+				//活动对象
+				var data = {
+					activeLevel: activeLevel.value,
+					activeTitile: activeTitile.value,
+					activeContent: activeContent.value,
+					activeChoose: activeChoose.value,
+					activeChooseCount: activeChoose.value,
+					activeType: activeType,
+					activeEndTime: getTimeStamp(activeEndTime.value),
+					pubType: 2
+				}
+
+				//添加选项	
+				var voteTitleArr = []
+				for (var i = 0; i < voteOption.length; i++) {
+					var obj = {
+						voteTitileContent: voteOption[i].value
+					}
+					voteTitleArr.push(obj);
+				}
+				//判断
+				if (voteTitleArr.length <= 0) {
+					mui.alert("选项不能为空！");
+					return;
+				}
+
+				if (boardIds.length <= 0) {
+					mui.alert("请选择对象！");
+					return;
+				}
+
+				mui.ajax('http://192.168.10.59:8099/phone/active/operateactive.do', {
+					data: {
+						active: JSON.stringify(data),
+						voteTitles: JSON.stringify(voteTitleArr),
+						token: window.localStorage.getItem('token'),
+						boardIds: boardIds.join(",")
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						// console.log(data);
+						if (data.code == 200) {
+							console.log(data);
+							// mui.openWindow({
+							// 	id: 'index',
+							// 	url: '../class-committee/index.html'
+							// });
+						} else {
+							mui.alert(data.msg)
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+
+			}
+
+
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				var q = window.location.pathname.substr(1).match(reg_rewrite);
+				if (r != null) {
+					return r[2];
+				} else if (q != null) {
+					return q[2];
+				} else {
+					return null;
+				}
+			}
+
+			//字符串类型转时时间戳
+			function getTimeStamp(str) {
+				str = str.substring(0, 19);
+				str = str.replace(/-/g, '/');
+				var timestamp = new Date(str).getTime();
+				return timestamp;
+			}
+
+			function notBlank(data) {
+				var isTrue = true;
+
+				if (!data) {
+					isTrue = false;
+				}
+				if (data == '') {
+					isTrue = false;
+				}
+				if (data == null) {
+					isTrue = false;
+				}
+				if (data == undefined) {
+					isTrue = false;
+				}
+				if (data == 'null') {
+					isTrue = false;
+				}
+				if (data == 'undefined') {
+					isTrue = false;
+				}
+				return isTrue;
+			}
 		</script>
 	</body>
 
 </html>
-
