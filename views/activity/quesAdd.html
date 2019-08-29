@@ -106,6 +106,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
 			<h1 class="mui-title">创建问卷</h1>
 		</header>
 		<div class="mui-content">
@@ -190,6 +191,7 @@
 		<!-- 对象弹出层 -->
 		<div class="objTchu" id="objTchu">
 			<header class="mui-bar mui-bar-nav">
+				<a class=" mui-icon mui-icon-left-nav mui-pull-left" ></a>
 				<h1 class="mui-title">选择对象</h1>
 			</header>
 			<div class="mui-content obje-content">
@@ -321,8 +323,6 @@
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
 								if (data.code == 200) {
-									boardIds = [];
-									boardNames = [];
 									objTchu.style.display = 'block';
 									objectData();
 								} else {
@@ -359,7 +359,6 @@
 
 				for (var i = 0; i < quesDiv.length; i++) {
 					var obj = quesDiv[i];
-					console.log(obj);
 					obj.className = "quesDiv1";
 					showQues.appendChild(obj);
 				}
@@ -525,6 +524,8 @@
 					boardNames.push($(this).find('div').text())
 					objTchu.style.display = 'none';
 				});
+				boardIds = [...new Set(boardIds)]
+				boardNames = [...new Set(boardNames)]
 				if (boardIds.length <= 0) {
 					mui.alert('请选择一项或多项')
 				} else {
