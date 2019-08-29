@@ -201,7 +201,7 @@
 			function listSearch() {
 				var curr = 1;
 				var _this = this;
-				mui.ajax'/phone/userhonor/selectuserhonorbyclass.do', {
+				mui.ajax('/phone/userhonor/selectuserhonorbyclass.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						currentPage: curr,
@@ -255,7 +255,7 @@
 			};
 
 			function deleteUserHonor(id) {
-				mui.ajax(severAddress+'/phone/userhonor/delete.do', {
+				mui.ajax('/phone/userhonor/delete.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						userHonorId: id,

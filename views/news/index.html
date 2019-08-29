@@ -135,7 +135,7 @@
 				var listClassSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax(severAddress+'/phone/selectnews.do', {
+						mui.ajax('/phone/selectnews.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -183,7 +183,7 @@
 				var listSchoolSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax(severAddress+'/phone/selectnews.do', {
+						mui.ajax('/phone/selectnews.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -229,7 +229,7 @@
 				}
 				
 				var del = function(id) {
-					mui.ajax(severAddress+'/phone/deletenews.do', {
+					mui.ajax('/phone/deletenews.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							newsId: id

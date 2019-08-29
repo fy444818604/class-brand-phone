@@ -201,7 +201,7 @@
 		mui.init()
 		var type = 1;
 		var search = function(id) {
-			mui.ajax(severAddress+'/phone/active/selectactiveforajax.do', {
+			mui.ajax('/phone/active/selectactiveforajax.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					activeId: id
@@ -242,7 +242,7 @@
 		}
 		var search1 = function(id){
 			console.log(id)
-			mui.ajax(severAddress+'/phone/questiontitle/selectlistbyactiveid.do',{
+			mui.ajax('/phone/questiontitle/selectlistbyactiveid.do',{
 				data:{
 					token: window.localStorage.getItem('token'),
 					activeId:id

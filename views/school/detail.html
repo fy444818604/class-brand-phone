@@ -123,7 +123,7 @@
 		<script type="text/javascript">
 			mui.init()
 			var id = window.location.href.split('id=')[1]
-			mui.ajax(severAddress+'/phone/propagandadetail.do',{
+			mui.ajax('/phone/propagandadetail.do',{
 				data:{
 					token:window.localStorage.getItem('token'),
 					id:id
@@ -194,7 +194,7 @@
 				}
 			});
 			document.querySelector('#over').addEventListener('tap',function(){
-				mui.ajax(severAddress+'/phone/stoppropagandastart.do',{
+				mui.ajax('/phone/stoppropagandastart.do',{
 					data:{
 						id:id
 					},

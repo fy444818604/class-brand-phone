@@ -118,7 +118,7 @@
 				var listSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax(severAddress+'/phone/selectimage.do', {
+						mui.ajax('/phone/selectimage.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -171,7 +171,7 @@
 				var listSearch1 = function() {
 					var _this = this;
 					if (curr1 <= count1) {
-						mui.ajax(severAddress+'/phone/selectimage.do', {
+						mui.ajax('/phone/selectimage.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -223,7 +223,7 @@
 
 				//删除活动
 				var activityDel = function(id) {
-					mui.ajax(severAddress+'/phone/deleteimage.do', {
+					mui.ajax('/phone/deleteimage.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id

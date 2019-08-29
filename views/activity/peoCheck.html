@@ -74,7 +74,7 @@
 		<script type="text/javascript">
 			mui.init()
 			var search = function(id,type){
-				mui.ajax(severAddress+'/phone/active/selectuserbyoptionid.do',{
+				mui.ajax('/phone/active/selectuserbyoptionid.do',{
 					data:{
 						token: window.localStorage.getItem('token'),
 						optionId:id,

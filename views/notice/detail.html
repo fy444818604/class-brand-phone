@@ -245,7 +245,7 @@
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
 		var search = function(id) {
-			mui.ajax(severAddress+'/phone/selectnoticedetail.do', {
+			mui.ajax('/phone/selectnoticedetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
@@ -264,7 +264,7 @@
 		
 				}
 			});
-			mui.ajax(severAddress+'/phone/selectboardsbyannouncementid.do', {
+			mui.ajax('/phone/selectboardsbyannouncementid.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id

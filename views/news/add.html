@@ -306,7 +306,7 @@
 			
 			
 			var save = function() {
-				mui.ajax(severAddress+'/phone/insertnews.do', {
+				mui.ajax('/phone/insertnews.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						level: thie_level,
@@ -333,7 +333,7 @@
 			
 			//班级数据
 						function objectData () {
-							mui.ajax(severAddress+'/phone/selectboard.do', {
+							mui.ajax('/phone/selectboard.do', {
 								data: {
 									token: window.localStorage.getItem('token'),
 									level:thie_level
