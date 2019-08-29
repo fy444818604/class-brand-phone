@@ -134,6 +134,7 @@
 			<button type="button" class="mui-btn mui-btn-primary add-slogan">添加班委</button>
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//初始化	
 			mui.init({});
@@ -186,7 +187,7 @@
 			function listSearch() {
 				var curr = 1;
 				var _this = this;
-				mui.ajax('http://192.168.38.98:8080/phone/classcadres/selectclasscadresbyclass.do', {
+				mui.ajax(severAddress+'/phone/classcadres/selectclasscadresbyclass.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						currentPage: curr,

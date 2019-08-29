@@ -123,6 +123,7 @@
 			</ul>
 		</div>
 		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript">
@@ -138,7 +139,7 @@
 				var listSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('http://192.168.38.98:8080/phone/active/selectpagebean.do', {
+						mui.ajax(severAddress+'/phone/active/selectpagebean.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -187,7 +188,7 @@
 				var listSearch1 = function() {
 					var _this = this;
 					if (curr1 <= count1) {
-						mui.ajax('http://192.168.38.98:8080/phone/active/selectpagebean.do', {
+						mui.ajax(severAddress+'/phone/active/selectpagebean.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -235,7 +236,7 @@
 
 				//删除活动
 				var activityDel = function(id) {
-					mui.ajax('http://192.168.38.98:8080/phone/active/delete.do', {
+					mui.ajax(severAddress+'/phone/active/delete.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id

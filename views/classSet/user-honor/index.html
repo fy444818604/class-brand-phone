@@ -151,6 +151,7 @@
 			<button type="button" class="mui-btn mui-btn-primary add-userHonor">添加荣誉</button>
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//dom获取
 			//初始化	
@@ -201,7 +202,7 @@
 			function listSearch() {
 				var curr = 1;
 				var _this = this;
-				mui.ajax('http://192.168.38.98:8080/phone/userhonor/selectuserhonorbyclass.do', {
+				mui.ajax(severAddress+'/phone/userhonor/selectuserhonorbyclass.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						currentPage: curr,
@@ -227,10 +228,10 @@
 									</div>
 									<div class="mui-slider-handle ">
 										<div class="list-title">
-											<img src="http://192.168.38.98:8080${con[i].face}" />${con[i].nickName}
+											<img src="${severAddress}${con[i].face}" />${con[i].nickName}
 										</div>
 										<div class="flex">
-											<div class="slogan-bnt-left"><img src="http://192.168.38.98:8080${con[i].userHonorIcon}" /></div>
+											<div class="slogan-bnt-left"><img src="${severAddress}${con[i].userHonorIcon}" /></div>
 												<div class="slogan-bnt-rnt">
 													<p>${con[i].userHonorName}</p>
 													<div class="">
@@ -255,7 +256,7 @@
 			};
 
 			function deleteUserHonor(id) {
-				mui.ajax('http://192.168.38.98:8080/phone/userhonor/delete.do', {
+				mui.ajax(severAddress+'/phone/userhonor/delete.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						userHonorId: id,

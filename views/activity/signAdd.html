@@ -383,6 +383,7 @@
 				<a href="#option" id="voteBtn" class="mui-btn mui-btn-primary mui-btn-block">确定</a>
 			</div>
 		</div>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
@@ -457,7 +458,7 @@
 					//判断是不是选择了级别
 					if (notBlank(activeLevel.value)) {
 						//判断是不是有选择班牌的权限
-						mui.ajax('http://192.168.38.98:8080/phone/active/jugeboardpower.do', {
+						mui.ajax(severAddress+'/phone/active/jugeboardpower.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								activeLevel: activeLevel.value
@@ -549,7 +550,7 @@
 			//班级数据
 			function objectData() {
 				console.log(window.localStorage.getItem('token'))
-				mui.ajax('http://192.168.38.98:8080/phone/selectboard.do', {
+				mui.ajax(severAddress+'/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						level: activeLevel.value
@@ -707,7 +708,7 @@
 					return;
 				}
 
-				mui.ajax('http://192.168.38.98:8080/phone/active/operateactive.do', {
+				mui.ajax(severAddress+'/phone/active/operateactive.do', {
 					data: {
 						active: JSON.stringify(data),
 						voteTitles: JSON.stringify(voteTitleArr),

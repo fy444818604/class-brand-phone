@@ -165,6 +165,7 @@
 			<button type="button" class="mui-btn mui-btn-primary add-classHonours">添加荣誉</button>
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//dom获取
 			var className = document.getElementById('className');
@@ -219,7 +220,7 @@
 			function listSearch() {
 				var curr = 1;
 				var _this = this;
-				mui.ajax('http://192.168.38.98:8080/phone/classhonor/selectclasshonorbyclass.do', {
+				mui.ajax(severAddress+'/phone/classhonor/selectclasshonorbyclass.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						currentPage: curr,
@@ -269,7 +270,7 @@
 			};
 
 			function deleteClassHonor(id) {
-				mui.ajax('http://192.168.38.98:8080/phone/classhonor/delete.do', {
+				mui.ajax(severAddress+'/phone/classhonor/delete.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						classHonorId: id

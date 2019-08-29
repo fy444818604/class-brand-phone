@@ -112,6 +112,7 @@
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			var classCadresId = getQueryString("classCadresId");
 			var workId = getQueryString("workId");
@@ -123,7 +124,7 @@
 			}(mui))
 			//查询现有学生接口
 			function existingTeacher(str) {
-				mui.ajax('http://192.168.38.98:8080/phone/user/selectstudentlistbyclassid.do', {
+				mui.ajax(severAddress+'/phone/user/selectstudentlistbyclassid.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						classId:window.localStorage.getItem('classId'),
@@ -143,14 +144,14 @@
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox" checked  value="${con[i].id}" />
-												<img src="http://192.168.38.98:8080${con[i].face}"/>${con[i].text}
+												<img src=${severAddress}"${con[i].face}"/>${con[i].text}
 											</li>`
 									document.getElementById('done').classList.remove("mui-disabled");
 								} else {
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox"  value="${con[i].id}" />
-												<img src="http://192.168.38.98:8080${con[i].face}"/>${con[i].text}
+												<img src=${severAddress}"${con[i].face}"/>${con[i].text}
 										</li>`
 
 								}

@@ -135,6 +135,7 @@
 			<button type="button" class="mui-btn mui-btn-primary add-slogan">添加老师</button>
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//初始化	
 			mui.init();
@@ -150,7 +151,7 @@
 				// 班级活动查询
 				var listSearch = function() {
 					var _this = this;
-					mui.ajax('http://192.168.38.98:8080/phone/classteacher/selectclassteacherbyclass.do', {
+					mui.ajax(severAddress+'/phone/classteacher/selectclassteacherbyclass.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							currentPage: curr,
@@ -192,7 +193,7 @@
 				listSearch();
 				//删除任课老师
 				var delTeacher = function(id) {
-					mui.ajax('http://192.168.38.98:8080/phone/classteacher/delete.do', {
+					mui.ajax(severAddress+'/phone/classteacher/delete.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							classTeacherId: id

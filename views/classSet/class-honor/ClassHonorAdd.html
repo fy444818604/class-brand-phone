@@ -157,6 +157,7 @@
 			<!-- </div> -->
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//获取DOM对象
 			var classHonorIcon = document.getElementById('classHonorIcon');
@@ -187,7 +188,7 @@
 					var formData = new FormData();
 					var files = this.files;
 					formData.append("file", files[0]);
-					mui.ajax('http://192.168.38.98:8080/uploadimg.do', {
+					mui.ajax(severAddress+'/uploadimg.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -219,7 +220,7 @@
 			//添加、编辑班级荣誉	
 			function operateClassHonor() {
 				if (notBlank(classHonorId)) {
-					mui.ajax('http://192.168.38.98:8080/phone/classhonor/update.do', {
+					mui.ajax(severAddress+'/phone/classhonor/update.do', {
 						data: {
 							classHonorId: classHonorId,
 							classId: window.localStorage.getItem('classId'),
@@ -249,7 +250,7 @@
 					});
 				} else {
 
-					mui.ajax('http://192.168.38.98:8080/phone/classhonor/insert.do', {
+					mui.ajax(severAddress+'/phone/classhonor/insert.do', {
 						data: {
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),

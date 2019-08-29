@@ -193,6 +193,7 @@
 		</div>
 	</body>
 	<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		var classCadresId = getQueryString("classCadresId");
 		var workId = getQueryString("workId");
@@ -265,7 +266,7 @@
 		function operateClassCadre(postion) {
 			if (notBlank(classCadresId)) {
 				console.log("update")
-				mui.ajax('http://192.168.38.98:8080/phone/classcadres/update.do', {
+				mui.ajax(severAddress+'/phone/classcadres/update.do', {
 					data: {
 						classCadresId: classCadresId,
 						classId: window.localStorage.getItem('classId'),
@@ -293,7 +294,7 @@
 					}
 				});
 			} else {
-				mui.ajax('http://192.168.38.98:8080/phone/classcadres/insert.do', {
+				mui.ajax(severAddress+'/phone/classcadres/insert.do', {
 					data: {
 						classId: window.localStorage.getItem('classId'),
 						workId: workId,

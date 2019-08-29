@@ -356,6 +356,7 @@
 		</div>
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
 			//获取dom对象
@@ -520,7 +521,7 @@
 			//班级数据
 			function objectData() {
 				console.log(window.localStorage.getItem('token'))
-				mui.ajax('http://192.168.38.98:8080/phone/selectboard.do', {
+				mui.ajax(severAddress+'/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						level: activeLevel.value
@@ -692,7 +693,7 @@
 					return;
 				}
 
-				mui.ajax('http://192.168.38.98:8080/phone/active/operateactive.do', {
+				mui.ajax(severAddress+'/phone/active/operateactive.do', {
 					data: {
 						active: JSON.stringify(data),
 						questionnaireTitleVos: JSON.stringify(questionnaireTitleVos),
