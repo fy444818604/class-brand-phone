@@ -76,6 +76,89 @@
 				line-height: 3.07rem;
 				text-align: center;
 			}
+			/*内容*/
+			.classHonuours {
+				padding: 1rem 1.07rem 0rem 1.07rem;
+				background: #FFFFFF;
+				height: calc(100vh - 6.263rem);
+			
+			}
+			
+			.classHonuours-icon {
+				height: 12.933rem;
+				background: #f4f7fa;
+				text-align: center;
+			
+			}
+			
+			.classHonuours-icon-top {
+				position: relative;
+				bottom: 0rem;
+				left: 0rem;
+				width: 100%;
+				height: 100%;
+				display: inherit;
+			}
+			
+			.classHonuours-icon-top>img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.classHonuours-icon-top>p {
+				color: #c0c4cc;
+				margin-top: 1.17rem;
+			}
+			
+			.describe {
+				margin-top: 1.07rem;
+				font-size: 1rem;
+			}
+			
+			.describe-title {
+				height: 3.5rem;
+				line-height: 3.5rem;
+				border-bottom: 1px solid #ebebeb;
+				border-top: 1px solid #ebebeb;
+			}
+			
+			/*anniu*/
+			.add-classHonours {
+				width: 100%;
+				height: 3.07rem;
+				position: fixed;
+				bottom: 0rem;
+				left: 0rem;
+				border-radius: 0rem;
+			}
+			
+			/*上传*/
+			.a-upload {
+				padding: 4px 10px;
+				height: 100%;
+				line-height: 20px;
+				position: relative;
+				cursor: pointer;
+				color: #888;
+				background: url(../../img/bg-img.png)no-repeat;
+				background-size:100% 100% ;
+				border-radius: 4px;
+				overflow: hidden;
+				display: inline-block;
+				*display: inline;
+				*zoom: 1
+				
+			}
+			.a-upload input {
+				height: 100%;
+				position: absolute;
+				font-size: 100px;
+				right: 0;
+				top: 0;
+				opacity: 0;
+				filter: alpha(opacity=0);
+				cursor: pointer
+			}
 		</style>
 	</head>
 
@@ -102,6 +185,18 @@
 					<div class="theClass-rnt jonsData">请选择对象</div>
 			    	<div><a class="mui-navigate-right"></a></div>
 			    </li>
+				<li class="addIMG">
+						<!--图标-->
+						<div class="classHonuours-icon">
+							<a class="classHonuours-icon-top a-upload" href="javascript:void(0)" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+								<input type="file" id="file" />
+								<img id="classHonorIcon" src="" alt="" />
+							</a>
+							<div>
+								<input type="hidden" id="imgUrl" />
+							</div>
+						</div>
+				</li>
 			</ul>
 			<!--标题/正文-->
 			<ul class="mui-table-view theInput">
@@ -144,6 +239,7 @@
 		<script type="text/javascript">
 			var this_level = 2;
 			var recognitionObjectType = 1;
+			var recognitionIcon = "";
 			mui.init();
 			var objId;
 			
@@ -189,6 +285,7 @@
 						recognitionLevel: this_level,
 						recognitionObject:objId,
 						recognitionObjectType:recognitionObjectType,
+						recognitionIcon:recognitionIcon,
 						recognitionContent:$('#recognitionContent').val(),
 						recognitionRemark:$('#recognitionRemark').val(),
 						type:1
@@ -219,10 +316,11 @@
 						var level = this_level;
 						var content = $('#recognitionContent').val();
 						var remark = $('#recognitionRemark').val();
+						var icon = recognitionIcon;
 						if (e.index == 0) {
 							mui.openWindow({
 								id: 'index',
-								url: './choose-class.html?level='+level+'&content='+content+'&remark='+remark
+								url: './choose-class.html?level='+level+'&content='+content+'&remark='+remark+'&icon='+icon
 							});
 						}else{
 							mui.openWindow({
@@ -232,6 +330,34 @@
 						}
 					})
 				})
+			})
+			
+			mui(".mui-content").on("change", "#file", function() {
+				var formData = new FormData();
+				var files = this.files;
+				formData.append("file", files[0]);
+				mui.ajax('/uploadimg.do', {
+					data: formData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					processData: false,
+					contentType: false,
+					cache: false,
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						// console.log(data);
+						if (data.code == 200) {
+							recognitionIcon = data.data;
+							document.getElementById("classHonorIcon").setAttribute("src", severAddress + data.data)
+						} else {
+							mui.alert(data.msg)
+						}
+
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
 			})
 			
 		</script>

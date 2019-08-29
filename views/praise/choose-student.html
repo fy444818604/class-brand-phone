@@ -239,11 +239,12 @@
 					var level = theRequest.level;
 					var content =  theRequest.content
 					var remark =  theRequest.remark
+					var icon = theRequest.icon
 					var id=$("input[type='checkbox']:checked").val();
 					var text = $("input[type='checkbox']:checked").attr('data-text');
 					mui.openWindow({
 						id: 'index',
-						url: './add.html?id='+id+'&text=' + text+'&type=1&level='+level+'&content='+content+'&remark='+remark
+						url: './add.html?id='+id+'&text=' + text+'&type=1&level='+level+'&content='+content+'&remark='+remark+'&icon='+icon
 					});
 				}) 
 				//统计完成数量
