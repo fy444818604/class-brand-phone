@@ -174,6 +174,121 @@ body {
 	width: 100%;
 }
 
-#segmentedControl>a{
+#segmentedControl>a {
 	touch-action: none;
+}
+
+
+/* 对象 */
+.obje-content {
+	height: 100%;
+	padding-top: 0.77rem;
+}
+
+.obje-content-content {
+	height: calc(100vh - 6.66rem);
+	background: #FFFFFF;
+	padding: 0rem 1rem;
+}
+
+/*复选框的样式*/
+.mui-checkbox input[type=checkbox]:before {
+	content: '\e413';
+	font-size: 1.5rem;
+}
+
+.li-label input[type=checkbox]:before {
+	font-size: 3rem;
+	border: none;
+	color: #edf1f6;
+}
+
+.mui-checkbox.mui-left input[type=checkbox],
+.mui-radio.mui-left input[type=radio] {
+	left: 0px;
+}
+
+.mui-checkbox input[type=checkbox]:checked:before {
+	content: '\e443';
+}
+
+.li-label input[type=checkbox]:checked:before {
+	content: '';
+}
+
+.mui-checkbox.mui-left label,
+.mui-radio.mui-left label {
+	padding-left: 30px;
+	font-size: 1rem;
+	margin-top: -3px;
+}
+
+.mui-input-row label {
+	padding: 11px 15px;
+}
+
+/*布局*/
+.obje-generations {
+	padding-top: 1rem;
+}
+
+.obje-grade {
+	height: calc(100vh - 10rem);
+	overflow: auto;
+}
+
+.obje-grade>li {
+	margin-bottom: 1rem;
+}
+
+.obje-grade-class>li {
+	width: 33.33%;
+	height: 4.07rem;
+	margin-top: 3%;
+}
+
+.obje-grade>li>.mui-left {
+	margin-top: 0.5rem;
+}
+
+.obje-grade-class-li div {
+	width: 90%;
+	margin: 0 auto;
+	background: #edf1f6;
+	height: 4.07rem;
+	line-height: 4.08rem;
+	text-align: center;
+}
+.liAktv>div {
+	background: #E7f1ff;
+	color: #3B8BFF;
+}
+/*按钮*/
+.obje-bnt>div {
+	height: 3.7rem;
+	text-align: center;
+	line-height: 3.7rem;
+	font-size: 1rem;
+}
+
+.obje-bnt-left {
+	width: 30%;
+	color: #3b8bff;
+}
+
+.obje-bnt-rnt {
+	width: 70%;
+	background: #3b8bff;
+	color: #FFFFFF;
+}
+
+.objTchu {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 99999;
+	display: none;
+
 }
