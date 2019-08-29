@@ -321,8 +321,6 @@
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
 								if (data.code == 200) {
-									boardIds = [];
-									boardNames = [];
 									objTchu.style.display = 'block';
 									objectData();
 								} else {
@@ -359,7 +357,6 @@
 
 				for (var i = 0; i < quesDiv.length; i++) {
 					var obj = quesDiv[i];
-					console.log(obj);
 					obj.className = "quesDiv1";
 					showQues.appendChild(obj);
 				}
@@ -525,6 +522,8 @@
 					boardNames.push($(this).find('div').text())
 					objTchu.style.display = 'none';
 				});
+				boardIds = [...new Set(boardIds)]
+				boardNames = [...new Set(boardNames)]
 				if (boardIds.length <= 0) {
 					mui.alert('请选择一项或多项')
 				} else {

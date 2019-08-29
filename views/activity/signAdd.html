@@ -152,11 +152,11 @@
 					<div class="mui-input-row flex justify-bet mt12 Hauto" style="padding: 0 15px; align-items: center;">
 						<div style="padding: 0px 0px;">选项</div>
 						<a class="iconfont icon-add" href="#option" style="color: #3B8BFF;"></a>
-					
+
 					</div>
 					<div id="showVoteTitle">
 						<ul class="addLI" id="showLi">
-					
+
 						</ul>
 					</div>
 					<div class="mui-input-row Hauto">
@@ -350,8 +350,6 @@
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
 								if (data.code == 200) {
-									boardIds = [];
-									boardNames = [];
 									objTchu.style.display = 'block';
 									objectData();
 								} else {
@@ -547,6 +545,8 @@
 					boardNames.push($(this).find('div').text());
 					objTchu.style.display = 'none';
 				});
+				boardIds = [...new Set(boardIds)]
+				boardNames = [...new Set(boardNames)]
 				if (boardIds.length <= 0) {
 					mui.alert('请选择一项或多项')
 				} else {
