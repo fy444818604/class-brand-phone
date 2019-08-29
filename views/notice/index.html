@@ -128,6 +128,7 @@
 				// 班级通知查询
 				var listSearch = function() {
 					var _this = this;
+					console.log(_this)
 					if (curr <= count) {
 						mui.ajax('http://192.168.38.175:8080/phone/selectnotice.do', {
 							data: {
@@ -174,6 +175,7 @@
 				//校级通知查询
 				var listSearch1 = function() {
 					var _this = this;
+					console.log(_this)
 					if (curr1 <= count1) {
 						mui.ajax('http://192.168.38.175:8080/phone/selectnotice.do', {
 							data: {
@@ -230,10 +232,9 @@
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
 							if (data.code == 200) {
-								// curr = 1
-								// curr1 = 1
-								// listSearch()
-								// listSearch1()
+								window.location.reload();
+							}else{
+								mui.alert(data.msg)
 							}
 						},
 						error: function(xhr, type, errorThrown) {

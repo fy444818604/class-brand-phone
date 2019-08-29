@@ -139,7 +139,7 @@
 									html +=
 										`<li class="mui-table-view-cell" data-id="${con[i].id}">
 											<div class="mui-slider-right mui-disabled">
-												<a  class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+												<a id="${con[i].id}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 											</div>
 											<div class="mui-slider-handle">
 												<div class="mui-table-cell">
@@ -191,7 +191,7 @@
 									html +=
 										`<li class="mui-table-view-cell" data-id="${con[i].id}">
 											<div class="mui-slider-right mui-disabled">
-												<a  class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
+												<a id="${con[i].id}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 											</div>
 											<div class="mui-slider-handle">
 												<div class="mui-table-cell">
@@ -233,10 +233,9 @@
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
 							if (data.code == 200) {
-								// curr = 1
-								// curr1 = 1
-								// listSearch()
-								// listSearch1()
+								window.location.reload();
+							}else{
+								mui.alert(data.msg)
 							}
 						},
 						error: function(xhr, type, errorThrown) {

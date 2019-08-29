@@ -12,7 +12,7 @@
 		</script>
 		<style type="text/css">
 			.login-wrap {
-				margin-top: 85px;
+				margin-top: 85px;	
 				padding: 0 8%;
 			}
 
@@ -97,12 +97,14 @@
 					if (data.code == 200) {
 						window.localStorage.setItem('token', data.data.token)
 						window.localStorage.setItem('classId', data.data.classId)
-							window.localStorage.setItem('isCharge', data.data.isCharge)
+						window.localStorage.setItem('isCharge', data.data.isCharge)
 						mui.openWindow({
 							id: 'index',
 							 // url:'./activity/index.html'
 							url: './school/index.html'
 						});
+					}else{
+						mui.alert(data.msg);
 					}
 				},
 				error: function(xhr, type, errorThrown) {}

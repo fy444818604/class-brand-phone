@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>发视频</title>
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
+	<link href="../../css/public.css" rel="stylesheet" />
+    <style type="text/css">
+	.mui-content{
+		text-align: center;
+	}
+	.mui-content img{
+		height: 87pt;
+		width: 91pt;
+		margin-top: 51pt;
+	}
+	.tip{
+		margin-top: 13pt;
+	}
+	.bind-button{
+		margin-top: 13pt;
+	}
+	.unbind-button{
+		margin-top: 13pt;
+	}
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">微信绑定</h1>
+	</header>
+	<div class="mui-content">
+
+	</div>
+	<script src="../../js/mui.js"></script>
+	<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+      	mui.init();
+		var search = function() {
+			mui.ajax('http://192.168.38.175:8080/phone/selectbindwechat.do', {
+				data: {
+					token: window.localStorage.getItem('token')
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if (data.data != null && data.data != "") {
+						var html = 
+						`<img src="../../img/wechat_icon.png" alt="" />
+						<div class="tip">微信名称(已绑定)</div>
+						<a class="mui-btn mui-btn-primary mui-btn-block unbind-button">解绑</a>`;
+						document.querySelector('.mui-content').innerHTML = html;
+						document.querySelector('.unbind-button').addEventListener('tap',function(){
+							var btnArray = ['否', '是'];
+							mui.confirm('解绑微信后你将无法使用微信登录，你确定要解绑吗？', null, btnArray, function(e) {
+								if (e.index == 1) {
+									unbind();
+								}
+							})
+						})
+					} else {
+						var html = 
+						`<img src="../../img/wechat_icon.png" alt="" />
+						<div class="tip">还未绑定微信</div>
+						<a class="mui-btn mui-btn-primary mui-btn-block bind-button">立即绑定</a>`;
+						document.querySelector('.mui-content').innerHTML = html;
+						document.querySelector('.bind-button').addEventListener('tap',function(){
+						})
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					
+				}
+			});
+		}
+		mui.ready(function() {
+			search();
+		})
+		
+		var bind = function() {
+			mui.ajax('http://192.168.38.175:8080/phone/bindwechat.do', {
+				data: {
+					token: window.localStorage.getItem('token'),
+					weChatId:weChatId
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if(data.code==200){
+						var html =
+						`<img src="../../img/wechat_icon.png" alt="" />
+						<div class="tip">微信名称(已绑定)</div>
+						<a class="mui-btn mui-btn-primary mui-btn-block unbind-button">解绑</a>`;
+						document.querySelector('.mui-content').innerHTML = html;
+						document.querySelector('.unbind-button').addEventListener('tap',function(){
+							var btnArray = ['否', '是'];
+							mui.confirm('解绑微信后你将无法使用微信登录，你确定要解绑吗？', null, btnArray, function(e) {
+								if (e.index == 1) {
+									unbind();
+								}
+							})
+						})
+					}else{
+						mui.alert(data.msg);
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					
+				}
+			});
+		}
+		
+		var unbind = function() {
+			mui.ajax('http://192.168.38.175:8080/phone/unbindwechat.do', {
+				data: {
+					token: window.localStorage.getItem('token')
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if(data.code==200){
+						var html =
+						`<img src="../../img/wechat_icon.png" alt="" />
+						<div class="tip">还未绑定微信</div>
+						<a class="mui-btn mui-btn-primary mui-btn-block bind-button">立即绑定</a>`;
+						document.querySelector('.mui-content').innerHTML = html;
+						document.querySelector('.bind-button').addEventListener('tap',function(){
+						})
+					}else{
+						mui.alert(data.msg);
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					
+				}
+			});
+		}
+    </script>
+</body>
+</html>
