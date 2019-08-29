@@ -219,7 +219,7 @@
 			function listSearch() {
 				var curr = 1;
 				var _this = this;
-				mui.ajax('http://192.168.10.59:8099/phone/classhonor/selectclasshonorbyclass.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/classhonor/selectclasshonorbyclass.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						currentPage: curr,
@@ -244,7 +244,7 @@
 										<a class="mui-btn mui-btn-red mui-icon iconfont icon-edit" id="${con[i].classHonorId}&${con[i].classHonorName}&${con[i].classHonorIcon}&${con[i].classHonorRemark}"></a>
 									</div>
 									<div class="mui-slider-handle flex">
-										<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].classHonorIcon}"/></div>
+										<div class="slogan-bnt-left"><img src="http://192.168.38.98:8080${con[i].classHonorIcon}"/></div>
 							    		<div class="slogan-bnt-rnt">
 							    			<p>${con[i].classHonorName}</p>
 							    			<div class="">
@@ -269,7 +269,7 @@
 			};
 
 			function deleteClassHonor(id) {
-				mui.ajax('http://192.168.10.59:8099/phone/classhonor/delete.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/classhonor/delete.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						classHonorId: id

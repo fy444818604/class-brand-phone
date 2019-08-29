@@ -247,7 +247,7 @@
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
 		var search = function(id) {
-			mui.ajax('http://192.168.38.175:8080/phone/selectnoticedetail.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/selectnoticedetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
@@ -265,7 +265,7 @@
 		
 				}
 			});
-			mui.ajax('http://192.168.38.175:8080/phone/selectvideodetail.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/selectvideodetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
@@ -283,7 +283,7 @@
 					
 				}
 			});
-			mui.ajax('http://192.168.38.175:8080/phone/selectboardsbyannouncementid.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/selectboardsbyannouncementid.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id

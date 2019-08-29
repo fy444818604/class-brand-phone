@@ -118,7 +118,7 @@
 				var listSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('http://192.168.38.175:8080/phone/selectimage.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/selectimage.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -171,7 +171,7 @@
 				var listSearch1 = function() {
 					var _this = this;
 					if (curr1 <= count1) {
-						mui.ajax('http://192.168.38.175:8080/phone/selectimage.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/selectimage.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -223,7 +223,7 @@
 
 				//删除活动
 				var activityDel = function(id) {
-					mui.ajax('http://192.168.38.175:8080/phone/deleteimage.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/deleteimage.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id

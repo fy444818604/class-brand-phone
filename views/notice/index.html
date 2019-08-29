@@ -130,7 +130,7 @@
 					var _this = this;
 					console.log(_this)
 					if (curr <= count) {
-						mui.ajax('http://192.168.38.175:8080/phone/selectnotice.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/selectnotice.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -177,7 +177,7 @@
 					var _this = this;
 					console.log(_this)
 					if (curr1 <= count1) {
-						mui.ajax('http://192.168.38.175:8080/phone/selectnotice.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/selectnotice.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -222,7 +222,7 @@
 
 				//删除活动
 				var activityDel = function(id) {
-					mui.ajax('http://192.168.38.175:8080/phone/deletenotice.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/deletenotice.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id

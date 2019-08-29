@@ -286,7 +286,7 @@
 			var _this = this;
 			var title = $('#title').val();
 			var content = $('#content').val();
-			mui.ajax('http://192.168.38.175:8080/phone/insertnotice.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/insertnotice.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					boardIds: boardIds,
@@ -335,7 +335,7 @@
 		
 		//班级数据
 		function objectData () {
-			mui.ajax('http://192.168.38.175:8080/phone/selectboard.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/selectboard.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					level:level

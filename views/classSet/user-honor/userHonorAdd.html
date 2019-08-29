@@ -163,7 +163,7 @@
 			} else {
 				if (notBlank(userHonorId)) {
 					nickName.value = window.localStorage.getItem('nickName')
-					userHonorIcon.setAttribute('src', 'http://192.168.10.59:8099' + window.localStorage.getItem('userHonorIcon'))
+					userHonorIcon.setAttribute('src', 'http://192.168.38.98:8080' + window.localStorage.getItem('userHonorIcon'))
 					userHonorRemark.value = window.localStorage.getItem('userHonorRemark');
 					userHonorName.value = window.localStorage.getItem('userHonorName');
 				} else {
@@ -187,7 +187,7 @@
 					var files = this.files;
 					formData.append("file", files[0]);
 					console.log(formData);
-					mui.ajax('http://192.168.10.59:8099/uploadimg.do', {
+					mui.ajax('http://192.168.38.98:8080/uploadimg.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -199,7 +199,7 @@
 							// console.log(data);
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
-								document.getElementById("userHonorIcon").setAttribute("src", "http://192.168.10.59:8099" + data.data)
+								document.getElementById("userHonorIcon").setAttribute("src", "http://192.168.38.98:8080" + data.data)
 								window.localStorage.setItem('userHonorIcon', data.data)
 							} else {
 								mui.alert(data.msg)
@@ -230,7 +230,7 @@
 			//添加、编辑个人荣誉
 			function operateUserHonor() {
 				if (notBlank(userHonorId)) {
-					mui.ajax('http://192.168.10.59:8099/phone/userhonor/update.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/userhonor/update.do', {
 						data: {
 							userHonorId: userHonorId,
 							classId: window.localStorage.getItem('classId'),
@@ -261,7 +261,7 @@
 					});
 				} else {
 
-					mui.ajax('http://192.168.10.59:8099/phone/userhonor/insert.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/userhonor/insert.do', {
 						data: {
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),

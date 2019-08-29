@@ -40,7 +40,7 @@
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
 		var search = function() {
-			mui.ajax('http://192.168.38.175:8080/phone/selectbindwechat.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/selectbindwechat.do', {
 				data: {
 					token: window.localStorage.getItem('token')
 				},
@@ -82,7 +82,7 @@
 		})
 		
 		var bind = function() {
-			mui.ajax('http://192.168.38.175:8080/phone/bindwechat.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/bindwechat.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					weChatId:weChatId
@@ -116,7 +116,7 @@
 		}
 		
 		var unbind = function() {
-			mui.ajax('http://192.168.38.175:8080/phone/unbindwechat.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/unbindwechat.do', {
 				data: {
 					token: window.localStorage.getItem('token')
 				},

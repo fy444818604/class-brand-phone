@@ -186,7 +186,7 @@
 			function listSearch() {
 				var curr = 1;
 				var _this = this;
-				mui.ajax('http://192.168.10.59:8099/phone/classcadres/selectclasscadresbyclass.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/classcadres/selectclasscadresbyclass.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						currentPage: curr,
@@ -212,7 +212,7 @@
 										<a class="mui-btn mui-btn-red mui-icon iconfont  icon-edit" id="${con[i].classCadresId}&${con[i].workId}&${con[i].postion}" ></a>
 									</div>
 									<div class="mui-slider-handle flex">
-										<div class="slogan-bnt-left"><img src="http://192.168.10.59:8099${con[i].userFace}"/></div>
+										<div class="slogan-bnt-left"><img src="http://192.168.38.98:8080${con[i].userFace}"/></div>
 										<div >${con[i].nickName}</div>
 										<div class="slogan-bnt-rnt">${con[i].postion}</div>
 									</div>
@@ -234,7 +234,7 @@
 
 			//删除班委
 			function deleteclassCadres(id) {
-				mui.ajax('http://192.168.10.59:8099/phone/classcadres/delete.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/classcadres/delete.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						classCadresId: id
