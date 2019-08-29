@@ -61,22 +61,35 @@
 				align-items: center;
 				border-radius: 100%;
 			}
+			.school-list-img-wrap{
+				padding-bottom: 56%;
+				position: relative;
+			}
+			.school-list-img-wrap>img,.school-list-img-wrap>video{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">欢迎杨丽市长来校参观</h1>
+			<h1 class="mui-title"></h1>
 		</header>
 		<div class="mui-content">
 			<div class="school-detail-wrap">
-				<div class="state-wrap">
+				<!-- <div class="state-wrap">
 					<img class="state-img" src="../../img/school.png" alt="">
-				</div>
-				<div class="school-list-wrap">
+				</div> -->
+				<!-- <div class="school-list-wrap">
 					<div class="school-list-img">
-						<img src="../../img/city-1.jpg" alt="">
+						<div class="school-list-img-wrap">
+							<img src="../../img/city-1.jpg" alt="">
+						</div>
 						<div class="school-edit">
 							<i class="iconfont icon-edit"></i>
 						</div>
@@ -102,13 +115,102 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
-			<button type="button" href="#" class="mui-btn mui-btn-primary mui-btn-block">立即结束</button>
+			<button type="button" href="#" id="over" class="mui-btn mui-btn-primary mui-btn-block">立即结束</button>
 		</div>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
 			mui.init()
+			var id = window.location.href.split('id=')[1]
+			mui.ajax('http://192.168.38.98:8080/phone/propagandadetail.do',{
+				data:{
+					token:window.localStorage.getItem('token'),
+					id:id
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'get',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
+					console.log(data)
+					var html = '';
+					var state = '';
+					document.querySelector('.mui-title').innerHTML = data.data.propagandaName
+					if(data.data.stutas == '1'){
+						state = '../../img/school.png';
+					}else{
+						state = '../../img/school1.png';
+					}
+					html += `<div class="state-wrap">
+								<img class="state-img" src="${state}" alt="">
+							</div>
+							<div class="school-list-wrap">
+								<div class="school-list-img">`
+								if(data.data.backgroundType == 1){
+									html += `<div class="school-list-img-wrap" style="background:${data.data.backgroundColor}">`;
+								}else if(data.data.backgroundType == 2){
+									html += `<div class="school-list-img-wrap">
+										<img src="${'http://192.168.38.98:8080'+data.data.backgroundUrl}" alt="">`;
+								}else if(data.data.backgroundType == 3){
+									html += `<div class="school-list-img-wrap">
+										<video src="${'http://192.168.38.98:8080'+data.data.backgroundUrl}" autoplay="autoplay" loop="loop"></video>`;
+								}else{
+									html += `<div class="school-list-img-wrap">
+										<video src="${data.data.backgroundUrl}" autoplay="autoplay" loop="loop"></video>`;
+								}
+							html +=`</div>
+									<div class="school-edit">
+										<i class="iconfont icon-edit"></i>
+									</div>
+								</div>
+								<div>
+									<div class="school-detail-row">
+										<img src="../../img/detail-title.png" alt="">
+										<span>${data.data.propagandaName}</span>
+									</div>
+									<div class="school-detail-row">
+										<img src="../../img/detail-time.png" alt="">
+										<span>${data.data.startTime.substring(5,16)} 至 ${data.data.endTime.substring(5,16)}</span>
+									</div>
+									<div class="mui-table-view-cell mui-collapse">
+										<a href="#" class="mui-navigate-right">
+											<img src="../../img/school-board.png" alt="">
+											<span>发布班牌${data.data.boards!=undefined?data.data.boards.length:'0'}</span>
+										</a>
+										<div class="mui-collapse-content">`
+								if(data.data.boards != undefined){
+									for(var i =0;i<data.data.boards.length;i++){
+										html += `<div>${data.data.boards[i].class_name}</div>`
+									}
+								}
+								html += `</div>
+									</div>
+								</div>
+							</div>`
+					document.querySelector('.school-detail-wrap').innerHTML = html;
+				},
+				error:function(xhr,type,errorThrown){
+					
+				}
+			});
+			document.querySelector('#over').addEventListener('tap',function(){
+				mui.ajax('http://192.168.38.98:8080/phone/stoppropagandastart.do',{
+					data:{
+						id:id
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+						if(data.code == 200){
+							location.reload()
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+			})
 		</script>
 	</body>
 

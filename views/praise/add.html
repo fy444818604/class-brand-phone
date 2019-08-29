@@ -9,82 +9,183 @@
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
 		<link href="../../css/public.css" rel="stylesheet" />
 		<style>
-			.Hauto>div{
-				padding: 11px 15px;
+			.mui-bar-nav~.mui-content {
+			    padding-top: 57px;
 			}
-			.mui-input-row>a{
-				height: 40px;
-				line-height: 40px;
+			.mui-content{
+				padding-top: 0.87rem;
+			}
+			.mui-content>.mui-table-view:first-child {
+			    margin-top: 0px;
+			}
+			.mui-table-view:after,.mui-table-view:before {
+			    background: none;
+			}
+			.mui-table-view-cell {
+			    padding: 15px 15px;
+			}
+			.mui-table-view-cell>a:not(.mui-btn) {
+			    margin: -15px -15px;
+			}
+			.theClass-left{
+				width: 4.6rem;
+				/*color: #303133;
+				font-size: ;*/
+			}
+			.theClass-rnt{
+				width: 70%;
 				color: #c0c4cc;
 			}
-			.mui-input-row .mui-icon{
-				position: absolute;
-				right: 0.8rem;
-				top: 50%;
-				margin-top: -12px;
+			.theClass-rnt a{
 				color: #c0c4cc;
+				display: block;	
 			}
-			.mui-content {
-				height: 100vh;
+			.mui-popover.mui-popover-action .mui-table-view {
+			     color: #303133;
 			}
-			.add-form{
-				height: calc(100% - 59px);
+			/*正文/标题*/
+			.theInput{
+				margin-top: 0.87rem;
+				height: calc(100vh - 14.55rem);
 			}
-			.mui-btn-block{
-				margin-bottom: 0;
+			input[type=text]{
+			  border: none;
+			  margin-bottom: 0px;
+			   height: 20px;
+			   padding: 0px 0px;
+			   font-size: 1rem;
+			}
+			input::-webkit-input-placeholder {
+			    /* placeholder颜色  */
+			    color: #c0c4cc;
+			     font-size: 1rem;
+			    
+			}
+			textarea{
+				-webkit-user-select: auto;
+				border: none;
+				font-size: 1rem;
+				padding: 10px 0px;
+			}
+			/*发送通知*/
+			.add{
+				height: 3.07rem;
+				background: #3B8BFF;
+				color: #FFFFFF;
+				font-size: 1.07rem;
+				line-height: 3.07rem;
+				text-align: center;
 			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" target="_blank" href="/index.html"></a>
 			<h1 class="mui-title">发表彰</h1>
 		</header>
-		<div class="mui-content">
-			<div class="add-form">
-				<div class="mui-input-group">
-					<div class="mui-input-row mt12">
-						<label>级别</label>
-						<a href="#level">请选择级别</a>
-					</div>
-					<div class="mui-input-row">
-						<label>对象</label>
-						<a href="#level">请选择对象</a>
-						<span class="mui-icon mui-icon-forward"></span>
-					</div>
-				</div>
-				<div class="mui-input-group">
-					<div class="mui-input-row mt12">
-						<label>通报类型</label>
-						<input type="text" placeholder="请输入通报类型">
-					</div>
-					<div class="mui-input-row Hauto">
-						<div>通报说明</div>
-						<textarea id="textarea" rows="5" placeholder="请输入通报说明"></textarea>
-					</div>
-				</div>
+		<div class="mui-content add-criticism">
+			<!--班级/对象-->
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell flex">
+			    	<div class="theClass-left">
+			    		级别
+			    	</div>
+					<div class="theClass-rnt"><a href="#picture">请选择级别</a></div>
+			    	<div><a class="mui-navigate-right"></a></div>
+			    </li>
+				<li class="mui-table-view-cell flex objetAdd">
+			    	<div class="theClass-left">
+			    		对象
+			    	</div>
+					<div class="theClass-rnt jonsData">请选择对象</div>
+			    	<div><a class="mui-navigate-right"></a></div>
+			    </li>
+			</ul>
+			<!--标题/正文-->
+			<ul class="mui-table-view theInput">
+			    <li class="mui-table-view-cell flex">
+			    	<div class="theClass-left">表彰事项</div>
+			    	<div>
+			    		<!--<input id="input" type="text" placeholder="请输入标题"/>-->
+			    		<input id="recognitionContent" class="mui-input-clear" type="text" placeholder="请输入表彰事项">
+			    	</div>
+			    </li>
+			    <li class="mui-table-view-cell" style="background: #FFFFFF;">
+			    	<div class="theClass-left">表彰说明</div>
+			    	<div>
+			    		<textarea rows="10" cols="30" contenteditable="true" id="recognitionRemark" placeholder="请输入表彰说明"></textarea
+			    	</div>
+			    </li>
+			</ul>
+			<div class="add">
+				发布
 			</div>
-			<button type="button" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
 		</div>
-		<div id="level" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#">班级</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">校级</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#level"><b>取消</b></a>
-				</li>
-			</ul>
+		<div id="picture" class="mui-popover mui-popover-action ">
+		    <ul class="mui-table-view top"> 
+		        <li class="mui-table-view-cell">
+		            <a href="#"  id="2">班级发布</a>
+		        </li>
+		        <li class="mui-table-view-cell">
+		            <a href="#"  id="1">校级发布</a>
+		        </li>
+		    </ul>
+		     <ul class="mui-table-view">
+		        <li class="mui-table-view-cell">
+		            <a href="#picture" style="color: #3b8bff;"><b>取消</b></a>
+		        </li>
+		    </ul>
 		</div>
+		<script src="../../js/jquery.min.js"></script>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
+			var thie_level = 2;
 			mui.init()
+			
+			
+			//弹框取值赋值
+			mui('#picture').on('tap', '.top>li>a', function() {
+				$('.theClass-rnt a').text(this.innerHTML).css('color','#3b8bff');
+				thie_level = $(this).attr("id");
+				$('#picture>ul>li>a').css('color','#303133')
+				$(this).css('color','#3b8bff');
+				mui("#picture").popover('toggle');
+			})
+			
+			mui('.add-criticism').on('tap', '.add', function() {
+				save();
+			})
+			
+			
+			var save = function() {
+				mui.ajax('http://127.0.0.1:8080/phone/insertbulletin.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						recognitionLevel: thie_level,
+						recognitionObject:'0BB4568175E44238821AA605700294F3',
+						recognitionObjectType:1,
+						recognitionContent:$('#recognitionContent').val(),
+						recognitionRemark:$('#recognitionRemark').val(),
+						type:1
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						console.log(data)
+						if (data.code == 200) {
+							window.location.href = './index.html';
+						}else{
+							
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+			
+					}
+				});
+			}
+			
 		</script>
 	</body>
 

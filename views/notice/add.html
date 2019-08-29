@@ -229,7 +229,7 @@
 		    <li class="mui-table-view-cell" style="background: #FFFFFF;">
 		    	<div class="theClass-left">正文</div>
 		    	<div>
-		    		<textarea id="content" rows="10" cols="30" contenteditable="true" placeholder="请输入正文内容"></textarea>
+		    		<textarea maxlength="512" id="content" rows="10" cols="30" contenteditable="true" placeholder="请输入正文内容"></textarea>
 		    	</div>
 		    </li>
 		</ul>
@@ -286,7 +286,7 @@
 			var _this = this;
 			var title = $('#title').val();
 			var content = $('#content').val();
-			mui.ajax('http://192.168.38.175:8080/phone/insertnotice.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/insertnotice.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					boardIds: boardIds,
@@ -335,7 +335,7 @@
 		
 		//班级数据
 		function objectData () {
-			mui.ajax('http://192.168.38.175:8080/phone/selectboard.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/selectboard.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					level:level

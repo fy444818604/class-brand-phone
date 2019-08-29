@@ -43,6 +43,8 @@
 				height: 40px;
 				line-height: 40px;
 				color: #c0c4cc;
+				display: inline-block;
+				width: 50%;
 			}
 			.mui-content {
 				height: 100vh;
@@ -82,6 +84,14 @@
 				width: 100%;
 				height: 100%;
 			}
+			.school-bg>video{
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				position: absolute;
+				width: 100%;
+			}
 			.school-bg-edit{
 				text-align: center;
 				position: absolute;
@@ -117,6 +127,16 @@
 				height: 100%;
 				position: absolute;
 			}
+			.img-select{
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				display: none;
+			}
+			.img-select>img{
+				width: 21px;
+				height: 21px;
+			}
 			.bg-tab-wrap{
 				padding: 0 16px;
 				border-top: 1px solid #c8c7cc;
@@ -131,7 +151,6 @@
 			.video-wrap{
 				width: 100%;
 				min-height: 100px;
-				background-color: #000000;
 				position: absolute;
 				z-index: -1;
 				top: 34px;
@@ -159,7 +178,9 @@
 			.login-input-cont {
 				position: relative;
 			}
-			
+			.mui-popover .mui-icon-clear{
+				top: 42px!important;
+			}
 		</style>
 	</head>
 
@@ -184,7 +205,7 @@
 				<div class="mui-input-group">
 					<div class="mui-input-row mt12">
 						<label>名称</label>
-						<input type="text" placeholder="请输入校宣方案名称">
+						<input type="text" id="issue-name" placeholder="请输入校宣方案名称">
 					</div>
 					<div class="mui-input-row">
 						<label>对象</label>
@@ -205,27 +226,27 @@
 				<div class="mui-input-group mt12">
 					<div class="mui-input-row">
 						<label>上标题</label>
-						<a href="#top-title">设置上标题</a>
+						<a href="#top-title" id="title-select">设置上标题</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row">
 						<label>主标题</label>
-						<a href="#main-title">设置主标题</a>
+						<a href="#main-title" id="title-select1">设置主标题</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row">
 						<label>下标题</label>
-						<a href="#bottom-title">设置下标题</a>
+						<a href="#bottom-title" id="title-select2">设置下标题</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row">
 						<label>倒计时</label>
-						<a href="#down-title">设置倒计时</a>
+						<a href="#down-title" id="title-select3">设置倒计时</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 				</div>
 			</div>
-			<button type="button" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
+			<button type="button" id="school-issue-all" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
 		</div>
 		<div id="mode" class="mui-popover mui-popover-action mui-popover-bottom">
 			<ul class="mui-table-view">
@@ -262,7 +283,7 @@
 		</div>
 		<div id="bg-select" class="mui-popover">
 			<header class="mui-bar mui-bar-nav">
-				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="#bg-select"></a>
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" href="#bg-select"></a>
 				<h1 class="mui-title">背景设置</h1>
 			</header>
 			<div class="mui-content fourth" style="background-color: #FFFFFF;">
@@ -294,6 +315,21 @@
 							<ul class="bg-img-list">
 								<li>
 									<img src="../../img/city-1.jpg" alt="">
+									<div class="img-select">
+										<img src="../../img/select.png" alt="">
+									</div>
+								</li>
+								<li>
+									<img src="../../img/city-1.jpg" alt="">
+									<div class="img-select">
+										<img src="../../img/select.png" alt="">
+									</div>
+								</li>
+								<li>
+									<img src="../../img/city-1.jpg" alt="">
+									<div class="img-select">
+										<img src="../../img/select.png" alt="">
+									</div>
 								</li>
 							</ul>
 						</div>
@@ -315,12 +351,12 @@
 						<div class="mui-input-group">
 							<div class="mui-input-row mt12">
 								<label>地址</label>
-								<input type="text" placeholder="请输入直播地址">
+								<input type="text" class="live-input" placeholder="请输入直播地址">
 							</div>
 						</div>
 					</div>
 				</div>
-				<a href="#bg-select" class="mui-btn mui-btn-primary mui-btn-block">确定</a>
+				<a href="#bg-select" id="bg-confirm" class="mui-btn mui-btn-primary mui-btn-block">确定</a>
 			</div>
 		</div>
 		<div id="top-title" class="mui-popover">
@@ -332,10 +368,10 @@
 				<div class="picker-wrap">
 					<div class="picker" id="color-picker1"></div>
 					<div class="mui-input-row login-input-cont">
-						<input type="text" class="mui-input-clear login-name" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
+						<input type="text" class="mui-input-clear top-input" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
 					</div>
 				</div>
-				<a href="#top-title" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
+				<a href="#top-title" id="top-confirm" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
 			</div>
 		</div>
 		<div id="main-title" class="mui-popover">
@@ -347,10 +383,10 @@
 				<div class="picker-wrap">
 					<div class="picker" id="color-picker2"></div>
 					<div class="mui-input-row login-input-cont">
-						<input type="text" class="mui-input-clear login-name" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
+						<input type="text" class="mui-input-clear top-input1" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
 					</div>
 				</div>
-				<a href="#main-title" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
+				<a href="#main-title" id="top-confirm1" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
 			</div>
 		</div>
 		<div id="bottom-title" class="mui-popover">
@@ -362,10 +398,10 @@
 				<div class="picker-wrap">
 					<div class="picker" id="color-picker3"></div>
 					<div class="mui-input-row login-input-cont">
-						<input type="text" class="mui-input-clear login-name" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
+						<input type="text" class="mui-input-clear top-input2" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
 					</div>
 				</div>
-				<a href="#bottom-title" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
+				<a href="#bottom-title" id="top-confirm2" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
 			</div>
 		</div>
 
@@ -383,10 +419,10 @@
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row login-input-cont">
-						<input type="text" class="mui-input-clear login-name" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
+						<input type="text" class="mui-input-clear top-input3" style="margin-top: 20px;top: 20px;" placeholder="点击输入文字" />
 					</div>
 				</div>
-				<a href="#down-title" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
+				<a href="#down-title" id="top-confirm3" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
 			</div>
 		</div>
 		<script src="../../js/mui.js"></script>
@@ -394,7 +430,6 @@
 		<script type="text/javascript">
 			(function($) {
 				mui.init();
-
 				var obj = document.getElementById("picker");
 				var a = Colorpicker.create({
 					el: "color-picker",
@@ -502,11 +537,12 @@
 						if (/^image\/\w+/.test(file.type)) {
 							blobURL = URL.createObjectURL(file);
 							console.log(blobURL)
-							var html = document.querySelector('.bg-img-list').innerHTML;
-							html += `<li>
-										<img src="${blobURL}" alt="">
-									</li>`
-							document.querySelector('.bg-img-list').innerHTML = html;
+							// var html = document.querySelector('.bg-img-list').innerHTML;
+							// html += `<li>
+							// 			<img src="${blobURL}" alt="">
+							// 		</li>`
+							// document.querySelector('.bg-img-list').innerHTML = html;
+							imgUpload(file)
 						} else {
 							mui.alert('请选择图片文件');
 						}
@@ -531,6 +567,144 @@
 					} else {
 						document.querySelector('.fourth').style.background = '#FFFFFF'
 					}
+				})
+				mui('.bg-img-list').on('tap', 'li', function() {
+					if (getComputedStyle(this.childNodes[3], null).getPropertyValue('display') == 'block') {
+						this.childNodes[3].style.display = 'none'
+					} else {
+						mui('.bg-img-list li').each(function(i, v) {
+							v.childNodes[3].style.display = 'none'
+						})
+						this.childNodes[3].style.display = 'block'
+					}
+				})
+
+				document.querySelector('#top-confirm').addEventListener('tap', function() {
+					var value = document.querySelector('.top-input').value;
+					var color = document.querySelector('#color-picker1').style.backgroundColor;
+					var html = `<p style="color:${color}">${value}<p>`;
+					console.log(html)
+					document.querySelector('#title-select').innerHTML = html;
+				})
+				document.querySelector('#top-confirm1').addEventListener('tap', function() {
+					var value = document.querySelector('.top-input1').value;
+					var color = document.querySelector('#color-picker2').style.backgroundColor;
+					var html = `<p style="color:${color}">${value}<p>`;
+					document.querySelector('#title-select1').innerHTML = html;
+				})
+				document.querySelector('#top-confirm2').addEventListener('tap', function() {
+					var value = document.querySelector('.top-input2').value;
+					var color = document.querySelector('#color-picker3').style.backgroundColor;
+					var html = `<p style="color:${color}">${value}<p>`;
+					document.querySelector('#title-select2').innerHTML = html;
+				})
+				document.querySelector('#top-confirm3').addEventListener('tap', function() {
+					var value = document.querySelector('.top-input3').value;
+					var color = document.querySelector('#color-picker4').style.backgroundColor;
+					var html = `<p style="color:${color}">${value}<p>`;
+					document.querySelector('#title-select3').innerHTML = html;
+				})
+				document.querySelector('#bg-confirm').addEventListener('tap', function() {
+					var index = 0;
+					mui('#segmentedControl a').each(function(i, v) {
+						if (v.className.indexOf('mui-active') != -1) {
+							index = i;
+						}
+					})
+					switch (index) {
+						case 0:
+							if (bgImg() == '') {
+								mui.alert('请选择背景图片')
+							} else {
+								var html = `<img src="${bgImg()}" alt="">`
+								document.querySelector('.school-bg').innerHTML = html;
+							}
+							break;
+						case 1:
+							var color = document.querySelector('#color-picker').style.backgroundColor;
+							document.querySelector('.school-bg').style.backgroundColor = color;
+							document.querySelector('.school-bg').innerHTML = '';
+							break;
+						case 2:
+							if(document.querySelector('.video-wrap').innerHTML.trim() == ''){
+								mui.alert('请选择背景视频')
+							}else{
+								document.querySelector('.school-bg').innerHTML = document.querySelector('.video-wrap').innerHTML;
+							}
+							break;
+						case 3:
+							var src = document.querySelector('.live-input').value.trim();
+							if(src == ''){
+								mui.alert('请选择背景直播')
+							}else{
+								var html = `<video src="${src}" autoplay="autoplay" loop="loop"></video>`
+								document.querySelector('.school-bg').innerHTML = html
+							}
+							break;
+					}
+				})
+				var bgImg = function() {
+					var value = '';
+					mui('.bg-img-list li').each(function(i, v) {
+						if (getComputedStyle(v.childNodes[3], null).getPropertyValue('display') == 'block') {
+							value = v.childNodes[1].getAttribute('src')
+						}
+					})
+					return value;
+				}
+				
+				var imgListSearch = function(){
+					mui.ajax('http://192.168.38.98:8080/phone/selectbackgroundurlbyphone.do',{
+						dataType:'json',//服务器返回json格式数据
+						type:'get',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							console.log(data)
+							var html = '';
+							for(var i =0;i<data.data.length;i++){
+								html += `<li>
+											<img src="${'http://192.168.38.98:8080'+data.data[i].background_url}" alt="">
+											<div class="img-select">
+												<img src="../../img/select.png" alt="">
+											</div>
+										</li>`
+							}
+							document.querySelector('.bg-img-list').innerHTML = html
+						},
+						error:function(xhr,type,errorThrown){
+							
+						}
+					});
+				}
+				imgListSearch()
+				
+				var imgUpload = function(file){
+					console.log(file)
+					var form = new FormData();
+					form.append('file',file)
+					// form.append('token',window.location.getItem('token'))
+					mui.ajax('http://192.168.38.98:8080/phone/uploadbackground.do',{
+						data:form,
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						processData: false,
+						contentType:false,
+						cache: false,
+						success:function(data){
+							console.log(data)
+						},
+						error:function(xhr,type,errorThrown){
+							
+						}
+					});
+				}
+				
+				document.querySelector('#school-issue-all').addEventListener('tap',function(){
+					var propagandaName = document.querySelector('#issue-name').innerHTML
+					var startTime = document.querySelector('#timeSelect').innerHTML
+					var endTime = document.querySelector('#timeSelect1').innerHTML
+					console.log(startTime)
 				})
 			})(mui);
 		</script>
