@@ -258,7 +258,7 @@
 					var value = data.data;
 					document.querySelector('#level').innerHTML = value.level==1?"校":"班"
 					document.querySelector('#title').innerHTML = value.newsTitle
-					document.querySelector('#content').innerHTML = value.newsContent
+					document.querySelector('#content').innerHTML = value.newsContentStr
 				},
 				error: function(xhr, type, errorThrown) {
 		
