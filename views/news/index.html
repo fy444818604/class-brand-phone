@@ -114,7 +114,7 @@
 					</div>
 				</div>
 			</div>
-			<a type="button" href="./add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发新闻</a>
+			<a type="button" id="add" href="#" class="mui-btn mui-btn-primary mui-btn-block">发新闻</a>
 		</div>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
@@ -288,6 +288,13 @@
 						mui.openWindow({
 							id: 'index',
 							url: './detail.html?id='+id
+						});
+					})
+					
+					document.querySelector('#add').addEventListener('tap',function(){
+						mui.openWindow({
+							id: 'index',
+							url: './add.html'
 						});
 					})
 				})
