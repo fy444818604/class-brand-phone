@@ -105,6 +105,7 @@
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($) {
 				var curr = 1;
@@ -118,7 +119,7 @@
 				var listSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('http://192.168.38.98:8080/phone/selectimage.do', {
+						mui.ajax(severAddress+'/phone/selectimage.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -145,7 +146,7 @@
 												<div class="mui-table-cell">
 													<div class="active-item">
 														<div>
-															<img src="http://192.168.38.98:8080/${con[i].img}"/>
+															<img src="${severAddress}/${con[i].img}"/>
 														</div>
 														<div>
 															<p class="opo">${con[i].text}</p>
@@ -171,7 +172,7 @@
 				var listSearch1 = function() {
 					var _this = this;
 					if (curr1 <= count1) {
-						mui.ajax('http://192.168.38.98:8080/phone/selectimage.do', {
+						mui.ajax(severAddress+'/phone/selectimage.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -197,7 +198,7 @@
 												<div class="mui-table-cell">
 													<div class="active-item">
 														<div>
-															<img src="http://192.168.38.98:8080/${con[i].img}"/>
+															<img src="${severAddress}/${con[i].img}"/>
 														</div>
 														<div>
 															<p class="opo">${con[i].text}</p>
@@ -223,7 +224,7 @@
 
 				//删除活动
 				var activityDel = function(id) {
-					mui.ajax('http://192.168.38.98:8080/phone/deleteimage.do', {
+					mui.ajax(severAddress+'/phone/deleteimage.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id

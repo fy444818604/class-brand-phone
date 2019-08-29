@@ -139,6 +139,7 @@
 		</div>
 		<script src="../../js/jquery.min.js"></script>
 		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var thie_level = 2;
 			mui.init()
@@ -159,7 +160,7 @@
 			
 			
 			var save = function() {
-				mui.ajax('http://127.0.0.1:8080/phone/insertbulletin.do', {
+				mui.ajax(severAddress+'/phone/insertbulletin.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						recognitionLevel: thie_level,

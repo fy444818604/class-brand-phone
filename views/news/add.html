@@ -278,6 +278,7 @@
 				</div>
 		<script src="../../js/jquery.min.js"></script>
 		<script src="../../js/mui.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var thie_level = 2;
 			mui.init()
@@ -306,7 +307,7 @@
 			
 			
 			var save = function() {
-				mui.ajax('http://127.0.0.1:8080/phone/insertnews.do', {
+				mui.ajax(severAddress+'/phone/insertnews.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						level: thie_level,
@@ -333,7 +334,7 @@
 			
 			//班级数据
 						function objectData () {
-							mui.ajax('http://127.0.0.1:8080/phone/selectboard.do', {
+							mui.ajax(severAddress+'/phone/selectboard.do', {
 								data: {
 									token: window.localStorage.getItem('token'),
 									level:thie_level

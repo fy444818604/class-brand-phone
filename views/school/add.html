@@ -427,6 +427,7 @@
 		</div>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($) {
 				mui.init();
@@ -663,7 +664,7 @@
 							var html = '';
 							for(var i =0;i<data.data.length;i++){
 								html += `<li>
-											<img src="${'http://192.168.38.98:8080'+data.data[i].background_url}" alt="">
+											<img src="${severAddress}${data.data[i].background_url}" alt="">
 											<div class="img-select">
 												<img src="../../img/select.png" alt="">
 											</div>
@@ -683,7 +684,7 @@
 					var form = new FormData();
 					form.append('file',file)
 					// form.append('token',window.location.getItem('token'))
-					mui.ajax('http://192.168.38.98:8080/phone/uploadbackground.do',{
+					mui.ajax(severAddress+'/phone/uploadbackground.do',{
 						data:form,
 						dataType:'json',//服务器返回json格式数据
 						type:'post',//HTTP请求类型

@@ -169,6 +169,7 @@
 				</ul>
 			</div>
 		</div>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//初始化	
 			(function($) {
@@ -183,7 +184,7 @@
 					});
 				}
 				if (window.localStorage.getItem('isCharge') == 1) {
-					mui.ajax('http://192.168.38.175:8080/phone/classdetail/selcetclassdetailbyid.do',{
+					mui.ajax(severAddress+'/phone/classdetail/selcetclassdetailbyid.do',{
 						data:{
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token')
@@ -271,7 +272,7 @@
 				});
 			})
 			var checkPassword = function(password) {
-				mui.ajax('http://192.168.38.175:8080/phone/checkpushpassword.do', {
+				mui.ajax(severAddress+'/phone/checkpushpassword.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						password: password
@@ -296,7 +297,7 @@
 			}
 
 			var checkWeChat = function() {
-				mui.ajax('http://192.168.38.175:8080/phone/selectbindwechat.do', {
+				mui.ajax(severAddress+'/phone/selectbindwechat.do', {
 					data: {
 						token: window.localStorage.getItem('token')
 					},

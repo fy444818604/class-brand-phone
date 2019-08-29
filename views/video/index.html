@@ -102,6 +102,7 @@
 			</div>
 			<a id="add" class="mui-btn mui-btn-primary mui-btn-block">发视频</a>
 		</div>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
@@ -118,7 +119,7 @@
 				var listSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('http://192.168.38.98:8080/phone/selectvideo.do', {
+						mui.ajax(severAddress+'/phone/selectvideo.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -143,7 +144,7 @@
 											</div>
 											<div class="mui-slider-handle">
 												<div class="">
-													<video src="http://192.168.38.98:8080/${con[i].video}" controls="controls"  width="100%" height="193"></video>
+													<video src="${severAddress}${con[i].video}" controls="controls"  width="100%" height="193"></video>
 												</div>
 												<div class="" style="margin-top: 0.1rem;">
 													${con[i].text}
@@ -169,7 +170,7 @@
 				var listSearch1 = function() {
 					var _this = this;
 					if (curr1 <= count1) {
-						mui.ajax('http://192.168.38.98:8080/phone/selectvideo.do', {
+						mui.ajax(severAddress+'/phone/selectvideo.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -193,7 +194,7 @@
 											</div>
 											<div class="mui-slider-handle">
 												<div class="">
-													<video src="http://192.168.38.98:8080/${con[i].video}" controls="controls"  width="100%" height="193"></video>
+													<video src="${severAddress}${con[i].video}" controls="controls"  width="100%" height="193"></video>
 												</div>
 												<div class="" style="margin-top: 0.1rem;">
 													${con[i].text}
@@ -219,7 +220,7 @@
 
 				//删除活动
 				var activityDel = function(id) {
-					mui.ajax('http://192.168.38.98:8080/phone/deletevideo.do', {
+					mui.ajax(severAddress+'/phone/deletevideo.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id

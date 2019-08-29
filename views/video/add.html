@@ -381,6 +381,7 @@
 				</li>
 			</ul>
 		</div>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
@@ -395,7 +396,7 @@
 				formData.append("title", $('#content').val());
 				formData.append("level", level);
 				formData.append("boardIds", boardIds);
-				mui.ajax('http://192.168.38.98:8080/phone/insertvideo.do', {
+				mui.ajax(severAddress+'/phone/insertvideo.do', {
 					data: formData,
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
@@ -482,7 +483,7 @@
 			//班级数据
 			function objectData () {
 				console.log(window.localStorage.getItem('token'))
-				mui.ajax('http://192.168.38.98:8080/phone/selectboard.do', {
+				mui.ajax(severAddress+'/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						level:level

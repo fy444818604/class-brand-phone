@@ -242,12 +242,13 @@
 			</div>
 		</div>
 	</div>
+	<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/mui.js"></script>
 	<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
 		var search = function(id) {
-			mui.ajax('http://192.168.38.98:8080/phone/selectnoticedetail.do', {
+			mui.ajax(severAddress+'/phone/selectnoticedetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
@@ -265,7 +266,7 @@
 		
 				}
 			});
-			mui.ajax('http://192.168.38.98:8080/phone/selectvideodetail.do', {
+			mui.ajax(severAddress+'/phone/selectvideodetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
@@ -283,7 +284,7 @@
 					
 				}
 			});
-			mui.ajax('http://192.168.38.98:8080/phone/selectboardsbyannouncementid.do', {
+			mui.ajax(severAddress+'/phone/selectboardsbyannouncementid.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
