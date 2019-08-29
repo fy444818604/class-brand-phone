@@ -474,6 +474,7 @@
 			function allchk() {
 				var chknum = $(".obje-grade-class-li").length; //选项总个数
 				var chk = $(".liAktv").length;
+
 				if (chknum == chk) { //全选
 					$("#parent-input").prop("checked", true);
 				} else { //不全选
@@ -522,8 +523,6 @@
 				$('.liAktv').each(function() {
 					boardIds.push($(this).attr('data-ids'));
 					boardNames.push($(this).find('div').text())
-					console.log(boardIds)
-					console.log(boardNames);
 					objTchu.style.display = 'none';
 				});
 				if (boardIds.length <= 0) {

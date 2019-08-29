@@ -541,12 +541,10 @@
 			})
 
 			//确定
-			$('.0bje-bnt-rnt').on('tap', function() {
+			$('.obje-bnt-rnt').on('tap', function() {
 				$('.liAktv').each(function() {
 					boardIds.push($(this).attr('data-ids'));
-					boardNames.push($(this).find('div').text())
-					console.log(boardIds)
-					console.log(boardNames);
+					boardNames.push($(this).find('div').text());
 					objTchu.style.display = 'none';
 				});
 				if (boardIds.length <= 0) {
