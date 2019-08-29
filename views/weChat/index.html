@@ -35,13 +35,12 @@
 	<div class="mui-content">
 
 	</div>
-	<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/mui.js"></script>
 	<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
 		var search = function() {
-			mui.ajax(severAddress+'/phone/selectbindwechat.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/selectbindwechat.do', {
 				data: {
 					token: window.localStorage.getItem('token')
 				},
@@ -83,7 +82,7 @@
 		})
 		
 		var bind = function() {
-			mui.ajax(severAddress+'/phone/bindwechat.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/bindwechat.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					weChatId:weChatId
@@ -117,7 +116,7 @@
 		}
 		
 		var unbind = function() {
-			mui.ajax(severAddress+'/phone/unbindwechat.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/unbindwechat.do', {
 				data: {
 					token: window.localStorage.getItem('token')
 				},

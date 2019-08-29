@@ -277,7 +277,6 @@
 	</div>
 	<script src="../../js/mui.js"></script>
     <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
@@ -287,7 +286,7 @@
 			var _this = this;
 			var title = $('#title').val();
 			var content = $('#content').val();
-			mui.ajax(severAddress+'/phone/insertnotice.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/insertnotice.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					boardIds: boardIds,
@@ -336,7 +335,7 @@
 		
 		//班级数据
 		function objectData () {
-			mui.ajax(severAddress+'/phone/selectboard.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/selectboard.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					level:level

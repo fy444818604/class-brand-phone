@@ -183,56 +183,6 @@
 				left: 0;
 				top: 0;
 			}
-			#option{
-				position: fixed;
-				width: 100vw;
-				height: 100vh;
-				left: 0;
-				top: 0;
-			}
-			.addLI-title{
-				font-size: 1rem;
-				margin: 0px;
-			}
-			.addLI-title>input{
-				color: #000000;
-			}
-			.addLI>li{
-				height: 3rem;
-				line-height: 3rem;
-				border-bottom: 0.03rem solid #e4e4e4;
-			}
-			.addLI-left{
-				width: 92%;
-			}
-			.addLI-rnt{
-				width: 8%;
-			}
-			.addLI li  i{
-				border-radius: 50%;
-				background: #000000;
-				opacity: 0.5;
-				color: #FFFFFF;
-				text-align: center;
-				line-height: 1.07rem;
-			}
-			#showQues{
-				padding-left: 1rem;
-			}
-			
-			.mui-input-group .boasds:after {
-			    position: absolute;
-			    right: 0;
-			    bottom: 0;
-			    left: 15px;
-			    height: 0px;
-			    content: '';
-			    -webkit-transform: scaleY(.5);
-			    transform: scaleY(.5);
-			    background-color: #c8c7cc;
-			}
-			
-	
 		</style>
 	</head>
 
@@ -265,16 +215,13 @@
 						<textarea id="activeContent" rows="5" placeholder="请输入正文"></textarea>
 					</div>
 				</div>
-				<div class="mui-input-group bodeHt">
+				<div class="mui-input-group">
 					<div class="mui-input-row flex justify-bet mt12 Hauto" style="padding: 0 15px; align-items: center;">
-						<div style="padding: 0px 0px;">选项</div>
+						<div>选项</div>
 						<a class="iconfont icon-add" href="#option" style="color: #3B8BFF;"></a>
-					
-					</div>
-					<div id="showVoteTitle">
-						<ul class="addLI" id="showLi">
-					
-						</ul>
+						<div id="showVoteTitle">
+
+						</div>
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
@@ -356,21 +303,10 @@
 			</header>
 			<div class="mui-content">
 				<div class="mui-input-group" style="height: calc(100vh - 103px);">
-					<div class="mui-input-row Hauto mt12 boasds" id="voteAdd">
-						<div class="voteDiv mui-input-row Hauto mt12 boasds" style="padding: 6px 0px;">
-							<ul class="addLI" id="addLi">
-								<li class="flex addChLi">
-									<div class="addLI-left ">
-										<input style="color:#c0c4cc;" type="text" class="voteTitle" mui-input-clear" placeholder="请输入选项内容" maxlength="40">
-									</div>
-									<div class="addLI-rnt">
-										<i class="iconfont icon-close"></i>
-									</div>
-								</li>
-							</ul>
-						</div>
+					<div class="mui-input-row Hauto mt12" id="voteTitleDiv">
+						<input type="text" class="voteTitle mui-input-clear" placeholder="请输入选项内容" maxlength="40">
 					</div>
-					<div class="mui-input-row boasds">
+					<div class="mui-input-row">
 						<div class="q-tips">
 							<div class="icon-btn">
 								<i class="iconfont icon-add"></i>
@@ -383,7 +319,6 @@
 				<a href="#option" id="voteBtn" class="mui-btn mui-btn-primary mui-btn-block">确定</a>
 			</div>
 		</div>
-		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
@@ -398,6 +333,7 @@
 			var activeEndTime = document.getElementById("activeEndTime");
 			var boardIds = [];
 			var boardNames = [];
+			var voteOption = [];
 
 			if (activeType == 1) {
 				titleName.innerHTML = "创建投票"
@@ -458,7 +394,7 @@
 					//判断是不是选择了级别
 					if (notBlank(activeLevel.value)) {
 						//判断是不是有选择班牌的权限
-						mui.ajax(severAddress+'/phone/active/jugeboardpower.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/active/jugeboardpower.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								activeLevel: activeLevel.value
@@ -491,66 +427,49 @@
 					operateActive();
 				})
 
+				//添加input	
+				mui("#option").on("tap", ".icon-btn", function() {
+					var voteTitles = document.getElementsByClassName("voteTitle");
+					var voteTitleDiv = document.getElementById("voteTitleDiv");
+					if (voteTitles.length < 15) {
+						//创建对象
+						var input = document.createElement("input");
+						input.type = "text";
+						input.className = "voteTitle";
+						input.placeholder = "请输入选项内容";
+						input.maxlength = 40;
+						voteTitleDiv.appendChild(input);
+					} else {
+						mui.alert("最多15个选项");
+					}
+
+				})
+
+				//展示添加的input	
+				document.querySelector('#voteBtn').addEventListener('tap', function() {
+					voteOption = [];
+					console.log(voteOption.length);
+					var voteTitles = document.getElementsByClassName("voteTitle");
+					for (var i = 0; i < voteTitles.length; i++) {
+						var input = voteTitles[i].cloneNode();
+						input.className = "voteTitleCop"
+						voteOption.push(input);
+					}
+					console.log(voteOption.length);
+					var showVoteTitle = document.getElementById("showVoteTitle");
+					showVoteTitle.innerHTML = "";
+					for (var i = 0; i < voteOption.length; i++) {
+						var input = voteOption[i]
+						showVoteTitle.appendChild(input);
+					}
+				})
+
 			})(mui);
-
-
-			//添加div
-			mui("#option").on("tap", ".icon-btn", function() {
-				// 添加
-				var html =
-					`<li class="flex  addChLi">
-							    <div class="addLI-left">
-									<input style="color:#c0c4cc;" type="text" class="voteTitle" mui-input-clear" placeholder="请输入选项内容" maxlength="40">
-								</div>
-								<div class="addLI-rnt">
-									<i class="iconfont icon-close"></i>
-								</div>
-					</li>`;
-				$('#addLi').append(html);
-				// 删除
-				bindListener();
-
-			});
-
-			//展示添加的input
-			document.querySelector('#voteBtn').addEventListener('tap', function() {
-				//获取展示的对象
-				var showLi = document.getElementById("showLi");
-				//获取题目的对象
-				var addLi = document.getElementsByClassName("addChLi");
-
-				for (var i = 0; i < addLi.length; i++) {
-					var obj = addLi[i];
-					showLi.appendChild(obj);
-				}
-
-				//获取添加对象
-				var html =
-					`<li class="flex addChLi">
-							    <div class="addLI-left ">
-									<input style="color:#c0c4cc;" type="text" class="voteTitle" mui-input-clear" placeholder="请输入选项内容" maxlength="40">
-								</div>
-								<div class="addLI-rnt">
-									<i class="iconfont icon-close"></i>
-								</div>
-					</li>`;
-				$("#addLi").append(html);
-			});
-
-
-			function bindListener() {
-				//给所有的 ul li重新绑定移除事件
-				$(".addLI li  i").unbind().click(function() {
-					//直接通过.remove() 方法移除掉li元素,页面自动就会刷新
-					$(this).parent().parent().remove();
-				});
-			}
-
 
 			//班级数据
 			function objectData() {
 				console.log(window.localStorage.getItem('token'))
-				mui.ajax(severAddress+'/phone/selectboard.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						level: activeLevel.value
@@ -688,8 +607,6 @@
 				}
 
 				//添加选项	
-				var voteOption = $("#showLi>.addChLi >.addLI-left> .voteTitle ");
-				console.log(voteOption);
 				var voteTitleArr = []
 				for (var i = 0; i < voteOption.length; i++) {
 					var obj = {
@@ -708,7 +625,7 @@
 					return;
 				}
 
-				mui.ajax(severAddress+'/phone/active/operateactive.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/active/operateactive.do', {
 					data: {
 						active: JSON.stringify(data),
 						voteTitles: JSON.stringify(voteTitleArr),
@@ -722,10 +639,10 @@
 						// console.log(data);
 						if (data.code == 200) {
 							console.log(data);
-							mui.openWindow({
-								id: 'index',
-								url: '../activity/index.html'
-							});
+							// mui.openWindow({
+							// 	id: 'index',
+							// 	url: '../class-committee/index.html'
+							// });
 						} else {
 							mui.alert(data.msg)
 						}

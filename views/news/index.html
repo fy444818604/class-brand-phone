@@ -117,7 +117,6 @@
 			<a type="button" href="add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发新闻</a>
 		</div>
 		<script src="../../js/mui.js"></script>
-		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($) {
 				mui.init()
@@ -136,7 +135,7 @@
 				var listClassSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax(severAddress+'/phone/selectnews.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/selectnews.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -184,7 +183,7 @@
 				var listSchoolSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax(severAddress+'/phone/selectnews.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/selectnews.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -230,7 +229,7 @@
 				}
 				
 				var del = function(id) {
-					mui.ajax(severAddress+'/phone/deletenews.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/deletenews.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							newsId: id

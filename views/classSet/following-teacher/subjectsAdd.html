@@ -142,7 +142,6 @@
 			</div>
 		</div>
 	</body>
-	<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		var classTeacherId = getQueryString("classTeacherId");
@@ -216,7 +215,8 @@
 		//添加/编辑
 		function operateTeacher(subjectName) {
 			if (notBlank(classTeacherId)) {
-				mui.ajax(severAddress+'/phone/classteacher/update.do', {
+				console.log("update")
+				mui.ajax('http://192.168.38.98:8080/phone/classteacher/update.do', {
 					data: {
 						classTeacherId: classTeacherId,
 						classId: window.localStorage.getItem('classId'),
@@ -244,7 +244,7 @@
 					}
 				});
 			} else {
-				mui.ajax(severAddress+'/phone/classteacher/insert.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/classteacher/insert.do', {
 					data: {
 						classId: window.localStorage.getItem('classId'),
 						workId: workId,

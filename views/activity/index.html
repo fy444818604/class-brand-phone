@@ -123,7 +123,6 @@
 			</ul>
 		</div>
 		<script src="../../js/mui.js"></script>
-		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.pullToRefresh.js"></script>
 		<script src="../../js/mui.pullToRefresh.material.js"></script>
 		<script type="text/javascript">
@@ -139,7 +138,7 @@
 				var listSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax(severAddress+'/phone/active/selectpagebean.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/active/selectpagebean.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -188,7 +187,7 @@
 				var listSearch1 = function() {
 					var _this = this;
 					if (curr1 <= count1) {
-						mui.ajax(severAddress+'/phone/active/selectpagebean.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/active/selectpagebean.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -236,7 +235,7 @@
 
 				//删除活动
 				var activityDel = function(id) {
-					mui.ajax(severAddress+'/phone/active/delete.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/active/delete.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id
@@ -246,10 +245,10 @@
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
 							if (data.code == 200) {
-								mui.openWindow({
-									id: 'index',
-									url: '../activity/index.html'
-								});
+								// curr = 1
+								// curr1 = 1
+								// listSearch()
+								// listSearch1()
 							}
 						},
 						error: function(xhr, type, errorThrown) {
@@ -308,6 +307,7 @@
 								url: './quesAdd.html?type='+this.dataset.type
 							});
 						} else {
+							console.log(111)
 							mui.openWindow({
 								id: 'index',
 								url: './signAdd.html?type='+this.dataset.type,

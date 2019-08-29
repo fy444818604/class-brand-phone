@@ -77,11 +77,7 @@
 
 		</div>
 	</body>
-	<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-		
-		console.log(severAddress);
-		
 		mui.ready(function() {
 			mui.init();
 		})
@@ -89,7 +85,7 @@
 		var login = function() {
 			var loginName = document.querySelector('.login-name').value;
 			var loginPwd = document.querySelector('.login-pwd').value;
-			mui.ajax(severAddress+'/phone/login.do', {
+			mui.ajax('http://192.168.38.98:8080/phone/login.do', {
 				data: {
 					loginName: loginName,
 					loginPwd: loginPwd

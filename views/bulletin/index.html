@@ -44,14 +44,13 @@
 	</body>
 	<script src="../../js/mui.js"></script>
     <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 	var check ="";
 	var rolling = 1;
 	var systemAnnouncementId = 0;
 	mui.init();
 	var getData = function() {
-		mui.ajax(severAddress+'/phone/selectpublicannouncement.do', {
+		mui.ajax('http://192.168.38.98:8080/phone/selectpublicannouncement.do', {
 			data: {
 				token: window.localStorage.getItem('token')
 			},
@@ -74,7 +73,7 @@
 	}
 	
 	var submitData = function() {
-		mui.ajax(severAddress+'/phone/updatepublicannouncement.do', {
+		mui.ajax('http://192.168.38.98:8080/phone/updatepublicannouncement.do', {
 			data: {
 				token: window.localStorage.getItem('token'),
 				systemAnnouncementId:systemAnnouncementId,

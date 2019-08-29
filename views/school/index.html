@@ -124,10 +124,9 @@
 			<a type="button" id="school-issue" class="mui-btn mui-btn-primary mui-btn-block">发校宣</a>
 		</div>
 		<script src="../../js/mui.js"></script>
-		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init()
-			mui.ajax(severAddress+'/phone/propagandapage.do',{
+			mui.ajax('http://192.168.38.98:8080/phone/propagandapage.do',{
 				data:{
 					token:window.localStorage.getItem('token')
 				},
@@ -156,10 +155,10 @@
 							html += `<div class="school-list-img-wrap" style="background:${data.data[i].background_color}">`;
 						}else if(data.data[i].background_type == 2){
 							html += `<div class="school-list-img-wrap">
-								<img src="${severAddress}${data.data[i].background_url}" alt="">`;
+								<img src="${'http://192.168.38.98:8080'+data.data[i].background_url}" alt="">`;
 						}else if(data.data[i].background_type == 3){
 							html += `<div class="school-list-img-wrap">
-								<video src="${severAddress}${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
+								<video src="${'http://192.168.38.98:8080'+data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
 						}else{
 							html += `<div class="school-list-img-wrap">
 								<video src="${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;

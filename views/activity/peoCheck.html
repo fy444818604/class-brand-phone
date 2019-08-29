@@ -71,11 +71,10 @@
 			</ul>
 		</div>
 		<script src="../../js/mui.js"></script>
-		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init()
 			var search = function(id,type){
-				mui.ajax(severAddress+'/phone/active/selectuserbyoptionid.do',{
+				mui.ajax('http://192.168.38.98:8080/phone/active/selectuserbyoptionid.do',{
 					data:{
 						token: window.localStorage.getItem('token'),
 						optionId:id,

@@ -96,7 +96,6 @@
 			<a type="button" href="add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发表彰</a>
 		</div>
 		<script src="../../js/mui.js"></script>
-		、<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			(function($) {
 				mui.init()
@@ -115,7 +114,7 @@
 				var listClassSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax(severAddress+'/phone/selectbulletin.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/selectbulletin.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -138,13 +137,13 @@
 										
 										var face = "../../img/home_btn_praise.png";
 										if(con[i].recognitionObjectType==1&&con[i].userFace){
-											var face = severAddress+con[i].userFace;
+											var face = "http://192.168.38.98:8080"+con[i].userFace;
 										}else if(con[i].recognitionObjectType==2&&con[i].classIcon){
-											var face = severAddress+con[i].classIcon;
+											var face = "http://192.168.38.98:8080"+con[i].classIcon;
 										}
 										var icon = "../../img/home_btn_praise.png";
 										if(con[i].recognitionIcon){
-											icon = severAddress+ con[i].recognitionIcon;
+											icon = "http://192.168.38.98:8080"+ con[i].recognitionIcon;
 										}
 										
 										
@@ -186,7 +185,7 @@
 				var listSchoolSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('${severAddress}/phone/selectbulletin.do', {
+						mui.ajax('http://192.168.38.98:8080/phone/selectbulletin.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -208,13 +207,13 @@
 									for (var i = 0; i < con.length; i++) {
 										var face = "../../img/home_btn_praise.png";
 										if(con[i].recognitionObjectType==1&&con[i].userFace){
-											var face = severAddress+con[i].userFace;
+											var face = "http://192.168.38.98:8080"+con[i].userFace;
 										}else if(con[i].recognitionObjectType==2&&con[i].classIcon){
-											var face = severAddress+con[i].classIcon;
+											var face = "http://192.168.38.98:8080"+con[i].classIcon;
 										}
 										var icon = "../../img/home_btn_praise.png";
 										if(con[i].recognitionIcon){
-											icon = severAddress+ con[i].recognitionIcon;
+											icon = "http://192.168.38.98:8080"+ con[i].recognitionIcon;
 										}
 										
 										
@@ -259,7 +258,7 @@
 				}
 				
 				var del = function(id) {
-					mui.ajax(severAddress+'/phone/deletebulletin.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/deletebulletin.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id

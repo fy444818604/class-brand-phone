@@ -72,14 +72,13 @@
 		</div>
 		
 		<script src="../../js/mui.js"></script>
-		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			var type = window.location.href.split('&type=')[1];
 			var types = type == 1?'投票':type == 2?'选择':'报名';
 			document.querySelector('.mui-title').innerHTML = '查看' + types + '人'
 			mui.init()
 			var search = function(id){
-				mui.ajax(severAddress+'/phone/active/selectuserbyactive.do',{
+				mui.ajax('http://192.168.38.98:8080/phone/active/selectuserbyactive.do',{
 					data:{
 						token: window.localStorage.getItem('token'),
 						activeId:id

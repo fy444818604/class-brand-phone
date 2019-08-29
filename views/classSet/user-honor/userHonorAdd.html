@@ -148,7 +148,6 @@
 			<button type="button" class="mui-btn mui-btn-primary add-classHonours">发布</button>
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//获取DOM对象
 			var nickName = document.getElementById('nickName');
@@ -164,7 +163,7 @@
 			} else {
 				if (notBlank(userHonorId)) {
 					nickName.value = window.localStorage.getItem('nickName')
-					userHonorIcon.setAttribute('src', severAddress+ window.localStorage.getItem('userHonorIcon'))
+					userHonorIcon.setAttribute('src', 'http://192.168.38.98:8080' + window.localStorage.getItem('userHonorIcon'))
 					userHonorRemark.value = window.localStorage.getItem('userHonorRemark');
 					userHonorName.value = window.localStorage.getItem('userHonorName');
 				} else {
@@ -188,7 +187,7 @@
 					var files = this.files;
 					formData.append("file", files[0]);
 					console.log(formData);
-					mui.ajax(severAddress+'/uploadimg.do', {
+					mui.ajax('http://192.168.38.98:8080/uploadimg.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -231,7 +230,7 @@
 			//添加、编辑个人荣誉
 			function operateUserHonor() {
 				if (notBlank(userHonorId)) {
-					mui.ajax(severAddress+'/phone/userhonor/update.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/userhonor/update.do', {
 						data: {
 							userHonorId: userHonorId,
 							classId: window.localStorage.getItem('classId'),
@@ -262,7 +261,7 @@
 					});
 				} else {
 
-					mui.ajax(severAddress+'/phone/userhonor/insert.do', {
+					mui.ajax('http://192.168.38.98:8080/phone/userhonor/insert.do', {
 						data: {
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),

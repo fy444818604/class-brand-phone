@@ -185,10 +185,9 @@
 			}
 			.addLI-title{
 				font-size: 1rem;
+				padding: 10px 1rem;
 				margin: 0px;
-			}
-			.addLI-title>input{
-				color: #000000;
+				color: ##303133;
 			}
 			.addLI>li{
 				height: 3rem;
@@ -208,9 +207,6 @@
 				color: #FFFFFF;
 				text-align: center;
 				line-height: 1.07rem;
-			}
-			#showQues{
-				padding-left: 1rem;
 			}
 		</style>
 	</head>
@@ -246,11 +242,11 @@
 				</div>
 				<div class="mui-input-group">
 					<div class="mui-input-row flex justify-bet mt12 Hauto" style="padding: 0 15px; align-items: center;">
-						<div style="padding: 0px 0px;">选项</div>
+						<div>选项</div>
 						<a class="iconfont icon-add" href="#option" style="color: #3B8BFF;"></a>
-					</div>
-					<div id="showQues">
-						
+						<div id="showQues">
+
+						</div>
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
@@ -331,7 +327,7 @@
 				<div class="mui-input-group" style="height: calc(100vh - 103px);">
 
 					<div class="mui-input-row Hauto mt12" id="queAdd">
-						<div class="quesDiv mui-input-row Hauto mt12" style="padding: 6px 0px;">
+						<div class="quesDiv mui-input-row Hauto mt12">
 							<p class="addLI-title">
 								<input type="text" class="quesTitle " placeholder="请输入题目内容" maxlength="40">
 							</p>
@@ -356,7 +352,6 @@
 		</div>
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
-		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
 			//获取dom对象
@@ -498,7 +493,7 @@
 				var html =
 					`<li class="flex">
 							    <div class="addLI-left">
-									<input style="color:#c0c4cc;" type="text" class="quesOption mui-input-clear" placeholder="请输入选项内容" maxlength="40">
+									<input type="text" class="quesOption mui-input-clear" placeholder="请输入选项内容" maxlength="40">
 								</div>
 								<div class="addLI-rnt">
 									<i class="iconfont icon-close"></i>
@@ -521,7 +516,7 @@
 			//班级数据
 			function objectData() {
 				console.log(window.localStorage.getItem('token'))
-				mui.ajax(severAddress+'/phone/selectboard.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						level: activeLevel.value
@@ -535,7 +530,6 @@
 						var html = "";
 						for (var i = 0; i < con.length; i++) {
 							var obj = con[i];
-							console.log(obj)
 							html += '<li data-id = "' + obj.id + '">';
 							if (obj.grade != "") {
 								html +=
@@ -585,7 +579,7 @@
 			}
 
 			function allchk() {
-				var chknum = $(".grade-class-li").length; //选项总个数
+				var chknum = $(".grade-class").length; //选项总个数
 				var chk = $(".liAktv").length;
 
 				if (chknum == chk) { //全选
@@ -660,7 +654,7 @@
 				}
 				
 				//拼装数据
-				var questionnaireTitleVos = []	
+				var questionnaireTitleVos = []
 				var arr = $(".quesDiv1");
 				for (var i = 0; i < arr.length; i++) {
 					var obj = arr[i];
@@ -679,6 +673,7 @@
 						optionList:optionList1
 					}
 					questionnaireTitleVos.push(dataVo);
+					console.log(questionnaireTitleVos);
 				}
 					
 				console.log(questionnaireTitleVos);	
@@ -693,7 +688,7 @@
 					return;
 				}
 
-				mui.ajax(severAddress+'/phone/active/operateactive.do', {
+				mui.ajax('http://192.168.38.98:8080/phone/active/operateactive.do', {
 					data: {
 						active: JSON.stringify(data),
 						questionnaireTitleVos: JSON.stringify(questionnaireTitleVos),
@@ -706,10 +701,11 @@
 					success: function(data) {
 						// console.log(data);
 						if (data.code == 200) {
-							mui.openWindow({
-								id: 'index',
-								url: '../activity/index.html'
-							});
+							console.log(data);
+							// mui.openWindow({
+							// 	id: 'index',
+							// 	url: '../class-committee/index.html'
+							// });
 						} else {
 							mui.alert(data.msg)
 						}
