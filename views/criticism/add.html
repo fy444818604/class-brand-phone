@@ -159,7 +159,7 @@
 			
 			
 			var save = function() {
-				mui.ajax('http://192.168.38.98:8080/phone/insertbulletin.do', {
+				mui.ajax('/phone/insertbulletin.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						recognitionLevel: thie_level,

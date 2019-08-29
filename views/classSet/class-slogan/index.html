@@ -131,7 +131,7 @@
 			<a class="mui-btn determine  mui-btn-link mui-pull-right  ">完成</a>
 		</header>
 		<div class="sloganAdd-cont mui-input-row">
-			<textarea name="" id="textarea" cols="30" rows="5" placeholder="多行文本框"></textarea>
+			<textarea name="" id="textarea" cols="30" rows="5" placeholder="输入班级口号"></textarea>
 		</div>
 
 	</div>
@@ -167,7 +167,7 @@
 			var textareaT = $('#textarea') 
 			var token = $('#token')
 			if(addVal != ''){
-			mui.ajax('http://192.168.38.98:8080/phone/classdetail/updatebyparam.do',{
+			mui.ajax('/phone/classdetail/updatebyparam.do',{
 					data:{
 						token:window.localStorage.getItem('token'),
 						classId:window.localStorage.getItem('classId'),

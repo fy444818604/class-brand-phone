@@ -78,7 +78,7 @@
 			document.querySelector('.mui-title').innerHTML = '查看' + types + '人'
 			mui.init()
 			var search = function(id){
-				mui.ajax('http://192.168.38.98:8080/phone/active/selectuserbyactive.do',{
+				mui.ajax('/phone/active/selectuserbyactive.do',{
 					data:{
 						token: window.localStorage.getItem('token'),
 						activeId:id

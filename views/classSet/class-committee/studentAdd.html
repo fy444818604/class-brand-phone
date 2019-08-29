@@ -123,7 +123,7 @@
 			}(mui))
 			//查询现有学生接口
 			function existingTeacher(str) {
-				mui.ajax('http://192.168.38.98:8080/phone/user/selectstudentlistbyclassid.do', {
+				mui.ajax('/phone/user/selectstudentlistbyclassid.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						classId:window.localStorage.getItem('classId'),
@@ -143,14 +143,14 @@
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox" checked  value="${con[i].id}" />
-												<img src="http://192.168.38.98:8080${con[i].face}"/>${con[i].text}
+												<img src=${severAddress}"${con[i].face}"/>${con[i].text}
 											</li>`
 									document.getElementById('done').classList.remove("mui-disabled");
 								} else {
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox"  value="${con[i].id}" />
-												<img src="http://192.168.38.98:8080${con[i].face}"/>${con[i].text}
+												<img src=${severAddress}"${con[i].face}"/>${con[i].text}
 										</li>`
 
 								}
@@ -199,14 +199,12 @@
 					});
 					if (checkedValues.length > 0) {
 						if (classCadresId && !classCadresId != undefined && classCadresId != '' && classCadresId != null) {
-							console.log("update")
 							//打开职位
 							mui.openWindow({
 								id: 'postionUpdate',
 								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId+'&postion='+postion
 							});
 						} else {
-							console.log("add")
 							mui.openWindow({
 								id: 'postionAdd',
 								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId

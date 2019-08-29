@@ -124,7 +124,7 @@
 							var listClassSearch = function() {
 								var _this = this;
 								if (curr <= count) {
-									mui.ajax('http://192.168.38.98:8080/phone/selectbulletin.do', {
+									mui.ajax('/phone/selectbulletin.do', {
 										data: {
 											token: window.localStorage.getItem('token'),
 											currPage: curr,
@@ -147,9 +147,9 @@
 													
 													var face = "";
 													if(con[i].recognitionObjectType==1){
-														var face = "http://192.168.38.98:8080"+con[i].userFace;
+														var face = con[i].userFace;
 													}else if(con[i].recognitionObjectType==2){
-														var face = "http://192.168.38.98:8080"+con[i].classIcon;
+														var face = con[i].classIcon;
 													}
 													
 													html +=
@@ -160,7 +160,7 @@
 															<div class="mui-slider-handle">
 																<div class="mui-table-cell">
 																	<div class="cri-list-wrap">
-																		<img src="`+face+`" alt="">
+																		<img src=${severAddress}"`+face+`" alt="">
 																		<div class="cri-list-cont">
 																			<div>${con[i].recognitionName}</div>
 																			<div>${con[i].recognitionRemark}</div>
@@ -190,7 +190,7 @@
 							var listSchoolSearch = function() {
 								var _this = this;
 								if (curr <= count) {
-									mui.ajax('http://192.168.38.98:8080/phone/selectbulletin.do', {
+									mui.ajax('/phone/selectbulletin.do', {
 										data: {
 											token: window.localStorage.getItem('token'),
 											currPage: curr1,
@@ -212,9 +212,9 @@
 												for (var i = 0; i < con.length; i++) {
 													var face = "";
 													if(con[i].recognitionObjectType==1){
-														var face = "http://192.168.38.98:8080"+con[i].userFace;
+														var face = con[i].userFace;
 													}else if(con[i].recognitionObjectType==2){
-														var face = "http://192.168.38.98:8080"+con[i].classIcon;
+														var face = con[i].classIcon;
 													}
 													
 													html +=
@@ -225,7 +225,7 @@
 															<div class="mui-slider-handle">
 																<div class="mui-table-cell">
 																	<div class="cri-list-wrap">
-																		<img src="`+face+`" alt="">
+																		<img src=${severAddress}"`+face+`" alt="">
 																		<div class="cri-list-cont">
 																			<div>${con[i].recognitionName}</div>
 																			<div>${con[i].recognitionRemark}</div>
@@ -259,7 +259,7 @@
 							
 							
 							var del = function(id) {
-								mui.ajax('http://192.168.38.98:8080/phone/deletebulletin.do', {
+								mui.ajax('/phone/deletebulletin.do', {
 									data: {
 										token: window.localStorage.getItem('token'),
 										id: id

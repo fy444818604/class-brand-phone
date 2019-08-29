@@ -150,7 +150,7 @@
 				// 班级活动查询
 				var listSearch = function() {
 					var _this = this;
-					mui.ajax('http://192.168.38.98:8080/phone/classteacher/selectclassteacherbyclass.do', {
+					mui.ajax('/phone/classteacher/selectclassteacherbyclass.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							currentPage: curr,
@@ -192,7 +192,7 @@
 				listSearch();
 				//删除任课老师
 				var delTeacher = function(id) {
-					mui.ajax('http://192.168.38.98:8080/phone/classteacher/delete.do', {
+					mui.ajax('/phone/classteacher/delete.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							classTeacherId: id

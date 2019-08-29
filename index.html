@@ -183,7 +183,7 @@
 					});
 				}
 				if (window.localStorage.getItem('isCharge') == 1) {
-					mui.ajax('http://192.168.38.98:8080/phone/classdetail/selcetclassdetailbyid.do',{
+					mui.ajax('/phone/classdetail/selcetclassdetailbyid.do',{
 						data:{
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token')
@@ -273,7 +273,7 @@
 				});
 			})
 			var checkPassword = function(password) {
-				mui.ajax('http://192.168.38.98:8080/phone/checkpushpassword.do', {
+				mui.ajax('/phone/checkpushpassword.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						password: password
@@ -322,7 +322,7 @@
 			}
 
 			var checkWeChat = function() {
-				mui.ajax('http://192.168.38.98:8080/phone/selectbindwechat.do', {
+				mui.ajax('/phone/selectbindwechat.do', {
 					data: {
 						token: window.localStorage.getItem('token')
 					},

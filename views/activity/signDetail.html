@@ -172,7 +172,7 @@
 		var type = 1;
 		mui.init()
 		var search = function(id) {
-			mui.ajax('http://192.168.38.98:8080/phone/active/selectactiveforajax.do', {
+			mui.ajax('/phone/active/selectactiveforajax.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					activeId: id
@@ -216,7 +216,7 @@
 		}
 		var search1 = function(id){
 			console.log(id)
-			mui.ajax('http://192.168.38.98:8080/phone/votetitle/selectbyactive.do',{
+			mui.ajax('/phone/votetitle/selectbyactive.do',{
 				data:{
 					token: window.localStorage.getItem('token'),
 					activeId:id

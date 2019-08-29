@@ -7,6 +7,8 @@
  * MUI核心JS
  * @type _L4.$|Function
  */
+var severAddress='http://192.168.10.59:8099'
+
 var mui = (function(document, undefined) {
 	var readyRE = /complete|loaded|interactive/;
 	var idSelectorRE = /^#([\w-]+)$/;
@@ -3140,6 +3142,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 			dataType: dataType
 		};
 	};
+	
 	$.ajax = function(url, options) {
 		if(typeof url === "object") {
 			options = url;
@@ -3147,6 +3150,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		}
 		var settings = options || {};
 		settings.url = url || settings.url;
+		settings.url = severAddress+ settings.url
 		for(var key in $.ajaxSettings) {
 			if(settings[key] === undefined) {
 				settings[key] = $.ajaxSettings[key];
