@@ -187,7 +187,7 @@
 					var formData = new FormData();
 					var files = this.files;
 					formData.append("file", files[0]);
-					mui.ajax('http://192.168.10.59:8099/uploadimg.do', {
+					mui.ajax('/uploadimg.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -199,7 +199,7 @@
 							// console.log(data);
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
-								document.getElementById("classHonorIcon").setAttribute("src", "http://192.168.10.59:8099" + data.data)
+								document.getElementById("classHonorIcon").setAttribute("src", severAddress + data.data)
 							} else {
 								mui.alert(data.msg)
 							}
@@ -219,7 +219,7 @@
 			//添加、编辑班级荣誉	
 			function operateClassHonor() {
 				if (notBlank(classHonorId)) {
-					mui.ajax('http://192.168.10.59:8099/phone/classhonor/update.do', {
+					mui.ajax('/phone/classhonor/update.do', {
 						data: {
 							classHonorId: classHonorId,
 							classId: window.localStorage.getItem('classId'),
@@ -249,7 +249,7 @@
 					});
 				} else {
 
-					mui.ajax('http://192.168.10.59:8099/phone/classhonor/insert.do', {
+					mui.ajax('/phone/classhonor/insert.do', {
 						data: {
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token'),

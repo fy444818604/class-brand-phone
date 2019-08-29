@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
 		<link href="../../css/public.css" rel="stylesheet" />
 		<style>
-			#scroll{
+			#scroll,#scroll1{
 				height: calc(100vh - 131px);
 			}
 			.mui-content{
@@ -70,7 +70,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a href="../../index.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">通报</h1>
 		</header>
 		<div class="mui-content">
@@ -88,54 +88,20 @@
 				<div id="item1" class="mui-control-content mui-active">
 					<div id="scroll" class="mui-scroll-wrapper">
 						<div class="mui-scroll">
-							<ul class="mui-table-view" id="OA_task_2">
-								<li class="mui-table-view-cell">
-									<div class="mui-slider-right mui-disabled">
-										<a class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
-									</div>
-									<div class="mui-slider-handle">
-										<div class="mui-table-cell">
-											<div class="cri-list-wrap">
-												<img src="../../img/city-1.jpg" alt="">
-												<div class="cri-list-cont">
-													<div>王志军</div>
-													<div>啊实打实大啊实打实大啊实打实大啊实打实大啊实打实大啊实打实大</div>
-													<div>06-09</div>
-												</div>
-												<div class="cri-right">
-													<div class="cri-type">特别严重警告</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="mui-table-view-cell">
-									<div class="mui-slider-right mui-disabled">
-										<a class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
-									</div>
-									<div class="mui-slider-handle">
-										<div class="mui-table-cell">
-											左滑显示多功能菜单
-										</div>
-									</div>
-								</li>
-
+							<ul class="mui-table-view" id="OA_task_1">
+								
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div id="item2" class="mui-control-content">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							第二个选项卡子项-1
-						</li>
-						<li class="mui-table-view-cell">
-							第二个选项卡子项-2
-						</li>
-						<li class="mui-table-view-cell">
-							第二个选项卡子项-3
-						</li>
-					</ul>
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view" id="OA_task_2">
+								
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 			<a type="button" href="add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发通报</a>
@@ -143,10 +109,214 @@
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
 			(function($) {
-				mui.init()
-				$('#scroll').scroll({
-					indicators: true //是否显示滚动条
-				});
+							mui.init()
+							$('#scroll').scroll({
+								indicators: true //是否显示滚动条
+							});
+							$('#scroll1').scroll({
+								indicators: true //是否显示滚动条
+							});
+							var curr = 1;
+							var count = 1;
+							var curr1 = 1;
+							var count1 = 1;
+							
+							var listClassSearch = function() {
+								var _this = this;
+								if (curr <= count) {
+									mui.ajax('/phone/selectbulletin.do', {
+										data: {
+											token: window.localStorage.getItem('token'),
+											currPage: curr,
+											pageSize: 10,
+											level: 2,
+											type:2
+										},
+										dataType: 'json', //服务器返回json格式数据
+										type: 'get', //HTTP请求类型
+										timeout: 10000, //超时时间设置为10秒；
+										success: function(data) {
+											if(data.code==200){
+												// _this.endPullupToRefresh(false);
+												// document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
+												var con = data.data.recordList;
+												
+												count = data.data.pageCount;
+												var html = document.querySelector('#OA_task_1').innerHTML;
+												for (var i = 0; i < con.length; i++) {
+													
+													var face = "";
+													if(con[i].recognitionObjectType==1){
+														var face = con[i].userFace;
+													}else if(con[i].recognitionObjectType==2){
+														var face = con[i].classIcon;
+													}
+													
+													html +=
+														`<li class="mui-table-view-cell" data-id="${con[i].recognitionId}">
+															<div class="mui-slider-right mui-disabled">
+																<a class="mui-btn mui-btn-red mui-icon iconfont icon-del" id="${con[i].recognitionId}"></a>
+															</div>
+															<div class="mui-slider-handle">
+																<div class="mui-table-cell">
+																	<div class="cri-list-wrap">
+																		<img src=${severAddress}"`+face+`" alt="">
+																		<div class="cri-list-cont">
+																			<div>${con[i].recognitionName}</div>
+																			<div>${con[i].recognitionRemark}</div>
+																			<div>${con[i].createTime}</div>
+																		</div>
+																		<div class="cri-right">
+																			<div class="cri-type">${con[i].recognitionContent}</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</li>`
+												}
+												document.querySelector('#OA_task_1').innerHTML = html
+												curr++;
+											}
+										},
+										error: function(xhr, type, errorThrown) {
+							
+										}
+									});
+								} else {
+									_this.endPullupToRefresh(true);
+								}
+							}
+							
+							var listSchoolSearch = function() {
+								var _this = this;
+								if (curr <= count) {
+									mui.ajax('/phone/selectbulletin.do', {
+										data: {
+											token: window.localStorage.getItem('token'),
+											currPage: curr1,
+											pageSize: 10,
+											level: 1,
+											type:2
+										},
+										dataType: 'json', //服务器返回json格式数据
+										type: 'get', //HTTP请求类型
+										timeout: 10000, //超时时间设置为10秒；
+										success: function(data) {
+											if(data.code==200){
+												// _this.endPullupToRefresh(false);
+												// document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
+												var con = data.data.recordList;
+												count1 = data.data.pageCount;
+												var html = document.querySelector('#OA_task_2').innerHTML;
+												
+												for (var i = 0; i < con.length; i++) {
+													var face = "";
+													if(con[i].recognitionObjectType==1){
+														var face = con[i].userFace;
+													}else if(con[i].recognitionObjectType==2){
+														var face = con[i].classIcon;
+													}
+													
+													html +=
+														`<li class="mui-table-view-cell" data-id="${con[i].recognitionId}">
+															<div class="mui-slider-right mui-disabled">
+																<a class="mui-btn mui-btn-red mui-icon iconfont icon-del" id="${con[i].recognitionId}"></a>
+															</div>
+															<div class="mui-slider-handle">
+																<div class="mui-table-cell">
+																	<div class="cri-list-wrap">
+																		<img src=${severAddress}"`+face+`" alt="">
+																		<div class="cri-list-cont">
+																			<div>${con[i].recognitionName}</div>
+																			<div>${con[i].recognitionRemark}</div>
+																			<div>${con[i].createTime}</div>
+																		</div>
+																		<div class="cri-right">
+																			<div class="cri-type">${con[i].recognitionContent}</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</li>`
+													
+												}
+												
+												document.querySelector('#OA_task_2').innerHTML = html
+												curr++;
+											}else{
+												// alert(data.msg);
+											}
+											
+										},
+										error: function(xhr, type, errorThrown) {
+											Layer.alert("1")
+										}
+									});
+								} else {
+									_this.endPullupToRefresh(true);
+								}
+							}
+							
+							
+							var del = function(id) {
+								mui.ajax('/phone/deletebulletin.do', {
+									data: {
+										token: window.localStorage.getItem('token'),
+										id: id
+									},
+									dataType: 'json', //服务器返回json格式数据
+									type: 'post', //HTTP请求类型
+									timeout: 10000, //超时时间设置为10秒；
+									success: function(data) {
+										console.log(data)
+										if (data.code == 200) {
+											curr = 1
+											curr1 = 1
+											document.querySelector('#OA_task_1').innerHTML = ""
+											document.querySelector('#OA_task_2').innerHTML = ""
+											listClassSearch()
+											listSchoolSearch()
+										}
+									},
+									error: function(xhr, type, errorThrown) {
+							
+									}
+								});
+							}
+							
+							
+							
+							mui.ready(function() {
+								
+								mui("#scroll").pullRefresh({
+									up: {
+										height: 50, //可选.默认50.触发上拉加载拖动距离
+										auto: true, //可选,默认false.自动上拉加载一次
+										contentrefresh: '正在加载...',
+										contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+										callback: listClassSearch()
+									}
+								})
+								mui("#scroll1").pullRefresh({
+									up: {
+										height: 50, //可选.默认50.触发上拉加载拖动距离
+										auto: true, //可选,默认false.自动上拉加载一次
+										contentrefresh: '正在加载...',
+										contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+										callback: listSchoolSearch()
+									},
+								})
+								mui(".mui-table-view").on('tap', '.icon-del', function() {
+									var id = this.getAttribute("id");
+									var btnArray = ['否', '是'];
+									mui.confirm('确认要删除？', null, btnArray, function(e) {
+										if (e.index == 1) {
+											del(id);
+										}
+									})
+								})
+							})
+							
 			})(mui);
 		</script>
 	</body>

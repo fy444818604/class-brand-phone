@@ -215,8 +215,7 @@
 		//添加/编辑
 		function operateTeacher(subjectName) {
 			if (notBlank(classTeacherId)) {
-				console.log("update")
-				mui.ajax('http://192.168.10.59:8099/phone/classteacher/update.do', {
+				mui.ajax('/phone/classteacher/update.do', {
 					data: {
 						classTeacherId: classTeacherId,
 						classId: window.localStorage.getItem('classId'),
@@ -244,7 +243,7 @@
 					}
 				});
 			} else {
-				mui.ajax('http://192.168.10.59:8099/phone/classteacher/insert.do', {
+				mui.ajax('/phone/classteacher/insert.do', {
 					data: {
 						classId: window.localStorage.getItem('classId'),
 						workId: workId,

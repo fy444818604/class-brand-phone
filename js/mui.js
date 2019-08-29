@@ -7,6 +7,8 @@
  * MUI核心JS
  * @type _L4.$|Function
  */
+var severAddress='http://192.168.10.59:8099'
+
 var mui = (function(document, undefined) {
 	var readyRE = /complete|loaded|interactive/;
 	var idSelectorRE = /^#([\w-]+)$/;
@@ -3039,12 +3041,13 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		error: $.noop,
 		complete: $.noop,
 		context: null,
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		xhr: function(protocol) {
 			return new window.XMLHttpRequest();
 		},
 		accepts: {
 			script: 'text/javascript, application/javascript, application/x-javascript',
-			json: jsonType,
+			json: 'application/json, text/javascript, */*; q=0.01',
 			xml: 'application/xml, text/xml',
 			html: htmlType,
 			text: 'text/plain'
@@ -3140,6 +3143,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 			dataType: dataType
 		};
 	};
+	
 	$.ajax = function(url, options) {
 		if(typeof url === "object") {
 			options = url;
@@ -3147,7 +3151,11 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		}
 		var settings = options || {};
 		settings.url = url || settings.url;
+<<<<<<< HEAD
 		settings.url = 'http://192.168.38.209:8080'+ settings.url
+=======
+		settings.url = severAddress+ settings.url
+>>>>>>> 5d04471f4a84e7862f92b573e66ecf461a050e50
 		for(var key in $.ajaxSettings) {
 			if(settings[key] === undefined) {
 				settings[key] = $.ajaxSettings[key];

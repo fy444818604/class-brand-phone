@@ -64,7 +64,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a href="../../index.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">活动</h1>
 		</header>
 		<div class="mui-content">
@@ -138,7 +138,7 @@
 				var listSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('http://192.168.10.59:8099/phone/active/selectpagebean.do', {
+						mui.ajax('/phone/active/selectpagebean.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
@@ -187,7 +187,7 @@
 				var listSearch1 = function() {
 					var _this = this;
 					if (curr1 <= count1) {
-						mui.ajax('http://192.168.10.59:8099/phone/active/selectpagebean.do', {
+						mui.ajax('/phone/active/selectpagebean.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
@@ -235,7 +235,7 @@
 
 				//删除活动
 				var activityDel = function(id) {
-					mui.ajax('http://192.168.10.59:8099/phone/active/delete.do', {
+					mui.ajax('/phone/active/delete.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
 							id: id
@@ -245,10 +245,10 @@
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
 							if (data.code == 200) {
-								// curr = 1
-								// curr1 = 1
-								// listSearch()
-								// listSearch1()
+								mui.openWindow({
+									id: 'index',
+									url: '../activity/index.html'
+								});
 							}
 						},
 						error: function(xhr, type, errorThrown) {
@@ -307,7 +307,6 @@
 								url: './quesAdd.html?type='+this.dataset.type
 							});
 						} else {
-							console.log(111)
 							mui.openWindow({
 								id: 'index',
 								url: './signAdd.html?type='+this.dataset.type,

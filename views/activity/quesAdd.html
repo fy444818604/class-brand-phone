@@ -54,121 +54,9 @@
 				width: 100vw;
 				height: 100vh;
 			}
-			.mui-content {
-				height: 100%;
-				padding-top: 0.77rem;
-			}
-
-			.mui-content-cont {
-				height: calc(100vh - 6.66rem);
-				background: #FFFFFF;
-				padding: 0rem 1rem;
-			}
-
-			/*复选框的样式*/
-			.mui-checkbox input[type=checkbox]:before {
-				content: '\e413';
-				font-size: 1.5rem;
-			}
-
-			.li-label input[type=checkbox]:before {
-				font-size: 3rem;
-				border: none;
-				color: #edf1f6;
-			}
-
-			.mui-checkbox.mui-left input[type=checkbox],
-			.mui-radio.mui-left input[type=radio] {
-				left: 0px;
-			}
-
-			.mui-checkbox input[type=checkbox]:checked:before {
-				content: '\e443';
-			}
-
-			.li-label input[type=checkbox]:checked:before {
-				content: '';
-			}
-
-			.mui-checkbox.mui-left label,
-			.mui-radio.mui-left label {
-				padding-left: 30px;
-				font-size: 1rem;
-				margin-top: -3px;
-			}
-
-			.mui-input-row label {
-				padding: 11px 15px;
-			}
-
-			/*布局*/
-			.generations {
-				padding-top: 1rem;
-			}
-
-			.grade {
-				height: calc(100vh - 7.9rem);
-				overflow: auto;
-			}
-
-			.grade>li {
-				margin-bottom: 1rem;
-			}
-
-			.grade-class>li {
-				width: 33.33%;
-				height: 4.07rem;
-				margin-top: 3%;
-			}
-
-			.grade>li>.mui-left {
-				margin-top: 0.5rem;
-			}
-
-			.grade-class-li div {
-				width: 90%;
-				margin: 0 auto;
-				background: #edf1f6;
-				height: 4.07rem;
-				line-height: 4.08rem;
-				text-align: center;
-			}
-
-			.liAktv>div {
-				background: #E7f1ff;
-				color: #3B8BFF;
-			}
-
-			/*按钮*/
-			.bnt>div {
-				height: 3.7rem;
-				text-align: center;
-				line-height: 3.7rem;
-				font-size: 1rem;
-			}
-
-			.bnt-left {
-				width: 30%;
-				color: #3b8bff;
-			}
-
-			.bnt-rnt {
-				width: 70%;
-				background: #3b8bff;
-				color: #FFFFFF;
-			}
 			
-			.objTchu {
-				position: fixed;
-				top: 0px;
-				left: 0px;
-				width: 100%;
-				height: 100%;
-				background: red;
-				z-index: 99999;
-				display: none;
-
-			}
+		
+		/* 添加选项 */	
 			.icon-btn{
 				display: flex;
 				color: #3b8bff;
@@ -185,9 +73,10 @@
 			}
 			.addLI-title{
 				font-size: 1rem;
-				padding: 10px 1rem;
 				margin: 0px;
-				color: ##303133;
+			}
+			.addLI-title>input{
+				color: #000000;
 			}
 			.addLI>li{
 				height: 3rem;
@@ -207,6 +96,9 @@
 				color: #FFFFFF;
 				text-align: center;
 				line-height: 1.07rem;
+			}
+			#showQues{
+				padding-left: 1rem;
 			}
 		</style>
 	</head>
@@ -242,11 +134,11 @@
 				</div>
 				<div class="mui-input-group">
 					<div class="mui-input-row flex justify-bet mt12 Hauto" style="padding: 0 15px; align-items: center;">
-						<div>选项</div>
+						<div style="padding: 0px 0px;">选项</div>
 						<a class="iconfont icon-add" href="#option" style="color: #3B8BFF;"></a>
-						<div id="showQues">
-
-						</div>
+					</div>
+					<div id="showQues">
+						
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
@@ -300,20 +192,20 @@
 			<header class="mui-bar mui-bar-nav">
 				<h1 class="mui-title">选择对象</h1>
 			</header>
-			<div class="mui-content">
-				<div class="mui-content-cont">
-					<div class="generations">
+			<div class="mui-content obje-content">
+				<div class="obje-content-content">
+					<div class="obje-generations">
 						<div class="mui-input-row mui-checkbox  mui-left parent-input">
 							<label style="text-align: left;">全选</label>
 							<input id="parent-input" name="zhege " type="checkbox">
 						</div>
 					</div>
-					<ul id="grade" class="grade">
+					<ul id="grade" class="obje-grade">
 					</ul>
 				</div>
-				<div class="bnt flex">
-					<div class="bnt-left">重置</div>
-					<div class="bnt-rnt">确定</div>
+				<div class="obje-bnt flex">
+					<div class="obje-bnt-left">重置</div>
+					<div class="obje-bnt-rnt">确定</div>
 				</div>
 			</div>
 		</div>
@@ -327,7 +219,7 @@
 				<div class="mui-input-group" style="height: calc(100vh - 103px);">
 
 					<div class="mui-input-row Hauto mt12" id="queAdd">
-						<div class="quesDiv mui-input-row Hauto mt12">
+						<div class="quesDiv mui-input-row Hauto mt12" style="padding: 6px 0px;">
 							<p class="addLI-title">
 								<input type="text" class="quesTitle " placeholder="请输入题目内容" maxlength="40">
 							</p>
@@ -419,7 +311,7 @@
 					//判断是不是选择了级别
 					if (notBlank(activeLevel.value)) {
 						//判断是不是有选择班牌的权限
-						mui.ajax('http://192.168.10.59:8099/phone/active/jugeboardpower.do', {
+						mui.ajax('/phone/active/jugeboardpower.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								activeLevel: activeLevel.value
@@ -493,7 +385,7 @@
 				var html =
 					`<li class="flex">
 							    <div class="addLI-left">
-									<input type="text" class="quesOption mui-input-clear" placeholder="请输入选项内容" maxlength="40">
+									<input style="color:#c0c4cc;" type="text" class="quesOption mui-input-clear" placeholder="请输入选项内容" maxlength="40">
 								</div>
 								<div class="addLI-rnt">
 									<i class="iconfont icon-close"></i>
@@ -516,7 +408,7 @@
 			//班级数据
 			function objectData() {
 				console.log(window.localStorage.getItem('token'))
-				mui.ajax('http://192.168.10.59:8099/phone/selectboard.do', {
+				mui.ajax('/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						level: activeLevel.value
@@ -530,6 +422,7 @@
 						var html = "";
 						for (var i = 0; i < con.length; i++) {
 							var obj = con[i];
+							console.log(obj)
 							html += '<li data-id = "' + obj.id + '">';
 							if (obj.grade != "") {
 								html +=
@@ -541,9 +434,9 @@
 							var list = obj.list;
 
 							html +=
-								'<ul class="grade-class flex">'
+								'<ul class="obje-grade-class flex">'
 							for (var j = 0; j < list.length; j++) {
-								html += '	<li data-ids = "' + list[j].id + '" class="grade-class-li">' +
+								html += '	<li data-ids = "' + list[j].id + '" class="obje-grade-class-li">' +
 									'		<div>' + list[j].name + '</div>' +
 									'	</li>'
 							}
@@ -565,10 +458,10 @@
 			mui('.parent-input').on('change', 'input', function() {
 				if (this.checked ? "true" : "false" == true) {
 					$("#grade :checkbox").prop("checked", true);
-					$('.grade-class-li').addClass('liAktv')
+					$('.obje-grade-class-li').addClass('liAktv')
 				} else {
 					$("#grade :checkbox").prop("checked", false);
-					$('.grade-class-li').removeClass('liAktv')
+					$('.obje-grade-class-li').removeClass('liAktv')
 				}
 			});
 			//设置全选复选框
@@ -579,9 +472,8 @@
 			}
 
 			function allchk() {
-				var chknum = $(".grade-class").length; //选项总个数
+				var chknum = $(".obje-grade-class-li").length; //选项总个数
 				var chk = $(".liAktv").length;
-
 				if (chknum == chk) { //全选
 					$("#parent-input").prop("checked", true);
 				} else { //不全选
@@ -600,7 +492,7 @@
 			}
 			//点击班级	
 			function claDIAN() {
-				$('.grade-class-li').click(function() {
+				$('.obje-grade-class-li').click(function() {
 					if ($(this).hasClass('liAktv')) {
 						$(this).removeClass('liAktv')
 					} else {
@@ -613,6 +505,7 @@
 					} else {
 						$(this).parent('ul').siblings('div').find('input').prop('checked', false)
 					}
+					console.log(1)
 					allchk();
 				})
 			}
@@ -621,11 +514,11 @@
 			//重置
 			$(".bnt-left").on("tap", function() {
 				$('input:checked').prop('checked', false)
-				$('.grade-class-li').removeClass('liAktv')
+				$('.obje-grade-class-li').removeClass('liAktv')
 			})
 
 			//确定
-			$('.bnt-rnt').on('tap', function() {
+			$('.obje-bnt-rnt').on('tap', function() {
 				$('.liAktv').each(function() {
 					boardIds.push($(this).attr('data-ids'));
 					boardNames.push($(this).find('div').text())
@@ -654,7 +547,7 @@
 				}
 				
 				//拼装数据
-				var questionnaireTitleVos = []
+				var questionnaireTitleVos = []	
 				var arr = $(".quesDiv1");
 				for (var i = 0; i < arr.length; i++) {
 					var obj = arr[i];
@@ -673,7 +566,6 @@
 						optionList:optionList1
 					}
 					questionnaireTitleVos.push(dataVo);
-					console.log(questionnaireTitleVos);
 				}
 					
 				console.log(questionnaireTitleVos);	
@@ -688,7 +580,7 @@
 					return;
 				}
 
-				mui.ajax('http://192.168.10.59:8099/phone/active/operateactive.do', {
+				mui.ajax('/phone/active/operateactive.do', {
 					data: {
 						active: JSON.stringify(data),
 						questionnaireTitleVos: JSON.stringify(questionnaireTitleVos),
@@ -701,11 +593,10 @@
 					success: function(data) {
 						// console.log(data);
 						if (data.code == 200) {
-							console.log(data);
-							// mui.openWindow({
-							// 	id: 'index',
-							// 	url: '../class-committee/index.html'
-							// });
+							mui.openWindow({
+								id: 'index',
+								url: '../activity/index.html'
+							});
 						} else {
 							mui.alert(data.msg)
 						}

@@ -183,7 +183,7 @@
 					});
 				}
 				if (window.localStorage.getItem('isCharge') == 1) {
-					mui.ajax('http://192.168.38.175:8080/phone/classdetail/selcetclassdetailbyid.do',{
+					mui.ajax('/phone/classdetail/selcetclassdetailbyid.do',{
 						data:{
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token')
@@ -265,13 +265,15 @@
 				});
 			})
 			mui("#notice").on('tap', '.school', function(e) {
-				mui.openWindow({
-					id: 'index',
-					url: 'views/school/index.html'
+				e.detail.gesture.preventDefault();
+				mui.prompt('', '请输入授权密码', '授权密码', ['取消', '确认'], function(e) {
+					if (e.index == 1) {
+						checkSchoolPassword(e.value);
+					}
 				});
 			})
 			var checkPassword = function(password) {
-				mui.ajax('http://192.168.38.175:8080/phone/checkpushpassword.do', {
+				mui.ajax('/phone/checkpushpassword.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						password: password
@@ -294,9 +296,33 @@
 					}
 				});
 			}
+			var checkSchoolPassword = function(password) {
+				mui.ajax('/phone/checkpushpassword.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						password: password
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == 200) {
+							mui.openWindow({
+								id: 'index',
+								url: 'views/school/index.html'
+							});
+						} else {
+							mui.alert(data.msg)
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						// console.log(xhr)
+					}
+				});
+			}
 
 			var checkWeChat = function() {
-				mui.ajax('http://192.168.38.175:8080/phone/selectbindwechat.do', {
+				mui.ajax('/phone/selectbindwechat.do', {
 					data: {
 						token: window.localStorage.getItem('token')
 					},

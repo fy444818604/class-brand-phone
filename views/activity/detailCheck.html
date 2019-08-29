@@ -42,7 +42,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"  ></a>
 			<h1 class="mui-title">查看报名人</h1>
 		</header>
 		<div class="mui-content">
@@ -78,7 +78,7 @@
 			document.querySelector('.mui-title').innerHTML = '查看' + types + '人'
 			mui.init()
 			var search = function(id){
-				mui.ajax('http://192.168.10.59:8099/phone/active/selectuserbyactive.do',{
+				mui.ajax('/phone/active/selectuserbyactive.do',{
 					data:{
 						token: window.localStorage.getItem('token'),
 						activeId:id

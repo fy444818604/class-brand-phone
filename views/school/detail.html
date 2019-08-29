@@ -150,10 +150,10 @@
 									html += `<div class="school-list-img-wrap" style="background:${data.data.backgroundColor}">`;
 								}else if(data.data.backgroundType == 2){
 									html += `<div class="school-list-img-wrap">
-										<img src="${'http://192.168.38.209:8080'+data.data.backgroundUrl}" alt="">`;
+										<img src="$${severAddress}{data.data.backgroundUrl}" alt="">`;
 								}else if(data.data.backgroundType == 3){
 									html += `<div class="school-list-img-wrap">
-										<video src="${'http://192.168.38.209:8080'+data.data.backgroundUrl}" autoplay="autoplay" loop="loop"></video>`;
+										<video src="${severAddress}${data.data.backgroundUrl}" autoplay="autoplay" loop="loop"></video>`;
 								}else{
 									html += `<div class="school-list-img-wrap">
 										<video src="${data.data.backgroundUrl}" autoplay="autoplay" loop="loop"></video>`;

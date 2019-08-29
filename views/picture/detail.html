@@ -263,7 +263,7 @@
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
 		var search = function(id) {
-			mui.ajax('http://192.168.38.175:8080/phone/selectnoticedetail.do', {
+			mui.ajax('/phone/selectnoticedetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
@@ -281,7 +281,7 @@
 		
 				}
 			});
-			mui.ajax('http://192.168.38.175:8080/phone/selectimagedetail.do', {
+			mui.ajax(/phone/selectimagedetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
@@ -297,7 +297,7 @@
 					for (var i = 0; i < value.length; i++) {
 						html +=
 							`<li>
-								<img class="picture" src="http://192.168.38.98:8080/${value[i]}"></img>
+								<img class="picture" src="${severAddress}${value[i]}"></img>
 							</li>`
 					}
 					document.querySelector('#images').innerHTML = html
@@ -306,7 +306,7 @@
 					
 				}
 			});
-			mui.ajax('http://192.168.38.175:8080/phone/selectboardsbyannouncementid.do', {
+			mui.ajax('/phone/selectboardsbyannouncementid.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id

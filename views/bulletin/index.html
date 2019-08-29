@@ -50,7 +50,7 @@
 	var systemAnnouncementId = 0;
 	mui.init();
 	var getData = function() {
-		mui.ajax('http://192.168.38.175:8080/phone/selectpublicannouncement.do', {
+		mui.ajax('/phone/selectpublicannouncement.do', {
 			data: {
 				token: window.localStorage.getItem('token')
 			},
@@ -73,7 +73,7 @@
 	}
 	
 	var submitData = function() {
-		mui.ajax('http://192.168.38.175:8080/phone/updatepublicannouncement.do', {
+		mui.ajax('/phone/updatepublicannouncement.do', {
 			data: {
 				token: window.localStorage.getItem('token'),
 				systemAnnouncementId:systemAnnouncementId,

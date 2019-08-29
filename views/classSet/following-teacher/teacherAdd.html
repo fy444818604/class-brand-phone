@@ -122,7 +122,7 @@
 			}(mui))
 			//查询现有老师接口
 			function existingTeacher(str) {
-				mui.ajax('http://192.168.10.59:8099/phone/user/selectteacherlist.do', {
+				mui.ajax('/phone/user/selectteacherlist.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						q: str
@@ -141,14 +141,14 @@
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox" checked  value="${con[i].id}" />
-												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+												<img src="${severAddress}${con[i].face}"/>${con[i].text}
 											</li>`
 									document.getElementById('done').classList.remove("mui-disabled");
 								} else {
 									html +=
 										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
 												<input type="checkbox"  value="${con[i].id}" />
-												<img src="http://192.168.10.59:8099${con[i].face}"/>${con[i].text}
+												<img src="${severAddress}${con[i].face}"/>${con[i].text}
 										</li>`
 
 								}
