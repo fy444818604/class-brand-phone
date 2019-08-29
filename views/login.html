@@ -85,7 +85,7 @@
 		var login = function() {
 			var loginName = document.querySelector('.login-name').value;
 			var loginPwd = document.querySelector('.login-pwd').value;
-			mui.ajax('http://192.168.10.59:8099/phone/login.do', {
+			mui.ajax('http://192.168.38.209:8080/phone/login.do', {
 				data: {
 					loginName: loginName,
 					loginPwd: loginPwd
@@ -101,7 +101,7 @@
 						mui.openWindow({
 							id: 'index',
 							 // url:'./activity/index.html'
-							url: '../index.html'
+							url: './school/index.html'
 						});
 					}
 				},

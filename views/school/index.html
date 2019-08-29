@@ -17,11 +17,22 @@
 			}
 			.mui-content>ul>li{
 				border-bottom: 1px solid #c8c7cc;
+				background: #FFFFFF;
 			}
 			.mui-btn-block{
 				margin-bottom: 0;
 			}
-			
+			.school-list-img-wrap{
+				padding-bottom: 56%;
+				position: relative;
+			}
+			.school-list-img-wrap>img,.school-list-img-wrap>video{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
 		</style>
 	</head>
 
@@ -39,7 +50,9 @@
 					<div class="school-list-wrap">
 						<div>欢迎杨丽市长来校参观</div>
 						<div class="school-list-img">
-							<img src="../../img/city-1.jpg" alt="">
+							<div class="school-list-img-wrap">
+								<img src="../../img/city-1.jpg" alt="">
+							</div>
 						</div>
 						<div class="flex justify-bet">
 							<div>05-09 09:00 至 05-10 19:00</div>
@@ -108,11 +121,75 @@
 					</div>
 				</li>
 			</ul>
-			<a type="button" href="#" class="mui-btn mui-btn-primary mui-btn-block">发校宣</a>
+			<a type="button" id="school-issue" class="mui-btn mui-btn-primary mui-btn-block">发校宣</a>
 		</div>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
 			mui.init()
+			mui.ajax('http://192.168.38.209:8080/phone/propagandapage.do',{
+				data:{
+					token:window.localStorage.getItem('token')
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'get',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
+					console.log(data)
+					var html = '';
+					var state = '';
+					for(var i = 0;i<data.data.length;i++){
+						if(data.data[i].stutas == '1'){
+							state = '../../img/school.png';
+						}else{
+							state = '../../img/school1.png';
+						}
+						html += `<li id="${data.data[i].propaganda_id}">
+									<div class="state-wrap">
+										<img class="state-img" src="${state}" alt="">
+									</div>
+									<div class="school-list-wrap">
+										<div>${data.data[i].propaganda_name}</div>
+										<div class="school-list-img">`
+										
+						if(data.data[i].background_type == 1){
+							html += `<div class="school-list-img-wrap" style="background:${data.data[i].background_color}">`;
+						}else if(data.data[i].background_type == 2){
+							html += `<div class="school-list-img-wrap">
+								<img src="${'http://192.168.38.209:8080'+data.data[i].background_url}" alt="">`;
+						}else if(data.data[i].background_type == 3){
+							html += `<div class="school-list-img-wrap">
+								<video src="${'http://192.168.38.209:8080'+data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
+						}else{
+							html += `<div class="school-list-img-wrap">
+								<video src="${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
+						}
+						html +=`</div></div>
+								<div class="flex justify-bet">
+									<div>${data.data[i].start_date} 至 ${data.data[i].end_date}</div>
+									<div>发布班牌${data.data[i].num}</div>
+								</div>
+							</div>
+						</li>`;
+					}
+					document.querySelector('.mui-content ul').innerHTML = html;
+				},
+				error:function(xhr,type,errorThrown){
+					
+				}
+			});
+			mui('.mui-content').on('tap','li',function(){
+				var id = this.getAttribute('id');
+				mui.openWindow({
+					id: 'index',
+					url: './detail.html?id='+id
+				});
+			})
+			document.querySelector('#school-issue').addEventListener('tap',function(){
+				mui.openWindow({
+					id: 'index1',
+					url: './add.html'
+				});
+			})
 		</script>
 	</body>
 
