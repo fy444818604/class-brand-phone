@@ -297,7 +297,7 @@
 				});
 			}
 			var checkSchoolPassword = function(password) {
-				mui.ajax(severAddress+'/phone/checkpushpassword.do', {
+				mui.ajax('/phone/checkpushpassword.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						password: password
