@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>表彰</title>
+		<title>新闻</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
@@ -24,45 +24,66 @@
 			.mui-btn-block{
 				margin-bottom: 0;
 			}
-			.title-list{
-				line-height: 2.86rem;
+			.nav{
+				height: 3.63rem;
+				border-bottom: 0.07rem solid #e4e4e4;
+				background: #FFFFFF;
+				width: 100%;
 			}
-			.title-list>img{
-				height: 2.86rem;
-				width: 2.86rem;
-				margin-right: 0.5rem;
-				border-radius: 50%;
+			.nav>li{
+				width: 50%;
 			}
-			.list-left{
-				margin-left: 3.53rem;
-				font-size: 0.87rem;
+			.nav-div{
+				width: ;
+				padding: 1.02rem 0;
+				width: 3rem;
+				border-bottom: 0.14rem solid #3b8bff;
+				margin: 0 auto;
+				text-align: center;
 			}
-			.list-left>img{
-				width: 3.73rem;
-				height: 3.73rem;
-				margin-right: 0.5rem;
+			.nav-bodex{
+				border: none;
 			}
-			.list-left-left{
-				margin-top: 0.5rem;
-				margin-left: 3.53rem;
-				line-height: 1.5rem;
-				text-overflow: -o-ellipsis-lastline;
-				  overflow: hidden;
-				  text-overflow: ellipsis;
-				  display: -webkit-box;
-				  -webkit-line-clamp: 2;
-				  line-clamp: 2;
-				  -webkit-box-orient: vertical;
-				  color: #979a9f;
-				  font-size: 0.87rem;
+			.color{
+				color: #3d8cff;
 			}
+			.mui-slider-handle>div{
+				width: 50%;
+			}
+			.mui-table-view{
+				height: calc(100vh - 9.6rem);
+				overflow: auto;
+			}
+			.mui-table-view-cell:after {
+			    background: none;
+			}
+			.mui-table-view-cell {
+			    padding: 15px 15px;
+			    border-bottom: 0.07rem solid #E4E4E4;
+			}
+			.mui-table-view:before {
+			    background-color: none;
+			}
+			.mui-table-view:after {
+				background: none;
+			}
+			/*发送通知*/
+			.add{
+				height: 3.07rem;
+				background: #3B8BFF;
+				color: #FFFFFF;
+				font-size: 1.07rem;
+				line-height: 3.07rem;
+				text-align: center;
+			}
+			
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" target="_blank" href="../../index.html"></a>
-			<h1 class="mui-title">表彰</h1>
+			<h1 class="mui-title">新闻</h1>
 		</header>
 		<div class="mui-content">
 			<div>
@@ -93,7 +114,7 @@
 					</div>
 				</div>
 			</div>
-			<a type="button" href="add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发表彰</a>
+			<a type="button" href="add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发新闻</a>
 		</div>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
@@ -114,60 +135,37 @@
 				var listClassSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('http://192.168.38.209:8080/phone/selectbulletin.do', {
+						mui.ajax('http://192.168.38.209:8080/phone/selectnews.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr,
 								pageSize: 10,
-								level: 2,
-								type:1
+								level: 2
 							},
 							dataType: 'json', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								console.log(data)
 								if(data.code==200){
-									// _this.endPullupToRefresh(false);
-									// document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
 									var con = data.data.recordList;
-									
 									count = data.data.pageCount;
 									var html = document.querySelector('#OA_task_1').innerHTML;
 									for (var i = 0; i < con.length; i++) {
-										
-										var face = "../../img/home_btn_praise.png";
-										if(con[i].recognitionObjectType==1&&con[i].userFace){
-											var face = "http://192.168.38.98:8080"+con[i].userFace;
-										}else if(con[i].recognitionObjectType==2&&con[i].classIcon){
-											var face = "http://192.168.38.98:8080"+con[i].classIcon;
-										}
-										var icon = "../../img/home_btn_praise.png";
-										if(con[i].recognitionIcon){
-											icon = "http://192.168.38.98:8080"+ con[i].recognitionIcon;
-										}
-										
-										
 										html +=
 											`<li class="mui-table-view-cell">
 												<div class="mui-slider-right mui-disabled">
-													<a class="mui-btn mui-btn-red mui-icon iconfont icon-del" id="${con[i].recognitionId}"></a>
+													<a class="mui-btn mui-btn-red iconfont icon-del" id="${con[i].newsId}">删除</a>
 												</div>
-												<div class="mui-slider-handle">
-													<div class="mui-table-cell">
-														<div class="title-list"><img src="`+face+`"/>${con[i].recognitionName}</div>
-														<div class="flex">
-															<div class="list-left"><img src="`+icon+`"/></div>
-															<div>
-																<p>${con[i].recognitionContent}</p>
-																<p>${con[i].createTime}</p>
-															</div>
-														</div>
-														<div class="list-left-left">
-															${con[i].recognitionRemark}
-														</div>
+												<div class="mui-slider-handle flex">
+													<div style="width:70%;">
+														${con[i].newsTitle}
+													</div>
+													<div style="text-align: right;color: #909399;width:30%">
+														${con[i].createTimeStr}
 													</div>
 												</div>
-											</li>`
+											</li>`	
 									}
 									document.querySelector('#OA_task_1').innerHTML = html
 									curr++;
@@ -185,71 +183,44 @@
 				var listSchoolSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('http://192.168.38.209:8080/phone/selectbulletin.do', {
+						mui.ajax('http://192.168.38.209:8080/phone/selectnews.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
 								pageSize: 10,
-								level: 1,
-								type:1
+								level: 1
 							},
 							dataType: 'json', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								console.log(data)
 								if(data.code==200){
-									// _this.endPullupToRefresh(false);
-									// document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
 									var con = data.data.recordList;
 									count1 = data.data.pageCount;
 									var html = document.querySelector('#OA_task_2').innerHTML;
-									
 									for (var i = 0; i < con.length; i++) {
-										var face = "../../img/home_btn_praise.png";
-										if(con[i].recognitionObjectType==1&&con[i].userFace){
-											var face = "http://192.168.38.98:8080"+con[i].userFace;
-										}else if(con[i].recognitionObjectType==2&&con[i].classIcon){
-											var face = "http://192.168.38.98:8080"+con[i].classIcon;
-										}
-										var icon = "../../img/home_btn_praise.png";
-										if(con[i].recognitionIcon){
-											icon = "http://192.168.38.98:8080"+ con[i].recognitionIcon;
-										}
-										
-										
 										html +=
 											`<li class="mui-table-view-cell">
 												<div class="mui-slider-right mui-disabled">
-													<a class="mui-btn mui-btn-red mui-icon iconfont icon-del" id="${con[i].recognitionId}"></a>
+													<a class="mui-btn mui-btn-red iconfont icon-del" id="${con[i].newsId}">删除</a>
 												</div>
-												<div class="mui-slider-handle">
-													<div class="mui-table-cell">
-														<div class="title-list"><img src="`+face+`"/>${con[i].recognitionName}</div>
-														<div class="flex">
-															<div class="list-left"><img src="`+icon+`"/></div>
-															<div>
-																<p>${con[i].recognitionContent}</p>
-																<p>${con[i].createTime}</p>
-															</div>
-														</div>
-														<div class="list-left-left">
-															${con[i].recognitionRemark}
-														</div>
+												<div class="mui-slider-handle flex">
+													<div class="l" style="width:70%">
+														${con[i].newsTitle}
+													</div>
+													<div style="text-align: right;color: #909399;width:30%">
+														${con[i].createTimeStr}
 													</div>
 												</div>
-											</li>`
-										
+											</li>`	
 									}
-									
 									document.querySelector('#OA_task_2').innerHTML = html
-									curr++;
-								}else{
-									// alert(data.msg);
+									curr1++;
 								}
-								
 							},
 							error: function(xhr, type, errorThrown) {
-								Layer.alert("1")
+				
 							}
 						});
 					} else {
@@ -258,16 +229,15 @@
 				}
 				
 				var del = function(id) {
-					mui.ajax('http://127.0.0.1:8080/phone/deletebulletin.do', {
+					mui.ajax('http://127.0.0.1:8080/phone/deletenews.do', {
 						data: {
 							token: window.localStorage.getItem('token'),
-							id: id
+							newsId: id
 						},
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							console.log(data)
 							if (data.code == 200) {
 								curr = 1
 								curr1 = 1
@@ -301,10 +271,11 @@
 							contentrefresh: '正在加载...',
 							contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
 							callback: listSchoolSearch()
-						},
+						}
 					})
 					mui(".mui-table-view").on('tap', '.icon-del', function() {
 						var id = this.getAttribute("id");
+						console.log(id);
 						var btnArray = ['否', '是'];
 						mui.confirm('确认要删除？', null, btnArray, function(e) {
 							if (e.index == 1) {
