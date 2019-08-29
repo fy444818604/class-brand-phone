@@ -209,7 +209,7 @@
 					</div>
 					<div class="mui-input-row">
 						<label>对象</label>
-						<a href="#level">请选择对象</a>
+						<a href="#objTchu">请选择对象</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row">
@@ -247,39 +247,6 @@
 				</div>
 			</div>
 			<button type="button" id="school-issue-all" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
-		</div>
-		<div id="mode" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#">单选</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">多选，最多两项</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">多选，无限制</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#mode"><b>取消</b></a>
-				</li>
-			</ul>
-		</div>
-		<div id="level" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#">班级</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">校级</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#level"><b>取消</b></a>
-				</li>
-			</ul>
 		</div>
 		<div id="bg-select" class="mui-popover">
 			<header class="mui-bar mui-bar-nav">
@@ -425,6 +392,29 @@
 				<a href="#down-title" id="top-confirm3" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
 			</div>
 		</div>
+		<!-- 对象弹出层 -->
+		<div class="objTchu mui-popover" id="objTchu">
+			<header class="mui-bar mui-bar-nav">
+				<h1 class="mui-title">选择对象</h1>
+			</header>
+			<div class="mui-content">
+				<div class="mui-content-cont">
+					<div class="generations">
+						<div class="mui-input-row mui-checkbox  mui-left parent-input">
+							<label style="text-align: left;">全选</label>
+							<input id="parent-input" name="zhege" type="checkbox">
+						</div>
+					</div>
+					<ul id="grade" class="grade">
+					</ul>
+				</div>
+				<div class="bnt flex">
+					<div class="bnt-left">重置</div>
+					<div class="bnt-rnt">确定</div>
+				</div>
+			</div>
+		</div>
+		
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
@@ -626,17 +616,17 @@
 							document.querySelector('.school-bg').innerHTML = '';
 							break;
 						case 2:
-							if(document.querySelector('.video-wrap').innerHTML.trim() == ''){
+							if (document.querySelector('.video-wrap').innerHTML.trim() == '') {
 								mui.alert('请选择背景视频')
-							}else{
+							} else {
 								document.querySelector('.school-bg').innerHTML = document.querySelector('.video-wrap').innerHTML;
 							}
 							break;
 						case 3:
 							var src = document.querySelector('.live-input').value.trim();
-							if(src == ''){
+							if (src == '') {
 								mui.alert('请选择背景直播')
-							}else{
+							} else {
 								var html = `<video src="${src}" autoplay="autoplay" loop="loop"></video>`
 								document.querySelector('.school-bg').innerHTML = html
 							}
@@ -652,17 +642,18 @@
 					})
 					return value;
 				}
-				
-				var imgListSearch = function(){
-					mui.ajax('http://192.168.38.209:8080/phone/selectbackgroundurlbyphone.do',{
-						dataType:'json',//服务器返回json格式数据
-						type:'get',//HTTP请求类型
-						timeout:10000,//超时时间设置为10秒；
-						success:function(data){
+
+				var imgListSearch = function() {
+					mui.ajax('/phone/selectbackgroundurlbyphone.do', {
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
 							console.log(data)
 							var html = '';
-							for(var i =0;i<data.data.length;i++){
-								html += `<li>
+							for (var i = 0; i < data.data.length; i++) {
+								html +=
+									`<li>
 											<img src="${'http://192.168.38.209:8080'+data.data[i].background_url}" alt="">
 											<div class="img-select">
 												<img src="../../img/select.png" alt="">
@@ -671,40 +662,72 @@
 							}
 							document.querySelector('.bg-img-list').innerHTML = html
 						},
-						error:function(xhr,type,errorThrown){
-							
+						error: function(xhr, type, errorThrown) {
+
 						}
 					});
 				}
 				imgListSearch()
-				
-				var imgUpload = function(file){
+
+				var imgUpload = function(file) {
 					console.log(file)
 					var form = new FormData();
-					form.append('file',file)
+					form.append('file', file)
 					// form.append('token',window.location.getItem('token'))
-					mui.ajax('http://192.168.38.209:8080/phone/uploadbackground.do',{
-						data:form,
-						dataType:'json',//服务器返回json格式数据
-						type:'post',//HTTP请求类型
-						timeout:10000,//超时时间设置为10秒；
+					mui.ajax('/phone/uploadbackground.do', {
+						data: form,
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
 						processData: false,
-						contentType:false,
+						contentType: false,
 						cache: false,
-						success:function(data){
+						success: function(data) {
 							console.log(data)
 						},
-						error:function(xhr,type,errorThrown){
-							
+						error: function(xhr, type, errorThrown) {
+
 						}
 					});
 				}
-				
-				document.querySelector('#school-issue-all').addEventListener('tap',function(){
+
+				document.querySelector('#school-issue-all').addEventListener('tap', function() {
 					var propagandaName = document.querySelector('#issue-name').innerHTML
 					var startTime = document.querySelector('#timeSelect').innerHTML
 					var endTime = document.querySelector('#timeSelect1').innerHTML
-					console.log(startTime)
+					var upTitle = document.querySelector('#title-select').innerHTML
+					var mainTitle = document.querySelector('#title-select1').innerHTML
+					var downTitle = document.querySelector('#title-select2').innerHTML
+					var countDownTitle = document.querySelector('#title-select3').innerHTML
+					var countDownEndTime = document.querySelector('#timeSelect2').innerHTML
+					var backgroundType  = 1
+					// var boardIds = 
+					if(document.querySelector('.school-bg').innerHTML.indexOf('点击') != -1){
+						mui.alert('请选择背景')
+					}else{
+						mui('#segmentedControl a').each(function(i,v){
+							if (v.className.indexOf('mui-active') != -1) {
+								if(i == 0){
+									backgroundType = 2
+								}else if(i == 1){
+									backgroundType = 1
+								}else{
+									backgroundType = i + 1
+								}
+							}
+						})
+					}
+					
+					if(backgroundType == 1){
+						var backgroundColor = document.querySelector('.school-bg').style.backgroundColor;
+					}else if(backgroundType == 3){
+						var backgroundUrl = ""
+					}else if(backgroundType == 4){
+						var backgroundUrl = document.querySelector('.live-input').value
+					}else{
+						var backgroundUrl = document.querySelector('.school-bg').childNodes
+					}
+					console.log(backgroundColor)
 				})
 			})(mui);
 		</script>

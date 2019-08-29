@@ -3147,6 +3147,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		}
 		var settings = options || {};
 		settings.url = url || settings.url;
+		settings.url = 'http://192.168.38.209:8080'+ settings.url
 		for(var key in $.ajaxSettings) {
 			if(settings[key] === undefined) {
 				settings[key] = $.ajaxSettings[key];
