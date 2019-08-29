@@ -199,14 +199,12 @@
 					});
 					if (checkedValues.length > 0) {
 						if (classCadresId && !classCadresId != undefined && classCadresId != '' && classCadresId != null) {
-							console.log("update")
 							//打开职位
 							mui.openWindow({
 								id: 'postionUpdate',
 								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId+'&postion='+postion
 							});
 						} else {
-							console.log("add")
 							mui.openWindow({
 								id: 'postionAdd',
 								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId
