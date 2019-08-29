@@ -82,7 +82,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a href="../../index.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" target="_blank" href="../../index.html"></a>
 			<h1 class="mui-title">新闻</h1>
 		</header>
 		<div class="mui-content">
@@ -114,7 +114,7 @@
 					</div>
 				</div>
 			</div>
-			<a type="button" href="add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发新闻</a>
+			<a type="button" href="./add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发新闻</a>
 		</div>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
@@ -153,7 +153,7 @@
 									var html = document.querySelector('#OA_task_1').innerHTML;
 									for (var i = 0; i < con.length; i++) {
 										html +=
-											`<li class="mui-table-view-cell">
+											`<li class="mui-table-view-cell" data-id="${con[i].newsId}">
 												<div class="mui-slider-right mui-disabled">
 													<a class="mui-btn mui-btn-red iconfont icon-del" id="${con[i].newsId}">删除</a>
 												</div>
@@ -201,7 +201,7 @@
 									var html = document.querySelector('#OA_task_2').innerHTML;
 									for (var i = 0; i < con.length; i++) {
 										html +=
-											`<li class="mui-table-view-cell">
+											`<li class="mui-table-view-cell" data-id="${con[i].newsId}">
 												<div class="mui-slider-right mui-disabled">
 													<a class="mui-btn mui-btn-red iconfont icon-del" id="${con[i].newsId}">删除</a>
 												</div>
@@ -282,6 +282,13 @@
 								del(id);
 							}
 						})
+					})
+					mui(".mui-content").on('tap', '.mui-table-view-cell', function(event) {
+						var id = this.dataset.id
+						mui.openWindow({
+							id: 'index',
+							url: './detail.html?id='+id
+						});
 					})
 				})
 				
