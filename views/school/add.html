@@ -393,7 +393,7 @@
 			</div>
 		</div>
 		<!-- 对象弹出层 -->
-		<div class="objTchu mui-popover" id="objTchu">
+		<div class="objTchu imgListSearch" id="objTchu">
 			<header class="mui-bar mui-bar-nav">
 				<h1 class="mui-title">选择对象</h1>
 			</header>
@@ -642,7 +642,6 @@
 					})
 					return value;
 				}
-<<<<<<< HEAD
 
 				var imgListSearch = function() {
 					mui.ajax('/phone/selectbackgroundurlbyphone.do', {
@@ -656,20 +655,6 @@
 								html +=
 									`<li>
 											<img src="${'http://192.168.38.209:8080'+data.data[i].background_url}" alt="">
-=======
-				
-				var imgListSearch = function(){
-					mui.ajax('http://192.168.38.98:8080/phone/selectbackgroundurlbyphone.do',{
-						dataType:'json',//服务器返回json格式数据
-						type:'get',//HTTP请求类型
-						timeout:10000,//超时时间设置为10秒；
-						success:function(data){
-							console.log(data)
-							var html = '';
-							for(var i =0;i<data.data.length;i++){
-								html += `<li>
-											<img src="${severAddress}${data.data[i].background_url}" alt="">
->>>>>>> 5d04471f4a84e7862f92b573e66ecf461a050e50
 											<div class="img-select">
 												<img src="../../img/select.png" alt="">
 											</div>
@@ -689,19 +674,11 @@
 					var form = new FormData();
 					form.append('file', file)
 					// form.append('token',window.location.getItem('token'))
-<<<<<<< HEAD
 					mui.ajax('/phone/uploadbackground.do', {
 						data: form,
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
-=======
-					mui.ajax('/phone/uploadbackground.do',{
-						data:form,
-						dataType:'json',//服务器返回json格式数据
-						type:'post',//HTTP请求类型
-						timeout:10000,//超时时间设置为10秒；
->>>>>>> 5d04471f4a84e7862f92b573e66ecf461a050e50
 						processData: false,
 						contentType: false,
 						cache: false,
