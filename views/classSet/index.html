@@ -109,7 +109,6 @@
             </ul>
        </div>
 	</div>
-	<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
 	 <script type="text/javascript" charset="utf-8">
 	 	//初始化	
       	(function($) {
@@ -123,7 +122,7 @@
 			  //获取班级信息
 			  var classInformation = function(curr){
 			  	var classSlogan,teacherT,membersT,classNameT;
-				mui.ajax(severAddress+'/phone/classdetail/selcetclassdetailbyid.do',{
+				mui.ajax('/phone/classdetail/selcetclassdetailbyid.do',{
 					data:{
 						classId: window.localStorage.getItem('classId'),
 						token: window.localStorage.getItem('token')
