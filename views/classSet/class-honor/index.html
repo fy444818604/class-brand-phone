@@ -165,7 +165,6 @@
 			<button type="button" class="mui-btn mui-btn-primary add-classHonours">添加荣誉</button>
 		</div>
 		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../../js/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//dom获取
 			var className = document.getElementById('className');
@@ -220,7 +219,7 @@
 			function listSearch() {
 				var curr = 1;
 				var _this = this;
-				mui.ajax(severAddress+'/phone/classhonor/selectclasshonorbyclass.do', {
+				mui.ajax('/phone/classhonor/selectclasshonorbyclass.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						currentPage: curr,
@@ -245,7 +244,7 @@
 										<a class="mui-btn mui-btn-red mui-icon iconfont icon-edit" id="${con[i].classHonorId}&${con[i].classHonorName}&${con[i].classHonorIcon}&${con[i].classHonorRemark}"></a>
 									</div>
 									<div class="mui-slider-handle flex">
-										<div class="slogan-bnt-left"><img src="http://192.168.38.98:8080${con[i].classHonorIcon}"/></div>
+										<div class="slogan-bnt-left"><img src="${severAddress}${con[i].classHonorIcon}"/></div>
 							    		<div class="slogan-bnt-rnt">
 							    			<p>${con[i].classHonorName}</p>
 							    			<div class="">
@@ -270,7 +269,7 @@
 			};
 
 			function deleteClassHonor(id) {
-				mui.ajax(severAddress+'/phone/classhonor/delete.do', {
+				mui.ajax('/phone/classhonor/delete.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						classHonorId: id

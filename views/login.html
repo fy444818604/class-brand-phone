@@ -77,7 +77,6 @@
 
 		</div>
 	</body>
-	<script src="../js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		
 		console.log(severAddress);
@@ -89,7 +88,7 @@
 		var login = function() {
 			var loginName = document.querySelector('.login-name').value;
 			var loginPwd = document.querySelector('.login-pwd').value;
-			mui.ajax(severAddress+'/phone/login.do', {
+			mui.ajax('/phone/login.do', {
 				data: {
 					loginName: loginName,
 					loginPwd: loginPwd

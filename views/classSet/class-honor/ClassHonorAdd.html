@@ -200,7 +200,7 @@
 							// console.log(data);
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
-								document.getElementById("classHonorIcon").setAttribute("src", "http://192.168.38.98:8080" + data.data)
+								document.getElementById("classHonorIcon").setAttribute("src", severAddress + data.data)
 							} else {
 								mui.alert(data.msg)
 							}
