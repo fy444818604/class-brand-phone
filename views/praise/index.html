@@ -185,7 +185,7 @@
 				var listSchoolSearch = function() {
 					var _this = this;
 					if (curr <= count) {
-						mui.ajax('${severAddress}/phone/selectbulletin.do', {
+						mui.ajax('/phone/selectbulletin.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
 								currPage: curr1,
