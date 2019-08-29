@@ -3041,13 +3041,12 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		error: $.noop,
 		complete: $.noop,
 		context: null,
-		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		xhr: function(protocol) {
 			return new window.XMLHttpRequest();
 		},
 		accepts: {
 			script: 'text/javascript, application/javascript, application/x-javascript',
-			json: 'application/json, text/javascript, */*; q=0.01',
+			json: jsonType,
 			xml: 'application/xml, text/xml',
 			html: htmlType,
 			text: 'text/plain'
