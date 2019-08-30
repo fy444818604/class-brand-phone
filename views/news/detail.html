@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>发通知</title>
+    <title>新闻详情</title>
 	<link href="../../css/mui.css" rel="stylesheet" />
 	<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
 	<link href="../../css/public.css" rel="stylesheet" />
@@ -33,7 +33,6 @@
 		}
 		.theClass-rnt{
 			width: 70%;
-			color: #c0c4cc;
 		}
 		.theClass-rnt a{
 			color: #c0c4cc;
@@ -74,6 +73,11 @@
 			font-size: 1.07rem;
 			line-height: 3.07rem;
 			text-align: center;
+		}
+		
+		.theClass-level{
+			width: 70%;
+			color: #3B8BFF;
 		}
 		
 		.objTchu {
@@ -168,11 +172,6 @@
 			text-align: center;
 		}
 		
-		.liAktv>div {
-			background: #E7f1ff;
-			color: #3B8BFF;
-		}
-		
 		/*按钮*/
 		.bnt>div {
 			height: 3.7rem;
@@ -181,24 +180,18 @@
 			font-size: 1rem;
 		}
 		
-		.bnt-left {
-			width: 30%;
-			color: #3b8bff;
-		}
-		
 		.bnt-rnt {
-			width: 70%;
+			width: 100%;
 			background: #3b8bff;
 			color: #FFFFFF;
 		}
-	
     </style>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
-		<h1 class="mui-title">发布通知</h1>
+		<h1 class="mui-title">新闻详情</h1>
 	</header>
 	<div class="mui-content add-notice"> 
 		<!--班级/对象-->
@@ -207,37 +200,31 @@
 		    	<div class="theClass-left">
 		    		级别
 		    	</div>
-				<div class="theClass-rnt"><a href="#picture" id="level">请选择级别</a></div>
-		    	<div><a class="mui-navigate-right"></a></div>
-		        
+				<div class="theClass-level" id="level"></div>
 		    </li>
 		   <li class="mui-table-view-cell flex objetAdd">
 		    	<div class="theClass-left">
 		    		对象
 		    	</div>
-				<div class="theClass-rnt jonsData">请选择对象</div>
-		    	<div><a class="mui-navigate-right"></a></div>
+				<div class="theClass-rnt jonsData" id="object"></div>
+				<div><a class="mui-navigate-right"></a></div>
 		    </li>
 		</ul>
 		<!--标题/正文-->
 		<ul class="mui-table-view theInput">
 		    <li class="mui-table-view-cell flex">
 		    	<div class="theClass-left">标题</div>
-		    	<div>
-		    		<input id="title" class="mui-input-clear" type="text" placeholder="请输入标题">
+		    	<div id="title">
 		    	</div>
 		    </li>
 		    <li class="mui-table-view-cell" style="background: #FFFFFF;">
 		    	<div class="theClass-left">正文</div>
-		    	<div>
-		    		<textarea maxlength="512" id="content" rows="10" cols="30" contenteditable="true" placeholder="请输入正文内容"></textarea>
+		    	<div id="content">
 		    	</div>
 		    </li>
 		</ul>
-		<div class="add">
-			发布
-		</div>
 	</div>
+	
 	<!-- 对象弹出层 -->
 	<div class="objTchu">
 		<header class="mui-bar mui-bar-nav">
@@ -245,107 +232,64 @@
 		</header>
 		<div class="mui-content">
 			<div class="mui-content-cont">
-				<div class="generations">
-					<div class="mui-input-row mui-checkbox  mui-left parent-input">
-						<label style="text-align: left;">全选</label>
-						<input id="parent-input" name="zhege " type="checkbox">
-					</div>
-				</div>
 				<ul id="grade" class="grade">
 				</ul>
 			</div>
 			<div class="bnt flex">
-				<div class="bnt-left">重置</div>
+				<div class="bnt-left"></div>
 				<div class="bnt-rnt">确定</div>
 			</div>
 		</div>
 	</div>
-	<!--级别弹出层-->
-	<div id="picture" class="mui-popover mui-popover-action ">
-	    <ul class="mui-table-view top"> 
-	        <li class="mui-table-view-cell">
-	            <a href="#" data-type="2">班级发布</a>
-	        </li>
-	        <li class="mui-table-view-cell">
-	            <a href="#" data-type="1">校级发布</a>
-	        </li>
-	    </ul>
-	     <ul class="mui-table-view">
-	        <li class="mui-table-view-cell">
-	            <a href="#picture" style="color: #3b8bff;"><b>取消</b></a>
-	        </li>
-	    </ul>
-	</div>
 	<script src="../../js/mui.js"></script>
-    <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	
+	<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
-		var level = 2;
-		var boardIds = "e3e36ac0ef5f446cb2a97e2f15631822";
-		var insert = function() {
-			var _this = this;
-			var title = $('#title').val();
-			var content = $('#content').val();
-			mui.ajax('/phone/insertnotice.do', {
+		var search = function(id) {
+			mui.ajax('/phone/selectnewsdetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
-					boardIds: boardIds,
-					title: title,
-					content: content,
-					level: level
+					id: id
 				},
+				async:false,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					if(data.code==200){
-						mui.openWindow({
-							id: 'index',
-							url: './index.html'
-						});
-					}else{
-						mui.alert(data.msg)
-					}
+					var value = data.data;
+					document.querySelector('#level').innerHTML = value.level==1?"校":"班"
+					document.querySelector('#title').innerHTML = value.newsTitle
+					document.querySelector('#content').innerHTML = value.newsContentStr
 				},
 				error: function(xhr, type, errorThrown) {
-	
+		
 				}
 			});
-		}
-		mui.ready(function() {
-			//弹框取值赋值
-			mui('#picture').on('tap', '.top>li>a', function() {
-				$('#level').text(this.dataset.type == 1?"校":"班").css('color','#3b8bff'),
-				level = this.dataset.type;
-				$('#picture>ul>li>a').css('color','#303133')
-				$(this).css('color','#3b8bff');
-				mui("#picture").popover('toggle');
-			})
-			
-			document.querySelector('.add').addEventListener('tap',function(){
-				insert();
-			})
-			
-			
-			document.querySelector('.objetAdd').addEventListener('tap', function() {
-				$('.objTchu').css('display', 'block');
-				objectData();
-			})
-		})
-		
-		//班级数据
-		function objectData () {
-			mui.ajax('/phone/selectboard.do', {
+			mui.ajax('/phone/selectboardsbynewid.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
-					level:level
+					id: id
 				},
+				async:false,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					var con = data;
+					var grage = data.data;
+					var count = 0;
+					var boardName = "";
+					for(var i=0;i<grage.length;i++){
+						var list = grage[i].list;
+						for(var j=0;j<list.length;j++){
+							var obj = list[j];
+							boardName = obj.name;
+							count++;
+						}
+					}
+					var str = boardName+"等"+count+"个班牌";
+					document.querySelector('#object').innerHTML = str;
+					
+					var con = data.data;
 					$('#grade').empty();
 					var html = "";
 					for (var i = 0; i < con.length; i++) {
@@ -355,11 +299,9 @@
 							html +=
 									'<div class="mui-input-row mui-checkbox mui-left subset-input">'+
 									'	<label style="text-align: left;">"'+con[i].name+'"</label>'+
-									'	<input name="zhege " type="checkbox" >'+
 									'</div>';
 						}
 						var list = obj.list;
-						
 							html +=
 									'<ul class="grade-class flex">'
 									for(var j=0;j<list.length;j++){
@@ -372,99 +314,25 @@
 						html +='</li>';
 					}
 					document.querySelector('#grade').innerHTML = html;
-					
-					$('input:checked').prop('checked',false)
-					$('.grade-class-li').removeClass('liAktv')
-					claDIAN ();
-					nianji();
-					nianji12 ();
 				},
 				error: function(xhr, type, errorThrown) {
-			
-				}
-			});
-		};
-		//父级全选/父级反选 
-		mui('.parent-input').on('change', 'input', function() {
-			if(this.checked?"true":"false" == true){
-				$("#grade :checkbox").prop("checked", true);  
-				$('.grade-class-li').addClass('liAktv')
-			}else{
-				$("#grade :checkbox").prop("checked", false);
-				$('.grade-class-li').removeClass('liAktv')
-			}
-		});
-		//设置全选复选框
-		function nianji () {
-			$("#grade :checkbox").click(function(){
-				allchk();
-			});
-		}
-		function allchk(){
-			var chknum = $(".grade-class").length;//选项总个数
-			var chk = $(".liAktv").length;
-			
-			if(chknum==chk){//全选
-				$("#parent-input").prop("checked",true);
-			}else{//不全选
-				$("#parent-input").prop("checked",false);
-			}
-		}
-		//年级全选
-		function nianji12 () {
-			mui('.subset-input').on('change', 'input', function() {
-				if(this.checked?"true":"false" == true){
-					$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
-				}else{
-					$(this).parent('div').siblings('ul').find('li').removeClass('liAktv')
+					
 				}
 			});
 		}
-		//点击班级	
-		function claDIAN () {
-			$('.grade-class-li').click(function  () {
-				if($(this).hasClass('liAktv')){
-					$(this).removeClass('liAktv')
-				}else{
-					$(this).addClass('liAktv');
-				}
-				var li = $(this).parent('ul').find('li').length;
-				var liAktv = $(this).parent('ul').find('.liAktv').length;
-				if(li == liAktv){
-					$(this).parent('ul').siblings('div').find('input').prop('checked',true)
-				}else{
-					$(this).parent('ul').siblings('div').find('input').prop('checked',false)
-				}
-				allchk();
+		mui.ready(function() {
+			//活动id
+			var id = window.location.href.split('id=')[1].replace('#','');
+			search(id)
+			document.querySelector('.objetAdd').addEventListener('tap', function() {
+				$('.objTchu').css('display', 'block');
 			})
-		}
-		//重置
-		$('.bnt-left').click(function  () {
-			$('input:checked').prop('checked',false)
-			$('.grade-class-li').removeClass('liAktv')
 		})
 		//确定
 		$('.bnt-rnt').on('tap',function  () {
-			var data = [];
-			var s = '';
-			$('.liAktv').each(function(){
-				data.push($(this).find('div').text());
-				var  src = $(this).attr('data-ids')+','
-				s = src + s;
-			});
-			if(data == ''){
-				mui.alert( '请选择一项或多项' )
-			}else{
-				$('.objTchu').css('display', 'none');
-				var lastIndex = s.lastIndexOf(',');
-				if (lastIndex > -1) {
-					ids = s.substring(0, lastIndex) + s.substring(lastIndex + 1, s.length);
-					boardIds = ids;
-					var boardName = data[0]+"等"+data.length+"个班牌";
-					$('.jonsData').text(boardName).css('color','#000');
-				}
-			}
+			$('.objTchu').css('display', 'none');
 		})
+		
     </script>
 </body>
 </html>

@@ -7,7 +7,7 @@
  * MUI核心JS
  * @type _L4.$|Function
  */
-var severAddress='http://192.168.38.98:8080'
+var severAddress='http://192.168.10.59:8099'
 
 var mui = (function(document, undefined) {
 	var readyRE = /complete|loaded|interactive/;
@@ -3151,6 +3151,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 		}
 		var settings = options || {};
 		settings.url = url || settings.url;
+		// settings.url = 'http://192.168.38.209:8080'+ settings.url
 		settings.url = severAddress+ settings.url
 		for(var key in $.ajaxSettings) {
 			if(settings[key] === undefined) {

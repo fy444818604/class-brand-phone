@@ -15,66 +15,66 @@
 			#scroll2{
 				height: calc(100vh - 131px);
 			}
-			.mui-content{
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+			
+			.mui-control-content {
+				height: calc(100vh - 131px);
+			}
+			
+			.mui-content {
 				height: 100vh;
 			}
-			.cri-list{
-				height: calc(100% - 87px);
-			}
-			.mui-btn-block{
+			
+			.mui-btn-block {
 				margin-bottom: 0;
 			}
-			.nav{
-				height: 3.63rem;
-				border-bottom: 0.07rem solid #e4e4e4;
-				background: #FFFFFF;
-				width: 100%;
+			
+			.activity-list .mui-table-view-cell {
+				height: 4rem;
+				line-height: 4rem;
+				padding: 0 1rem;
 			}
-			.nav>li{
-				width: 50%;
-			}
-			.nav-div{
-				width: ;
-				padding: 1.02rem 0;
-				width: 3rem;
-				border-bottom: 0.14rem solid #3b8bff;
-				margin: 0 auto;
-				text-align: center;
-			}
-			.nav-bodex{
-				border: none;
-			}
-			.color{
-				color: #3d8cff;
-			}
-			.mui-slider-handle>div{
-				width: 50%;
-			}
-			.mui-table-view{
-				height: calc(100vh - 9.6rem);
-				overflow: auto;
-			}
+			
 			.mui-table-view-cell:after {
-			    background: none;
+				left: 0;
 			}
-			.mui-table-view-cell {
-			    padding: 15px 15px;
-			    border-bottom: 0.07rem solid #E4E4E4;
+			
+			.active-item {
+				display: flex;
 			}
-			.mui-table-view:before {
-			    background-color: none;
+			
+			.active-item>div:last-child {
+				text-align: right;
+				width: 55px;
 			}
-			.mui-table-view:after {
-				background: none;
+			
+			.active-item>div:first-child {
+				margin-right: 5px;
+				color: #ed932a;
 			}
-			/*发送通知*/
-			.add{
-				height: 3.07rem;
-				background: #3B8BFF;
-				color: #FFFFFF;
-				font-size: 1.07rem;
-				line-height: 3.07rem;
-				text-align: center;
+			
+			.active-item>div:nth-child(2) {
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				width: calc(100vw - 130px);
+			}
+			
+			.end {
+				color: #c0c4cc !important;
+			}
+			/*新增样式*/
+			.addsTybe-left{
+				width: 70%;
+				text-overflow:ellipsis;
+				white-space:nowrap; 
+				overflow:hidden; 
+			}
+			.addsTybe-rnt{
+				width: 30%;
+				text-align: right;
 			}
 			
 		</style>
@@ -82,7 +82,8 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a href="../../index.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" target="_blank" href="../../index.html"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
 			<h1 class="mui-title">新闻</h1>
 		</header>
 		<div class="mui-content">
@@ -114,7 +115,7 @@
 					</div>
 				</div>
 			</div>
-			<a type="button" href="add.html" id="add-activity" class="mui-btn mui-btn-primary mui-btn-block">发新闻</a>
+			<a type="button" id="add" href="#" class="mui-btn mui-btn-primary mui-btn-block">发新闻</a>
 		</div>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
@@ -153,16 +154,14 @@
 									var html = document.querySelector('#OA_task_1').innerHTML;
 									for (var i = 0; i < con.length; i++) {
 										html +=
-											`<li class="mui-table-view-cell">
+											`<li class="mui-table-view-cell" data-id="${con[i].newsId}">
 												<div class="mui-slider-right mui-disabled">
-													<a class="mui-btn mui-btn-red iconfont icon-del" id="${con[i].newsId}">删除</a>
+													<a id="${con[i].newsId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 												</div>
-												<div class="mui-slider-handle flex">
-													<div style="width:70%;">
-														${con[i].newsTitle}
-													</div>
-													<div style="text-align: right;color: #909399;width:30%">
-														${con[i].createTimeStr}
+												<div class="mui-slider-handle">
+													<div class="mui-table-cell flex">
+														<div class="addsTybe-left">${con[i].newsTitle}</div>
+														<div class="addsTybe-rnt">${con[i].createTimeStr}</div>
 													</div>
 												</div>
 											</li>`	
@@ -201,7 +200,7 @@
 									var html = document.querySelector('#OA_task_2').innerHTML;
 									for (var i = 0; i < con.length; i++) {
 										html +=
-											`<li class="mui-table-view-cell">
+											`<li class="mui-table-view-cell" data-id="${con[i].newsId}">
 												<div class="mui-slider-right mui-disabled">
 													<a class="mui-btn mui-btn-red iconfont icon-del" id="${con[i].newsId}">删除</a>
 												</div>
@@ -282,6 +281,20 @@
 								del(id);
 							}
 						})
+					})
+					mui(".mui-content").on('tap', '.mui-table-view-cell', function(event) {
+						var id = this.dataset.id
+						mui.openWindow({
+							id: 'index',
+							url: './detail.html?id='+id
+						});
+					})
+					
+					document.querySelector('#add').addEventListener('tap',function(){
+						mui.openWindow({
+							id: 'index',
+							url: './add.html'
+						});
 					})
 				})
 				
