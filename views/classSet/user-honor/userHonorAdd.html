@@ -187,7 +187,7 @@
 					var formData = new FormData();
 					var files = this.files;
 					formData.append("file", files[0]);
-					mui.ajax('/uploadimg.do', {
+					mui.ajax('/uploadbase64img.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
