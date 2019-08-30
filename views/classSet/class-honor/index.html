@@ -177,7 +177,7 @@
 							deleteClassHonor(id);
 						}
 					})
-					
+
 				})
 
 				//修改班委
@@ -191,7 +191,7 @@
 					//修改/添加班级荣誉
 					mui.openWindow({
 						id: 'classHonor',
-						url: 'ClassHonorAdd.html?classHonorId='+ids[0]
+						url: 'ClassHonorAdd.html?classHonorId=' + ids[0]
 					});
 				});
 
@@ -223,6 +223,14 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var html = document.querySelector('#OA_task_1').innerHTML;
@@ -254,8 +262,7 @@
 						}
 
 					},
-					error: function(xhr, type, errorThrown) {
-					}
+					error: function(xhr, type, errorThrown) {}
 				});
 			};
 
@@ -269,14 +276,21 @@
 					type: 'get', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
 						if (data.code == 200) {
 							listSearch();
 						} else {
 							mui.alert(data.msg)
 						}
 					},
-					error: function(xhr, type, errorThrown) {
-					}
+					error: function(xhr, type, errorThrown) {}
 				});
 			}
 		</script>

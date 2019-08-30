@@ -139,7 +139,7 @@
 						<a class="iconfont icon-add" href="#option" style="color: #3B8BFF;"></a>
 					</div>
 					<div id="showQues">
-						
+
 					</div>
 					<div class="mui-input-row Hauto">
 						<label>选择模式</label>
@@ -191,7 +191,7 @@
 		<!-- 对象弹出层 -->
 		<div class="objTchu" id="objTchu">
 			<header class="mui-bar mui-bar-nav">
-				<a class=" mui-icon mui-icon-left-nav mui-pull-left" ></a>
+				<a class=" mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">选择对象</h1>
 			</header>
 			<div class="mui-content obje-content">
@@ -322,6 +322,14 @@
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								if (data.code == -3) {
+									//跳转登录页面
+									mui.openWindow({
+										id: 'loginout',
+										url: "../login.html"
+									});
+									return;
+								}
 								if (data.code == 200) {
 									objTchu.style.display = 'block';
 									objectData();
@@ -414,7 +422,15 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						var con = data;
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
+						var con = data.data;
 						$('#grade').empty();
 						var html = "";
 						for (var i = 0; i < con.length; i++) {
@@ -541,25 +557,25 @@
 					activeEndTime: getTimeStamp(activeEndTime.value),
 					pubType: 2
 				}
-				
+
 				//拼装数据
-				var questionnaireTitleVos = []	
+				var questionnaireTitleVos = []
 				var arr = $(".quesDiv1");
 				for (var i = 0; i < arr.length; i++) {
 					var obj = arr[i];
 					var options = $(obj).find(".quesOption");
 					var optionList1 = [];
 					for (var j = 0; j < options.length; j++) {
-						var obj1 =options[j];
-						var data1 ={
-							qestionTitileOptionContent:$(obj1).val()
+						var obj1 = options[j];
+						var data1 = {
+							qestionTitileOptionContent: $(obj1).val()
 						}
 						optionList1.push(data1);
 					}
-					var  quesTitle =  $(obj).find(".quesTitle")[0];
+					var quesTitle = $(obj).find(".quesTitle")[0];
 					var dataVo = {
 						qestionTitileContent: $(quesTitle).val(),
-						optionList:optionList1
+						optionList: optionList1
 					}
 					questionnaireTitleVos.push(dataVo);
 				}
@@ -585,6 +601,14 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',

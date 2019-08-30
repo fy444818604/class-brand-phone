@@ -181,7 +181,7 @@
 
 			var html1 = '';
 			//完成操作
-			
+
 			mui(".mui-content").on('tap', ".determine", function() {
 				var discipline = mui("#discipline")[0].value;
 				if (discipline != '') {
@@ -228,6 +228,14 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',
@@ -284,10 +292,10 @@
 				return null;
 			}
 		}
-		
+
 		function notBlank(data) {
 			var isTrue = true;
-		
+
 			if (!data) {
 				isTrue = false;
 			}
@@ -308,6 +316,5 @@
 			}
 			return isTrue;
 		}
-		
 	</script>
 </html>

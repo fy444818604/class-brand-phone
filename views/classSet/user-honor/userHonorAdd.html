@@ -157,30 +157,28 @@
 			var userHonorName = document.getElementById('userHonorName');
 			var userHonorId = getQueryString("userHonorId");
 			var workId = window.localStorage.getItem('workId');
+			var imgUrl = document.getElementById("imgUrl");
 			var type = getQueryString("type");
-			
+
 			var mask = mui.createMask();
 
 			if (type == 1) {
-				console.log(1)
 				nickName.value = window.localStorage.getItem('nickName')
-				userHonorIcon.setAttribute('src', window.localStorage.getItem('userHonorIcon'))
+				userHonorIcon.setAttribute('src', severAddress + window.localStorage.getItem('userHonorIcon'))
 				document.getElementById("imgUrl").value = window.localStorage.getItem('userHonorIcon')
 			} else {
 				if (notBlank(userHonorId)) {
-					console.log( window.localStorage.getItem('userHonorIcon'));
 					nickName.value = window.localStorage.getItem('nickName')
-					userHonorIcon.setAttribute('src', window.localStorage.getItem('userHonorIcon'))
+					userHonorIcon.setAttribute('src', severAddress + window.localStorage.getItem('userHonorIcon'))
 					userHonorRemark.value = window.localStorage.getItem('userHonorRemark');
 					userHonorName.value = window.localStorage.getItem('userHonorName');
 					document.getElementById("imgUrl").value = window.localStorage.getItem('userHonorIcon')
 				} else {
-					console.log(3)
 					nickName.value = "";
 					userHonorIcon.setAttribute('src', "");
 					userHonorRemark.value = "";
 					userHonorName.value = "";
-					document.getElementById("imgUrl").value="";
+					document.getElementById("imgUrl").value = "";
 				}
 			}
 
@@ -206,6 +204,14 @@
 						cache: false,
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								//跳转登录页面
+								mui.openWindow({
+									id: 'loginout',
+									url: "../login.html"
+								});
+								return;
+							}
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
 								document.getElementById("userHonorIcon").setAttribute("src", severAddress + data.data)
@@ -225,7 +231,7 @@
 
 				//选择对象	
 				mui(".mui-content").on("tap", "#nickName", function() {
-					window.localStorage.setItem('userHonorIcon', userHonorIcon.getAttribute('src'))
+					window.localStorage.setItem('userHonorIcon', imgUrl.value)
 					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
 					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
 					mui.openWindow({
@@ -256,6 +262,15 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								//跳转登录页面
+								mui.openWindow({
+									id: 'loginout',
+									url: "../login.html"
+								});
+								return;
+							}
+
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',

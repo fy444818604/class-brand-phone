@@ -87,14 +87,14 @@
 				cursor: pointer;
 				color: #888;
 				background: url(../../../img/bg-img.png)no-repeat;
-				background-size:100% 100% ;
+				background-size: 100% 100%;
 				border-radius: 4px;
 				overflow: hidden;
 				display: inline-block;
 				*display: inline;
 				*zoom: 1
-				
 			}
+
 			.a-upload input {
 				height: 100%;
 				position: absolute;
@@ -166,10 +166,10 @@
 
 			var classHonorId = getQueryString("classHonorId");
 			var mask = mui.createMask();
-			
+
 			//初始化数据	
 			if (notBlank(classHonorId)) {
-				classHonorIcon.setAttribute('src', 'http://192.168.10.59:	8099' + window.localStorage.getItem('classHonorIcon'))
+				classHonorIcon.setAttribute('src', severAddress + window.localStorage.getItem('classHonorIcon'))
 				classHonorRemark.value = window.localStorage.getItem('classHonorRemark');
 				classHonorName.value = window.localStorage.getItem('classHonorName');
 			} else {
@@ -235,6 +235,14 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								//跳转登录页面
+								mui.openWindow({
+									id: 'loginout',
+									url: "../login.html"
+								});
+								return;
+							}
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
@@ -263,6 +271,14 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								//跳转登录页面
+								mui.openWindow({
+									id: 'loginout',
+									url: "../login.html"
+								});
+								return;
+							}
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
@@ -272,8 +288,7 @@
 								mui.alert(data.msg)
 							}
 						},
-						error: function(xhr, type, errorThrown) {
-						}
+						error: function(xhr, type, errorThrown) {}
 					});
 				}
 			}

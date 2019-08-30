@@ -150,7 +150,7 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
-								
+
 								_this.endPullupToRefresh(false);
 								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
 								if (data.data) {
@@ -201,6 +201,14 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								if (data.code == -3) {
+									//跳转登录页面
+									mui.openWindow({
+										id: 'loginout',
+										url: "../login.html"
+									});
+									return;
+								}
 								_this.endPullupToRefresh(false);
 								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
 								if (data.data) {

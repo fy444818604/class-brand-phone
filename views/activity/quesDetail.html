@@ -212,6 +212,14 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
+					if (data.code == -3) {
+						//跳转登录页面
+						mui.openWindow({
+							id: 'loginout',
+							url: "../login.html"
+						});
+						return;
+					}
 					var value = data.data;
 					type = value.activeType
 					var html =
@@ -251,6 +259,14 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
+					if (data.code == -3) {
+						//跳转登录页面
+						mui.openWindow({
+							id: 'loginout',
+							url: "../login.html"
+						});
+						return;
+					}
 					var value = data.data;
 					var html = '';
 					for (var i = 0; i < data.data.length; i++) {
