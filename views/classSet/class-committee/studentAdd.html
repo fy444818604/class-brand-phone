@@ -230,8 +230,12 @@
 				}, false);
 				//统计完成数量
 				mui('.mui-indexed-list-inner').on('change', 'input', function() {
+<<<<<<< HEAD
 					var count = list.querySelectorAll('input[type="radio"]:checked').length;
 					console.log(count)
+=======
+				var count = list.querySelectorAll('input[type="radio"]:checked').length;
+>>>>>>> 4a3c2d9c35ea846ea4fefea32e29b8bbb86e03c9
 					var value = count ? "确定" : "确定";
 					done.innerHTML = value;
 					if (count) {
