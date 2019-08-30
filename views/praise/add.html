@@ -351,6 +351,13 @@
 					cache: false,
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						if (data.code == 200) {
 							recognitionIcon = data.data;
 							document.getElementById("classHonorIcon").setAttribute("src", severAddress + data.data)

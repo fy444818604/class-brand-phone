@@ -649,6 +649,13 @@
 						type: 'get', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								mui.openWindow({
+									id: 'index',
+									url: '../login.html'
+								});
+								return;
+							}
 							var html = '';
 							for (var i = 0; i < data.data.length; i++) {
 								html +=
@@ -668,7 +675,6 @@
 				var imgUpload = function(file) {
 					var form = new FormData();
 					form.append('file', file)
-					// form.append('token',window.location.getItem('token'))
 					mui.ajax('/phone/uploadbackground.do', {
 						data: form,
 						dataType: 'json', //服务器返回json格式数据
@@ -677,7 +683,15 @@
 						processData: false,
 						contentType: false,
 						cache: false,
-						success: function(data) {},
+						success: function(data) {
+							if (data.code == -3) {
+								mui.openWindow({
+									id: 'index',
+									url: '../login.html'
+								});
+								return;
+							}
+						},
 						error: function(xhr, type, errorThrown) {}
 					});
 				}
@@ -771,7 +785,13 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
-								console.log(data)
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
 							},
 							error: function(xhr, type, errorThrown) {}
 						});
@@ -799,7 +819,13 @@
 							contentType: false,
 							cache: false,
 							success: function(data) {
-								console.log(data)
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
 							},
 							error: function(xhr, type, errorThrown) {}
 						});
@@ -808,7 +834,6 @@
 			})(mui);
 
 			function objectData() {
-				console.log(window.localStorage.getItem('token'))
 				mui.ajax('/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
@@ -818,6 +843,13 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						var con = data;
 						$('#grade').empty();
 						var html = "";
