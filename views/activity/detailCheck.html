@@ -42,7 +42,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"  ></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<a class="mui-action-menu mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
 			<h1 class="mui-title">查看报名人</h1>
 		</header>
@@ -71,28 +71,37 @@
 				</li>
 			</ul>
 		</div>
-		
+
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
 			var type = window.location.href.split('&type=')[1];
-			var types = type == 1?'投票':type == 2?'选择':'报名';
+			var types = type == 1 ? '投票' : type == 2 ? '选择' : '报名';
 			document.querySelector('.mui-title').innerHTML = '查看' + types + '人'
 			mui.init()
-			var search = function(id){
-				mui.ajax('/phone/active/selectuserbyactive.do',{
-					data:{
+			var search = function(id) {
+				mui.ajax('/phone/active/selectuserbyactive.do', {
+					data: {
 						token: window.localStorage.getItem('token'),
-						activeId:id
+						activeId: id
 					},
-					dataType:'json',//服务器返回json格式数据
-					type:'get',//HTTP请求类型
-					timeout:10000,//超时时间设置为10秒；
-					success:function(data){
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
 						var value = data.data;
 						var html = '';
-						if(value.length != 0){
-							for(var i = 0;i<value.length;i++){
-								html += `<li>
+						if (value.length != 0) {
+							for (var i = 0; i < value.length; i++) {
+								html +=
+									`<li>
 											<img src="${value[i].userFace}" alt="">
 											<div class="peo-name text-overflow">${value[i].nickName}</div>
 											<div class="peo-class">${value[i].className}</div>
@@ -100,14 +109,14 @@
 							}
 						}
 						document.querySelector('.peo-list').innerHTML = html;
-						document.querySelector('.peo-count').innerHTML = '共'+value.length+types
+						document.querySelector('.peo-count').innerHTML = '共' + value.length + types
 					},
-					error:function(xhr,type,errorThrown){
-						
+					error: function(xhr, type, errorThrown) {
+
 					}
 				});
 			}
-			mui.ready(function(){
+			mui.ready(function() {
 				//活动id
 				var id = window.location.href.split('&type=')[0].split('id=')[1];
 				search(id)

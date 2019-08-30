@@ -351,6 +351,14 @@
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								if (data.code == -3) {
+									//跳转登录页面
+									mui.openWindow({
+										id: 'loginout',
+										url: "../login.html"
+									});
+									return;
+								}
 								if (data.code == 200) {
 									objTchu.style.display = 'block';
 									objectData();
@@ -444,6 +452,14 @@
 						$('#grade').empty();
 						var html = "";
 						for (var i = 0; i < con.length; i++) {
+							if (data.code == -3) {
+								//跳转登录页面
+								mui.openWindow({
+									id: 'loginout',
+									url: "../login.html"
+								});
+								return;
+							}
 							var obj = con[i];
 							html += '<li data-id = "' + obj.id + '">';
 							if (obj.grade != "") {
