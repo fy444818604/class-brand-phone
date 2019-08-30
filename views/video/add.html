@@ -391,7 +391,7 @@
 			var boardIds;
 			var formData = new FormData();
 			var insert = function() {
-				if ($('#content').val() != "" && level != 0 && boardIds != "" && formData.getAll('file').length > 0) {
+				if ($('#content').val() != "" && level != 0 && boardIds != "" && formData.getAll('inputVideo').length > 0) {
 					var _this = this;
 					formData.append("token", window.localStorage.getItem('token'));
 					formData.append("title", $('#content').val());
@@ -431,7 +431,7 @@
 						mui.alert("请选择发布级别")
 					} else if (boardIds == "") {
 						mui.alert("请选择发布对象")
-					} else if (formData.getAll('file').length == 0) {
+					} else if (formData.getAll('inputVideo').length == 0) {
 						mui.alert("请添加发布视频")
 					} else {
 						mui.alert("请输入正文内容")
