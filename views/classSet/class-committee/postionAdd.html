@@ -265,7 +265,6 @@
 		//添加/编辑
 		function operateClassCadre(postion) {
 			if (notBlank(classCadresId)) {
-				console.log("update")
 				mui.ajax('/phone/classcadres/update.do', {
 					data: {
 						classCadresId: classCadresId,
@@ -278,7 +277,6 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						console.log(data);
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',
@@ -305,7 +303,6 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						// console.log(data);
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',

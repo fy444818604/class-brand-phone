@@ -282,7 +282,7 @@
 		
 				}
 			});
-			mui.ajax(/phone/selectimagedetail.do', {
+			mui.ajax('/phone/selectimagedetail.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
 					id: id
@@ -292,7 +292,6 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					console.log(data);
 					var value = data.data;
 					var html = "";
 					for (var i = 0; i < value.length; i++) {

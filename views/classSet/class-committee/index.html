@@ -166,7 +166,6 @@
 				mui(".mui-content").on('tap', '.icon-edit', function() {
 					var id = this.getAttribute("id");
 					var ids = id.split("&");
-					console.log(encodeURI(ids[2]));
 					mui.openWindow({
 						id: 'teacherUpdate',
 						url: 'studentAdd.html?classCadresId=' + ids[0] + '&workId=' + ids[1] + '&postion=' + encodeURI(ids[2])
@@ -198,7 +197,6 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						console.log(data);
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var html = document.querySelector('#OA_task_1').innerHTML;
@@ -228,7 +226,6 @@
 
 					},
 					error: function(xhr, type, errorThrown) {
-						console.log(xhr);
 					}
 				});
 			};

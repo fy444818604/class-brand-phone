@@ -281,37 +281,49 @@
 	
 	<script type="text/javascript" charset="utf-8">
       	mui.init();
-		var level = 2;
+		var level = 0;
 		var boardIds = "e3e36ac0ef5f446cb2a97e2f15631822";
 		var insert = function() {
-			var _this = this;
-			var title = $('#title').val();
-			var content = $('#content').val();
-			mui.ajax('/phone/insertnotice.do', {
-				data: {
-					token: window.localStorage.getItem('token'),
-					boardIds: boardIds,
-					title: title,
-					content: content,
-					level: level
-				},
-				dataType: 'json', //服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				success: function(data) {
-					if(data.code==200){
-						mui.openWindow({
-							id: 'index',
-							url: './index.html'
-						});
-					}else{
-						mui.alert(data.msg)
+			if($('#content').val()!=""&&level!=0&&boardIds!=""&&$('#title').val()!=""){
+				var _this = this;
+				var title = $('#title').val();
+				var content = $('#content').val();
+				mui.ajax('/phone/insertnotice.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						boardIds: boardIds,
+						title: title,
+						content: content,
+						level: level
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if(data.code==200){
+							mui.openWindow({
+								id: 'index',
+								url: './index.html'
+							});
+						}else{
+							mui.alert(data.msg)
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+		
 					}
-				},
-				error: function(xhr, type, errorThrown) {
-	
+				});
+			}else{
+				if(level==0){
+					mui.alert("请选择发布级别")
+				}else if(boardIds==""){
+					mui.alert("请选择发布对象")
+				}else if($('#title').val()==""){
+					mui.alert("请输入通知标题")
+				}else{
+					mui.alert("请输入通知正文")
 				}
-			});
+			}
 		}
 		mui.ready(function() {
 			//弹框取值赋值
@@ -329,14 +341,17 @@
 			
 			
 			document.querySelector('.objetAdd').addEventListener('tap', function() {
-				$('.objTchu').css('display', 'block');
-				objectData();
+				if(level!=0){
+					$('.objTchu').css('display', 'block');
+					objectData();
+				}else{
+					mui.alert("请先选择发布级别")
+				}
 			})
 		})
 		
 		//班级数据
 		function objectData () {
-			console.log(window.localStorage.getItem('token'))
 			mui.ajax('/phone/selectboard.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
@@ -405,8 +420,6 @@
 		function allchk(){
 			var chknum = $(".grade-class-li").length;//选项总个数
 			var chk = $(".liAktv").length;
-			console.log(chknum)
-			console.log(chk)
 			if(chknum==chk){//全选
 				$("#parent-input").prop("checked",true);
 			}else{//不全选

@@ -355,7 +355,6 @@
 				var showVoteTitle = document.getElementById("showQues");
 				//获取题目的对象
 				var quesDiv = document.getElementsByClassName("quesDiv");
-				console.log(quesDiv.length);
 
 				for (var i = 0; i < quesDiv.length; i++) {
 					var obj = quesDiv[i];
@@ -406,7 +405,6 @@
 
 			//班级数据
 			function objectData() {
-				console.log(window.localStorage.getItem('token'))
 				mui.ajax('/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
@@ -421,7 +419,6 @@
 						var html = "";
 						for (var i = 0; i < con.length; i++) {
 							var obj = con[i];
-							console.log(obj)
 							html += '<li data-id = "' + obj.id + '">';
 							if (obj.grade != "") {
 								html +=
@@ -505,7 +502,6 @@
 					} else {
 						$(this).parent('ul').siblings('div').find('input').prop('checked', false)
 					}
-					console.log(1)
 					allchk();
 				})
 			}
@@ -567,8 +563,6 @@
 					}
 					questionnaireTitleVos.push(dataVo);
 				}
-					
-				console.log(questionnaireTitleVos);	
 				//判断
 				if (questionnaireTitleVos.length <= 0) {
 					mui.alert("选项不能为空！");
@@ -591,7 +585,6 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						// console.log(data);
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',

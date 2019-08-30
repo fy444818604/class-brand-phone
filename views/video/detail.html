@@ -276,7 +276,6 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					console.log(data);
 					var value = data.data;
 					document.querySelector('#video').innerHTML = `<video style="width:160pt;height:120pt" src="http://192.168.38.98:8080/${value}" autoplay="autoplay" controls="controls"></video>`
 				},

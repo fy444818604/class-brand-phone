@@ -540,7 +540,6 @@
 					if (files && files.length) {
 						file = files[0];
 						blobURL = URL.createObjectURL(file);
-						console.log(blobURL)
 						document.querySelector('#video-upload').style.display = 'none';
 						document.querySelector('.video-wrap').style.zIndex = 99;
 						var html = `<video src="${blobURL}" autoplay="autoplay" loop="loop"></video>`;
@@ -568,7 +567,6 @@
 					var value = document.querySelector('.top-input').value;
 					var color = document.querySelector('#color-picker1').style.backgroundColor;
 					var html = `<p style="color:${color}">${value}<p>`;
-					console.log(html)
 					document.querySelector('#title-select').innerHTML = html;
 				})
 				document.querySelector('#top-confirm1').addEventListener('tap', function() {
@@ -643,7 +641,6 @@
 						type: 'get', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							console.log(data)
 							var html = '';
 							for (var i = 0; i < data.data.length; i++) {
 								html +=
@@ -662,7 +659,6 @@
 				}
 				// imgListSearch()
 				var imgUpload = function(file) {
-					console.log(file)
 					var form = new FormData();
 					form.append('file', file)
 					// form.append('token',window.location.getItem('token'))
@@ -675,7 +671,6 @@
 						contentType: false,
 						cache: false,
 						success: function(data) {
-							console.log(data)
 						},
 						error: function(xhr, type, errorThrown) {
 						}

@@ -132,7 +132,6 @@
 					for (var i = 0; i < strs.length; i++) {
 						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
 					}
-					console.log(theRequest)
 				}
 			}
 			
@@ -157,7 +156,6 @@
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var con = data.data;
-							console.log(con)
 							var html = '';
 							for (var i = 0; i < con.length; i++) {
 								var html;

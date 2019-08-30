@@ -183,7 +183,6 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					console.log(data)
 					var value = data.data;
 					typelist = value.activeType == 1 ? '投票' : '报名',
 						type = value.activeType;
@@ -217,7 +216,6 @@
 			});
 		}
 		var search1 = function(id) {
-			console.log(id)
 			mui.ajax('/phone/votetitle/selectbyactive.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
@@ -227,7 +225,6 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					console.log(data)
 					var value = data.data;
 					var count = 0;
 					var html = '';

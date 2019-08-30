@@ -187,7 +187,6 @@
 					var formData = new FormData();
 					var files = this.files;
 					formData.append("file", files[0]);
-					console.log(formData);
 					mui.ajax('/uploadimg.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
@@ -197,7 +196,6 @@
 						cache: false,
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							// console.log(data);
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
 								document.getElementById("userHonorIcon").setAttribute("src", severAddress + data.data)
@@ -245,7 +243,6 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							console.log(data);
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
@@ -275,7 +272,6 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							// console.log(data);
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
@@ -286,7 +282,6 @@
 							}
 						},
 						error: function(xhr, type, errorThrown) {
-							console.log(xhr);
 						}
 					});
 				}
