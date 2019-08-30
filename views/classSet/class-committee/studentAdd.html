@@ -120,7 +120,7 @@
 			var classCadresId = getQueryString("classCadresId");
 			var workId = getQueryString("workId");
 			var postion = decodeURI(getQueryString('postion'));
-			var resetR =  document.getElementById("reset")
+			var resetR = document.getElementById("reset")
 
 			mui.init();
 			(function($) {
@@ -131,13 +131,21 @@
 				mui.ajax('/phone/user/selectstudentlistbyclassid.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						classId:window.localStorage.getItem('classId'),
+						classId: window.localStorage.getItem('classId'),
 						q: str
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'get', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var html = document.querySelector('#OA_task_1').innerHTML;
@@ -206,7 +214,8 @@
 							//打开职位
 							mui.openWindow({
 								id: 'postionUpdate',
-								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId+'&postion='+postion
+								url: 'postionAdd.html?workId=' + checkedValues[0] + '&classCadresId=' + classCadresId + '&postion=' +
+									postion
 							});
 						} else {
 							mui.openWindow({
@@ -221,7 +230,7 @@
 				}, false);
 				//统计完成数量
 				mui('.mui-indexed-list-inner').on('change', 'input', function() {
-				var count = list.querySelectorAll('input[type="radio"]:checked').length;
+					var count = list.querySelectorAll('input[type="radio"]:checked').length;
 					console.log(count)
 					var value = count ? "确定" : "确定";
 					done.innerHTML = value;
@@ -244,8 +253,8 @@
 						event.preventDefault(); // 阻止默认事件---阻止页面刷新
 					}
 				});
-				resetR.addEventListener('tap',function  () {
-			        
+				resetR.addEventListener('tap', function() {
+
 				})
 			});
 		</script>
