@@ -788,7 +788,7 @@
 						form.append('countDownEndTime', countDownEndTime)
 						form.append('token', window.localStorage.getItem('token'))
 						form.append('file', document.querySelector('#bg-video-upload').files[0])
-						mui.ajax('/phone/insertvideo.do', {
+						mui.ajax('/phone/propagandainsertvideo.do', {
 							data: form,
 							dataType: 'json', //服务器返回json格式数据
 							type: 'post', //HTTP请求类型
