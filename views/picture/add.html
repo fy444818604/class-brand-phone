@@ -367,6 +367,7 @@
 		<!-- 对象弹出层 -->
 		<div class="objTchu">
 			<header class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" id="close-objTchu"></a>
 				<h1 class="mui-title">选择对象</h1>
 			</header>
 			<div class="mui-content">
@@ -662,6 +663,10 @@
 						$('.jonsData').text(boardName).css('color', '#000');
 					}
 				}
+			})
+
+			$('#close-objTchu').on('tap', function() {
+				$('.objTchu').css('display', 'none');
 			})
 		</script>
 	</body>
