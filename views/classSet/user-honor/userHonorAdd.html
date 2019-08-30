@@ -157,18 +157,19 @@
 			var userHonorName = document.getElementById('userHonorName');
 			var userHonorId = getQueryString("userHonorId");
 			var workId = window.localStorage.getItem('workId');
+			var imgUrl = document.getElementById("imgUrl");
 			var type = getQueryString("type");
 
 			var mask = mui.createMask();
 
 			if (type == 1) {
 				nickName.value = window.localStorage.getItem('nickName')
-				userHonorIcon.setAttribute('src', window.localStorage.getItem('userHonorIcon'))
+				userHonorIcon.setAttribute('src', severAddress + window.localStorage.getItem('userHonorIcon'))
 				document.getElementById("imgUrl").value = window.localStorage.getItem('userHonorIcon')
 			} else {
 				if (notBlank(userHonorId)) {
 					nickName.value = window.localStorage.getItem('nickName')
-					userHonorIcon.setAttribute('src', window.localStorage.getItem('userHonorIcon'))
+					userHonorIcon.setAttribute('src', severAddress + window.localStorage.getItem('userHonorIcon'))
 					userHonorRemark.value = window.localStorage.getItem('userHonorRemark');
 					userHonorName.value = window.localStorage.getItem('userHonorName');
 					document.getElementById("imgUrl").value = window.localStorage.getItem('userHonorIcon')
@@ -230,7 +231,7 @@
 
 				//选择对象	
 				mui(".mui-content").on("tap", "#nickName", function() {
-					window.localStorage.setItem('userHonorIcon', userHonorIcon.getAttribute('src'))
+					window.localStorage.setItem('userHonorIcon', imgUrl.getValue())
 					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
 					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
 					mui.openWindow({
