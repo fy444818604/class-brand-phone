@@ -89,7 +89,11 @@ body {
 }
 
 .set-title-card-left {
-	margin-right: 2.23rem;
+	margin-right: 1.23rem;
+	width:40%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 /*选项卡样式*/
@@ -226,7 +230,6 @@ body {
 .mui-input-row label {
 	padding: 11px 15px;
 }
-
 /*布局*/
 .obje-generations {
 	padding-top: 1rem;
@@ -291,4 +294,11 @@ body {
 	z-index: 99999;
 	display: none;
 
+}
+/*超出*/
+.beyond{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 15%;
 }

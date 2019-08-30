@@ -34,28 +34,23 @@
 			.mui-table-view-cell:after {
 				left: 0;
 			}
-
 			.active-item {
 				display: flex;
 			}
-
 			.active-item>div:last-child {
 				text-align: right;
 				width: 55px;
 			}
-
 			.active-item>div:first-child {
 				margin-right: 5px;
 				color: #ed932a;
 			}
-
 			.active-item>div:nth-child(2) {
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				overflow: hidden;
 				width: calc(100vw - 130px);
 			}
-
 			.end {
 				color: #c0c4cc !important;
 			}
@@ -129,6 +124,7 @@
 				// 班级通知查询
 				var listSearch = function() {
 					var _this = this;
+					console.log(_this)
 					if (curr <= count) {
 						mui.ajax('/phone/selectnotice.do', {
 							data: {
@@ -146,6 +142,7 @@
 								var con = data.data;
 								count = parseInt(data.data.length/10)+1;
 								var html = document.querySelector('#OA_task_2').innerHTML;
+								// console.log(con)
 								for (var i = 0; i < con.length; i++) {
 									html +=
 										`<li class="mui-table-view-cell" data-id="${con[i].id}">
@@ -154,7 +151,7 @@
 											</div>
 											<div class="mui-slider-handle">
 												<div class="mui-table-cell flex">
-													<div class="addsTybe-left">${con[i].text}</div>
+													<div class="addsTybe-left text-overflow">${con[i].text}</div>
 													<div class="addsTybe-rnt">${con[i].date}</div>
 												</div>
 											</div>
@@ -174,6 +171,7 @@
 				//校级通知查询
 				var listSearch1 = function() {
 					var _this = this;
+					console.log(_this)
 					if (curr1 <= count1) {
 						mui.ajax('/phone/selectnotice.do', {
 							data: {
@@ -199,7 +197,7 @@
 											</div>
 											<div class="mui-slider-handle">
 												<div class="mui-table-cell flex">
-													<div class="addsTybe-left">${con[i].text}</div>
+													<div class="addsTybe-left text-overflow">${con[i].text}</div>
 													<div class="addsTybe-rnt">${con[i].date}</div>
 												</div>
 											</div>
