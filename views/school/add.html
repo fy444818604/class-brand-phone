@@ -548,7 +548,7 @@
 						console.log(blobURL)
 						document.querySelector('#video-upload').style.display = 'none';
 						document.querySelector('.video-wrap').style.zIndex = 99;
-						var html = `<video src="${blobURL}" autoplay="autoplay" loop="loop"></video>`;
+						var html = `<video src="${severAddress}${blobURL}" autoplay="autoplay" loop="loop"></video>`;
 						document.querySelector('.video-wrap').innerHTML = html;
 					}
 				})
@@ -607,7 +607,7 @@
 							if (bgImg() == '') {
 								mui.alert('请选择背景图片')
 							} else {
-								var html = `<img src="${bgImg()}" alt="">`
+								var html = `<img src="${severAddress}${bgImg()}" alt="">`
 								document.querySelector('.school-bg').innerHTML = html;
 							}
 							break;
@@ -628,7 +628,7 @@
 							if (src == '') {
 								mui.alert('请选择背景直播')
 							} else {
-								var html = `<video src="${src}" autoplay="autoplay" loop="loop"></video>`
+								var html = `<video src="${severAddress}${src}" autoplay="autoplay" loop="loop"></video>`
 								document.querySelector('.school-bg').innerHTML = html
 							}
 							break;
