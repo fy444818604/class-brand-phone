@@ -119,7 +119,6 @@
 			var workId = window.localStorage.getItem("workId");
 			var userHonorId = getQueryString("userHonorId");
 			var type = getQueryString("type");
-
 			mui.init();
 			
 			//参数接收
@@ -132,6 +131,7 @@
 					for (var i = 0; i < strs.length; i++) {
 						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
 					}
+					console.log(theRequest)
 				}
 			}
 			
@@ -156,6 +156,7 @@
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var con = data.data;
+							console.log(con)
 							var html = '';
 							for (var i = 0; i < con.length; i++) {
 								var html;
@@ -170,7 +171,6 @@
 						
 					},
 					error: function(xhr, type, errorThrown) {
-
 					}
 				});
 			}
@@ -189,7 +189,6 @@
 					return null;
 				}
 			}
-
 			mui.ready(function() {
 				var header = document.querySelector('header.mui-bar');
 				var list = document.getElementById('list');
