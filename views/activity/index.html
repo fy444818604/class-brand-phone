@@ -150,30 +150,33 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								
 								_this.endPullupToRefresh(false);
 								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
-								var con = data.data.recordList;
-								count = data.data.pageCount;
-								var html = document.querySelector('#OA_task_2').innerHTML;
-								for (var i = 0; i < con.length; i++) {
-									html +=
-										`<li class="mui-table-view-cell" data-id="${con[i].activeId}" data-type="${con[i].activeType}">
-											<div class="mui-slider-right mui-disabled">
-												<a id="${con[i].activeId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
-											</div>
-											<div class="mui-slider-handle">
-												<div class="mui-table-cell">
-													<div class="active-item">
-														<div class="${con[i].status == 1?'':'end' }">[${con[i].activeType}]</div>
-														<div>${con[i].activeTitile}</div>
-														<div>${con[i].createTime.substring(5,10)}</div>
+								if (data.data) {
+									var con = data.data.recordList;
+									count = data.data.pageCount;
+									var html = document.querySelector('#OA_task_2').innerHTML;
+									for (var i = 0; i < con.length; i++) {
+										html +=
+											`<li class="mui-table-view-cell" data-id="${con[i].activeId}" data-type="${con[i].activeType}">
+													<div class="mui-slider-right mui-disabled">
+														<a id="${con[i].activeId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 													</div>
-												</div>
-											</div>
-										</li>`
+													<div class="mui-slider-handle">
+														<div class="mui-table-cell">
+															<div class="active-item">
+																<div class="${con[i].status == 1?'':'end' }">[${con[i].activeType}]</div>
+																<div>${con[i].activeTitile}</div>
+																<div>${con[i].createTime.substring(5,10)}</div>
+															</div>
+														</div>
+													</div>
+												</li>`
+									}
+									document.querySelector('#OA_task_2').innerHTML = html
+									curr++;
 								}
-								document.querySelector('#OA_task_2').innerHTML = html
-								curr++;
 							},
 							error: function(xhr, type, errorThrown) {
 
@@ -200,12 +203,13 @@
 							success: function(data) {
 								_this.endPullupToRefresh(false);
 								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
-								var con = data.data.recordList;
-								count1 = data.data.pageCount;
-								var html = document.querySelector('#OA_task_1').innerHTML;
-								for (var i = 0; i < con.length; i++) {
-									html +=
-										`<li class="mui-table-view-cell" data-id="${con[i].activeId}" data-type="${con[i].activeType}">
+								if (data.data) {
+									var con = data.data.recordList;
+									count1 = data.data.pageCount;
+									var html = document.querySelector('#OA_task_1').innerHTML;
+									for (var i = 0; i < con.length; i++) {
+										html +=
+											`<li class="mui-table-view-cell" data-id="${con[i].activeId}" data-type="${con[i].activeType}">
 											<div class="mui-slider-right mui-disabled">
 												<a id="${con[i].activeId}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 											</div>
@@ -219,9 +223,10 @@
 												</div>
 											</div>
 										</li>`
+									}
+									document.querySelector('#OA_task_1').innerHTML = html
+									curr1++;
 								}
-								document.querySelector('#OA_task_1').innerHTML = html
-								curr1++;
 							},
 							error: function(xhr, type, errorThrown) {
 
@@ -290,12 +295,12 @@
 						if (this.dataset.type == "问卷") {
 							mui.openWindow({
 								id: 'index',
-								url: './quesDetail.html?id='+id
+								url: './quesDetail.html?id=' + id
 							});
 						} else {
 							mui.openWindow({
 								id: 'index',
-								url: './signDetail.html?id='+id,
+								url: './signDetail.html?id=' + id,
 							});
 						}
 					})
@@ -304,12 +309,12 @@
 						if (this.dataset.type == 2) {
 							mui.openWindow({
 								id: 'index',
-								url: './quesAdd.html?type='+this.dataset.type
+								url: './quesAdd.html?type=' + this.dataset.type
 							});
 						} else {
 							mui.openWindow({
 								id: 'index',
-								url: './signAdd.html?type='+this.dataset.type,
+								url: './signAdd.html?type=' + this.dataset.type,
 							});
 						}
 					})
