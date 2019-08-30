@@ -134,7 +134,6 @@
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
 			mui.init()
-<<<<<<< HEAD
 			var search = function(){
 				mui.ajax('/phone/propagandapage.do',{
 					data:{
@@ -183,49 +182,6 @@
 										<div>${data.data[i].start_date} 至 ${data.data[i].end_date}</div>
 										<div>发布班牌${data.data[i].num}</div>
 									</div>
-=======
-			mui.ajax('/phone/propagandapage.do',{
-				data:{
-					token:window.localStorage.getItem('token')
-				},
-				dataType:'json',//服务器返回json格式数据
-				type:'get',//HTTP请求类型
-				timeout:10000,//超时时间设置为10秒；
-				success:function(data){
-					console.log(data)
-					var html = '';
-					var state = '';
-					for(var i = 0;i<data.data.length;i++){
-						if(data.data[i].stutas == '1'){
-							state = '../../img/school.png';
-						}else{
-							state = '../../img/school1.png';
-						}
-						html += `<li id="${data.data[i].propaganda_id}">
-									<div class="state-wrap">
-										<img class="state-img" src="${state}" alt="">
-									</div>
-									<div class="school-list-wrap">
-										<div>${data.data[i].propaganda_name}</div>
-										<div class="school-list-img">`
-										
-						if(data.data[i].background_type == 1){
-							html += `<div class="school-list-img-wrap" style="background:${data.data[i].background_color}">`;
-						}else if(data.data[i].background_type == 2){
-							html += `<div class="school-list-img-wrap">
-								<img src="${severAddress}${data.data[i].background_url}" alt="">`;
-						}else if(data.data[i].background_type == 3){
-							html += `<div class="school-list-img-wrap">
-								<video src="${severAddress}${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
-						}else{
-							html += `<div class="school-list-img-wrap">
-								<video src="${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
-						}
-						html +=`</div></div>
-								<div class="flex justify-bet">
-									<div>${data.data[i].start_date} 至 ${data.data[i].end_date}</div>
-									<div>发布班牌${data.data[i].num}</div>
->>>>>>> 5d04471f4a84e7862f92b573e66ecf461a050e50
 								</div>
 								</div>
 								</div>
