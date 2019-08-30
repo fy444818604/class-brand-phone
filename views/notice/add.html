@@ -336,6 +336,7 @@
 		
 		//班级数据
 		function objectData () {
+			console.log(window.localStorage.getItem('token'))
 			mui.ajax('/phone/selectboard.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
@@ -375,9 +376,10 @@
 					
 					$('input:checked').prop('checked',false)
 					$('.grade-class-li').removeClass('liAktv')
+					
 					claDIAN ();
-					nianji();
-					nianji12 ();
+					/* nianji();
+					nianji12 (); */
 				},
 				error: function(xhr, type, errorThrown) {
 			
@@ -401,9 +403,10 @@
 			});
 		}
 		function allchk(){
-			var chknum = $(".grade-class").length;//选项总个数
+			var chknum = $(".grade-class-li").length;//选项总个数
 			var chk = $(".liAktv").length;
-			
+			console.log(chknum)
+			console.log(chk)
 			if(chknum==chk){//全选
 				$("#parent-input").prop("checked",true);
 			}else{//不全选
@@ -425,10 +428,11 @@
 			$('.grade-class-li').click(function  () {
 				if($(this).hasClass('liAktv')){
 					$(this).removeClass('liAktv')
-				}else{
+				}else{ 
 					$(this).addClass('liAktv');
 				}
 				var li = $(this).parent('ul').find('li').length;
+				
 				var liAktv = $(this).parent('ul').find('.liAktv').length;
 				if(li == liAktv){
 					$(this).parent('ul').siblings('div').find('input').prop('checked',true)
