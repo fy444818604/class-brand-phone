@@ -137,6 +137,15 @@
 					type: 'get', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
+
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var html = document.querySelector('#OA_task_1').innerHTML;
@@ -167,7 +176,7 @@
 					}
 				});
 			}
-			
+
 			//获取参数
 			function getQueryString(name) {
 				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -208,7 +217,7 @@
 						window.localStorage.setItem('workId', checkedValues[0])
 						mui.openWindow({
 							id: 'userHonorAdd',
-							url: 'userHonorAdd.html?type='+type+'&userHonorId=' + userHonorId
+							url: 'userHonorAdd.html?type=' + type + '&userHonorId=' + userHonorId
 						});
 					} else {
 						mui.alert('你没有选择对象');
