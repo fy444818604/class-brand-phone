@@ -130,8 +130,9 @@
 				border-radius: 50%;
 				margin-right: 0.5rem;
 			}
-			.iconfont{
-				font-size:1.2rem ;
+
+			.iconfont {
+				font-size: 1.2rem;
 			}
 		</style>
 	</head>
@@ -178,7 +179,7 @@
 					//修改/添加班级荣誉
 					mui.openWindow({
 						id: 'userHonor',
-						url: 'userHonorAdd.html?userHonorId='+ids[0]+'&type=2'
+						url: 'userHonorAdd.html?userHonorId=' + ids[0] + '&type=2'
 					});
 				});
 
@@ -212,6 +213,14 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							//跳转登录页面
+							mui.openWindow({
+								id: 'loginout',
+								url: "../login.html"
+							});
+							return;
+						}
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var html = document.querySelector('#OA_task_1').innerHTML;
@@ -247,8 +256,7 @@
 						}
 
 					},
-					error: function(xhr, type, errorThrown) {
-					}
+					error: function(xhr, type, errorThrown) {}
 				});
 			};
 
@@ -257,7 +265,7 @@
 					data: {
 						token: window.localStorage.getItem('token'),
 						userHonorId: id,
-						classId:window.localStorage.getItem('classId')
+						classId: window.localStorage.getItem('classId')
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'get', //HTTP请求类型

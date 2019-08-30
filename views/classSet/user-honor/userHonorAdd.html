@@ -158,7 +158,7 @@
 			var userHonorId = getQueryString("userHonorId");
 			var workId = window.localStorage.getItem('workId');
 			var type = getQueryString("type");
-			
+
 			var mask = mui.createMask();
 
 			if (type == 1) {
@@ -177,7 +177,7 @@
 					userHonorIcon.setAttribute('src', "");
 					userHonorRemark.value = "";
 					userHonorName.value = "";
-					document.getElementById("imgUrl").value="";
+					document.getElementById("imgUrl").value = "";
 				}
 			}
 
@@ -203,6 +203,14 @@
 						cache: false,
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								//跳转登录页面
+								mui.openWindow({
+									id: 'loginout',
+									url: "../login.html"
+								});
+								return;
+							}
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
 								document.getElementById("userHonorIcon").setAttribute("src", severAddress + data.data)
@@ -253,6 +261,15 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								//跳转登录页面
+								mui.openWindow({
+									id: 'loginout',
+									url: "../login.html"
+								});
+								return;
+							}
+
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
