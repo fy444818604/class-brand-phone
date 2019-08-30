@@ -222,7 +222,6 @@
 				//统计完成数量
 				mui('.mui-indexed-list-inner').on('change', 'input', function() {
 				var count = list.querySelectorAll('input[type="radio"]:checked').length;
-					console.log(count)
 					var value = count ? "确定" : "确定";
 					done.innerHTML = value;
 					if (count) {

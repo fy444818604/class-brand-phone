@@ -125,7 +125,6 @@
 				// 班级通知查询
 				var listSearch = function() {
 					var _this = this;
-					console.log(_this)
 					if (curr <= count) {
 						mui.ajax('/phone/selectnotice.do', {
 							data: {
@@ -150,7 +149,6 @@
 								var con = data.data;
 								count = parseInt(data.data.length / 10) + 1;
 								var html = document.querySelector('#OA_task_2').innerHTML;
-								// console.log(con)
 								for (var i = 0; i < con.length; i++) {
 									html +=
 										`<li class="mui-table-view-cell" data-id="${con[i].id}">
@@ -179,7 +177,6 @@
 				//校级通知查询
 				var listSearch1 = function() {
 					var _this = this;
-					console.log(_this)
 					if (curr1 <= count1) {
 						mui.ajax('/phone/selectnotice.do', {
 							data: {

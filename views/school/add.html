@@ -523,12 +523,7 @@
 						file = files[0];
 						if (/^image\/\w+/.test(file.type)) {
 							blobURL = URL.createObjectURL(file);
-							console.log(blobURL)
 							var html = document.querySelector('.bg-img-list').innerHTML;
-							// html += `<li>
-							// 			<img src="${blobURL}" alt="">
-							// 		</li>`
-							// document.querySelector('.bg-img-list').innerHTML = html;
 							imgUpload(file)
 						} else {
 							mui.alert('请选择图片文件');
@@ -797,7 +792,6 @@
 						});
 					} else {
 						var form = new FormData();
-						console.log(propagandaName)
 						form.append('propagandaName', propagandaName)
 						form.append('backgroundType', backgroundType)
 						form.append('boardIds', boardIds)

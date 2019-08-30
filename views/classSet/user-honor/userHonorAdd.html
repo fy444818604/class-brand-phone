@@ -162,20 +162,17 @@
 			var mask = mui.createMask();
 
 			if (type == 1) {
-				console.log(1)
 				nickName.value = window.localStorage.getItem('nickName')
 				userHonorIcon.setAttribute('src', window.localStorage.getItem('userHonorIcon'))
 				document.getElementById("imgUrl").value = window.localStorage.getItem('userHonorIcon')
 			} else {
 				if (notBlank(userHonorId)) {
-					console.log( window.localStorage.getItem('userHonorIcon'));
 					nickName.value = window.localStorage.getItem('nickName')
 					userHonorIcon.setAttribute('src', window.localStorage.getItem('userHonorIcon'))
 					userHonorRemark.value = window.localStorage.getItem('userHonorRemark');
 					userHonorName.value = window.localStorage.getItem('userHonorName');
 					document.getElementById("imgUrl").value = window.localStorage.getItem('userHonorIcon')
 				} else {
-					console.log(3)
 					nickName.value = "";
 					userHonorIcon.setAttribute('src', "");
 					userHonorRemark.value = "";
