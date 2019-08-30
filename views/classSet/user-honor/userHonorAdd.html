@@ -77,6 +77,7 @@
 				left: 0rem;
 				border-radius: 0rem;
 			}
+
 			/*上传*/
 			.a-upload {
 				padding: 4px 10px;
@@ -86,14 +87,14 @@
 				cursor: pointer;
 				color: #888;
 				background: url(../../../img/bg-img.png)no-repeat;
-				background-size:100% 100% ;
+				background-size: 100% 100%;
 				border-radius: 4px;
 				overflow: hidden;
 				display: inline-block;
 				*display: inline;
 				*zoom: 1
-				
 			}
+
 			.a-upload input {
 				height: 100%;
 				position: absolute;
@@ -158,20 +159,29 @@
 			var userHonorId = getQueryString("userHonorId");
 			var workId = window.localStorage.getItem('workId');
 			var type = getQueryString("type");
+			
+			var mask = mui.createMask();
 
 			if (type == 1) {
+				console.log(1)
 				nickName.value = window.localStorage.getItem('nickName')
+				userHonorIcon.setAttribute('src', window.localStorage.getItem('userHonorIcon'))
+				document.getElementById("imgUrl").value = window.localStorage.getItem('userHonorIcon')
 			} else {
 				if (notBlank(userHonorId)) {
+					console.log( window.localStorage.getItem('userHonorIcon'));
 					nickName.value = window.localStorage.getItem('nickName')
-					userHonorIcon.setAttribute('src',  window.localStorage.getItem('userHonorIcon'))
+					userHonorIcon.setAttribute('src', window.localStorage.getItem('userHonorIcon'))
 					userHonorRemark.value = window.localStorage.getItem('userHonorRemark');
 					userHonorName.value = window.localStorage.getItem('userHonorName');
+					document.getElementById("imgUrl").value = window.localStorage.getItem('userHonorIcon')
 				} else {
+					console.log(3)
 					nickName.value = "";
 					userHonorIcon.setAttribute('src', "");
 					userHonorRemark.value = "";
 					userHonorName.value = "";
+					document.getElementById("imgUrl").value="";
 				}
 			}
 
@@ -184,6 +194,7 @@
 
 				//文件上传
 				mui(".mui-content").on("change", "#file", function() {
+					mask.show();
 					var formData = new FormData();
 					var files = this.files;
 					formData.append("file", files[0]);
@@ -200,24 +211,27 @@
 								document.getElementById("imgUrl").value = data.data;
 								document.getElementById("userHonorIcon").setAttribute("src", severAddress + data.data)
 								window.localStorage.setItem('userHonorIcon', data.data)
+								mask.close();
 							} else {
+								mask.close();
 								mui.alert(data.msg)
 							}
 
 						},
 						error: function(xhr, type, errorThrown) {
-
+							mask.close();
 						}
 					});
 				})
 
 				//选择对象	
 				mui(".mui-content").on("tap", "#nickName", function() {
-					window.localStorage.setItem('userHonorName', userHonorName.value)
+					window.localStorage.setItem('userHonorIcon', userHonorIcon.getAttribute('src'))
+					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
 					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
 					mui.openWindow({
 						id: 'index',
-						url: '../user-honor/studentAdd.html?userHonorId=' + userHonorId+"&type="+type
+						url: '../user-honor/studentAdd.html?userHonorId=' + userHonorId + "&type=" + type
 					});
 				});
 
@@ -281,8 +295,7 @@
 								mui.alert(data.msg)
 							}
 						},
-						error: function(xhr, type, errorThrown) {
-						}
+						error: function(xhr, type, errorThrown) {}
 					});
 				}
 			}
