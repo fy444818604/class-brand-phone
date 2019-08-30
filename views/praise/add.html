@@ -76,6 +76,89 @@
 				line-height: 3.07rem;
 				text-align: center;
 			}
+			/*内容*/
+			.classHonuours {
+				padding: 1rem 1.07rem 0rem 1.07rem;
+				background: #FFFFFF;
+				height: calc(100vh - 6.263rem);
+			
+			}
+			
+			.classHonuours-icon {
+				height: 12.933rem;
+				background: #f4f7fa;
+				text-align: center;
+			
+			}
+			
+			.classHonuours-icon-top {
+				position: relative;
+				bottom: 0rem;
+				left: 0rem;
+				width: 100%;
+				height: 100%;
+				display: inherit;
+			}
+			
+			.classHonuours-icon-top>img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.classHonuours-icon-top>p {
+				color: #c0c4cc;
+				margin-top: 1.17rem;
+			}
+			
+			.describe {
+				margin-top: 1.07rem;
+				font-size: 1rem;
+			}
+			
+			.describe-title {
+				height: 3.5rem;
+				line-height: 3.5rem;
+				border-bottom: 1px solid #ebebeb;
+				border-top: 1px solid #ebebeb;
+			}
+			
+			/*anniu*/
+			.add-classHonours {
+				width: 100%;
+				height: 3.07rem;
+				position: fixed;
+				bottom: 0rem;
+				left: 0rem;
+				border-radius: 0rem;
+			}
+			
+			/*上传*/
+			.a-upload {
+				padding: 4px 10px;
+				height: 100%;
+				line-height: 20px;
+				position: relative;
+				cursor: pointer;
+				color: #888;
+				background: url(../../img/bg-img.png)no-repeat;
+				background-size:100% 100% ;
+				border-radius: 4px;
+				overflow: hidden;
+				display: inline-block;
+				*display: inline;
+				*zoom: 1
+				
+			}
+			.a-upload input {
+				height: 100%;
+				position: absolute;
+				font-size: 100px;
+				right: 0;
+				top: 0;
+				opacity: 0;
+				filter: alpha(opacity=0);
+				cursor: pointer
+			}
 		</style>
 	</head>
 
@@ -88,34 +171,46 @@
 		<div class="mui-content add-criticism">
 			<!--班级/对象-->
 			<ul class="mui-table-view">
-			    <li class="mui-table-view-cell flex">
-			    	<div class="theClass-left">
-			    		级别
-			    	</div>
-					<div class="theClass-rnt"><a href="#picture">请选择级别</a></div>
-			    	<div><a class="mui-navigate-right"></a></div>
-			    </li>
+				<li class="mui-table-view-cell flex">
+					<div class="theClass-left">
+						级别
+					</div>
+					<div class="theClass-rnt"><a href="#picture" id="level">请选择级别</a></div>
+					<div><a class="mui-navigate-right"></a></div>
+				</li>
 				<li class="mui-table-view-cell flex objetAdd">
-			    	<div class="theClass-left">
-			    		对象
-			    	</div>
+					<div class="theClass-left">
+						对象
+					</div>
 					<div class="theClass-rnt jonsData">请选择对象</div>
-			    	<div><a class="mui-navigate-right"></a></div>
-			    </li>
+					<div><a class="mui-navigate-right"></a></div>
+				</li>
+				<li class="addIMG">
+					<!--图标-->
+					<div class="classHonuours-icon">
+						<a class="classHonuours-icon-top a-upload" href="javascript:void(0)" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+							<input type="file" id="file" />
+							<img id="classHonorIcon" src="" alt="" />
+						</a>
+						<div>
+							<input type="hidden" id="imgUrl" />
+						</div>
+					</div>
+				</li>
 			</ul>
 			<!--标题/正文-->
 			<ul class="mui-table-view theInput">
-			    <li class="mui-table-view-cell flex">
-			    	<div class="theClass-left">表彰事项</div>
-			    	<div>
-			    		<!--<input id="input" type="text" placeholder="请输入标题"/>-->
-			    		<input id="recognitionContent" class="mui-input-clear" type="text" placeholder="请输入表彰事项">
-			    	</div>
-			    </li>
-			    <li class="mui-table-view-cell" style="background: #FFFFFF;">
-			    	<div class="theClass-left">表彰说明</div>
-			    	<div>
-			    		<textarea rows="10" cols="30" contenteditable="true" id="recognitionRemark" placeholder="请输入表彰说明"></textarea
+				<li class="mui-table-view-cell flex">
+					<div class="theClass-left">表彰事项</div>
+					<div>
+						<!--<input id="input" type="text" placeholder="请输入标题"/>-->
+						<input id="recognitionContent" class="mui-input-clear" type="text" placeholder="请输入表彰事项">
+					</div>
+				</li>
+				<li class="mui-table-view-cell" style="background: #FFFFFF;">
+					<div class="theClass-left">表彰说明</div>
+					<div>
+						<textarea rows="10" cols="30" contenteditable="true" id="recognitionRemark" placeholder="请输入表彰说明"></textarea
 			    	</div>
 			    </li>
 			</ul>
@@ -123,34 +218,58 @@
 				发布
 			</div>
 		</div>
+		<!--级别弹出层-->
 		<div id="picture" class="mui-popover mui-popover-action ">
-		    <ul class="mui-table-view top"> 
-		        <li class="mui-table-view-cell">
-		            <a href="#"  id="2">班级发布</a>
-		        </li>
-		        <li class="mui-table-view-cell">
-		            <a href="#"  id="1">校级发布</a>
-		        </li>
-		    </ul>
-		     <ul class="mui-table-view">
-		        <li class="mui-table-view-cell">
-		            <a href="#picture" style="color: #3b8bff;"><b>取消</b></a>
-		        </li>
-		    </ul>
+			<ul class="mui-table-view top">
+				<li class="mui-table-view-cell">
+					<a href="#" data-type="2">班级发布</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" data-type="1">校级发布</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture" style="color: #3b8bff;"><b>取消</b></a>
+				</li>
+			</ul>
 		</div>
 		<script src="../../js/jquery.min.js"></script>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
-			var thie_level = 2;
-			mui.init()
+			var this_level = 2;
+			var recognitionObjectType = 1;
+			var recognitionIcon = "";
+			mui.init();
+			var objId;
 			
+			//参数接收
+			 function GetRequest() {
+				var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+					 objId = theRequest.id;
+					 $('.jonsData').text(theRequest.text).css('color', '#000')
+					 this_level=theRequest.level;
+					 recognitionObjectType = theRequest.type;
+					 $('#level').text(this_level == 1 ? "校" : "班").css('color', '#3b8bff'),
+					 $('#recognitionContent').val(theRequest.content)
+					 $('#recognitionRemark').val(theRequest.remark)
+				}
+			}
+			GetRequest();
 			
 			//弹框取值赋值
 			mui('#picture').on('tap', '.top>li>a', function() {
-				$('.theClass-rnt a').text(this.innerHTML).css('color','#3b8bff');
-				thie_level = $(this).attr("id");
-				$('#picture>ul>li>a').css('color','#303133')
-				$(this).css('color','#3b8bff');
+				$('#level').text(this.dataset.type == 1 ? "校" : "班").css('color', '#3b8bff'),
+					this_level = this.dataset.type;
+				$('#picture>ul>li>a').css('color', '#303133')
+				$(this).css('color', '#3b8bff');
 				mui("#picture").popover('toggle');
 			})
 			
@@ -163,9 +282,10 @@
 				mui.ajax('/phone/insertbulletin.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						recognitionLevel: thie_level,
-						recognitionObject:'0BB4568175E44238821AA605700294F3',
-						recognitionObjectType:1,
+						recognitionLevel: this_level,
+						recognitionObject:objId,
+						recognitionObjectType:recognitionObjectType,
+						recognitionIcon:recognitionIcon,
 						recognitionContent:$('#recognitionContent').val(),
 						recognitionRemark:$('#recognitionRemark').val(),
 						type:1
@@ -174,6 +294,13 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						if (data.code == 200) {
 							window.location.href = './index.html';
 						}else{
@@ -185,6 +312,63 @@
 					}
 				});
 			}
+			
+			mui.ready(function() {
+				//选择对象
+				document.querySelector('.objetAdd').addEventListener('tap', function() {
+					var btnArray = ['班级', '个人'];
+					
+					mui.confirm('请选择表彰对象', null, btnArray, function(e) {
+						var level = this_level;
+						var content = $('#recognitionContent').val();
+						var remark = $('#recognitionRemark').val();
+						var icon = recognitionIcon;
+						if (e.index == 0) {
+							mui.openWindow({
+								id: 'index',
+								url: './choose-class.html?level='+level+'&content='+content+'&remark='+remark+'&icon='+icon
+							});
+						}else{
+							mui.openWindow({
+								id: 'index',
+								url: './choose-student.html?level='+level+'&content='+content+'&remark='+remark
+							});
+						}
+					})
+				})
+			})
+			
+			mui(".mui-content").on("change", "#file", function() {
+				var formData = new FormData();
+				var files = this.files;
+				formData.append("file", files[0]);
+				mui.ajax('/uploadimg.do', {
+					data: formData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					processData: false,
+					contentType: false,
+					cache: false,
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
+						if (data.code == 200) {
+							recognitionIcon = data.data;
+							document.getElementById("classHonorIcon").setAttribute("src", severAddress + data.data)
+						} else {
+							mui.alert(data.msg)
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+					}
+				});
+			})
 			
 		</script>
 	</body>

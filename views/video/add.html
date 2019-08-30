@@ -320,7 +320,7 @@
 					<div class="shiPing">
 						<!--上传按钮-->
 						<a href="javascript:;" class="a-upload" id="a-upload">
-							<input class="form-control" type="file" accept="video/mp4"  value="上传" style="height:100%; " id="video" name="video" />
+							<input class="form-control" type="file" accept="video/mp4" value="上传" style="height:100%; " id="video" name="video" />
 						</a>
 						<!--展示视频-->
 						<div class="shiPing-cont">
@@ -333,9 +333,9 @@
 					</div>
 				</li>
 				<li class="mui-table-view-cell" style="background: #FFFFFF;">
-					<div class="theClass-left">正文</div>
+					<div class="theClass-left">说明</div>
 					<div>
-						<textarea maxlength="256" id="content" rows="6" cols="6" contenteditable="true" placeholder="请输入正文内容"></textarea>
+						<textarea maxlength="256" id="content" rows="5" cols="5" contenteditable="true" placeholder="请输入正文内容"></textarea>
 					</div>
 				</li>
 			</ul>
@@ -391,7 +391,7 @@
 			var boardIds;
 			var formData = new FormData();
 			var insert = function() {
-				if($('#content').val()!=""&&level!=0&&boardIds!=""&&formData.getAll('file').length>0){
+				if ($('#content').val() != "" && level != 0 && boardIds != "" && formData.getAll('file').length > 0) {
 					var _this = this;
 					formData.append("token", window.localStorage.getItem('token'));
 					formData.append("title", $('#content').val());
@@ -406,6 +406,13 @@
 						cache: false,
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								mui.openWindow({
+									id: 'index',
+									url: '../login.html'
+								});
+								return;
+							}
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
@@ -416,15 +423,15 @@
 							}
 						},
 						error: function(xhr, type, errorThrown) {
-					
+
 						}
 					});
-				}else{
-					if(level==0){
+				} else {
+					if (level == 0) {
 						mui.alert("请选择发布级别")
-					}else if(boardIds==""){
+					} else if (boardIds == "") {
 						mui.alert("请选择发布对象")
-					}else if(formData.getAll('file').length==0){
+					} else if (formData.getAll('file').length == 0) {
 						mui.alert("请添加发布视频")
 					} else {
 						mui.alert("请输入正文内容")
@@ -446,10 +453,10 @@
 				})
 
 				document.querySelector('.objetAdd').addEventListener('tap', function() {
-					if(level!=0){
+					if (level != 0) {
 						$('.objTchu').css('display', 'block');
 						objectData();
-					}else{
+					} else {
 						mui.alert("请先选择发布级别")
 					}
 				})
@@ -495,136 +502,144 @@
 				}
 				return url;
 			}
-			    
+
 			//班级数据
-			function objectData () {
+			function objectData() {
 				mui.ajax('/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						level:level
+						level: level
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						var con = data;
 						$('#grade').empty();
 						var html = "";
 						for (var i = 0; i < con.length; i++) {
 							var obj = con[i];
-							html += '<li data-id = "'+obj.id+'">';
-							if(obj.grade != ""){
+							html += '<li data-id = "' + obj.id + '">';
+							if (obj.grade != "") {
 								html +=
-										'<div class="mui-input-row mui-checkbox mui-left subset-input">'+
-										'	<label style="text-align: left;">"'+con[i].name+'"</label>'+
-										'	<input name="zhege " type="checkbox" >'+
-										'</div>';
+									'<div class="mui-input-row mui-checkbox mui-left subset-input">' +
+									'	<label style="text-align: left;">"' + con[i].name + '"</label>' +
+									'	<input name="zhege " type="checkbox" >' +
+									'</div>';
 							}
 							var list = obj.list;
-							
-								html +=
-										'<ul class="grade-class flex">'
-										for(var j=0;j<list.length;j++){
-										html +=	'	<li data-ids = "'+list[j].id+'" class="grade-class-li">'+
-											'		<div>'+list[j].name+'</div>'+
-											'	</li>'
-										}
-										html +='</ul>';
-							
-							html +='</li>';
+
+							html +=
+								'<ul class="grade-class flex">'
+							for (var j = 0; j < list.length; j++) {
+								html += '	<li data-ids = "' + list[j].id + '" class="grade-class-li">' +
+									'		<div>' + list[j].name + '</div>' +
+									'	</li>'
+							}
+							html += '</ul>';
+
+							html += '</li>';
 						}
 						document.querySelector('#grade').innerHTML = html;
-						
-						$('input:checked').prop('checked',false)
+
+						$('input:checked').prop('checked', false)
 						$('.grade-class-li').removeClass('liAktv')
-						
-						claDIAN ();
+
+						claDIAN();
 						/* nianji();
 						nianji12 (); */
 					},
 					error: function(xhr, type, errorThrown) {
-				
+
 					}
 				});
 			};
 			//父级全选/父级反选 
 			mui('.parent-input').on('change', 'input', function() {
-				if(this.checked?"true":"false" == true){
-					$("#grade :checkbox").prop("checked", true);  
+				if (this.checked ? "true" : "false" == true) {
+					$("#grade :checkbox").prop("checked", true);
 					$('.grade-class-li').addClass('liAktv')
-				}else{
+				} else {
 					$("#grade :checkbox").prop("checked", false);
 					$('.grade-class-li').removeClass('liAktv')
 				}
 			});
 			//设置全选复选框
-			function nianji () {
-				$("#grade :checkbox").click(function(){
+			function nianji() {
+				$("#grade :checkbox").click(function() {
 					allchk();
 				});
 			}
-			function allchk(){
-				var chknum = $(".grade-class-li").length;//选项总个数
+
+			function allchk() {
+				var chknum = $(".grade-class-li").length; //选项总个数
 				var chk = $(".liAktv").length;
-				if(chknum==chk){//全选
-					$("#parent-input").prop("checked",true);
-				}else{//不全选
-					$("#parent-input").prop("checked",false);
+				if (chknum == chk) { //全选
+					$("#parent-input").prop("checked", true);
+				} else { //不全选
+					$("#parent-input").prop("checked", false);
 				}
 			}
 			//年级全选
-			function nianji12 () {
+			function nianji12() {
 				mui('.subset-input').on('change', 'input', function() {
-					if(this.checked?"true":"false" == true){
+					if (this.checked ? "true" : "false" == true) {
 						$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
-					}else{
+					} else {
 						$(this).parent('div').siblings('ul').find('li').removeClass('liAktv')
 					}
 				});
 			}
 			//点击班级	
-			function claDIAN () {
-				$('.grade-class-li').click(function  () {
-					if($(this).hasClass('liAktv')){
+			function claDIAN() {
+				$('.grade-class-li').click(function() {
+					if ($(this).hasClass('liAktv')) {
 						$(this).removeClass('liAktv')
-					}else{ 
+					} else {
 						$(this).addClass('liAktv');
 					}
 					var li = $(this).parent('ul').find('li').length;
-					
+
 					var liAktv = $(this).parent('ul').find('.liAktv').length;
-					if(li == liAktv){
-						$(this).parent('ul').siblings('div').find('input').prop('checked',true)
-					}else{
-						$(this).parent('ul').siblings('div').find('input').prop('checked',false)
+					if (li == liAktv) {
+						$(this).parent('ul').siblings('div').find('input').prop('checked', true)
+					} else {
+						$(this).parent('ul').siblings('div').find('input').prop('checked', false)
 					}
 					allchk();
 				})
 			}
 			//重置
-			$('.bnt-left').click(function  () {
-				$('input:checked').prop('checked',false)
+			$('.bnt-left').click(function() {
+				$('input:checked').prop('checked', false)
 				$('.grade-class-li').removeClass('liAktv')
 			})
 			//确定
-			$('.bnt-rnt').on('tap',function  () {
+			$('.bnt-rnt').on('tap', function() {
 				var data = [];
 				var s = '';
-				$('.liAktv').each(function(){
+				$('.liAktv').each(function() {
 					data.push($(this).find('div').text());
-					var  src = $(this).attr('data-ids')+','
+					var src = $(this).attr('data-ids') + ','
 					s = src + s;
 				});
-				if(data == ''){
-					mui.alert( '请选择一项或多项' )
-				}else{
+				if (data == '') {
+					mui.alert('请选择一项或多项')
+				} else {
 					$('.objTchu').css('display', 'none');
 					var lastIndex = s.lastIndexOf(',');
 					if (lastIndex > -1) {
 						ids = s.substring(0, lastIndex) + s.substring(lastIndex + 1, s.length);
 						boardIds = ids;
-						var boardName = data[0]+"等"+data.length+"个班牌";
-						$('.jonsData').text(boardName).css('color','#000');
+						var boardName = data[0] + "等" + data.length + "个班牌";
+						$('.jonsData').text(boardName).css('color', '#000');
 					}
 				}
 			})

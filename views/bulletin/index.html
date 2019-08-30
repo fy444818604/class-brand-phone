@@ -44,78 +44,90 @@
 		</div>
 	</body>
 	<script src="../../js/mui.js"></script>
-    <script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-	var check ="";
-	var rolling = 1;
-	var systemAnnouncementId = 0;
-	mui.init();
-	var getData = function() {
-		mui.ajax('/phone/selectpublicannouncement.do', {
-			data: {
-				token: window.localStorage.getItem('token')
-			},
-			dataType:'json',//服务器返回json格式数据
-			type: 'get', //HTTP请求类型
-			timeout: 10000, //超时时间设置为10秒；
-			success: function(data) {
-				if(data.code == 200){
-					var obj = data.data;
-					document.querySelector('#textarea').innerHTML = obj.systemAnnouncementContent;
-					systemAnnouncementId = obj.systemAnnouncementId;
-					if(obj.rolling==2){
-						mui("#mySwitch").switch().toggle();
-					}
-				}
-			},
-			error: function(xhr, type, errorThrown) {
-			}
-		});
-	}
-	
-	var submitData = function() {
-		if($("#textarea").val()!=""){
-			mui.ajax('/phone/updatepublicannouncement.do', {
+		var check = "";
+		var rolling = 1;
+		var systemAnnouncementId = 0;
+		mui.init();
+		var getData = function() {
+			mui.ajax('/phone/selectpublicannouncement.do', {
 				data: {
-					token: window.localStorage.getItem('token'),
-					systemAnnouncementId:systemAnnouncementId,
-					systemAnnouncementContent:$("#textarea").val(),
-					rolling:rolling,
-					check:check
+					token: window.localStorage.getItem('token')
 				},
-				dataType:'json',//服务器返回json格式数据
-				type: 'post', //HTTP请求类型
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					if(data.code == 200){
-						mui.alert("发布成功")
-					}else{
-						mui.alert(data.msg)
+					if (data.code == -3) {
+						mui.openWindow({
+							id: 'index',
+							url: '../login.html'
+						});
+						return;
+					}
+					if (data.code == 200) {
+						var obj = data.data;
+						document.querySelector('#textarea').innerHTML = obj.systemAnnouncementContent;
+						systemAnnouncementId = obj.systemAnnouncementId;
+						if (obj.rolling == 2) {
+							mui("#mySwitch").switch().toggle();
+						}
 					}
 				},
-				error: function(xhr, type, errorThrown) {
+				error: function(xhr, type, errorThrown) {}
+			});
+		}
+
+		var submitData = function() {
+			if ($("#textarea").val() != "") {
+				mui.ajax('/phone/updatepublicannouncement.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						systemAnnouncementId: systemAnnouncementId,
+						systemAnnouncementContent: $("#textarea").val(),
+						rolling: rolling,
+						check: check
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
+						if (data.code == 200) {
+							mui.alert("发布成功")
+						} else {
+							mui.alert(data.msg)
+						}
+					},
+					error: function(xhr, type, errorThrown) {}
+				});
+			} else {
+				mui.alert("请填写公告内容")
+			}
+		}
+
+		mui.ready(function() {
+			check = window.location.href.split('check=')[1].replace('#', '');
+			getData();
+			// mui("#mySwitch").switch().toggle();
+			document.querySelector('.mui-switch').addEventListener('toggle', function(event) {
+				if (event.detail.isActive) {
+					rolling = 1
+				} else {
+					rolling = 2
 				}
 			});
-		}else{
-			mui.alert("请填写公告内容")
-		}
-	}
-	
-	mui.ready(function() {
-		check = window.location.href.split('check=')[1].replace('#','');
-		getData();
-		// mui("#mySwitch").switch().toggle();
-		document.querySelector('.mui-switch').addEventListener('toggle', function(event) {
-			if(event.detail.isActive){
-				rolling = 1
-			}else{
-				rolling = 2
-			}
+
+			document.querySelector('.push').addEventListener('tap', function() {
+				submitData();
+			})
 		});
-		
-		document.querySelector('.push').addEventListener('tap',function(){
-			submitData();
-		})
-	});
 	</script>
 </html>

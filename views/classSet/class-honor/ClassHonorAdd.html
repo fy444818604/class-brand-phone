@@ -165,7 +165,8 @@
 			var classHonorName = document.getElementById('classHonorName');
 
 			var classHonorId = getQueryString("classHonorId");
-
+			var mask = mui.createMask();
+			
 			//初始化数据	
 			if (notBlank(classHonorId)) {
 				classHonorIcon.setAttribute('src', 'http://192.168.10.59:	8099' + window.localStorage.getItem('classHonorIcon'))
@@ -184,10 +185,11 @@
 			mui.ready(function() {
 
 				mui(".mui-content").on("change", "#file", function() {
+					mask.show();
 					var formData = new FormData();
 					var files = this.files;
 					formData.append("file", files[0]);
-					mui.ajax('/uploadimg.do', {
+					mui.ajax('/uploadbase64img.do', {
 						data: formData,
 						dataType: 'json', //服务器返回json格式数据
 						type: 'post', //HTTP请求类型
@@ -199,13 +201,15 @@
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
 								document.getElementById("classHonorIcon").setAttribute("src", severAddress + data.data)
+								mask.close();
 							} else {
 								mui.alert(data.msg)
+								mask.close();
 							}
 
 						},
 						error: function(xhr, type, errorThrown) {
-
+							mask.close();
 						}
 					});
 				})

@@ -127,12 +127,12 @@
 				$('#scroll2').scroll({
 					indicators: true //是否显示滚动条
 				});
-				
+
 				var curr = 1;
 				var count = 1;
 				var curr1 = 1;
 				var count1 = 1;
-				
+
 				var listClassSearch = function() {
 					var _this = this;
 					if (curr <= count) {
@@ -147,7 +147,14 @@
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
-								if(data.code==200){
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
+								if (data.code == 200) {
 									var con = data.data.recordList;
 									count = data.data.pageCount;
 									var html = document.querySelector('#OA_task_1').innerHTML;
@@ -163,21 +170,21 @@
 														<div class="addsTybe-rnt">${con[i].createTimeStr}</div>
 													</div>
 												</div>
-											</li>`	
+											</li>`
 									}
 									document.querySelector('#OA_task_1').innerHTML = html
 									curr++;
 								}
 							},
 							error: function(xhr, type, errorThrown) {
-				
+
 							}
 						});
 					} else {
 						_this.endPullupToRefresh(true);
 					}
 				}
-				
+
 				var listSchoolSearch = function() {
 					var _this = this;
 					if (curr <= count) {
@@ -192,7 +199,14 @@
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
-								if(data.code==200){
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
+								if (data.code == 200) {
 									var con = data.data.recordList;
 									count1 = data.data.pageCount;
 									var html = document.querySelector('#OA_task_2').innerHTML;
@@ -210,21 +224,21 @@
 														${con[i].createTimeStr}
 													</div>
 												</div>
-											</li>`	
+											</li>`
 									}
 									document.querySelector('#OA_task_2').innerHTML = html
 									curr1++;
 								}
 							},
 							error: function(xhr, type, errorThrown) {
-				
+
 							}
 						});
 					} else {
 						_this.endPullupToRefresh(true);
 					}
 				}
-				
+
 				var del = function(id) {
 					mui.ajax('/phone/deletenews.do', {
 						data: {
@@ -235,6 +249,13 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								mui.openWindow({
+									id: 'index',
+									url: '../login.html'
+								});
+								return;
+							}
 							if (data.code == 200) {
 								curr = 1
 								curr1 = 1
@@ -245,13 +266,13 @@
 							}
 						},
 						error: function(xhr, type, errorThrown) {
-				
+
 						}
 					});
 				}
-				
+
 				mui.ready(function() {
-					
+
 					mui("#scroll1").pullRefresh({
 						up: {
 							height: 50, //可选.默认50.触发上拉加载拖动距离
@@ -283,18 +304,18 @@
 						var id = this.dataset.id
 						mui.openWindow({
 							id: 'index',
-							url: './detail.html?id='+id
+							url: './detail.html?id=' + id
 						});
 					})
-					
-					document.querySelector('#add').addEventListener('tap',function(){
+
+					document.querySelector('#add').addEventListener('tap', function() {
 						mui.openWindow({
 							id: 'index',
 							url: './add.html'
 						});
 					})
 				})
-				
+
 			})(mui);
 		</script>
 	</body>

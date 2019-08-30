@@ -142,24 +142,32 @@
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
 			mui.init()
-			var search = function(){
-				mui.ajax('/phone/propagandapage.do',{
-					data:{
-						token:window.localStorage.getItem('token')
+			var search = function() {
+				mui.ajax('/phone/propagandapage.do', {
+					data: {
+						token: window.localStorage.getItem('token')
 					},
-					dataType:'json',//服务器返回json格式数据
-					type:'get',//HTTP请求类型
-					timeout:10000,//超时时间设置为10秒；
-					success:function(data){
+					dataType: 'json', //服务器返回json格式数据
+					type: 'get', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						var html = '';
 						var state = '';
-						for(var i = 0;i<data.data.length;i++){
-							if(data.data[i].stutas == '1'){
+						for (var i = 0; i < data.data.length; i++) {
+							if (data.data[i].stutas == '1') {
 								state = '../../img/school.png';
-							}else{
+							} else {
 								state = '../../img/school1.png';
 							}
-							html += `<li class="mui-table-view-cell" id="${data.data[i].propaganda_id}">
+							html +=
+								`<li class="mui-table-view-cell" id="${data.data[i].propaganda_id}">
 										<div class="mui-slider-right mui-disabled">
 											<a id="${data.data[i].propaganda_id}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 										</div>
@@ -172,23 +180,23 @@
 											<div>${data.data[i].propaganda_name}</div>
 											<div class="school-list-img">`
 
-								if (data.data[i].background_type == 1) {
-									html += `<div class="school-list-img-wrap" style="background:${data.data[i].background_color}">`;
-								} else if (data.data[i].background_type == 2) {
-									html +=
-										`<div class="school-list-img-wrap">
-									<img src="${severAddress}${+data.data[i].background_url}" alt="">`;
-								} else if (data.data[i].background_type == 3) {
-									html +=
-										`<div class="school-list-img-wrap">
-									<video src="${severAddress}${+data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
-								} else {
-									html +=
-										`<div class="school-list-img-wrap">
-									<video src="${severAddress}${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
-								}
+							if (data.data[i].background_type == 1) {
+								html += `<div class="school-list-img-wrap" style="background:${data.data[i].background_color}">`;
+							} else if (data.data[i].background_type == 2) {
 								html +=
-									`</div></div>
+									`<div class="school-list-img-wrap">
+									<img src="${severAddress}${+data.data[i].background_url}" alt="">`;
+							} else if (data.data[i].background_type == 3) {
+								html +=
+									`<div class="school-list-img-wrap">
+									<video src="${severAddress}${+data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
+							} else {
+								html +=
+									`<div class="school-list-img-wrap">
+									<video src="${severAddress}${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
+							}
+							html +=
+								`</div></div>
 									<div class="flex justify-bet">
 										<div>${data.data[i].start_date} 至 ${data.data[i].end_date}</div>
 										<div>发布班牌${data.data[i].num}</div>
@@ -238,6 +246,13 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						if (data.code == 200) {
 							mui.alert('删除成功');
 							search()
