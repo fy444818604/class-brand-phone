@@ -548,7 +548,7 @@
 						console.log(blobURL)
 						document.querySelector('#video-upload').style.display = 'none';
 						document.querySelector('.video-wrap').style.zIndex = 99;
-						var html = `<video src="${blobURL}" autoplay="autoplay" loop="loop"></video>`;
+						var html = `<video src="${severAddress}${blobURL}" autoplay="autoplay" loop="loop"></video>`;
 						document.querySelector('.video-wrap').innerHTML = html;
 					}
 				})
@@ -607,7 +607,7 @@
 							if (bgImg() == '') {
 								mui.alert('请选择背景图片')
 							} else {
-								var html = `<img src="${bgImg()}" alt="">`
+								var html = `<img src="${severAddress}${bgImg()}" alt="">`
 								document.querySelector('.school-bg').innerHTML = html;
 							}
 							break;
@@ -628,7 +628,7 @@
 							if (src == '') {
 								mui.alert('请选择背景直播')
 							} else {
-								var html = `<video src="${src}" autoplay="autoplay" loop="loop"></video>`
+								var html = `<video src="${severAddress}${src}" autoplay="autoplay" loop="loop"></video>`
 								document.querySelector('.school-bg').innerHTML = html
 							}
 							break;
@@ -655,7 +655,7 @@
 							for (var i = 0; i < data.data.length; i++) {
 								html +=
 									`<li>
-											<img src="${'http://192.168.38.209:8080'+data.data[i].background_url}" alt="">
+											<img src="${severAddress}${data.data[i].background_url}" alt="">
 											<div class="img-select">
 												<img src="../../img/select.png" alt="">
 											</div>
@@ -696,36 +696,11 @@
 					var propagandaName = document.querySelector('#issue-name').innerHTML
 					var startTime = document.querySelector('#timeSelect').innerHTML
 					var endTime = document.querySelector('#timeSelect1').innerHTML
-<<<<<<< HEAD
-<<<<<<< HEAD
-					
-=======
->>>>>>> b30ede03f404515895a00ec921fdc0f83017052f
 					var upTitle = document.querySelector('#title-select').innerHTML
 					var mainTitle = document.querySelector('#title-select1').innerHTML
 					var downTitle = document.querySelector('#title-select2').innerHTML
 					var countDownTitle = document.querySelector('#title-select3').innerHTML
 					var countDownEndTime = document.querySelector('#timeSelect2').innerHTML
-<<<<<<< HEAD
-					var backgroundType = 1
-					var backgroundColor = '';
-					var backgroundUrl = '';
-					if (document.querySelector('#obj-select').dataset.values != undefined) {
-						var boardIds = document.querySelector('#obj-select').dataset.values.split(',')
-					} else {
-						mui.alert('请选择对象')
-					}
-					if (document.querySelector('.school-bg').innerHTML.indexOf('点击') != -1) {
-						mui.alert('请选择背景')
-					} else {
-						mui('#segmentedControl a').each(function(i, v) {
-							if (v.className.indexOf('mui-active') != -1) {
-								if (i == 0) {
-									backgroundType = 2
-								} else if (i == 1) {
-									backgroundType = 1
-								} else {
-=======
 					var backgroundType  = 1
 					// var boardIds = 
 					if(document.querySelector('.school-bg').innerHTML.indexOf('点击') != -1){
@@ -738,86 +713,11 @@
 								}else if(i == 1){
 									backgroundType = 1
 								}else{
->>>>>>> b30ede03f404515895a00ec921fdc0f83017052f
 									backgroundType = i + 1
 								}
 							}
 						})
 					}
-<<<<<<< HEAD
-
-					if (backgroundType == 1) {
-						backgroundColor = document.querySelector('.school-bg').style.backgroundColor;
-					} else if (backgroundType == 3) {
-						backgroundUrl = ""
-					} else if (backgroundType == 4) {
-						backgroundUrl = document.querySelector('.live-input').value
-					} else {
-						backgroundUrl = document.querySelector('.school-bg').childNodes
-					}
-					if (backgroundType != 3) {
-						mui.ajax('/phone/insertschoolpropaganda.do', {
-							data: {
-								propagandaName: propagandaName,
-								backgroundType: backgroundType,
-								backgroundColor: backgroundColor,
-								backgroundUrl: backgroundUrl,
-								boardIds: boardIds,
-								startTime: startTime,
-								endTime: endTime,
-								upTitle: upTitle,
-								mainTitle: mainTitle,
-								downTitle: downTitle,
-								countDownTitle: countDownTitle,
-								countDownEndTime: countDownEndTime,
-								token: window.localStorage.getItem('token')
-							},
-							dataType: 'json', //服务器返回json格式数据
-							type: 'post', //HTTP请求类型
-							timeout: 10000, //超时时间设置为10秒；
-							success: function(data) {
-								console.log(data)
-							},
-							error: function(xhr, type, errorThrown) {
-
-							}
-						});
-					} else {
-						var form = new FormData();
-						console.log(propagandaName)
-						form.append('propagandaName', propagandaName)
-						form.append('backgroundType', backgroundType)
-						form.append('boardIds', boardIds)
-						form.append('startTime', startTime)
-						form.append('endTime', endTime)
-						form.append('upTitle', upTitle)
-						form.append('mainTitle', mainTitle)
-						form.append('downTitle', downTitle)
-						form.append('countDownTitle', countDownTitle)
-						form.append('countDownEndTime', countDownEndTime)
-						form.append('token', window.localStorage.getItem('token'))
-						form.append('file', document.querySelector('#bg-video-upload').files[0])
-						mui.ajax('/phone/propagandainsertvideo.do', {
-							data: form,
-							dataType: 'json', //服务器返回json格式数据
-							type: 'post', //HTTP请求类型
-							timeout: 10000, //超时时间设置为10秒；
-							processData: false,
-							contentType: false,
-							cache: false,
-							success: function(data) {
-								console.log(data)
-							},
-							error: function(xhr, type, errorThrown) {
-
-							}
-						});
-					}
-
-=======
-					console.log(startTime)
->>>>>>> 15bfdfd51f501e2226113ad8126515d8656993ea
-=======
 					
 					if(backgroundType == 1){
 						var backgroundColor = document.querySelector('.school-bg').style.backgroundColor;
@@ -829,7 +729,6 @@
 						var backgroundUrl = document.querySelector('.school-bg').childNodes
 					}
 					console.log(backgroundColor)
->>>>>>> b30ede03f404515895a00ec921fdc0f83017052f
 				})
 			})(mui);
 		</script>
