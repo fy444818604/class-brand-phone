@@ -79,6 +79,10 @@
 				width: 68%;
 				margin-left: -1.5%;
 			}
+			/*单选框*/
+			 .mui-table-view-cell.mui-radio input[type=radio] {
+			    top: 16px!important;
+			}
 		</style>
 	</head>
 	<body>
@@ -139,15 +143,15 @@
 							for (var i = 0; i < con.length; i++) {
 								if (workId == con[i].id) {
 									html +=
-										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-												<input type="checkbox" checked  value="${con[i].id}" />
+										`<li class="mui-table-view-cell mui-indexed-list-item mui-radio mui-left">
+												<input name="radio" type="radio" checked  value="${con[i].id}" />
 												<img src="${severAddress}${con[i].face}"/>${con[i].text}
 											</li>`
 									document.getElementById('done').classList.remove("mui-disabled");
 								} else {
 									html +=
-										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-												<input type="checkbox"  value="${con[i].id}" />
+										`<li class="mui-table-view-cell mui-indexed-list-item mui-radio mui-left">
+												<input type="radio" name="radio"  value="${con[i].id}" />
 												<img src="${severAddress}${con[i].face}"/>${con[i].text}
 										</li>`
 
@@ -188,7 +192,7 @@
 				//				window.indexedList = new mui.IndexedList(list);
 				//点击完成
 				done.addEventListener('tap', function() {
-					var checkboxArray = [].slice.call(list.querySelectorAll('input[type="checkbox"]'));
+					var checkboxArray = [].slice.call(list.querySelectorAll('input[type="radio"]'));
 					var checkedValues = [];
 					checkboxArray.forEach(function(box) {
 						if (box.checked) {
@@ -215,8 +219,8 @@
 				}, false);
 				//统计完成数量
 				mui('.mui-indexed-list-inner').on('change', 'input', function() {
-					var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
-					var value = count ? "确定(" + count + ")" : "确定";
+					var count = list.querySelectorAll('input[type="radio"]:checked').length;
+					var value = count ? "确定" : "确定";
 					done.innerHTML = value;
 					if (count) {
 						if (done.classList.contains("mui-disabled")) {
