@@ -79,7 +79,7 @@
 
 			.slogan-bnt-rnt {
 				color: #909398;
-				margin-left: 2.87rem;
+				margin-left: 2.5rem;
 			}
 
 			.mui-table-view-cell {
@@ -175,7 +175,7 @@
 													</div>
 													<div class="mui-slider-handle flex">
 														<div class="slogan-bnt-left"><img src="http://192.168.38.98:8080${con[i].userFace}"/></div>
-											    		<div >${con[i].nikeName}</div>
+											    		<div class="beyond">${con[i].nikeName}</div>
 											    		<div class="slogan-bnt-rnt">${con[i].subjectName}</div>
 													</div>
 											</li>`
@@ -185,7 +185,6 @@
 							} else {
 								mui.alert(data.msg);
 							}
-
 						},
 						error: function(xhr, type, errorThrown) {}
 					});

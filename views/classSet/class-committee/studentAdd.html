@@ -109,7 +109,7 @@
 				</div>
 				<!--按钮-->
 				<div class="anniu mui-row">
-					<button type="button" class="mui-btn reset">重置</button>
+					<button id="reset" type="button" class="mui-btn reset">重置</button>
 					<button id="done" type="button" class="mui-btn mui-btn-primary mui-disabled">确定</button>
 				</div>
 			</div>
@@ -120,6 +120,7 @@
 			var classCadresId = getQueryString("classCadresId");
 			var workId = getQueryString("workId");
 			var postion = decodeURI(getQueryString('postion'));
+			var resetR =  document.getElementById("reset")
 
 			mui.init();
 			(function($) {
@@ -243,6 +244,9 @@
 						event.preventDefault(); // 阻止默认事件---阻止页面刷新
 					}
 				});
+				resetR.addEventListener('tap',function  () {
+			        
+				})
 			});
 		</script>
 	</body>

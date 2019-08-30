@@ -162,13 +162,7 @@
 				//编辑班级荣誉
 				mui(".mui-content").on("tap", ".icon-del", function() {
 					var id = this.getAttribute("id");
-					var btnArray = ['否', '是'];
-					mui.confirm('确认要删除？', null, btnArray, function(e) {
-						if (e.index == 1) {
-							deleteUserHonor(id);
-						}
-					})
-					
+					deleteUserHonor(id);
 				})
 
 				//修改班委
@@ -237,8 +231,8 @@
 										<div class="flex">
 											<div class="slogan-bnt-left"><img src="${severAddress}${con[i].userHonorIcon}" /></div>
 												<div class="slogan-bnt-rnt">
-													<p>${con[i].userHonorName}</p>
-													<div class="">
+													<p class="text-overflow">${con[i].userHonorName}</p>
+													<div class="text-overflow">
 														${con[i].userHonorRemark}
 													</div>
 												</div>
