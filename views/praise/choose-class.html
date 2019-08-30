@@ -121,10 +121,10 @@
 			var type = getQueryString("type");
 
 			mui.init();
-			
+
 			//参数接收
-			 function GetRequest() {
-				var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+			function GetRequest() {
+				var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
 				var theRequest = new Object();
 				if (url.indexOf("?") != -1) {
 					var str = url.substr(1);
@@ -134,10 +134,10 @@
 					}
 				}
 			}
-			
-			
-			
-			
+
+
+
+
 			(function($) {
 				GetRequest();
 				existingTeacher('');
@@ -153,28 +153,36 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var con = data.data;
 							var html = '';
 							for (var i = 0; i < con.length; i++) {
 								var html;
-								html +=	'	<li data-ids = "'+con[i].id+'" class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">'+
-									'<input data-text="'+con[i].text+'" type="checkbox" value="'+con[i].id+'" />'+
-									'<img src=""/>'+
-									'<span>'+con[i].text+'</span>'+
+								html += '	<li data-ids = "' + con[i].id +
+									'" class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">' +
+									'<input data-text="' + con[i].text + '" type="checkbox" value="' + con[i].id + '" />' +
+									'<img src=""/>' +
+									'<span>' + con[i].text + '</span>' +
 									'</li>'
-								}
 							}
-							$('#OA_task_1').html(html);
-						
+						}
+						$('#OA_task_1').html(html);
+
 					},
 					error: function(xhr, type, errorThrown) {
 
 					}
 				});
 			}
-			
+
 			//获取参数
 			function getQueryString(name) {
 				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -200,8 +208,8 @@
 				//create
 				//				window.indexedList = new mui.IndexedList(list);
 				//点击完成
-				mui(".anniu").on('tap','#done',function(){
-					var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+				mui(".anniu").on('tap', '#done', function() {
+					var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
 					var theRequest = new Object();
 					var str = url.substr(1);
 					strs = str.split("&");
@@ -209,16 +217,17 @@
 						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
 					}
 					var level = theRequest.level;
-					var content =  theRequest.content
-					var remark =  theRequest.remark
+					var content = theRequest.content
+					var remark = theRequest.remark
 					var icon = theRequest.icon
-					var id=$("input[type='checkbox']:checked").val();
+					var id = $("input[type='checkbox']:checked").val();
 					var text = $("input[type='checkbox']:checked").attr('data-text');
 					mui.openWindow({
 						id: 'index',
-						url: './add.html?id='+id+'&text=' + text+'&type=2&level='+level+'&content='+content+'&remark='+remark+'&icon='+icon
+						url: './add.html?id=' + id + '&text=' + text + '&type=2&level=' + level + '&content=' + content +
+							'&remark=' + remark + '&icon=' + icon
 					});
-				}) 
+				})
 			});
 		</script>
 	</body>

@@ -59,15 +59,16 @@
 			.end {
 				color: #c0c4cc !important;
 			}
+
 			/*新增样式*/
-			.addsTybe-left{
+			.addsTybe-left {
 				width: 80%;
 			}
-			.addsTybe-rnt{
+
+			.addsTybe-rnt {
 				width: 20%;
 				text-align: right;
 			}
-
 		</style>
 	</head>
 
@@ -141,10 +142,17 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
 								_this.endPullupToRefresh(false);
 								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
 								var con = data.data;
-								count = parseInt(data.data.length/10)+1;
+								count = parseInt(data.data.length / 10) + 1;
 								var html = document.querySelector('#OA_task_2').innerHTML;
 								for (var i = 0; i < con.length; i++) {
 									html +=
@@ -186,10 +194,17 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
 								_this.endPullupToRefresh(false);
 								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
 								var con = data.data;
-								count1 = parseInt(data.data.length/10)+1;
+								count1 = parseInt(data.data.length / 10) + 1;
 								var html = document.querySelector('#OA_task_1').innerHTML;
 								for (var i = 0; i < con.length; i++) {
 									html +=
@@ -229,9 +244,16 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								mui.openWindow({
+									id: 'index',
+									url: '../login.html'
+								});
+								return;
+							}
 							if (data.code == 200) {
 								window.location.reload();
-							}else{
+							} else {
 								mui.alert(data.msg)
 							}
 						},
@@ -273,10 +295,10 @@
 						var id = this.dataset.id
 						mui.openWindow({
 							id: 'index',
-							url: './detail.html?id='+id
+							url: './detail.html?id=' + id
 						});
 					})
-					document.querySelector('#add').addEventListener('tap',function(){
+					document.querySelector('#add').addEventListener('tap', function() {
 						mui.openWindow({
 							id: 'index',
 							url: './add.html'

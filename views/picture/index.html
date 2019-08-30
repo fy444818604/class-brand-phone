@@ -12,50 +12,64 @@
 			.mui-card .mui-control-content {
 				padding: 10px;
 			}
+
 			.mui-control-content {
 				height: calc(100vh - 131px);
 			}
+
 			.mui-content {
 				height: 100vh;
 			}
+
 			.mui-btn-block {
 				margin-bottom: 0;
 			}
+
 			.activity-list .mui-table-view-cell {
 				padding: 1.23rem 1rem;
 			}
+
 			.mui-table-view-cell:after {
 				left: 0;
 			}
+
 			.active-item {
 				display: flex;
 			}
+
 			.active-item>div:last-child {
 				text-align: left;
 			}
+
 			.active-item>div:first-child {
 				width: 6.4rem;
 				height: 3.6rem;
 				margin-right: 0.7rem;
-				
+
 			}
+
 			.active-item>div:first-child>img {
 				width: 6.4rem;
 				height: 3.6rem;
 			}
+
 			.active-item>div:nth-child(2) {
 				line-height: 2rem;
 			}
-			.active-item>div:nth-child(2)>.opo{
+
+			.active-item>div:nth-child(2)>.opo {
 				font-size: 1rem;
 				color: #303133;
 			}
-			.active-item>div:nth-child(2)>.poo{
+
+			.active-item>div:nth-child(2)>.poo {
 				font-size: 1rem;
 			}
+
 			.end {
 				color: #c0c4cc !important;
 			}
+
 			/*新增样式*/
 		</style>
 	</head>
@@ -130,10 +144,17 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
 								_this.endPullupToRefresh(false);
 								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
 								var con = data.data;
-								count = parseInt(data.data.length/10)+1;
+								count = parseInt(data.data.length / 10) + 1;
 								var html = document.querySelector('#OA_task_2').innerHTML;
 								for (var i = 0; i < con.length; i++) {
 									html +=
@@ -182,10 +203,17 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
 								_this.endPullupToRefresh(false);
 								document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
 								var con = data.data;
-								count1 = parseInt(data.data.length/10)+1;
+								count1 = parseInt(data.data.length / 10) + 1;
 								var html = document.querySelector('#OA_task_1').innerHTML;
 								for (var i = 0; i < con.length; i++) {
 									html +=
@@ -232,9 +260,16 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							if (data.code == -3) {
+								mui.openWindow({
+									id: 'index',
+									url: '../login.html'
+								});
+								return;
+							}
 							if (data.code == 200) {
 								window.location.reload();
-							}else{
+							} else {
 								mui.alert(data.msg)
 							}
 						},
@@ -276,10 +311,10 @@
 						var id = this.dataset.id
 						mui.openWindow({
 							id: 'index',
-							url: './detail.html?id='+id
+							url: './detail.html?id=' + id
 						});
 					})
-					document.querySelector('#add').addEventListener('tap',function(){
+					document.querySelector('#add').addEventListener('tap', function() {
 						mui.openWindow({
 							id: 'index',
 							url: './add.html'

@@ -106,12 +106,12 @@
 				$('#scroll2').scroll({
 					indicators: true //是否显示滚动条
 				});
-				
+
 				var curr = 1;
 				var count = 1;
 				var curr1 = 1;
 				var count1 = 1;
-				
+
 				var listClassSearch = function() {
 					var _this = this;
 					if (curr <= count) {
@@ -121,33 +121,38 @@
 								currPage: curr,
 								pageSize: 10,
 								level: 2,
-								type:1
+								type: 1
 							},
 							dataType: 'json', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
-								if(data.code==200){
-									// _this.endPullupToRefresh(false);
-									// document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
+								if (data.code == 200) {
 									var con = data.data.recordList;
-									
+
 									count = data.data.pageCount;
 									var html = document.querySelector('#OA_task_1').innerHTML;
 									for (var i = 0; i < con.length; i++) {
-										
+
 										var face = "../../img/home_btn_praise.png";
-										if(con[i].recognitionObjectType==1&&con[i].userFace){
+										if (con[i].recognitionObjectType == 1 && con[i].userFace) {
 											var face = con[i].userFace;
-										}else if(con[i].recognitionObjectType==2&&con[i].classIcon){
+										} else if (con[i].recognitionObjectType == 2 && con[i].classIcon) {
 											var face = con[i].classIcon;
 										}
 										var icon = "../../img/home_btn_praise.png";
-										if(con[i].recognitionIcon){
-											icon =  con[i].recognitionIcon;
+										if (con[i].recognitionIcon) {
+											icon = con[i].recognitionIcon;
 										}
-										
-										
+
+
 										html +=
 											`<li class="mui-table-view-cell">
 												<div class="mui-slider-right mui-disabled">
@@ -155,9 +160,13 @@
 												</div>
 												<div class="mui-slider-handle">
 													<div class="mui-table-cell">
-														<div class="title-list"><img src="`+face+`"/>${con[i].recognitionName}</div>
+														<div class="title-list"><img src="` +
+											face +
+											`"/>${con[i].recognitionName}</div>
 														<div class="flex">
-															<div class="list-left"><img src="`+icon+`"/></div>
+															<div class="list-left"><img src="` +
+											icon +
+											`"/></div>
 															<div>
 																<p>${con[i].recognitionContent}</p>
 																<p>${con[i].createTime}</p>
@@ -172,17 +181,19 @@
 									}
 									document.querySelector('#OA_task_1').innerHTML = html
 									curr++;
+								} else {
+									mui.alert(data.msg);
 								}
 							},
 							error: function(xhr, type, errorThrown) {
-				
+
 							}
 						});
 					} else {
 						_this.endPullupToRefresh(true);
 					}
 				}
-				
+
 				var listSchoolSearch = function() {
 					var _this = this;
 					if (curr <= count) {
@@ -192,32 +203,37 @@
 								currPage: curr1,
 								pageSize: 10,
 								level: 1,
-								type:1
+								type: 1
 							},
 							dataType: 'json', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
-								if(data.code==200){
-									// _this.endPullupToRefresh(false);
-									// document.querySelector('.mui-pull-bottom-pocket').style.display = 'none'
+								if (data.code == -3) {
+									mui.openWindow({
+										id: 'index',
+										url: '../login.html'
+									});
+									return;
+								}
+								if (data.code == 200) {
 									var con = data.data.recordList;
 									count1 = data.data.pageCount;
 									var html = document.querySelector('#OA_task_2').innerHTML;
-									
+
 									for (var i = 0; i < con.length; i++) {
 										var face = "../../img/home_btn_praise.png";
-										if(con[i].recognitionObjectType==1&&con[i].userFace){
+										if (con[i].recognitionObjectType == 1 && con[i].userFace) {
 											var face = con[i].userFace;
-										}else if(con[i].recognitionObjectType==2&&con[i].classIcon){
+										} else if (con[i].recognitionObjectType == 2 && con[i].classIcon) {
 											var face = con[i].classIcon;
 										}
 										var icon = "../../img/home_btn_praise.png";
-										if(con[i].recognitionIcon){
-											icon =  con[i].recognitionIcon;
+										if (con[i].recognitionIcon) {
+											icon = con[i].recognitionIcon;
 										}
-										
-										
+
+
 										html +=
 											`<li class="mui-table-view-cell">
 												<div class="mui-slider-right mui-disabled">
@@ -225,9 +241,13 @@
 												</div>
 												<div class="mui-slider-handle">
 													<div class="mui-table-cell">
-														<div class="title-list"><img src="`+face+`"/>${con[i].recognitionName}</div>
+														<div class="title-list"><img src="` +
+											face +
+											`"/>${con[i].recognitionName}</div>
 														<div class="flex">
-															<div class="list-left"><img src="`+icon+`"/></div>
+															<div class="list-left"><img src="` +
+											icon +
+											`"/></div>
 															<div>
 																<p>${con[i].recognitionContent}</p>
 																<p>${con[i].createTime}</p>
@@ -239,15 +259,15 @@
 													</div>
 												</div>
 											</li>`
-										
+
 									}
-									
+
 									document.querySelector('#OA_task_2').innerHTML = html
 									curr++;
-								}else{
-									// alert(data.msg);
+								} else {
+									mui.alert(data.msg);
 								}
-								
+
 							},
 							error: function(xhr, type, errorThrown) {
 								Layer.alert("1")
@@ -257,7 +277,7 @@
 						_this.endPullupToRefresh(true);
 					}
 				}
-				
+
 				var del = function(id) {
 					mui.ajax('/phone/deletebulletin.do', {
 						data: {
@@ -278,13 +298,13 @@
 							}
 						},
 						error: function(xhr, type, errorThrown) {
-				
+
 						}
 					});
 				}
-				
+
 				mui.ready(function() {
-					
+
 					mui("#scroll1").pullRefresh({
 						up: {
 							height: 50, //可选.默认50.触发上拉加载拖动距离
@@ -313,7 +333,7 @@
 						})
 					})
 				})
-				
+
 			})(mui);
 		</script>
 	</body>
