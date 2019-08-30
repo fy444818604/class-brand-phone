@@ -402,37 +402,49 @@
 
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
-			var level = 2;
+			var level = 0;
 			var boardIds = "";
 			var formData = new FormData();
 			var insert = function() {
-				var _this = this;
-				formData.append("token", window.localStorage.getItem('token'));
-				formData.append("title", $('#content').val());
-				formData.append("level",level);
-				formData.append("boardIds", boardIds);
-				mui.ajax('/phone/insertimage.do', {
-					data: formData,
-					dataType: 'json', //服务器返回json格式数据
-					type: 'post', //HTTP请求类型
-					processData: false,
-					contentType: false,
-					cache: false,
-					timeout: 10000, //超时时间设置为10秒；
-					success: function(data) {
-						if (data.code == 200) {
-							mui.openWindow({
-								id: 'index',
-								url: './index.html'
-							});
-						} else {
-							mui.alert(data.msg)
-						}
-					},
-					error: function(xhr, type, errorThrown) {
+				if($('#content').val()!=""&&level!=0&&boardIds!=""&&formData.getAll('file').length>0){
+					var _this = this;
+					formData.append("token", window.localStorage.getItem('token'));
+					formData.append("title", $('#content').val());
+					formData.append("level",level);
+					formData.append("boardIds", boardIds);
+					mui.ajax('/phone/insertimage.do', {
+						data: formData,
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						processData: false,
+						contentType: false,
+						cache: false,
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							if (data.code == 200) {
+								mui.openWindow({
+									id: 'index',
+									url: './index.html'
+								});
+							} else {
+								mui.alert(data.msg)
+							}
+						},
+						error: function(xhr, type, errorThrown) {
 
+						}
+					});
+				}else{
+					if(level==0){
+						mui.alert("请选择发布级别")
+					}else if(boardIds==""){
+						mui.alert("请选择发布对象")
+					}else if(formData.getAll('file').length==0){
+						mui.alert("请添加发布图片")
+					} else {
+						mui.alert("请输入正文内容")
 					}
-				});
+				}
 			}
 			mui.ready(function() {
 				//弹框取值赋值
@@ -449,8 +461,12 @@
 				})
 
 				document.querySelector('.objetAdd').addEventListener('tap', function() {
-					$('.objTchu').css('display', 'block');
-					objectData();
+					if(level!=0){
+						$('.objTchu').css('display', 'block');
+						objectData();
+					}else{
+						mui.alert("请先选择发布级别")
+					}
 				})
 			})
 			
