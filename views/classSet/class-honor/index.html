@@ -185,7 +185,13 @@
 				//编辑班级荣誉
 				mui(".mui-content").on("tap", ".icon-del", function() {
 					var id = this.getAttribute("id");
-					deleteClassHonor(id);
+					var btnArray = ['否', '是'];
+					mui.confirm('确认要删除？', null, btnArray, function(e) {
+						if (e.index == 1) {
+							deleteClassHonor(id);
+						}
+					})
+					
 				})
 
 				//修改班委
