@@ -431,7 +431,6 @@
 
 			//班级数据
 			function objectData() {
-				console.log(window.localStorage.getItem('token'))
 				mui.ajax('/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
@@ -571,7 +570,6 @@
 
 				//添加选项	
 				var voteOption = $("#showLi>.addChLi >.addLI-left> .voteTitle ");
-				console.log(voteOption);
 				var voteTitleArr = []
 				for (var i = 0; i < voteOption.length; i++) {
 					var obj = {
@@ -601,9 +599,7 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						// console.log(data);
 						if (data.code == 200) {
-							console.log(data);
 							mui.openWindow({
 								id: 'index',
 								url: '../activity/index.html'

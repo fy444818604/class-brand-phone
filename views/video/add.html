@@ -482,7 +482,6 @@
 			    
 			//班级数据
 			function objectData () {
-				console.log(window.localStorage.getItem('token'))
 				mui.ajax('/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
@@ -551,8 +550,6 @@
 			function allchk(){
 				var chknum = $(".grade-class-li").length;//选项总个数
 				var chk = $(".liAktv").length;
-				console.log(chknum)
-				console.log(chk)
 				if(chknum==chk){//全选
 					$("#parent-input").prop("checked",true);
 				}else{//不全选

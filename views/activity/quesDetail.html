@@ -212,7 +212,6 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					console.log(data)
 					var value = data.data;
 					type = value.activeType
 					var html =
@@ -243,7 +242,6 @@
 			});
 		}
 		var search1 = function(id) {
-			console.log(id)
 			mui.ajax('/phone/questiontitle/selectlistbyactiveid.do', {
 				data: {
 					token: window.localStorage.getItem('token'),
@@ -253,7 +251,6 @@
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
 				success: function(data) {
-					console.log(data)
 					var value = data.data;
 					var html = '';
 					for (var i = 0; i < data.data.length; i++) {

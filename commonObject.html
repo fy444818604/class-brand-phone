@@ -207,7 +207,6 @@
 		}
 		//年级全选
 		mui('.subset-input').on('change', 'input', function() {
-			console.log(1)
 		    if(this.checked?"true":"false" == true){
 		    	$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
 		    }else{
@@ -247,7 +246,6 @@
 		  	if(data == ''){
 		  		mui.alert( '请选择一项或多项' )
 		  	}else{
-		  		console.log(data)
 		  		$.cookie('data',JSON.stringify(data))
 		  		window.location="views/notice/add.html";
 		  	}

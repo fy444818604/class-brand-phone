@@ -319,7 +319,6 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						console.log(data)
 						if (data.code == 200) {
 							window.location.href = './index.html';
 						}else{
@@ -333,134 +332,137 @@
 			}
 			
 			//班级数据
-						function objectData () {
-							mui.ajax('/phone/selectboard.do', {
-								data: {
-									token: window.localStorage.getItem('token'),
-									level:thie_level
-								},
-								dataType: 'json', //服务器返回json格式数据
-								type: 'post', //HTTP请求类型
-								timeout: 10000, //超时时间设置为10秒；
-								success: function(data) {
-									var con = data;
-									$('#grade').empty();
-									var html = "";
-									for (var i = 0; i < con.length; i++) {
-										var obj = con[i];
-										html += '<li data-id = "'+obj.id+'">';
-										if(obj.grade != ""){
-											html +=
-													'<div class="mui-input-row mui-checkbox mui-left subset-input">'+
-													'	<label style="text-align: left;">"'+con[i].name+'"</label>'+
-													'	<input name="zhege " type="checkbox" >'+
-													'</div>';
+			function objectData () {
+				mui.ajax('/phone/selectboard.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						level:thie_level
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						var con = data;
+						$('#grade').empty();
+						var html = "";
+						for (var i = 0; i < con.length; i++) {
+							var obj = con[i];
+							html += '<li data-id = "'+obj.id+'">';
+							if(obj.grade != ""){
+								html +=
+										'<div class="mui-input-row mui-checkbox mui-left subset-input">'+
+										'	<label style="text-align: left;">"'+con[i].name+'"</label>'+
+										'	<input name="zhege " type="checkbox" >'+
+										'</div>';
+							}
+							var list = obj.list;
+							
+								html +=
+										'<ul class="grade-class flex">'
+										for(var j=0;j<list.length;j++){
+										html +=	'	<li data-ids = "'+list[j].id+'" class="grade-class-li">'+
+											'		<div>'+list[j].name+'</div>'+
+											'	</li>'
 										}
-										var list = obj.list;
-										
-											html +=
-													'<ul class="grade-class flex">'
-													for(var j=0;j<list.length;j++){
-													html +=	'	<li data-ids = "'+list[j].id+'" class="grade-class-li">'+
-														'		<div>'+list[j].name+'</div>'+
-														'	</li>'
-													}
-													html +='</ul>';
-										
-										html +='</li>';
-									}
-									document.querySelector('#grade').innerHTML = html;
-									claDIAN ();
-									nianji();
-									nianji12 ();
-								},
-								error: function(xhr, type, errorThrown) {
+										html +='</ul>';
+							
+							html +='</li>';
+						}
+						document.querySelector('#grade').innerHTML = html;
+						
+						$('input:checked').prop('checked',false)
+						$('.grade-class-li').removeClass('liAktv')
+						
+						claDIAN ();
+						/* nianji();
+						nianji12 (); */
+					},
+					error: function(xhr, type, errorThrown) {
 				
-								}
-							});
-						};
-						//父级全选/父级反选 
-						mui('.parent-input').on('change', 'input', function() {
-							if(this.checked?"true":"false" == true){
-								$("#grade :checkbox").prop("checked", true);  
-								$('.grade-class-li').addClass('liAktv')
-							}else{
-								$("#grade :checkbox").prop("checked", false);
-								$('.grade-class-li').removeClass('liAktv')
-							}
-						});
-						//设置全选复选框
-						function nianji () {
-							$("#grade :checkbox").click(function(){
-								allchk();
-							});
-						}
-						function allchk(){
-							var chknum = $(".grade-class").length;//选项总个数
-							var chk = $(".liAktv").length;
-							
-							if(chknum==chk){//全选
-								$("#parent-input").prop("checked",true);
-							}else{//不全选
-								$("#parent-input").prop("checked",false);
-							}
-						}
-						//年级全选
-						function nianji12 () {
-							mui('.subset-input').on('change', 'input', function() {
-								if(this.checked?"true":"false" == true){
-									$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
-								}else{
-									$(this).parent('div').siblings('ul').find('li').removeClass('liAktv')
-								}
-							});
-						}
-							
-						function claDIAN () {
-							$('.grade-class-li').click(function  () {
-								if($(this).hasClass('liAktv')){
-									$(this).removeClass('liAktv')
-								}else{
-									$(this).addClass('liAktv');
-								}
-								var li = $(this).parent('ul').find('li').length;
-								var liAktv = $(this).parent('ul').find('.liAktv').length;
-								if(li == liAktv){
-									$(this).parent('ul').siblings('div').find('input').prop('checked',true)
-								}else{
-									$(this).parent('ul').siblings('div').find('input').prop('checked',false)
-								}
-								allchk();
-							})
-						}
-						//重置
-						$('.bnt-left').click(function  () {
-							$('input:checked').prop('checked',false)
-							$('.grade-class-li').removeClass('liAktv')
-						})
-						//确定
-						$('.bnt-rnt').on('tap',function  () {
-							var data = [];
-							var s = '';
-							$('.liAktv').each(function(){
-								data.push($(this).find('div').text());
-								var  src = $(this).attr('data-ids')+','
-								s = src + s;
-							});
-							if(data == ''){
-								mui.alert( '请选择一项或多项' )
-							}else{
-								$('.objTchu').css('display', 'none');
-								var lastIndex = s.lastIndexOf(',');
-								if (lastIndex > -1) {
-									ids = s.substring(0, lastIndex) + s.substring(lastIndex + 1, s.length);
-									boardIds = ids;
-									boardNames = data[0]+"等"+data.length+"个班牌";
-									$('.jonsData').text(boardNames).css('color','#000');
-								}
-							}
-						})
-			
+					}
+				});
+			};
+			//父级全选/父级反选 
+			mui('.parent-input').on('change', 'input', function() {
+				if(this.checked?"true":"false" == true){
+					$("#grade :checkbox").prop("checked", true);  
+					$('.grade-class-li').addClass('liAktv')
+				}else{
+					$("#grade :checkbox").prop("checked", false);
+					$('.grade-class-li').removeClass('liAktv')
+				}
+			});
+			//设置全选复选框
+			function nianji () {
+				$("#grade :checkbox").click(function(){
+					allchk();
+				});
+			}
+			function allchk(){
+				var chknum = $(".grade-class-li").length;//选项总个数
+				var chk = $(".liAktv").length;
+				if(chknum==chk){//全选
+					$("#parent-input").prop("checked",true);
+				}else{//不全选
+					$("#parent-input").prop("checked",false);
+				}
+			}
+			//年级全选
+			function nianji12 () {
+				mui('.subset-input').on('change', 'input', function() {
+					if(this.checked?"true":"false" == true){
+						$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
+					}else{
+						$(this).parent('div').siblings('ul').find('li').removeClass('liAktv')
+					}
+				});
+			}
+			//点击班级	
+			function claDIAN () {
+				$('.grade-class-li').click(function  () {
+					if($(this).hasClass('liAktv')){
+						$(this).removeClass('liAktv')
+					}else{ 
+						$(this).addClass('liAktv');
+					}
+					var li = $(this).parent('ul').find('li').length;
+					
+					var liAktv = $(this).parent('ul').find('.liAktv').length;
+					if(li == liAktv){
+						$(this).parent('ul').siblings('div').find('input').prop('checked',true)
+					}else{
+						$(this).parent('ul').siblings('div').find('input').prop('checked',false)
+					}
+					allchk();
+				})
+			}
+			//重置
+			$('.bnt-left').click(function  () {
+				$('input:checked').prop('checked',false)
+				$('.grade-class-li').removeClass('liAktv')
+			})
+			//确定
+			$('.bnt-rnt').on('tap',function  () {
+				var data = [];
+				var s = '';
+				$('.liAktv').each(function(){
+					data.push($(this).find('div').text());
+					var  src = $(this).attr('data-ids')+','
+					s = src + s;
+				});
+				if(data == ''){
+					mui.alert( '请选择一项或多项' )
+				}else{
+					$('.objTchu').css('display', 'none');
+					var lastIndex = s.lastIndexOf(',');
+					if (lastIndex > -1) {
+						ids = s.substring(0, lastIndex) + s.substring(lastIndex + 1, s.length);
+						boardIds = ids;
+						var boardName = data[0]+"等"+data.length+"个班牌";
+						$('.jonsData').text(boardName).css('color','#000');
+					}
+				}
+			})
 		</script>
 	</body>
 

@@ -147,7 +147,6 @@
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
-								console.log(data)
 								if(data.code==200){
 									var con = data.data.recordList;
 									count = data.data.pageCount;
@@ -193,7 +192,6 @@
 							type: 'get', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
-								console.log(data)
 								if(data.code==200){
 									var con = data.data.recordList;
 									count1 = data.data.pageCount;
@@ -274,7 +272,6 @@
 					})
 					mui(".mui-table-view").on('tap', '.icon-del', function() {
 						var id = this.getAttribute("id");
-						console.log(id);
 						var btnArray = ['否', '是'];
 						mui.confirm('确认要删除？', null, btnArray, function(e) {
 							if (e.index == 1) {

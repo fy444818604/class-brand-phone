@@ -167,7 +167,6 @@
 			var classHonorId = getQueryString("classHonorId");
 
 			//初始化数据	
-			console.log(classHonorId);
 			if (notBlank(classHonorId)) {
 				classHonorIcon.setAttribute('src', 'http://192.168.10.59:	8099' + window.localStorage.getItem('classHonorIcon'))
 				classHonorRemark.value = window.localStorage.getItem('classHonorRemark');
@@ -197,7 +196,6 @@
 						cache: false,
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							// console.log(data);
 							if (data.code == 200) {
 								document.getElementById("imgUrl").value = data.data;
 								document.getElementById("classHonorIcon").setAttribute("src", severAddress + data.data)
@@ -233,7 +231,6 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							console.log(data);
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
@@ -262,7 +259,6 @@
 						type: 'post', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
-							// console.log(data);
 							if (data.code == 200) {
 								mui.openWindow({
 									id: 'index',
@@ -273,7 +269,6 @@
 							}
 						},
 						error: function(xhr, type, errorThrown) {
-							console.log(xhr);
 						}
 					});
 				}

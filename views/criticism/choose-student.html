@@ -147,7 +147,6 @@
 					for (var i = 0; i < strs.length; i++) {
 						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
 					}
-					console.log(theRequest)
 				}
 			}
 			
@@ -253,7 +252,6 @@
 				});
 				search.addEventListener('keypress', function(event) {
 					var str = document.getElementById("search").value;
-					console.log(str)
 					if (event.keyCode == 13) {
 						document.activeElement.blur(); //收起虚拟键盘
 						existingTeacher(str);
