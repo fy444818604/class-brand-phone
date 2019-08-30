@@ -9,35 +9,43 @@
 		<link href="../../css/public.css" rel="stylesheet" />
 		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
 		<style type="text/css">
-			.mui-content{
+			.mui-content {
 				height: 100vh;
 			}
-			.mui-content>ul{
+
+			.mui-content>ul {
 				height: calc(100% - 47px);
 				overflow: auto;
 			}
-			.mui-content>ul>li{
+
+			.mui-content>ul>li {
 				border-bottom: 1px solid #c8c7cc;
 				background: #FFFFFF;
 			}
-			.mui-btn-block{
+
+			.mui-btn-block {
 				margin-bottom: 0;
 			}
-			.school-list-img-wrap{
+
+			.school-list-img-wrap {
 				padding-bottom: 56%;
 				position: relative;
 			}
-			.school-list-img-wrap>img,.school-list-img-wrap>video{
+
+			.school-list-img-wrap>img,
+			.school-list-img-wrap>video {
 				position: absolute;
 				left: 0;
 				top: 0;
 				width: 100%;
 				height: 100%;
 			}
-			.school-list .mui-table-view-cell{
+
+			.school-list .mui-table-view-cell {
 				padding: 0;
 			}
-			.school-list .mui-table-cell{
+
+			.school-list .mui-table-cell {
 				display: inherit;
 			}
 		</style>
@@ -134,26 +142,26 @@
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
 			mui.init()
-<<<<<<< HEAD
-			var search = function(){
-				mui.ajax('/phone/propagandapage.do',{
-					data:{
-						token:window.localStorage.getItem('token')
-					},
-					dataType:'json',//服务器返回json格式数据
-					type:'get',//HTTP请求类型
-					timeout:10000,//超时时间设置为10秒；
-					success:function(data){
-						console.log(data)
-						var html = '';
-						var state = '';
-						for(var i = 0;i<data.data.length;i++){
-							if(data.data[i].stutas == '1'){
-								state = '../../img/school.png';
-							}else{
-								state = '../../img/school1.png';
-							}
-							html += `<li class="mui-table-view-cell" id="${data.data[i].propaganda_id}">
+			var search = function() {
+				mui.ajax('/phone/propagandapage.do', {
+						data: {
+							token: window.localStorage.getItem('token')
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							console.log(data)
+							var html = '';
+							var state = '';
+							for (var i = 0; i < data.data.length; i++) {
+								if (data.data[i].stutas == '1') {
+									state = '../../img/school.png';
+								} else {
+									state = '../../img/school1.png';
+								}
+								html +=
+									`<li class="mui-table-view-cell" id="${data.data[i].propaganda_id}">
 										<div class="mui-slider-right mui-disabled">
 											<a id="${data.data[i].propaganda_id}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 										</div>
@@ -165,94 +173,54 @@
 										<div class="school-list-wrap">
 											<div>${data.data[i].propaganda_name}</div>
 											<div class="school-list-img">`
-											
-							if(data.data[i].background_type == 1){
-								html += `<div class="school-list-img-wrap" style="background:${data.data[i].background_color}">`;
-							}else if(data.data[i].background_type == 2){
-								html += `<div class="school-list-img-wrap">
-									<img src="${'http://192.168.38.209:8080'+data.data[i].background_url}" alt="">`;
-							}else if(data.data[i].background_type == 3){
-								html += `<div class="school-list-img-wrap">
-									<video src="${'http://192.168.38.209:8080'+data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
-							}else{
-								html += `<div class="school-list-img-wrap">
+
+								if (data.data[i].background_type == 1) {
+									html += `<div class="school-list-img-wrap" style="background:${data.data[i].background_color}">`;
+								} else if (data.data[i].background_type == 2) {
+									html +=
+										`<div class="school-list-img-wrap">
+									<img src="${severAddress}${+data.data[i].background_url}" alt="">`;
+								} else if (data.data[i].background_type == 3) {
+									html +=
+										`<div class="school-list-img-wrap">
+									<video src="${severAddress}${+data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
+								} else {
+									html +=
+										`<div class="school-list-img-wrap">
 									<video src="${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
-							}
-							html +=`</div></div>
+								}
+								html +=
+									`</div></div>
 									<div class="flex justify-bet">
 										<div>${data.data[i].start_date} 至 ${data.data[i].end_date}</div>
 										<div>发布班牌${data.data[i].num}</div>
-									</div>
-=======
-			mui.ajax('/phone/propagandapage.do',{
-				data:{
-					token:window.localStorage.getItem('token')
-				},
-				dataType:'json',//服务器返回json格式数据
-				type:'get',//HTTP请求类型
-				timeout:10000,//超时时间设置为10秒；
-				success:function(data){
-					console.log(data)
-					var html = '';
-					var state = '';
-					for(var i = 0;i<data.data.length;i++){
-						if(data.data[i].stutas == '1'){
-							state = '../../img/school.png';
-						}else{
-							state = '../../img/school1.png';
-						}
-						html += `<li id="${data.data[i].propaganda_id}">
-									<div class="state-wrap">
-										<img class="state-img" src="${state}" alt="">
-									</div>
-									<div class="school-list-wrap">
-										<div>${data.data[i].propaganda_name}</div>
-										<div class="school-list-img">`
-										
-						if(data.data[i].background_type == 1){
-							html += `<div class="school-list-img-wrap" style="background:${data.data[i].background_color}">`;
-						}else if(data.data[i].background_type == 2){
-							html += `<div class="school-list-img-wrap">
-								<img src="${severAddress}${data.data[i].background_url}" alt="">`;
-						}else if(data.data[i].background_type == 3){
-							html += `<div class="school-list-img-wrap">
-								<video src="${severAddress}${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
-						}else{
-							html += `<div class="school-list-img-wrap">
-								<video src="${data.data[i].background_url}" autoplay="autoplay" loop="loop"></video>`;
-						}
-						html +=`</div></div>
-								<div class="flex justify-bet">
-									<div>${data.data[i].start_date} 至 ${data.data[i].end_date}</div>
-									<div>发布班牌${data.data[i].num}</div>
->>>>>>> 5d04471f4a84e7862f92b573e66ecf461a050e50
-								</div>
+									</div>	
 								</div>
 								</div>
 							</li>`;
 						}
 						document.querySelector('.mui-content ul').innerHTML = html;
 					},
-					error:function(xhr,type,errorThrown){
-						
+					error: function(xhr, type, errorThrown) {
+
 					}
 				});
 			}
 			search();
-			mui('.mui-content').on('tap','li',function(){
+			mui('.mui-content').on('tap', 'li', function() {
 				var id = this.getAttribute('id');
 				mui.openWindow({
 					id: 'index',
-					url: './detail.html?id='+id
+					url: './detail.html?id=' + id
 				});
 			})
-			document.querySelector('#school-issue').addEventListener('tap',function(){
+			document.querySelector('#school-issue').addEventListener('tap', function() {
 				mui.openWindow({
 					id: 'index1',
 					url: './add.html'
 				});
 			})
-			
+
 			mui(".school-list").on('tap', '.icon-del', function() {
 				var id = this.getAttribute("id");
 				var btnArray = ['否', '是'];
@@ -262,23 +230,23 @@
 					}
 				})
 			})
-			
-			var schoolListDel = function(id){
-				mui.ajax('/phone/delectpropagandadata.do',{
-					data:{
-						id:id
+
+			var schoolListDel = function(id) {
+				mui.ajax('/phone/delectpropagandadata.do', {
+					data: {
+						id: id
 					},
-					dataType:'json',//服务器返回json格式数据
-					type:'post',//HTTP请求类型
-					timeout:10000,//超时时间设置为10秒；
-					success:function(data){
-						if(data.code == 200){
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == 200) {
 							mui.alert('删除成功');
 							search()
 						}
 					},
-					error:function(xhr,type,errorThrown){
-						
+					error: function(xhr, type, errorThrown) {
+
 					}
 				});
 			}
