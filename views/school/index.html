@@ -151,6 +151,7 @@
 					type:'get',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
+						console.log(data)
 						var html = '';
 						var state = '';
 						for(var i = 0;i<data.data.length;i++){

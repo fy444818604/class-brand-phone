@@ -133,6 +133,7 @@
 				type:'get',//HTTP请求类型
 				timeout:10000,//超时时间设置为10秒；
 				success:function(data){
+					console.log(data)
 					var html = '';
 					var state = '';
 					document.querySelector('.mui-title').innerHTML = data.data.propagandaName
@@ -159,9 +160,6 @@
 										<video src="${severAddress}${data.data.backgroundUrl}" autoplay="autoplay" loop="loop"></video>`;
 								}
 							html +=`</div>
-									<div class="school-edit">
-										<i class="iconfont icon-edit"></i>
-									</div>
 								</div>
 								<div>
 									<div class="school-detail-row">
