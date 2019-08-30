@@ -183,21 +183,29 @@
 					});
 				}
 				if (window.localStorage.getItem('isCharge') == 1) {
-					mui.ajax('/phone/classdetail/selcetclassdetailbyid.do',{
-						data:{
+					mui.ajax('/phone/classdetail/selcetclassdetailbyid.do', {
+						data: {
 							classId: window.localStorage.getItem('classId'),
 							token: window.localStorage.getItem('token')
 						},
-						dataType:'json',//服务器返回json格式数据
-						type:'get',//HTTP请求类型
-						timeout:10000,//超时时间设置为10秒；
-						success:function(data){
-							if(data.code == 200){
-								document.querySelector('.class-left').innerHTML = `${data.data.classDetail.className}<i class="iconfont icon-arrow-down"></i>`
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(data) {
+							if (data.code == -3) {
+								mui.openWindow({
+									id: 'index',
+									url: 'views/login.html'
+								});
+								return;
+							}
+							if (data.code == 200) {
+								document.querySelector('.class-left').innerHTML =
+									`${data.data.classDetail.className}<i class="iconfont icon-arrow-down"></i>`
 							}
 						}
 					});
-					
+
 					mui(".card").on('tap', '.class-left', function() {
 						mui.openWindow({
 							id: 'index',
@@ -206,12 +214,12 @@
 					})
 				} else {
 					// mui.alert('你还不是班主任，请联系管理员');
-					mui.alert('您还不是班主任，请联系管理员设置您管理的班级','权限设置','知道了',function (e) {
-					   mui.openWindow({
-					   	id: 'login',
-					   	url: 'views/login.html'
-					   });
-					},'div')
+					mui.alert('您还不是班主任，请联系管理员设置您管理的班级', '权限设置', '知道了', function(e) {
+						mui.openWindow({
+							id: 'login',
+							url: 'views/login.html'
+						});
+					}, 'div')
 				}
 			})(mui);
 			mui("#notice").on('tap', '.notice', function() {
@@ -282,6 +290,13 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',
@@ -291,8 +306,7 @@
 							mui.alert(data.msg)
 						}
 					},
-					error: function(xhr, type, errorThrown) {
-					}
+					error: function(xhr, type, errorThrown) {}
 				});
 			}
 			var checkSchoolPassword = function(password) {
@@ -305,6 +319,13 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						if (data.code == 200) {
 							mui.openWindow({
 								id: 'index',
@@ -314,8 +335,7 @@
 							mui.alert(data.msg)
 						}
 					},
-					error: function(xhr, type, errorThrown) {
-					}
+					error: function(xhr, type, errorThrown) {}
 				});
 			}
 
@@ -328,14 +348,20 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						if (data.code == -3) {
+							mui.openWindow({
+								id: 'index',
+								url: '../login.html'
+							});
+							return;
+						}
 						if (data.data != null && data.data != "") {
 							document.querySelector('.classRnt').innerHTML = `<img src="img/home_icon_wechat.png" alt="" />已绑定`
 						} else {
 							document.querySelector('.classRnt').innerHTML = `<img src="img/home_icon_wechat.png" alt="" />未绑定`
 						}
 					},
-					error: function(xhr, type, errorThrown) {
-					}
+					error: function(xhr, type, errorThrown) {}
 				});
 			}
 
