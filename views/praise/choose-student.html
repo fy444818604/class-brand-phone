@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.indexedlist.css" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				overflow: hidden;
+			}
+			.mui-bar {
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			#done.mui-disabled{
+				color: gray;
+			}
+			.mui-indexed-list-bar{
+				display: none;
+			}
+			/*搜索*/
+			input[type=search]{
+				height: 44px;
+				line-height: 44px;
+				background: #FFFFFF;
+				border-radius: 0px;
+			}
+		
+			.mui-search .mui-placeholder {
+			    line-height: 44px;
+				height: 44px;
+			}
+			.mui-table-view-cell {
+			    padding: 11px 15px;
+			}
+			.mui-table-view-cell img{
+				width: 2.4rem;
+				height: 2.4rem;
+				border-radius: 50%;
+				vertical-align: middle;
+				margin-right: 0.87rem;
+			}
+			.mui-table-view-cell:after {
+			    left: 108px;
+			    height: 1px;
+			}
+			.mui-table-view-cell.mui-checkbox input[type=checkbox]{
+				top: 16.5px;	
+			}
+			
+			.htOvfl{
+				height: calc(100vh - 8.7rem);
+				overflow: auto;
+			}
+			/*按钮*/
+			.anniu{
+				position: fixed;
+				bottom: 0px;
+				left: 0px;
+				width: 100%;
+				height: 3.07rem;
+			}
+			.anniu button{
+				border-radius: 0px;
+				height: 100%;
+				font-size: 1.07rem;
+			}
+			.anniu .reset{
+				width: 32%;
+				background: #ebf3ff;
+				color: #3B8BFF;
+				border: 0.07rem solid #ebf3ff;
+			}
+			.anniu .mui-btn-primary{
+				width: 68%;
+				margin-left: -1.5%;
+			}
+			/* 添加样式 */
+			.class-top{
+				background: #F7F7F7;
+				height: 2rem;
+				line-height: 2rem;
+				padding: 0px 1.5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择个人</h1>
+		</header>
+		<div class="mui-content">
+			<div id="list" class="mui-indexed-list">
+				<div class="mui-indexed-list-search mui-input-row mui-search">
+					<input type="search" id="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索个人
+					">
+				</div>
+				<div class="mui-indexed-list-bar">
+				</div>
+				<div class="mui-indexed-list-alert"></div>
+				<div class="mui-indexed-list-inner">
+					<div class="mui-indexed-list-empty-alert">没有数据</div>
+					<div class="htOvfl">
+					<ul class="mui-table-view class-contentS" id="class-contentS">
+						<li class="">
+							<div class="class-top">
+								高二一班
+							</div>
+							<ul class="mui-table-view " id="OA_task_1">
+								<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+										<input type="checkbox" checked  value="" />
+										<img src=""/><span>杨同学</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					</div>
+				</div>
+				<!--按钮-->
+				<div class="anniu mui-row">
+					<button type="button" class="mui-btn reset">重置</button>
+					<button id="done" type="button" class="mui-btn mui-btn-primary ">确定</button>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			var workId = window.localStorage.getItem("workId");
+			var userHonorId = getQueryString("userHonorId");
+			var type = getQueryString("type");
+
+			mui.init();
+			
+			//参数接收
+			 function GetRequest() {
+				var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+					console.log(theRequest)
+				}
+			}
+			
+			
+			
+			
+			(function($) {
+				GetRequest();
+				existingTeacher('');
+			}(mui))
+			//查询现有学生接口
+			function existingTeacher(str) {
+				mui.ajax('/phone/selectuserobject.do', {
+					data: {
+						token: window.localStorage.getItem('token'),
+						nickName: str
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						if (data.code == 200) {
+							document.querySelector('#OA_task_1').innerHTML = '';
+							var con = data.data;
+							var html = '';
+							for (var i = 0; i < con.length; i++) {
+								var html ;
+								html += '<li>';
+								var list = con[i].users;
+								if(con[i].users != ''){
+									html +=
+											'<div class="class-top">'+con[i].className+'</div>';
+								}
+									html +=
+											'<ul class="mui-table-view " id="OA_task_1">'
+											for(var j=0;j<list.length;j++){
+											html +=	'	<li data-ids = "'+list[j].id+'" class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">'+
+												'<input data-text="'+list[j].text+'" type="checkbox" value="'+list[j].id+'" />'+
+												'<img src=""/>'+
+												'<span>'+list[j].text+'</span>'+
+												'</li>'
+											}
+											html +='</ul>';
+								
+								html +='</li>';
+							}
+							$('#class-contentS').html(html);
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+			}
+			
+			//获取参数
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				var q = window.location.pathname.substr(1).match(reg_rewrite);
+				if (r != null) {
+					return r[2];
+				} else if (q != null) {
+					return q[2];
+				} else {
+					return null;
+				}
+			}
+
+			mui.ready(function() {
+				var header = document.querySelector('header.mui-bar');
+				var list = document.getElementById('list');
+				var done = document.getElementById('done');
+				var search = document.getElementById('search');
+				//calc hieght
+				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+				//create
+				//				window.indexedList = new mui.IndexedList(list);
+				//点击完成
+				mui(".anniu").on('tap','#done',function(){
+					var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+					var theRequest = new Object();
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+					var level = theRequest.level;
+					var content =  theRequest.content
+					var remark =  theRequest.remark
+					var icon = theRequest.icon
+					var id=$("input[type='checkbox']:checked").val();
+					var text = $("input[type='checkbox']:checked").attr('data-text');
+					mui.openWindow({
+						id: 'index',
+						url: './add.html?id='+id+'&text=' + text+'&type=1&level='+level+'&content='+content+'&remark='+remark+'&icon='+icon
+					});
+				}) 
+				//统计完成数量
+				mui('.mui-indexed-list-inner').on('change', 'input', function() {
+					// $(this).
+				
+				});
+				search.addEventListener('keypress', function(event) {
+					var str = document.getElementById("search").value;
+					console.log(str)
+					if (event.keyCode == 13) {
+						document.activeElement.blur(); //收起虚拟键盘
+						existingTeacher(str);
+						event.preventDefault(); // 阻止默认事件---阻止页面刷新
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
