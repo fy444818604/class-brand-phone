@@ -74,27 +74,31 @@
 	}
 	
 	var submitData = function() {
-		mui.ajax('/phone/updatepublicannouncement.do', {
-			data: {
-				token: window.localStorage.getItem('token'),
-				systemAnnouncementId:systemAnnouncementId,
-				systemAnnouncementContent:$("#textarea").val(),
-				rolling:rolling,
-				check:check
-			},
-			dataType:'json',//服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			timeout: 10000, //超时时间设置为10秒；
-			success: function(data) {
-				if(data.code == 200){
-					mui.alert("发布成功")
-				}else{
-					mui.alert(data.msg)
+		if($("#textarea").val()!=""){
+			mui.ajax('/phone/updatepublicannouncement.do', {
+				data: {
+					token: window.localStorage.getItem('token'),
+					systemAnnouncementId:systemAnnouncementId,
+					systemAnnouncementContent:$("#textarea").val(),
+					rolling:rolling,
+					check:check
+				},
+				dataType:'json',//服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				success: function(data) {
+					if(data.code == 200){
+						mui.alert("发布成功")
+					}else{
+						mui.alert(data.msg)
+					}
+				},
+				error: function(xhr, type, errorThrown) {
 				}
-			},
-			error: function(xhr, type, errorThrown) {
-			}
-		});
+			});
+		}else{
+			mui.alert("请填写公告内容")
+		}
 	}
 	
 	mui.ready(function() {
