@@ -290,7 +290,7 @@
 						<div class="bg-tip">推荐</div>
 						<div>
 							<ul class="bg-img-list">
-								
+
 							</ul>
 						</div>
 					</div>
@@ -413,6 +413,7 @@
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
 		<script type="text/javascript">
 			(function($) {
 				mui.init();
@@ -620,8 +621,15 @@
 							if (src == '') {
 								mui.alert('请选择背景直播')
 							} else {
-								var html = `<video src="${src}" autoplay="autoplay" loop="loop"></video>`
+								var html = `<video id="online" autoplay="autoplay" loop="loop"></video>`
 								document.querySelector('.school-bg').innerHTML = html
+								var video = document.getElementById('online'); // 获取 video 标签
+								var hls = new Hls(); // 实例化 Hls 对象
+								hls.loadSource(src); // 传入路径
+								hls.attachMedia(video);
+								hls.on(Hls.Events.MANIFEST_PARSED, function() {
+									video.play(); // 调用播放 API
+								});
 							}
 							break;
 					}
@@ -653,8 +661,7 @@
 							}
 							document.querySelector('.bg-img-list').innerHTML = html
 						},
-						error: function(xhr, type, errorThrown) {
-						}
+						error: function(xhr, type, errorThrown) {}
 					});
 				}
 				// imgListSearch()
@@ -670,47 +677,45 @@
 						processData: false,
 						contentType: false,
 						cache: false,
-						success: function(data) {
-						},
-						error: function(xhr, type, errorThrown) {
-						}
+						success: function(data) {},
+						error: function(xhr, type, errorThrown) {}
 					});
 				}
 				document.querySelector('#school-issue-all').addEventListener('tap', function() {
 					var propagandaName = document.querySelector('#issue-name').value;
-					if(document.querySelector('#timeSelect').innerHTML.indexOf('-') == -1){
+					if (document.querySelector('#timeSelect').innerHTML.indexOf('-') == -1) {
 						var startTime = "";
-					}else{
+					} else {
 						var startTime = document.querySelector('#timeSelect').innerHTML
 					}
-					if(document.querySelector('#timeSelect1').innerHTML.indexOf('-') == -1){
+					if (document.querySelector('#timeSelect1').innerHTML.indexOf('-') == -1) {
 						var endTime = "";
-					}else{
+					} else {
 						var endTime = document.querySelector('#timeSelect1').innerHTML
 					}
-					if(document.querySelector('.top-input').value == ''){
+					if (document.querySelector('.top-input').value == '') {
 						var upTitle = "";
-					}else{
+					} else {
 						var upTitle = document.querySelector('#title-select').innerHTML
 					}
-					if(document.querySelector('.top-input1').value == ''){
+					if (document.querySelector('.top-input1').value == '') {
 						var mainTitle = "";
-					}else{
+					} else {
 						var mainTitle = document.querySelector('#title-select1').innerHTML
 					}
-					if(document.querySelector('.top-input2').value == ''){
+					if (document.querySelector('.top-input2').value == '') {
 						var downTitle = ""
-					}else{
+					} else {
 						var downTitle = document.querySelector('#title-select2').innerHTML
 					}
-					if(document.querySelector('.top-input3').value == ''){
+					if (document.querySelector('.top-input3').value == '') {
 						var countDownTitle = ""
-					}else{
+					} else {
 						var countDownTitle = document.querySelector('#title-select3').innerHTML
 					}
-					if(document.querySelector('#timeSelect2').innerHTML.indexOf('-') == -1){
+					if (document.querySelector('#timeSelect2').innerHTML.indexOf('-') == -1) {
 						var countDownEndTime = ""
-					}else{
+					} else {
 						var countDownEndTime = document.querySelector('#timeSelect2').innerHTML
 					}
 					var backgroundType = 1
@@ -768,8 +773,7 @@
 							success: function(data) {
 								console.log(data)
 							},
-							error: function(xhr, type, errorThrown) {
-							}
+							error: function(xhr, type, errorThrown) {}
 						});
 					} else {
 						var form = new FormData();
@@ -797,12 +801,12 @@
 							success: function(data) {
 								console.log(data)
 							},
-							error: function(xhr, type, errorThrown) {
-							}
+							error: function(xhr, type, errorThrown) {}
 						});
 					}
 				})
 			})(mui);
+
 			function objectData() {
 				console.log(window.localStorage.getItem('token'))
 				mui.ajax('/phone/selectboard.do', {
@@ -843,8 +847,7 @@
 						nianji();
 						nianji12();
 					},
-					error: function(xhr, type, errorThrown) {
-					}
+					error: function(xhr, type, errorThrown) {}
 				});
 			}
 			objectData()
@@ -905,6 +908,7 @@
 					document.querySelector("#obj-select").dataset.values = boardIds.join(',')
 				}
 			})
+
 			function allchk() {
 				var chknum = $(".obje-grade-class-li").length; //选项总个数
 				var chk = $(".liAktv").length;
