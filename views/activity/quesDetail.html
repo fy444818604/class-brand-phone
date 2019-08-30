@@ -104,7 +104,6 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
 			<h1 class="mui-title">问卷详情</h1>
 		</header>
 		<div class="mui-content">
@@ -130,7 +129,7 @@
 			<div class="option-wrap">
 				<div class="single">多选</div>
 				<div class="ques-list">
-
+					
 				</div>
 				<!-- <div class="flex justify-bet option-title">
 					<div>1.你认为校园建设的重点在于</div>
@@ -207,7 +206,7 @@
 					token: window.localStorage.getItem('token'),
 					activeId: id
 				},
-				async: false,
+				async:false,
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -215,8 +214,7 @@
 					console.log(data)
 					var value = data.data;
 					type = value.activeType
-					var html =
-						`<div class="active-detail-title">
+					var html = `<div class="active-detail-title">
 									<span>${value.activeTitile}</span>
 									<span class="${value.activeLevel == 1?'school':''}">${value.activeLevel == 1?'校':'班'}</span>
 									<span class="${value.state == 1?'':'stateEnd'}">${value.state == 1?'进行中':'已结束'}</span>
@@ -234,69 +232,67 @@
 									${value.activeContent}
 								</div>`
 					document.querySelector('.active-detail-top').innerHTML = html
-					document.querySelector('.option-btm>div').innerHTML = value.endTime.substring(5, 16) + "截止";
-					document.querySelector('.single').innerHTML = value.choose == 1 ? '单选' : '多选'
+					document.querySelector('.option-btm>div').innerHTML = value.endTime.substring(5,16)+"截止";
+					document.querySelector('.single').innerHTML = value.choose==1?'单选':'多选'
 				},
 				error: function(xhr, type, errorThrown) {
-
+		
 				}
 			});
 		}
-		var search1 = function(id) {
+		var search1 = function(id){
 			console.log(id)
-			mui.ajax('/phone/questiontitle/selectlistbyactiveid.do', {
-				data: {
+			mui.ajax('/phone/questiontitle/selectlistbyactiveid.do',{
+				data:{
 					token: window.localStorage.getItem('token'),
-					activeId: id
+					activeId:id
 				},
-				dataType: 'json', //服务器返回json格式数据
-				type: 'post', //HTTP请求类型
-				timeout: 10000, //超时时间设置为10秒；
-				success: function(data) {
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:10000,//超时时间设置为10秒；
+				success:function(data){
 					console.log(data)
 					var value = data.data;
 					var html = '';
-					for (var i = 0; i < data.data.length; i++) {
-						html +=
-							`<div class="flex justify-bet option-title">
+					for(var i = 0;i<data.data.length;i++){
+						html += `<div class="flex justify-bet option-title">
 									<div>${i+1}.${value[i].qestionTitileContent}</div>
 								</div>
 								<ul class="option-list">`
-						for (var x = 0; x < data.data[i].optionList.length; x++) {
-							html +=
-								`<li>
+						for(var x = 0;x<data.data[i].optionList.length;x++){
+							html += `<li>
 										<a href="#" id="${value[i].optionList[x].qestionTitileOptionId}">
 											<div>${value[i].optionList[x].qestionTitileOptionContent}</div>
 											<div>${value[i].optionList[x].total}人</div>
 										</a>
 									</li>`
-						}
-						html += `</ul>`
+						}			
+						html +=	`</ul>`
 					}
 					document.querySelector('.ques-list').innerHTML = html;
-					document.querySelector('.option-btm>a').innerHTML = data.data[0].totalUser + "人参与";
+					document.querySelector('.option-btm>a').innerHTML = data.data[0].totalUser+"人参与";
 				},
-				error: function(xhr, type, errorThrown) {
-
+				error:function(xhr,type,errorThrown){
+					
 				}
 			});
 		}
 		mui.ready(function() {
 			//活动id
-			var id = window.location.href.split('id=')[1].replace('#', '');
+			var id = window.location.href.split('id=')[1].replace('#','');
 			search(id)
 			search1(id)
 			mui(".ques-list").on('tap', 'a', function(event) {
 				var quesId = this.getAttribute("id")
 				mui.openWindow({
 					id: 'index',
-					url: './peoCheck.html?id=' + quesId + '&type=' + type
+					url: './peoCheck.html?id='+quesId+'&type='+type
 				});
 			})
 			mui(".option-btm").on('tap', 'a', function(event) {
 				mui.openWindow({
 					id: 'index',
-					url: './detailCheck.html?id=' + id + '&type=' + type
+					url: './detailCheck.html?id='+id+'&type='+type
 				});
 			})
 		})

@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
-		<link href="../../../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../../../css/mui.indexedlist.css" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.indexedlist.css" />
 		<style>
 			html,
 			body {
@@ -79,17 +79,24 @@
 				width: 68%;
 				margin-left: -1.5%;
 			}
+			/* 添加样式 */
+			.class-top{
+				background: #F7F7F7;
+				height: 2rem;
+				line-height: 2rem;
+				padding: 0px 1.5rem;
+			}
 		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">选择班委</h1>
+			<h1 class="mui-title">选择个人</h1>
 		</header>
 		<div class="mui-content">
 			<div id="list" class="mui-indexed-list">
 				<div class="mui-indexed-list-search mui-input-row mui-search">
-					<input type="search" id="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索班委
+					<input type="search" id="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索个人
 					">
 				</div>
 				<div class="mui-indexed-list-bar">
@@ -98,65 +105,96 @@
 				<div class="mui-indexed-list-inner">
 					<div class="mui-indexed-list-empty-alert">没有数据</div>
 					<div class="htOvfl">
-						<ul class="mui-table-view " id="OA_task_1">
-						</ul>
+					<ul class="mui-table-view class-contentS" id="class-contentS">
+						<li class="">
+							<div class="class-top">
+								高二一班
+							</div>
+							<ul class="mui-table-view " id="OA_task_1">
+								<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
+										<input type="checkbox" checked  value="" />
+										<img src=""/><span>杨同学</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
 					</div>
-
 				</div>
 				<!--按钮-->
 				<div class="anniu mui-row">
 					<button type="button" class="mui-btn reset">重置</button>
-					<button id="done" type="button" class="mui-btn mui-btn-primary mui-disabled">确定</button>
+					<button id="done" type="button" class="mui-btn mui-btn-primary ">确定</button>
 				</div>
 			</div>
 		</div>
-		<script src="../../../js/mui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			var workId = window.localStorage.getItem("workId");
 			var userHonorId = getQueryString("userHonorId");
 			var type = getQueryString("type");
 
 			mui.init();
+			
+			//参数接收
+			 function GetRequest() {
+				var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+					console.log(theRequest)
+				}
+			}
+			
+			
+			
+			
 			(function($) {
+				GetRequest();
 				existingTeacher('');
 			}(mui))
 			//查询现有学生接口
 			function existingTeacher(str) {
-				mui.ajax('/phone/user/selectstudentlistbyclassid.do', {
+				mui.ajax('/phone/selectuserobject.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						classId: window.localStorage.getItem('classId'),
-						q: str
+						nickName: str
 					},
 					dataType: 'json', //服务器返回json格式数据
-					type: 'get', //HTTP请求类型
+					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						// console.log(data.data)
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
-							var html = document.querySelector('#OA_task_1').innerHTML;
 							var con = data.data;
+							var html = '';
 							for (var i = 0; i < con.length; i++) {
-								if (workId == con[i].id) {
+								var html ;
+								html += '<li>';
+								var list = con[i].users;
+								if(con[i].users != ''){
 									html +=
-										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-												<input type="checkbox" checked  value="${con[i].id}" />
-												<img src="${severAddress}${con[i].face}"/><span>${con[i].text}</span>
-											</li>`
-									document.getElementById('done').classList.remove("mui-disabled");
-								} else {
-									html +=
-										`<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">
-												<input type="checkbox"  value="${con[i].id}" />
-												<img src="${severAddress}${con[i].face}"/><span>${con[i].text}</span>
-										</li>`
-
+											'<div class="class-top">'+con[i].className+'</div>';
 								}
-
+									html +=
+											'<ul class="mui-table-view " id="OA_task_1">'
+											for(var j=0;j<list.length;j++){
+											html +=	'	<li data-ids = "'+list[j].id+'" class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left">'+
+												'<input data-text="'+list[j].text+'" type="checkbox" value="'+list[j].id+'" />'+
+												'<img src=""/>'+
+												'<span>'+list[j].text+'</span>'+
+												'</li>'
+											}
+											html +='</ul>';
+								
+								html +='</li>';
 							}
-							document.querySelector('#OA_task_1').innerHTML = html
+							$('#class-contentS').html(html);
 						}
 					},
 					error: function(xhr, type, errorThrown) {
@@ -180,7 +218,6 @@
 				}
 			}
 
-
 			mui.ready(function() {
 				var header = document.querySelector('header.mui-bar');
 				var list = document.getElementById('list');
@@ -191,47 +228,33 @@
 				//create
 				//				window.indexedList = new mui.IndexedList(list);
 				//点击完成
-				done.addEventListener('tap', function() {
-					var checkedValues = [];
-					var checkedText = [];
-					mui('#OA_task_1>li').each(function(i, v) {
-						if (v.childNodes[1].checked) {
-							checkedValues.push(v.childNodes[1].value);
-							checkedText.push(v.childNodes[4].innerHTML)
-						}
-					})
-					if (checkedValues.length > 0 && checkedText.length > 0) {
-						window.localStorage.setItem('nickName', checkedText[0])
-						window.localStorage.setItem('workId', checkedValues[0])
-						mui.openWindow({
-							id: 'userHonorAdd',
-							url: 'userHonorAdd.html?type='+type+'&userHonorId=' + userHonorId
-						});
-					} else {
-						mui.alert('你没有选择对象');
+				mui(".anniu").on('tap','#done',function(){
+					var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+					var theRequest = new Object();
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
 					}
-
-
-
-				}, false);
+					var level = theRequest.level;
+					var content =  theRequest.content
+					var remark =  theRequest.remark
+					var icon = theRequest.icon
+					var id=$("input[type='checkbox']:checked").val();
+					var text = $("input[type='checkbox']:checked").attr('data-text');
+					mui.openWindow({
+						id: 'index',
+						url: './add.html?id='+id+'&text=' + text+'&type=1&level='+level+'&content='+content+'&remark='+remark+'&icon='+icon
+					});
+				}) 
 				//统计完成数量
 				mui('.mui-indexed-list-inner').on('change', 'input', function() {
-					var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
-					var value = count ? "确定(" + count + ")" : "确定";
-					done.innerHTML = value;
-					if (count) {
-						if (done.classList.contains("mui-disabled")) {
-							done.classList.remove("mui-disabled");
-						}
-					} else {
-						if (!done.classList.contains("mui-disabled")) {
-							done.classList.add("mui-disabled");
-						}
-					}
+					// $(this).
+				
 				});
-
 				search.addEventListener('keypress', function(event) {
 					var str = document.getElementById("search").value;
+					console.log(str)
 					if (event.keyCode == 13) {
 						document.activeElement.blur(); //收起虚拟键盘
 						existingTeacher(str);

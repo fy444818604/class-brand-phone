@@ -92,7 +92,7 @@
 			    	<div class="theClass-left">
 			    		级别
 			    	</div>
-					<div class="theClass-rnt"><a href="#picture">请选择级别</a></div>
+					<div class="theClass-rnt"><a href="#picture" id="level">请选择级别</a></div>
 			    	<div><a class="mui-navigate-right"></a></div>
 			    </li>
 				<li class="mui-table-view-cell flex objetAdd">
@@ -123,36 +123,59 @@
 				发布
 			</div>
 		</div>
+		<!--级别弹出层-->
 		<div id="picture" class="mui-popover mui-popover-action ">
-		    <ul class="mui-table-view top"> 
-		        <li class="mui-table-view-cell">
-		            <a href="#"  id="2">班级发布</a>
-		        </li>
-		        <li class="mui-table-view-cell">
-		            <a href="#"  id="1">校级发布</a>
-		        </li>
-		    </ul>
-		     <ul class="mui-table-view">
-		        <li class="mui-table-view-cell">
-		            <a href="#picture" style="color: #3b8bff;"><b>取消</b></a>
-		        </li>
-		    </ul>
+			<ul class="mui-table-view top">
+				<li class="mui-table-view-cell">
+					<a href="#" data-type="2">班级发布</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" data-type="1">校级发布</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture" style="color: #3b8bff;"><b>取消</b></a>
+				</li>
+			</ul>
 		</div>
 		<script src="../../js/jquery.min.js"></script>
 		<script src="../../js/mui.js"></script>
 		<script type="text/javascript">
-			var thie_level = 2;
-			mui.init()
+			var this_level = 2;
+			var recognitionObjectType = 1;
+			mui.init();
+			var objId;
+			//参数接收
+			 function GetRequest() {
+				var url =decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+					 objId = theRequest.id;
+					 $('.jonsData').text(theRequest.text).css('color', '#000')
+					 this_level=theRequest.level;
+					 recognitionObjectType = theRequest.type;
+					 $('#level').text(this_level == 1 ? "校" : "班").css('color', '#3b8bff'),
+					 $('#recognitionContent').val(theRequest.content)
+					 $('#recognitionRemark').val(theRequest.remark)
+				}
+			}
+			GetRequest();
 			
 			
-			//弹框取值赋值
-			mui('#picture').on('tap', '.top>li>a', function() {
-				$('.theClass-rnt a').text(this.innerHTML).css('color','#3b8bff');
-				thie_level = $(this).attr("id");
-				$('#picture>ul>li>a').css('color','#303133')
-				$(this).css('color','#3b8bff');
-				mui("#picture").popover('toggle');
-			})
+				//弹框取值赋值
+				mui('#picture').on('tap', '.top>li>a', function() {
+					$('#level').text(this.dataset.type == 1 ? "校" : "班").css('color', '#3b8bff'),
+						this_level = this.dataset.type;
+					$('#picture>ul>li>a').css('color', '#303133')
+					$(this).css('color', '#3b8bff');
+					mui("#picture").popover('toggle');
+				})
 			
 			mui('.add-criticism').on('tap', '.add', function() {
 				save();
@@ -163,9 +186,9 @@
 				mui.ajax('/phone/insertbulletin.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						recognitionLevel: thie_level,
-						recognitionObject:'0BB4568175E44238821AA605700294F3',
-						recognitionObjectType:1,
+						recognitionLevel: this_level,
+						recognitionObject:objId,
+						recognitionObjectType:recognitionObjectType,
 						recognitionContent:$('#recognitionContent').val(),
 						recognitionRemark:$('#recognitionRemark').val(),
 						type:2
@@ -174,7 +197,6 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						console.log(data)
 						if (data.code == 200) {
 							window.location.href = './index.html';
 						}else{
@@ -186,6 +208,30 @@
 					}
 				});
 			}
+			
+			mui.ready(function() {
+				//选择对象
+				document.querySelector('.objetAdd').addEventListener('tap', function() {
+					var btnArray = ['班级', '个人'];
+					
+					mui.confirm('请选择表彰对象', null, btnArray, function(e) {
+						var level = this_level;
+						var content = $('#recognitionContent').val();
+						var remark = $('#recognitionRemark').val();
+						if (e.index == 0) {
+							mui.openWindow({
+								id: 'choose-class',
+								url: './choose-class.html'
+							});
+						}else{
+							mui.openWindow({
+								id: 'index',
+								url: './choose-student.html?level='+level+'&content='+content+'&remark='+remark
+							});
+						}
+					})
+				})
+			})
 			
 		</script>
 	</body>

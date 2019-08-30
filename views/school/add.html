@@ -181,22 +181,12 @@
 			.mui-popover .mui-icon-clear{
 				top: 42px!important;
 			}
-			.objTchu{
-				z-index: 999;
-			}
-			.obje-bnt-rnt{
-				height: 3.7rem;
-				text-align: center;
-				line-height: 3.7rem;
-				font-size: 1rem;
-			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
 			<h1 class="mui-title">发校宣</h1>
 		</header>
 		<div class="mui-content">
@@ -219,7 +209,7 @@
 					</div>
 					<div class="mui-input-row">
 						<label>对象</label>
-						<a href="#objTchu" id="obj-select">请选择对象</a>
+						<a href="#level">请选择对象</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 					<div class="mui-input-row">
@@ -257,6 +247,39 @@
 				</div>
 			</div>
 			<button type="button" id="school-issue-all" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
+		</div>
+		<div id="mode" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">单选</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">多选，最多两项</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">多选，无限制</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#mode"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<div id="level" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">班级</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">校级</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#level"><b>取消</b></a>
+				</li>
+			</ul>
 		</div>
 		<div id="bg-select" class="mui-popover">
 			<header class="mui-bar mui-bar-nav">
@@ -402,32 +425,6 @@
 				<a href="#down-title" id="top-confirm3" class="mui-btn mui-btn-primary mui-btn-block" style="position: absolute;bottom: 0;">确定</a>
 			</div>
 		</div>
-		<!-- 对象弹出层 -->
-		<div class="objTchu mui-popover" id="objTchu">
-			<header class="mui-bar mui-bar-nav">
-				<header class="mui-bar mui-bar-nav">
-					<a class="mui-icon mui-icon-left-nav mui-pull-left" href="#objTchu"></a>
-					<h1 class="mui-title">选择对象</h1>
-				</header>
-			</header>
-			<div class="mui-content obje-content">
-				<div class="obje-content-content">
-					<div class="obje-generations">
-						<div class="mui-input-row mui-checkbox  mui-left parent-input">
-							<label style="text-align: left;">全选</label>
-							<input id="parent-input" name="zhege " type="checkbox">
-						</div>
-					</div>
-					<ul id="grade" class="obje-grade">
-					</ul>
-				</div>
-				<div class="obje-bnt flex">
-					<div class="obje-bnt-left">重置</div>
-					<a href="#objTchu" class="obje-bnt-rnt">确定<a>
-				</div>
-			</div>
-		</div>
-		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script type="text/javascript">
@@ -629,17 +626,17 @@
 							document.querySelector('.school-bg').innerHTML = '';
 							break;
 						case 2:
-							if (document.querySelector('.video-wrap').innerHTML.trim() == '') {
+							if(document.querySelector('.video-wrap').innerHTML.trim() == ''){
 								mui.alert('请选择背景视频')
-							} else {
+							}else{
 								document.querySelector('.school-bg').innerHTML = document.querySelector('.video-wrap').innerHTML;
 							}
 							break;
 						case 3:
 							var src = document.querySelector('.live-input').value.trim();
-							if (src == '') {
+							if(src == ''){
 								mui.alert('请选择背景直播')
-							} else {
+							}else{
 								var html = `<video src="${src}" autoplay="autoplay" loop="loop"></video>`
 								document.querySelector('.school-bg').innerHTML = html
 							}
@@ -655,19 +652,18 @@
 					})
 					return value;
 				}
-
-				var imgListSearch = function() {
-					mui.ajax('/phone/selectbackgroundurlbyphone.do', {
-						dataType: 'json', //服务器返回json格式数据
-						type: 'get', //HTTP请求类型
-						timeout: 10000, //超时时间设置为10秒；
-						success: function(data) {
+				
+				var imgListSearch = function(){
+					mui.ajax('http://192.168.38.98:8080/phone/selectbackgroundurlbyphone.do',{
+						dataType:'json',//服务器返回json格式数据
+						type:'get',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
 							console.log(data)
 							var html = '';
-							for (var i = 0; i < data.data.length; i++) {
-								html +=
-									`<li>
-											<img src="${'http://192.168.38.209:8080'+data.data[i].background_url}" alt="">
+							for(var i =0;i<data.data.length;i++){
+								html += `<li>
+											<img src="${severAddress}${data.data[i].background_url}" alt="">
 											<div class="img-select">
 												<img src="../../img/select.png" alt="">
 											</div>
@@ -675,38 +671,40 @@
 							}
 							document.querySelector('.bg-img-list').innerHTML = html
 						},
-						error: function(xhr, type, errorThrown) {
-
+						error:function(xhr,type,errorThrown){
+							
 						}
 					});
 				}
 				imgListSearch()
-				var imgUpload = function(file) {
+				
+				var imgUpload = function(file){
 					console.log(file)
 					var form = new FormData();
-					form.append('file', file)
+					form.append('file',file)
 					// form.append('token',window.location.getItem('token'))
-					mui.ajax('/phone/uploadbackground.do', {
-						data: form,
-						dataType: 'json', //服务器返回json格式数据
-						type: 'post', //HTTP请求类型
-						timeout: 10000, //超时时间设置为10秒；
+					mui.ajax('/phone/uploadbackground.do',{
+						data:form,
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
 						processData: false,
-						contentType: false,
+						contentType:false,
 						cache: false,
-						success: function(data) {
+						success:function(data){
 							console.log(data)
 						},
-						error: function(xhr, type, errorThrown) {
-
+						error:function(xhr,type,errorThrown){
+							
 						}
 					});
 				}
-
-				document.querySelector('#school-issue-all').addEventListener('tap', function() {
-					var propagandaName = document.querySelector('#issue-name').value;
+				
+				document.querySelector('#school-issue-all').addEventListener('tap',function(){
+					var propagandaName = document.querySelector('#issue-name').innerHTML
 					var startTime = document.querySelector('#timeSelect').innerHTML
 					var endTime = document.querySelector('#timeSelect1').innerHTML
+<<<<<<< HEAD
 					
 					var upTitle = document.querySelector('#title-select').innerHTML
 					var mainTitle = document.querySelector('#title-select1').innerHTML
@@ -805,136 +803,11 @@
 						});
 					}
 
+=======
+					console.log(startTime)
+>>>>>>> 15bfdfd51f501e2226113ad8126515d8656993ea
 				})
 			})(mui);
-
-			function objectData() {
-				console.log(window.localStorage.getItem('token'))
-				mui.ajax('/phone/selectboard.do', {
-					data: {
-						token: window.localStorage.getItem('token'),
-						level: 1
-					},
-					dataType: 'json', //服务器返回json格式数据
-					type: 'post', //HTTP请求类型
-					timeout: 10000, //超时时间设置为10秒；
-					success: function(data) {
-						var con = data;
-						$('#grade').empty();
-						var html = "";
-						for (var i = 0; i < con.length; i++) {
-							var obj = con[i];
-							html += '<li data-id = "' + obj.id + '">';
-							if (obj.grade != "") {
-								html +=
-									'<div class="mui-input-row mui-checkbox mui-left subset-input">' +
-									'	<label style="text-align: left;">"' + con[i].name + '"</label>' +
-									'	<input name="zhege " type="checkbox" >' +
-									'</div>';
-							}
-							var list = obj.list;
-
-							html +=
-								'<ul class="obje-grade-class flex">'
-							for (var j = 0; j < list.length; j++) {
-								html += '	<li data-ids = "' + list[j].id + '" class="obje-grade-class-li">' +
-									'		<div>' + list[j].name + '</div>' +
-									'	</li>'
-							}
-							html += '</ul>';
-
-							html += '</li>';
-						}
-						document.querySelector('#grade').innerHTML = html;
-						claDIAN();
-						nianji();
-						nianji12();
-					},
-					error: function(xhr, type, errorThrown) {
-
-					}
-				});
-			}
-			objectData()
-			var boardIds = [];
-			var boardNames = [];
-			//点击班级
-			function claDIAN() {
-				$('.obje-grade-class-li').click(function() {
-					if ($(this).hasClass('liAktv')) {
-						$(this).removeClass('liAktv')
-					} else {
-						$(this).addClass('liAktv');
-					}
-					var li = $(this).parent('ul').find('li').length;
-					var liAktv = $(this).parent('ul').find('.liAktv').length;
-					if (li == liAktv) {
-						$(this).parent('ul').siblings('div').find('input').prop('checked', true)
-					} else {
-						$(this).parent('ul').siblings('div').find('input').prop('checked', false)
-					}
-					allchk();
-				})
-			}
-			//设置全选复选框
-			function nianji() {
-				$("#grade :checkbox").click(function() {
-					allchk();
-				});
-			}
-			//年级全选
-			function nianji12() {
-				mui('.subset-input').on('change', 'input', function() {
-					if (this.checked ? "true" : "false" == true) {
-						$(this).parent('div').siblings('ul').find('li').addClass('liAktv')
-					} else {
-						$(this).parent('div').siblings('ul').find('li').removeClass('liAktv')
-					}
-				});
-			}
-			//重置
-			$(".obje-bnt-left").on("tap", function() {
-				$('input:checked').prop('checked', false)
-				$('.obje-grade-class-li').removeClass('liAktv')
-			})
-
-			//确定
-			$('.obje-bnt-rnt').on('tap', function() {
-				$('.liAktv').each(function() {
-					boardIds.push($(this).attr('data-ids'));
-					boardNames.push($(this).find('div').text());
-					objTchu.style.display = 'none';
-				});
-				if (boardIds.length <= 0) {
-					mui.alert('请选择一项或多项')
-				} else {
-					boardNames = [...new Set(boardNames)]
-					boardIds = [...new Set(boardIds)]
-					document.querySelector("#obj-select").innerHTML = boardNames[0] + "等" + boardNames.length + "个班牌";
-					document.querySelector("#obj-select").dataset.values = boardIds.join(',')
-				}
-			})
-
-			function allchk() {
-				var chknum = $(".obje-grade-class-li").length; //选项总个数
-				var chk = $(".liAktv").length;
-
-				if (chknum == chk) { //全选
-					$("#parent-input").prop("checked", true);
-				} else { //不全选
-					$("#parent-input").prop("checked", false);
-				}
-			}
-			//父级全选/父级反选
-			mui('.parent-input').on('change', 'input', function() {
-				if (this.checked ? "true" : "false" == true) {
-					$("#grade :checkbox").prop("checked", true);
-					$('.obje-grade-class-li').addClass('liAktv')
-				} else {
-					$("#grade :checkbox").prop("checked", false);
-					$('.obje-grade-class-li').removeClass('liAktv')
-				}
-			});
 		</script>
 	</body>
 
