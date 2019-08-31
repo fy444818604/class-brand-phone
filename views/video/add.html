@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>发视频</title>
 		<link href="../../css/mui.css" rel="stylesheet" />
-		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
+		<link rel="stylesheet" href="../../fonts/font_1065627_jhxyseritsp/iconfont.css">
 		<link href="../../css/public.css" rel="stylesheet" />
 		<style type="text/css">
 			.mui-bar-nav~.mui-content {
@@ -56,6 +56,7 @@
 			/*正文/标题*/
 			.theInput {
 				margin-top: 0.87rem;
+				height: calc(100vh - 14.55rem);
 			}
 
 			input[type=text] {
@@ -93,6 +94,7 @@
 			/*视频*/
 			.shiPing {
 				position: relative;
+				height: 12.933rem;
 				width: 100%;
 				margin-top: 0.8rem;
 			}
@@ -117,6 +119,7 @@
 				color: #888;
 				background: url(../../img/beijingUP.png)no-repeat;
 				background-size: 100% 100%;
+				border: 1px solid #ddd;
 				border-radius: 4px;
 				overflow: hidden;
 				display: inline-block;
@@ -186,7 +189,7 @@
 			}
 
 			.mui-content-cont {
-				height: calc(100vh - 7.3rem);
+				height: calc(100vh - 6.66rem);
 				background: #FFFFFF;
 				padding: 0rem 1rem;
 			}
@@ -233,7 +236,7 @@
 			}
 
 			.grade {
-				height: calc(100vh - 11rem);
+				height: calc(100vh - 7.9rem);
 				overflow: auto;
 			}
 
@@ -264,17 +267,6 @@
 				background: #E7f1ff;
 				color: #3B8BFF;
 			}
-			.shiPing-div{
-				padding-top: 56%;
-				position: relative;
-			}
-			.shiPing-div-div{
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				width: 100%;
-				height: 100%;
-			}
 
 			/*按钮*/
 			.bnt>div {
@@ -294,6 +286,24 @@
 				background: #3b8bff;
 				color: #FFFFFF;
 			}
+			.mui-content{
+				height: 100vh;
+			}
+			.video-detail-wrap{
+				height: calc(100vh - 101px);
+				overflow: auto;
+			}
+			
+			.objTchu{
+				z-index: 999;
+				position: absolute;
+			}
+			.bnt-rnt{
+				height: 3.7rem;
+				text-align: center;
+				line-height: 3.7rem;
+				font-size: 1rem;
+			}
 		</style>
 	</head>
 	<body>
@@ -303,63 +313,60 @@
 			<h1 class="mui-title">发布视频</h1>
 		</header>
 		<div class="mui-content add-notice">
-			<!--班级/对象-->
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell flex">
-					<div class="theClass-left">
-						级别
-					</div>
-					<div class="theClass-rnt"><a href="#picture" id="level">请选择级别</a></div>
-					<div><a class="mui-navigate-right"></a></div>
-
-				</li>
-				<li class="mui-table-view-cell flex objetAdd">
-					<div class="theClass-left">
-						对象
-					</div>
-					<div class="theClass-rnt jonsData">请选择对象</div>
-					<div><a class="mui-navigate-right"></a></div>
-				</li>
-			</ul>
-			<!--标题/正文-->
-			<ul class="mui-table-view theInput">
-				<li class="mui-table-view-cell flex">
-					<div class="theClass-left">视频</div>
-					<div class="shiPing">
-						<div class="shiPing-div">
-							<div class="shiPing-div-div">
-								<!--上传按钮-->
-								<a href="javascript:;" class="a-upload" id="a-upload">
-									<input class="form-control" type="file" accept="video/mp4" value="上传" style="height:100%; " id="video" name="video" />
-								</a>
-								<!--展示视频-->
-								<div class="shiPing-cont">
-									<video style="width: 100%; height: 100%;" src="../../img/7004e5f1e64f882b26149f87ea610d8d.mp4" id="video0"></video>
-									<i id="icon-close" class="iconfont icon-close"></i>
-									<div class="bofang">
-										<i id="iconvideo_" class="iconfont iconvideo_"></i>
-									</div>
+			<div class="video-detail-wrap">
+				<!--班级/对象-->
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell flex">
+						<div class="theClass-left">
+							级别
+						</div>
+						<div class="theClass-rnt"><a href="#picture" id="level">请选择级别</a></div>
+						<div><a class="mui-navigate-right"></a></div>
+				
+					</li>
+					<li class="mui-table-view-cell flex objetAdd">
+						<div class="theClass-left">
+							对象
+						</div>
+						<a class="theClass-rnt jonsData" style="color:#c0c4cc">请选择对象</a>
+						<div><a class="mui-navigate-right"></a></div>
+					</li>
+				</ul>
+				<!--标题/正文-->
+				<ul class="mui-table-view theInput">
+					<li class="mui-table-view-cell flex">
+						<div class="theClass-left">视频</div>
+						<div class="shiPing">
+							<!--上传按钮-->
+							<a href="javascript:;" class="a-upload" id="a-upload">
+								<input class="form-control" type="file" accept="video/mp4" value="上传" style="height:100%; " id="video" name="video" />
+							</a>
+							<!--展示视频-->
+							<div class="shiPing-cont">
+								<video style="width: 100%; height: 100%;" src="../../img/7004e5f1e64f882b26149f87ea610d8d.mp4" id="video0"></video>
+								<i id="icon-close" class="iconfont icon-close"></i>
+								<div class="bofang">
+									<i id="iconvideo_" class="iconfont iconvideo_"></i>
 								</div>
 							</div>
-							
 						</div>
-					</div>
-				</li>
-				<li class="mui-table-view-cell" style="background: #FFFFFF;">
-					<div class="theClass-left">说明</div>
-					<div>
-						<textarea maxlength="256" id="content" rows="5" cols="5" contenteditable="true" placeholder="请输入正文内容"></textarea>
-					</div>
-				</li>
-			</ul>
+					</li>
+					<li class="mui-table-view-cell" style="background: #FFFFFF;">
+						<div class="theClass-left">说明</div>
+						<div>
+							<textarea maxlength="256" id="content" rows="5" cols="5" contenteditable="true" placeholder="请输入正文内容"></textarea>
+						</div>
+					</li>
+				</ul>
+			</div>
 			<div class="add">
 				发布
 			</div>
 		</div>
 		<!-- 对象弹出层 -->
-		<div class="objTchu">
+		<div class="objTchu mui-popover" id="objTchu">
 			<header class="mui-bar mui-bar-nav">
-				<a href="add.html" class=" mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" href="#objTchu"></a>
 				<h1 class="mui-title">选择对象</h1>
 			</header>
 			<div class="mui-content">
@@ -375,7 +382,7 @@
 				</div>
 				<div class="bnt flex">
 					<div class="bnt-left">重置</div>
-					<div class="bnt-rnt">确定</div>
+					<a href="#objTchu" class="bnt-rnt">确定</a>
 				</div>
 			</div>
 		</div>
@@ -400,8 +407,8 @@
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
 		<script type="text/javascript" charset="utf-8">
-			mui.init();
 			var level = 0;
+			mui.init();
 			var boardIds;
 			var formData = new FormData();
 			var insert = function() {
@@ -455,10 +462,15 @@
 			mui.ready(function() {
 				//弹框取值赋值
 				mui('#picture').on('tap', '.top>li>a', function() {
-					$('#level').text(this.dataset.type == 1 ? "校" : "班").css('color', '#3b8bff'),
+					if(level!=this.dataset.type){
 						level = this.dataset.type;
-					$('#picture>ul>li>a').css('color', '#303133')
-					$(this).css('color', '#3b8bff');
+						$('#level').text(this.dataset.type == 1 ? "校" : "班").css('color', '#3b8bff'),
+						$('#picture>ul>li>a').css('color', '#303133')
+						$(this).css('color', '#3b8bff');
+						boardIds = "";
+						$('.jonsData').text("请选择对象").css('color', '#c0c4cc');
+						objectData();
+					}
 					mui("#picture").popover('toggle');
 				})
 
@@ -468,8 +480,7 @@
 
 				document.querySelector('.objetAdd').addEventListener('tap', function() {
 					if (level != 0) {
-						$('.objTchu').css('display', 'block');
-						objectData();
+						mui('#objTchu').popover('toggle')
 					} else {
 						mui.alert("请先选择发布级别")
 					}
@@ -567,8 +578,6 @@
 						$('.grade-class-li').removeClass('liAktv')
 
 						claDIAN();
-						/* nianji();
-						nianji12 (); */
 					},
 					error: function(xhr, type, errorThrown) {
 
@@ -646,8 +655,8 @@
 				});
 				if (data == '') {
 					mui.alert('请选择一项或多项')
+					$('.jonsData').text("请选择对象").css('color', '#c0c4cc');
 				} else {
-					$('.objTchu').css('display', 'none');
 					var lastIndex = s.lastIndexOf(',');
 					if (lastIndex > -1) {
 						ids = s.substring(0, lastIndex) + s.substring(lastIndex + 1, s.length);

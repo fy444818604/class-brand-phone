@@ -134,9 +134,9 @@
 		</div>
 		<div id="signadd" class="sloganAdd mui-popover">
 			<header class="mui-bar mui-bar-nav">
-				<a id="cancel" href="#signadd" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<a href="#signadd" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">编辑口号</h1>
-				<a class="mui-btn determine  mui-btn-link mui-pull-right  ">完成</a>
+				<a href="#signadd" class="mui-btn determine  mui-btn-link mui-pull-right">完成</a>
 			</header>
 			<div class="sloganAdd-cont mui-input-row">
 				<textarea name="" id="textarea" cols="30" rows="5" placeholder="输入班级口号"></textarea>
@@ -161,14 +161,8 @@
 			className.innerText = window.localStorage.getItem('classNameT');
 			sloganCont.innerText = window.localStorage.getItem('classSlogan');
 
-			//编辑
-			document.getElementById('add-slogsan').addEventListener('tap', function() { /*tap表示单击屏幕，此处可换双击，滑动等等事件*/
-				$('.sloganAdd').show();
-			});
-			//取消
-			document.getElementById('cancel').addEventListener('tap', function() { /*tap表示单击屏幕，此处可换双击，滑动等等事件*/
-				$('.sloganAdd').hide();
-			});
+		
+			
 			//确定
 			mui(".sloganAdd").on('tap', '.determine', function() {
 				var addVal = $('.sloganAdd-cont textarea').val();
@@ -194,7 +188,7 @@
 								return;
 							}
 							if (data.code == 200) {
-
+								// document.querySelector('.mui-backdrop').style.display = 'none'
 							}else{
 								mui.alert("设置失败");
 							}

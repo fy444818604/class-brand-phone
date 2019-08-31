@@ -55,6 +55,7 @@
 			/*正文/标题*/
 			.theInput {
 				margin-top: 0.87rem;
+				height: calc(100vh - 14.55rem);
 			}
 
 			input[type=text] {
@@ -93,17 +94,25 @@
 				width: 70%;
 				color: #3B8BFF;
 			}
-			.paLi{
+
+			.picture {
+				height: 61pt;
+				width: 108pt;
+				float: left;
+			}
+
+			.flex>li {
 				width: 33.33%;
+				height: 50px;
 				text-align: center;
 				margin-top: 1.3%;
 			}
-			.paLi>img{
-				width: 96%;
-				padding-top: 20%;
-				margin-top: -20%;
-			}
 
+			.flex>li>img {
+				width: 96%;
+				height: 100%;
+
+			}
 
 			.objTchu {
 				position: fixed;
@@ -196,7 +205,7 @@
 				line-height: 4.08rem;
 				text-align: center;
 			}
-	
+
 			/*按钮*/
 			.bnt>div {
 				height: 3.7rem;
@@ -219,7 +228,7 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
-			<h1 class="mui-title">图片详情</h1>
+			<h1 class="mui-title">发布图片</h1>
 		</header>
 		<div class="mui-content add-notice">
 			<!--班级/对象-->
@@ -243,7 +252,7 @@
 				<li class="mui-table-view-cell flex">
 					<div class="theClass-left">图片</div>
 					<ul id="images" class="flex">
-						
+
 
 					</ul>
 				</li>
@@ -322,8 +331,8 @@
 						var html = "";
 						for (var i = 0; i < value.length; i++) {
 							html +=
-								`<li class='paLi'>
-							<img class="picture" src="${severAddress}${value[i]}"></img>
+								`<li>
+								<img class="picture" src="${severAddress}${value[i]}"></img>
 							</li>`
 						}
 						document.querySelector('#images').innerHTML = html
@@ -397,6 +406,7 @@
 			mui.ready(function() {
 				//活动id
 				var id = window.location.href.split('id=')[1].replace('#', '');
+				search(id)
 				document.querySelector('.objetAdd').addEventListener('tap', function() {
 					$('.objTchu').css('display', 'block');
 				})
