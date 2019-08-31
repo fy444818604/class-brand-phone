@@ -128,12 +128,12 @@
 					<div class="describe-title flex">
 						<div><label>表彰事项</label></div>
 						<div>
-							<input id="classHonorName" class="mui-input-clear" type="text" placeholder="请输入表彰事项">
+							<input id="classHonorName" class="mui-input-clear" maxlength="100"  type="text" placeholder="请输入表彰事项">
 						</div>
 					</div>
 					<div class="" style="margin-top: 1.033rem;">
 						<label>表彰说明</label>
-						<textarea class="textarea" id="classHonorRemark" rows="10" cols="30" contenteditable="true" placeholder="请输入表彰说明内容"></textarea>
+						<textarea class="textarea" id="classHonorRemark" maxlength="200" rows="10" cols="30" contenteditable="true" placeholder="请输入表彰说明内容"></textarea>
 					</div>
 				</div>
 			</div>
@@ -219,6 +219,22 @@
 
 			//添加、编辑班级荣誉	
 			function operateClassHonor() {
+				
+				if(!notBlank(classHonorRemark.value)){
+					mui.alert("请输入表彰说明");
+					return;
+				}
+				
+				if(!notBlank(classHonorName.value)){
+					mui.alert("请输入表彰事项");
+					return;
+				}	
+				
+				if(!notBlank(document.getElementById("imgUrl").value)){
+					mui.alert("请选择表彰图标");
+					return;
+				}
+					
 				if (notBlank(classHonorId)) {
 					mui.ajax('/phone/classhonor/update.do', {
 						data: {
