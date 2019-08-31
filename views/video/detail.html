@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>发视频</title>
+		<title>发图片</title>
 		<link href="../../css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../fonts/font_1065627_jhxyseritsp/iconfont.css">
 		<link href="../../css/public.css" rel="stylesheet" />
@@ -93,6 +93,25 @@
 			.theClass-level {
 				width: 70%;
 				color: #3B8BFF;
+			}
+
+			.picture {
+				height: 61pt;
+				width: 108pt;
+				float: left;
+			}
+
+			.flex>li {
+				width: 33.33%;
+				height: 50px;
+				text-align: center;
+				margin-top: 1.3%;
+			}
+
+			.flex>li>img {
+				width: 96%;
+				height: 100%;
+
 			}
 
 			.objTchu {
@@ -200,13 +219,16 @@
 				background: #3b8bff;
 				color: #FFFFFF;
 			}
+			#images{
+				width: calc(100% - 4.6rem);
+			}
 		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
-			<h1 class="mui-title">发布视频</h1>
+			<h1 class="mui-title">发布图片</h1>
 		</header>
 		<div class="mui-content add-notice">
 			<!--班级/对象-->
@@ -227,7 +249,7 @@
 			</ul>
 			<!--标题/正文-->
 			<ul class="mui-table-view theInput">
-				<li class="mui-table-view-cell flex">
+			<li class="mui-table-view-cell flex">
 					<div class="theClass-left">视频</div>
 					<div id="video">
 
@@ -263,7 +285,7 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 			var search = function(id) {
-				mui.ajax(severAddress + '/phone/selectnoticedetail.do', {
+				mui.ajax('/phone/selectnoticedetail.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						id: id
@@ -288,7 +310,7 @@
 
 					}
 				});
-				mui.ajax(severAddress + '/phone/selectvideodetail.do', {
+				mui.ajax('/phone/selectvideodetail.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						id: id
@@ -298,22 +320,21 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
-						if (data.code == -3) {
-							mui.openWindow({
-								id: 'index',
-								url: '../login.html'
-							});
-							return;
-						}
-						var value = data.data;
-						document.querySelector('#video').innerHTML =
-							`<video style="width:160pt;height:120pt" src="http://192.168.38.98:8080/${value}" autoplay="autoplay" controls="controls"></video>`
+							if (data.code == -3) {
+								mui.openWindow({
+									id: 'index',
+									url: '../login.html'
+								});
+								return;
+							}
+							var value = data.data;
+							document.querySelector('#video').innerHTML = `<video style="width:160pt;height:120pt" src="http://192.168.38.98:8080/${value}" autoplay="autoplay" controls="controls"></video>`;
 					},
 					error: function(xhr, type, errorThrown) {
 
 					}
 				});
-				mui.ajax(severAddress + '/phone/selectboardsbyannouncementid.do', {
+				mui.ajax('/phone/selectboardsbyannouncementid.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
 						id: id

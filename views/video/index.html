@@ -164,7 +164,7 @@
 												<div class="">
 													<video src="${severAddress}${con[i].video}" controls="controls"  width="100%" height="193"></video>
 												</div>
-												<div class="" style="margin-top: 0.1rem;">
+												<div class="video-name" style="margin-top: 0.1rem;" data-id="${con[i].id}">
 													${con[i].text}
 												</div>
 												<p >
@@ -221,7 +221,7 @@
 												<div class="">
 													<video src="${severAddress}${con[i].video}" controls="controls"  width="100%" height="193"></video>
 												</div>
-												<div class="" style="margin-top: 0.1rem;">
+												<div class="video-name" style="margin-top: 0.1rem;" data-id="${con[i].id}">
 													${con[i].text}
 												</div>
 												<p >
@@ -301,7 +301,7 @@
 							}
 						})
 					})
-					mui(".mui-content").on('tap', '.mui-table-view-cell', function(event) {
+					mui(".mui-content").on('tap', '.video-name', function(event) {
 						var id = this.dataset.id
 						mui.openWindow({
 							id: 'index',
