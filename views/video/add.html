@@ -293,6 +293,17 @@
 				height: calc(100vh - 101px);
 				overflow: auto;
 			}
+			
+			.objTchu{
+				z-index: 999;
+				position: absolute;
+			}
+			.bnt-rnt{
+				height: 3.7rem;
+				text-align: center;
+				line-height: 3.7rem;
+				font-size: 1rem;
+			}
 		</style>
 	</head>
 	<body>
@@ -317,7 +328,7 @@
 						<div class="theClass-left">
 							对象
 						</div>
-						<div class="theClass-rnt jonsData">请选择对象</div>
+						<a class="theClass-rnt jonsData" style="color:#c0c4cc">请选择对象</a>
 						<div><a class="mui-navigate-right"></a></div>
 					</li>
 				</ul>
@@ -353,9 +364,9 @@
 			</div>
 		</div>
 		<!-- 对象弹出层 -->
-		<div class="objTchu">
+		<div class="objTchu mui-popover" id="objTchu">
 			<header class="mui-bar mui-bar-nav">
-				<a class="mui-icon mui-icon-left-nav mui-pull-left" id="close-objTchu"></a>
+				<a class="mui-icon mui-icon-left-nav mui-pull-left" href="#objTchu"></a>
 				<h1 class="mui-title">选择对象</h1>
 			</header>
 			<div class="mui-content">
@@ -371,7 +382,7 @@
 				</div>
 				<div class="bnt flex">
 					<div class="bnt-left">重置</div>
-					<div class="bnt-rnt">确定</div>
+					<a href="#objTchu" class="bnt-rnt">确定</a>
 				</div>
 			</div>
 		</div>
@@ -451,10 +462,15 @@
 			mui.ready(function() {
 				//弹框取值赋值
 				mui('#picture').on('tap', '.top>li>a', function() {
-					$('#level').text(this.dataset.type == 1 ? "校" : "班").css('color', '#3b8bff'),
+					if(level!=this.dataset.type){
 						level = this.dataset.type;
-					$('#picture>ul>li>a').css('color', '#303133')
-					$(this).css('color', '#3b8bff');
+						$('#level').text(this.dataset.type == 1 ? "校" : "班").css('color', '#3b8bff'),
+						$('#picture>ul>li>a').css('color', '#303133')
+						$(this).css('color', '#3b8bff');
+						boardIds = "";
+						$('.jonsData').text("请选择对象").css('color', '#c0c4cc');
+						objectData();
+					}
 					mui("#picture").popover('toggle');
 				})
 
@@ -464,8 +480,7 @@
 
 				document.querySelector('.objetAdd').addEventListener('tap', function() {
 					if (level != 0) {
-						$('.objTchu').css('display', 'block');
-						objectData();
+						mui('#objTchu').popover('toggle')
 					} else {
 						mui.alert("请先选择发布级别")
 					}
@@ -563,8 +578,6 @@
 						$('.grade-class-li').removeClass('liAktv')
 
 						claDIAN();
-						/* nianji();
-						nianji12 (); */
 					},
 					error: function(xhr, type, errorThrown) {
 
@@ -642,8 +655,8 @@
 				});
 				if (data == '') {
 					mui.alert('请选择一项或多项')
+					$('.jonsData').text("请选择对象").css('color', '#c0c4cc');
 				} else {
-					$('.objTchu').css('display', 'none');
 					var lastIndex = s.lastIndexOf(',');
 					if (lastIndex > -1) {
 						ids = s.substring(0, lastIndex) + s.substring(lastIndex + 1, s.length);
@@ -652,10 +665,6 @@
 						$('.jonsData').text(boardName).css('color', '#000');
 					}
 				}
-			})
-
-			$('#close-objTchu').on('tap', function() {
-				$('.objTchu').css('display', 'none');
 			})
 		</script>
 	</body>
