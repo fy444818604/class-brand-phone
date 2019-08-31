@@ -215,6 +215,17 @@
 
 		//添加/编辑
 		function operateTeacher(subjectName) {
+			
+			if(!notBlank(workId)){
+				mui.alert("请选择对象");
+				return;
+			}
+			
+			if(!notBlank(subjectName)){
+				mui.alert("请选择学科");
+				return;
+			}	
+			
 			if (notBlank(classTeacherId)) {
 				mui.ajax('/phone/classteacher/update.do', {
 					data: {
