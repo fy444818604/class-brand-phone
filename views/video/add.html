@@ -56,7 +56,6 @@
 			/*正文/标题*/
 			.theInput {
 				margin-top: 0.87rem;
-				height: calc(100vh - 14.55rem);
 			}
 
 			input[type=text] {
@@ -94,7 +93,6 @@
 			/*视频*/
 			.shiPing {
 				position: relative;
-				height: 12.933rem;
 				width: 100%;
 				margin-top: 0.8rem;
 			}
@@ -119,7 +117,6 @@
 				color: #888;
 				background: url(../../img/beijingUP.png)no-repeat;
 				background-size: 100% 100%;
-				border: 1px solid #ddd;
 				border-radius: 4px;
 				overflow: hidden;
 				display: inline-block;
@@ -189,7 +186,7 @@
 			}
 
 			.mui-content-cont {
-				height: calc(100vh - 6.66rem);
+				height: calc(100vh - 7.3rem);
 				background: #FFFFFF;
 				padding: 0rem 1rem;
 			}
@@ -236,7 +233,7 @@
 			}
 
 			.grade {
-				height: calc(100vh - 7.9rem);
+				height: calc(100vh - 11rem);
 				overflow: auto;
 			}
 
@@ -266,6 +263,17 @@
 			.liAktv>div {
 				background: #E7f1ff;
 				color: #3B8BFF;
+			}
+			.shiPing-div{
+				padding-top: 56%;
+				position: relative;
+			}
+			.shiPing-div-div{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
 			}
 
 			/*按钮*/
@@ -318,17 +326,22 @@
 				<li class="mui-table-view-cell flex">
 					<div class="theClass-left">视频</div>
 					<div class="shiPing">
-						<!--上传按钮-->
-						<a href="javascript:;" class="a-upload" id="a-upload">
-							<input class="form-control" type="file" accept="video/mp4" value="上传" style="height:100%; " id="video" name="video" />
-						</a>
-						<!--展示视频-->
-						<div class="shiPing-cont">
-							<video style="width: 100%; height: 100%;" src="../../img/7004e5f1e64f882b26149f87ea610d8d.mp4" id="video0"></video>
-							<i id="icon-close" class="iconfont icon-close"></i>
-							<div class="bofang">
-								<i id="iconvideo_" class="iconfont iconvideo_"></i>
+						<div class="shiPing-div">
+							<div class="shiPing-div-div">
+								<!--上传按钮-->
+								<a href="javascript:;" class="a-upload" id="a-upload">
+									<input class="form-control" type="file" accept="video/mp4" value="上传" style="height:100%; " id="video" name="video" />
+								</a>
+								<!--展示视频-->
+								<div class="shiPing-cont">
+									<video style="width: 100%; height: 100%;" src="../../img/7004e5f1e64f882b26149f87ea610d8d.mp4" id="video0"></video>
+									<i id="icon-close" class="iconfont icon-close"></i>
+									<div class="bofang">
+										<i id="iconvideo_" class="iconfont iconvideo_"></i>
+									</div>
+								</div>
 							</div>
+							
 						</div>
 					</div>
 				</li>
@@ -346,6 +359,7 @@
 		<!-- 对象弹出层 -->
 		<div class="objTchu">
 			<header class="mui-bar mui-bar-nav">
+				<a href="add.html" class=" mui-icon mui-icon-left-nav mui-pull-left"></a>
 				<h1 class="mui-title">选择对象</h1>
 			</header>
 			<div class="mui-content">
