@@ -29,12 +29,6 @@
 		</header>
 		<div class="mui-content">
 			<div class="mui-input-group">
-				<div class="mui-input-row mt12">
-					<label>滚动公告开关</label>
-					<div class="mui-switch mui-switch-blue mui-switch-mini mui-active" id="mySwitch">
-						<div class="mui-switch-handle"></div>
-					</div>
-				</div>
 				<div class="mui-input-row Hauto">
 					<div>公告内容</div>
 					<textarea id="textarea" rows="5" placeholder="请输入公告内容详情"></textarea>
@@ -117,13 +111,13 @@
 			check = window.location.href.split('check=')[1].replace('#', '');
 			getData();
 			// mui("#mySwitch").switch().toggle();
-			document.querySelector('.mui-switch').addEventListener('toggle', function(event) {
-				if (event.detail.isActive) {
-					rolling = 1
-				} else {
-					rolling = 2
-				}
-			});
+			// document.querySelector('.mui-switch').addEventListener('toggle', function(event) {
+			// 	if (event.detail.isActive) {
+			// 		rolling = 1
+			// 	} else {
+			// 		rolling = 2
+			// 	}
+			// });
 
 			document.querySelector('.push').addEventListener('tap', function() {
 				submitData();

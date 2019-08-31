@@ -8,7 +8,7 @@
 		<link href="../../css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
 		<link href="../../css/public.css" rel="stylesheet" />
-		<link rel="stylesheet" href="//at.alicdn.com/t/font_1065627_xs9ose09vdn.css">
+		<link rel="stylesheet" href="../../fonts/font_1065627_jhxyseritsp/iconfont.css">
 		<style>
 			.Hauto>div{
 				padding: 11px 15px;
@@ -100,6 +100,12 @@
 			#showQues{
 				padding-left: 1rem;
 			}
+			.obje-bnt-rnt{
+				height: 3.7rem;
+				text-align: center;
+				line-height: 3.7rem;
+				font-size: 1rem;
+			}
 		</style>
 	</head>
 
@@ -119,7 +125,7 @@
 					</div>
 					<div class="mui-input-row objetAdd">
 						<label>对象</label>
-						<a href="#" id="boardName">请选择对象</a>
+						<a id="boardName">请选择对象</a>
 						<span class="mui-icon mui-icon-forward"></span>
 					</div>
 				</div>
@@ -189,9 +195,9 @@
 			</ul>
 		</div>
 		<!-- 对象弹出层 -->
-		<div class="objTchu" id="objTchu">
+		<div class="objTchu mui-popover" id="objTchu">
 			<header class="mui-bar mui-bar-nav">
-				<a class=" mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="#objTchu"></a>
 				<h1 class="mui-title">选择对象</h1>
 			</header>
 			<div class="mui-content obje-content">
@@ -207,7 +213,7 @@
 				</div>
 				<div class="obje-bnt flex">
 					<div class="obje-bnt-left">重置</div>
-					<div class="obje-bnt-rnt">确定</div>
+					<a href="#objTchu" class="obje-bnt-rnt">确定</a>
 				</div>
 			</div>
 		</div>
@@ -262,6 +268,7 @@
 
 			(function($) {
 				mui.init();
+				objectData();
 				var result = document.querySelector('#timeSelect');
 				result.addEventListener('tap', function() {
 					var _self = this;
@@ -331,8 +338,8 @@
 									return;
 								}
 								if (data.code == 200) {
-									objTchu.style.display = 'block';
-									objectData();
+									// objTchu.style.display = 'block';
+									mui('#objTchu').popover('toggle')
 								} else {
 									mui.alert(data.msg)
 								}
@@ -342,6 +349,7 @@
 							}
 						});
 					} else {
+						// objTchu.style.display = 'none';
 						mui.alert("请选择级别");
 					}
 

@@ -234,7 +234,7 @@
 					var count = list.querySelectorAll('input[type="radio"]:checked').length;
 					console.log(count)
 
-				var count = list.querySelectorAll('input[type="radio"]:checked').length;
+					var count = list.querySelectorAll('input[type="radio"]:checked').length;
 
 					var value = count ? "确定" : "确定";
 					done.innerHTML = value;
@@ -257,8 +257,20 @@
 						event.preventDefault(); // 阻止默认事件---阻止页面刷新
 					}
 				});
-				resetR.addEventListener('tap', function() {
 
+				resetR.addEventListener('tap', function() {
+					var list = document.querySelectorAll('input[type="radio"]');
+					for (var i = 0; i < list.length; i++) {
+						var obj = list[i];
+						console.log()
+						if (obj.checked) {
+							obj.checked = false;
+						}
+					}
+					var count = document.querySelectorAll('input[type="radio"]:checked').length;
+					if (count <= 0) {
+						done.classList.add("mui-disabled");
+					}
 				})
 			});
 		</script>
