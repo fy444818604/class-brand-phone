@@ -90,7 +90,7 @@ body {
 
 .set-title-card-left {
 	margin-right: 1.23rem;
-	width:40%;
+	width: 40%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -230,6 +230,7 @@ body {
 .mui-input-row label {
 	padding: 11px 15px;
 }
+
 /*布局*/
 .obje-generations {
 	padding-top: 1rem;
@@ -262,10 +263,12 @@ body {
 	line-height: 4.08rem;
 	text-align: center;
 }
+
 .liAktv>div {
 	background: #E7f1ff;
 	color: #3B8BFF;
 }
+
 /*按钮*/
 .obje-bnt>div {
 	height: 3.7rem;
@@ -295,10 +298,20 @@ body {
 	display: none;
 
 }
+
 /*超出*/
-.beyond{
+.beyond {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 15%;
+}
+
+/* IOS文本框无法输入 */
+input {
+	-webkit-user-select: auto !important;
+}
+/* IOS文本域无法输入 */
+textarea {
+	-webkit-user-select: auto !important;
 }
