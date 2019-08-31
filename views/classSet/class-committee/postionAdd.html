@@ -264,6 +264,17 @@
 
 		//添加/编辑
 		function operateClassCadre(postion) {
+			
+			if(!notBlank(workId)){
+				mui.alert("请选择对象");
+				return;
+			}
+			
+			if(!notBlank(postion)){
+				mui.alert("请选择职位");
+				return;
+			}	
+			
 			if (notBlank(classCadresId)) {
 				mui.ajax('/phone/classcadres/update.do', {
 					data: {

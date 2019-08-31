@@ -26,8 +26,6 @@
 			.classHonuours {
 				padding: 1rem 1.07rem 0rem 1.07rem;
 				background: #FFFFFF;
-				height: calc(100vh - 6.263rem);
-
 			}
 
 			.classHonuours-icon {
@@ -137,12 +135,12 @@
 					<div class="describe-title flex">
 						<div><label>表彰事项</label></div>
 						<div>
-							<input id="userHonorName" class="mui-input-clear" type="text" placeholder="请输入表彰事项" />
+							<input id="userHonorName" max="50" class="mui-input-clear" type="text" placeholder="请输入表彰事项" />
 						</div>
 					</div>
 					<div class="" style="margin-top: 1.033rem;">
 						<label>表彰说明</label>
-						<textarea class="textarea" id="userHonorRemark" rows="8" cols="8" contenteditable="true" placeholder="请输入表彰说明内容"></textarea>
+						<textarea class="textarea" id="userHonorRemark" maxlength="200" rows="8" cols="8" contenteditable="true" placeholder="请输入表彰说明内容"></textarea>
 					</div>
 				</div>
 			</div>
@@ -247,6 +245,27 @@
 
 			//添加、编辑个人荣誉
 			function operateUserHonor() {
+				
+				if (!notBlank(window.localStorage.getItem('workId'))) {
+					mui.alert("请选择对象");
+					return;
+				}
+				
+				if (!notBlank(userHonorName.value)) {
+					mui.alert("请输入表彰事项");
+					return;
+				}
+
+				if (!notBlank(userHonorRemark.value)) {
+					mui.alert("请输入表彰说明");
+					return;
+				}
+				
+				if (!notBlank( document.getElementById("imgUrl").value)) {
+					mui.alert("请上传表彰图标");
+					return;
+				}
+				
 				if (notBlank(userHonorId)) {
 					mui.ajax('/phone/userhonor/update.do', {
 						data: {
