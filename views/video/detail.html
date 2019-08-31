@@ -55,7 +55,6 @@
 			/*正文/标题*/
 			.theInput {
 				margin-top: 0.87rem;
-				height: calc(100vh - 14.55rem);
 			}
 
 			input[type=text] {
@@ -222,6 +221,18 @@
 			#images{
 				width: calc(100% - 4.6rem);
 			}
+			#video{
+				position: relative;
+				padding-top: 56%;
+				width: 100%;
+			}
+			#video>video{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+			}
 		</style>
 	</head>
 	<body>
@@ -250,9 +261,9 @@
 			<!--标题/正文-->
 			<ul class="mui-table-view theInput">
 			<li class="mui-table-view-cell flex">
-					<div class="theClass-left">视频</div>
+					<div class="theClass-left" style="width: 100%;">视频</div>
 					<div id="video">
-
+						<video style="width:160pt;height:120pt" src="http://192.168.38.98:8080/${value}" autoplay="autoplay" controls="controls"></video>
 
 					</div>
 				</li>
@@ -328,7 +339,7 @@
 								return;
 							}
 							var value = data.data;
-							document.querySelector('#video').innerHTML = `<video style="width:160pt;height:120pt" src="http://192.168.38.98:8080/${value}" autoplay="autoplay" controls="controls"></video>`;
+							document.querySelector('#video').innerHTML = `<video  src="http://192.168.38.98:8080/${value}" autoplay="autoplay" controls="controls"></video>`;
 					},
 					error: function(xhr, type, errorThrown) {
 
