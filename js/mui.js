@@ -7,8 +7,13 @@
  * MUI核心JS
  * @type _L4.$|Function
  */
+<<<<<<< HEAD
 var severAddress='http://192.168.10.59:8099'
 // var severAddress='http://192.168.38.98:8080'
+=======
+
+var severAddress='http://192.168.38.98:8080'
+>>>>>>> 538ddd643d4afd77c10b8d7a2ea50ab535c3136c
 
 var mui = (function(document, undefined) {
 	var readyRE = /complete|loaded|interactive/;
