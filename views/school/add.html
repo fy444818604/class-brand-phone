@@ -108,6 +108,9 @@
 				height: 100vh;
 				border-radius: 0!important;
 			}
+			#bg-select>.mui-bar-nav,#top-title>.mui-bar-nav,#main-title>.mui-bar-nav,#bottom-title>.mui-bar-nav,#down-title>.mui-bar-nav{
+				border-radius: 0!important;
+			}
 			.bg-img-upload-wrap{
 				position: relative;
 				padding-bottom: 56%;
@@ -138,10 +141,9 @@
 				height: 21px;
 			}
 			.bg-tab-wrap{
-				padding: 0 16px;
 				border-top: 1px solid #c8c7cc;
 				height: calc(100vh - 131px);
-				overflow: auto;
+				position: relative;
 			}
 			.bg-tip{
 				color: #909399;
@@ -190,6 +192,10 @@
 				line-height: 3.7rem;
 				font-size: 1rem;
 			}
+			/* .bg-tab-wrap>div{
+				padding: 0 16px;
+				height: 100%;
+			} */
 		</style>
 	</head>
 
@@ -259,65 +265,72 @@
 			<button type="button" id="school-issue-all" class="mui-btn mui-btn-primary mui-btn-block">发布</button>
 		</div>
 		<div id="bg-select" class="mui-popover">
-			<header class="mui-bar mui-bar-nav">
-				<a class="mui-icon mui-icon-left-nav mui-pull-left" href="#bg-select"></a>
-				<h1 class="mui-title">背景设置</h1>
-			</header>
-			<div class="mui-content fourth" style="background-color: #FFFFFF;">
-				<div>
-					<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
-						<a class="mui-control-item mui-active" href="#item1">
-							<span>图片</span>
-						</a>
-						<a class="mui-control-item" href="#item2">
-							<span>颜色</span>
-						</a>
-						<a class="mui-control-item" href="#item3">
-							<span>视频</span>
-						</a>
-						<a class="mui-control-item" href="#item4">
-							<span>直播</span>
-						</a>
-					</div>
-				</div>
-				<div class="bg-tab-wrap">
-					<div id="item1" class="mui-control-content mui-active">
-						<div class="bg-tip">上传</div>
-						<label for="bg-img-upload" class="bg-img-upload-wrap">
-							<i class="iconfont icon-add"></i>
-							<input type="file" id="bg-img-upload">
-						</label>
-						<div class="bg-tip">推荐</div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<header class="mui-bar mui-bar-nav">
+						<a class="mui-icon mui-icon-left-nav mui-pull-left" href="#bg-select"></a>
+						<h1 class="mui-title">背景设置</h1>
+					</header>
+					<div class="mui-content fourth" style="background-color: #FFFFFF;height: auto;">
 						<div>
-							<ul class="bg-img-list">
-
-							</ul>
-						</div>
-					</div>
-					<div id="item2" class="mui-control-content">
-						<div class="picker" id="color-picker"></div>
-					</div>
-					<div id="item3" class="mui-control-content">
-						<div class="bg-tip">上传</div>
-						<label for="bg-video-upload" class="bg-img-upload-wrap" id="video-upload">
-							<i class="iconfont icon-add"></i>
-							<input type="file" id="bg-video-upload">
-						</label>
-						<div class="video-wrap">
-
-						</div>
-					</div>
-					<div id="item4" class="mui-control-content">
-						<div class="mui-input-group">
-							<div class="mui-input-row mt12">
-								<label>地址</label>
-								<input type="text" class="live-input" placeholder="请输入直播地址">
+							<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+								<a class="mui-control-item mui-active" href="#item1">
+									<span>图片</span>
+								</a>
+								<a class="mui-control-item" href="#item2">
+									<span>颜色</span>
+								</a>
+								<a class="mui-control-item" href="#item3">
+									<span>视频</span>
+								</a>
+								<a class="mui-control-item" href="#item4">
+									<span>直播</span>
+								</a>
 							</div>
 						</div>
+						<div class="bg-tab-wrap">
+							<div id="item1" class="mui-control-content mui-active">
+								<div class="bg-tip">上传</div>
+								<label for="bg-img-upload" class="bg-img-upload-wrap">
+									<i class="iconfont icon-add"></i>
+									<input type="file" id="bg-img-upload">
+								</label>
+								<div class="bg-tip">推荐</div>
+								<div>
+									<ul class="bg-img-list">
+							
+									</ul>
+								</div>
+							</div>
+							<div id="item2" class="mui-control-content">
+								<div class="picker" id="color-picker"></div>
+							</div>
+							<div id="item3" class="mui-control-content">
+								<div class="bg-tip">上传</div>
+								<label for="bg-video-upload" class="bg-img-upload-wrap" id="video-upload">
+									<i class="iconfont icon-add"></i>
+									<input type="file" id="bg-video-upload">
+								</label>
+								<div class="video-wrap">
+							
+								</div>
+							</div>
+							<div id="item4" class="mui-control-content">
+								<div class="mui-input-group">
+									<div class="mui-input-row mt12">
+										<label>地址</label>
+										<input type="text" class="live-input" placeholder="请输入直播地址">
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#bg-select" id="bg-confirm" class="mui-btn mui-btn-primary mui-btn-block">确定</a>
 					</div>
 				</div>
-				<a href="#bg-select" id="bg-confirm" class="mui-btn mui-btn-primary mui-btn-block">确定</a>
+				
 			</div>
+			
+			
 		</div>
 		<div id="top-title" class="mui-popover">
 			<header class="mui-bar mui-bar-nav">
@@ -413,10 +426,14 @@
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
+		<script src="../../js/colorpicker.js"></script>
 		<script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
 		<script type="text/javascript">
 			(function($) {
 				mui.init();
+				setTimeout(function(){
+					mui('mui-scroll-wrapper').scroll();
+				},5000)
 				var obj = document.getElementById("picker");
 				var a = Colorpicker.create({
 					el: "color-picker",
@@ -640,6 +657,9 @@
 				}
 				var imgListSearch = function() {
 					mui.ajax('/phone/selectbackgroundurlbyphone.do', {
+						data:{
+							token:window.localStorage.getItem('token')
+						},
 						dataType: 'json', //服务器返回json格式数据
 						type: 'get', //HTTP请求类型
 						timeout: 10000, //超时时间设置为10秒；
@@ -666,10 +686,11 @@
 						error: function(xhr, type, errorThrown) {}
 					});
 				}
-				// imgListSearch()
+				imgListSearch()
 				var imgUpload = function(file) {
 					var form = new FormData();
 					form.append('file', file)
+					form.append('token', window.localStorage.getItem('token'))
 					mui.ajax('/phone/uploadbackground.do', {
 						data: form,
 						dataType: 'json', //服务器返回json格式数据
@@ -679,12 +700,15 @@
 						contentType: false,
 						cache: false,
 						success: function(data) {
+							console.log(data);
 							if (data.code == -3) {
 								mui.openWindow({
 									id: 'index',
 									url: '../login.html'
 								});
 								return;
+							}else{
+								imgListSearch()
 							}
 						},
 						error: function(xhr, type, errorThrown) {}
