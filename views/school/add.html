@@ -101,7 +101,7 @@
 				color: #c0c4cc;
 			}
 			#bg-select,#top-title,#main-title,#bottom-title,#down-title{
-				position: fixed;
+				position: absolute;
 				top: 0;
 				left: 0;
 				width: 100vw;
@@ -142,7 +142,6 @@
 			}
 			.bg-tab-wrap{
 				border-top: 1px solid #c8c7cc;
-				height: calc(100vh - 131px);
 				position: relative;
 				padding: 0 16px;
 				overflow: auto;
@@ -194,10 +193,14 @@
 				line-height: 3.7rem;
 				font-size: 1rem;
 			}
-			/* .bg-tab-wrap>div{
-				padding: 0 16px;
-				height: 100%;
-			} */
+			#bg-confirm{
+				position: fixed;
+				bottom: 0;
+			}
+			#bg-select .mui-scroll-wrapper{
+				top: 77px;
+				bottom: 47px;
+			}
 		</style>
 	</head>
 
@@ -288,38 +291,42 @@
 						</a>
 					</div>
 				</div>
-				<div class="bg-tab-wrap">
-					<div id="item1" class="mui-control-content mui-active">
-						<div class="bg-tip">上传</div>
-						<label for="bg-img-upload" class="bg-img-upload-wrap">
-							<i class="iconfont icon-add"></i>
-							<input type="file" id="bg-img-upload">
-						</label>
-						<div class="bg-tip">推荐</div>
-						<div>
-							<ul class="bg-img-list">
-
-							</ul>
-						</div>
-					</div>
-					<div id="item2" class="mui-control-content">
-						<div class="picker" id="color-picker"></div>
-					</div>
-					<div id="item3" class="mui-control-content">
-						<div class="bg-tip">上传</div>
-						<label for="bg-video-upload" class="bg-img-upload-wrap" id="video-upload">
-							<i class="iconfont icon-add"></i>
-							<input type="file" id="bg-video-upload">
-						</label>
-						<div class="video-wrap">
-
-						</div>
-					</div>
-					<div id="item4" class="mui-control-content">
-						<div class="mui-input-group">
-							<div class="mui-input-row mt12">
-								<label>地址</label>
-								<input type="text" class="live-input" placeholder="请输入直播地址">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="bg-tab-wrap">
+							<div id="item1" class="mui-control-content mui-active">
+								<div class="bg-tip">上传</div>
+								<label for="bg-img-upload" class="bg-img-upload-wrap">
+									<i class="iconfont icon-add"></i>
+									<input type="file" id="bg-img-upload">
+								</label>
+								<div class="bg-tip">推荐</div>
+								<div>
+									<ul class="bg-img-list">
+						
+									</ul>
+								</div>
+							</div>
+							<div id="item2" class="mui-control-content">
+								<div class="picker" id="color-picker"></div>
+							</div>
+							<div id="item3" class="mui-control-content">
+								<div class="bg-tip">上传</div>
+								<label for="bg-video-upload" class="bg-img-upload-wrap" id="video-upload">
+									<i class="iconfont icon-add"></i>
+									<input type="file" id="bg-video-upload">
+								</label>
+								<div class="video-wrap">
+						
+								</div>
+							</div>
+							<div id="item4" class="mui-control-content">
+								<div class="mui-input-group">
+									<div class="mui-input-row mt12">
+										<label>地址</label>
+										<input type="text" class="live-input" placeholder="请输入直播地址">
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -419,16 +426,14 @@
 			</div>
 		</div>
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mui.js"></script>
+		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script src="../../js/colorpicker.js"></script>
 		<script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
 		<script type="text/javascript">
 			(function($) {
 				mui.init();
-				setTimeout(function() {
-					mui('mui-scroll-wrapper').scroll();
-				}, 5000)
+				mui('.mui-scroll-wrapper').scroll();
 				var obj = document.getElementById("picker");
 				var a = Colorpicker.create({
 					el: "color-picker",
@@ -799,6 +804,13 @@
 							type: 'post', //HTTP请求类型
 							timeout: 10000, //超时时间设置为10秒；
 							success: function(data) {
+								if (data.code == 200) {
+									mui.openWindow({
+										id: 'index1',
+										url: './index.html'
+									});
+									return;
+								}
 								if (data.code == -3) {
 									mui.openWindow({
 										id: 'index',

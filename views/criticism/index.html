@@ -34,9 +34,15 @@
 			.cri-type{
 				color: #ff0000;
 				border: 1px solid #ff0000;
-				padding: 5px 10px;
+				padding: 4px 10px;
 				display: inline;
 				text-align: center;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				line-clamp: 2;
+				-webkit-box-orient: vertical;
 			}
 			.cri-list-cont{
 				width: calc(100% - 122px);
@@ -170,7 +176,7 @@
 											face +
 											`" alt="">
 																		<div class="cri-list-cont">
-																			<div>${con[i].recognitionName}</div>
+																			<div class="text-overflow">${con[i].recognitionName}</div>
 																			<div>${con[i].recognitionRemark}</div>
 																			<div>${con[i].createTime}</div>
 																		</div>
@@ -244,7 +250,7 @@
 											face +
 											`" alt="">
 																		<div class="cri-list-cont">
-																			<div>${con[i].recognitionName}</div>
+																			<div class="text-overflow">${con[i].recognitionName}</div>
 																			<div>${con[i].recognitionRemark}</div>
 																			<div>${con[i].createTime}</div>
 																		</div>
