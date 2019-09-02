@@ -69,6 +69,19 @@
 			.end {
 				color: #c0c4cc !important;
 			}
+			/*视频适应*/
+			.adapt-video{
+				position: relative;
+				padding-top: 50%;
+				
+			}
+			.adapt-video>video{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+			}
 		</style>
 	</head>
 
@@ -161,13 +174,13 @@
 												<a id="${con[i].id}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 											</div>
 											<div class="mui-slider-handle">
-												<div class="">
+												<div class="adapt-video">
 													<video src="${severAddress}${con[i].video}" controls="controls"  width="100%" height="193"></video>
 												</div>
-												<div class="video-name" style="margin-top: 0.1rem;" data-id="${con[i].id}">
+												<div class="video-name text-overflow" style="margin-top: 0.1rem;" data-id="${con[i].id}">
 													${con[i].text}
 												</div>
-												<p >
+												<p class="text-overflow">
 													${con[i].date}
 												</p>
 											</div>
@@ -218,10 +231,10 @@
 												<a id="${con[i].id}" class="mui-btn mui-btn-red mui-icon iconfont icon-del"></a>
 											</div>
 											<div class="mui-slider-handle">
-												<div class="">
+												<div class="adapt-video">
 													<video src="${severAddress}${con[i].video}" controls="controls"  width="100%" height="193"></video>
 												</div>
-												<div class="video-name" style="margin-top: 0.1rem;" data-id="${con[i].id}">
+												<div class="video-name text-overflow" style="margin-top: 0.1rem;" data-id="${con[i].id}">
 													${con[i].text}
 												</div>
 												<p >

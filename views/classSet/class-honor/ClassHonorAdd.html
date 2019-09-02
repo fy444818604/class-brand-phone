@@ -32,6 +32,8 @@
 				height: 12.933rem;
 				background: #f4f7fa;
 				text-align: center;
+				position: relative;
+				padding-top: 56%;
 
 			}
 
@@ -78,7 +80,6 @@
 
 			/*上传*/
 			.a-upload {
-				padding: 4px 10px;
 				height: 100%;
 				line-height: 20px;
 				position: relative;
@@ -103,6 +104,13 @@
 				filter: alpha(opacity=0);
 				cursor: pointer
 			}
+			.adapt{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+			}
 		</style>
 	</head>
 	<body>
@@ -115,12 +123,14 @@
 			<div class="classHonuours">
 				<!--图标-->
 				<div class="classHonuours-icon">
-					<a class="classHonuours-icon-top a-upload" href="javascript:void(0)" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
-						<input type="file" id="file" />
-						<img id="classHonorIcon" src="" alt="" />
-					</a>
-					<div>
-						<input type="hidden" id="imgUrl" />
+					<div class="adapt">
+						<a class="classHonuours-icon-top a-upload" href="javascript:void(0)" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined">
+							<input type="file" id="file" />
+							<img id="classHonorIcon" src="" alt="" />
+						</a>
+						<div>
+							<input type="hidden" id="imgUrl" />
+						</div>
 					</div>
 				</div>
 				<!--描述-->

@@ -56,7 +56,6 @@
 			/*正文/标题*/
 			.theInput {
 				margin-top: 0.87rem;
-				height: calc(100vh - 14.55rem);
 			}
 
 			input[type=text] {
@@ -94,7 +93,6 @@
 			/*视频*/
 			.shiPing {
 				position: relative;
-				height: 12.933rem;
 				width: 100%;
 				margin-top: 0.8rem;
 			}
@@ -112,14 +110,13 @@
 			/*a  upload */
 			.a-upload {
 				padding: 4px 10px;
-				height: 100%;
 				width: 100%;
+				height: 100%;
 				position: relative;
 				cursor: pointer;
 				color: #888;
 				background: url(../../img/beijingUP.png)no-repeat;
 				background-size: 100% 100%;
-				border: 1px solid #ddd;
 				border-radius: 4px;
 				overflow: hidden;
 				display: inline-block;
@@ -189,7 +186,7 @@
 			}
 
 			.mui-content-cont {
-				height: calc(100vh - 6.66rem);
+				height: calc(100vh - 7.3rem);
 				background: #FFFFFF;
 				padding: 0rem 1rem;
 			}
@@ -236,7 +233,7 @@
 			}
 
 			.grade {
-				height: calc(100vh - 7.9rem);
+				height: calc(100vh - 11rem);
 				overflow: auto;
 			}
 
@@ -304,6 +301,19 @@
 				line-height: 3.7rem;
 				font-size: 1rem;
 			}
+			.adapt-addVideo{
+				position: relative;
+				padding-top: 56%;
+				width: 100%;
+			}
+			.adapt-addVideo>div{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+				
+			}
 		</style>
 	</head>
 	<body>
@@ -322,7 +332,6 @@
 						</div>
 						<div class="theClass-rnt"><a href="#picture" id="level">请选择级别</a></div>
 						<div><a class="mui-navigate-right"></a></div>
-				
 					</li>
 					<li class="mui-table-view-cell flex objetAdd">
 						<div class="theClass-left">
@@ -337,18 +346,23 @@
 					<li class="mui-table-view-cell flex">
 						<div class="theClass-left">视频</div>
 						<div class="shiPing">
-							<!--上传按钮-->
-							<a href="javascript:;" class="a-upload" id="a-upload">
-								<input class="form-control" type="file" accept="video/mp4" value="上传" style="height:100%; " id="video" name="video" />
-							</a>
-							<!--展示视频-->
-							<div class="shiPing-cont">
-								<video style="width: 100%; height: 100%;" src="../../img/7004e5f1e64f882b26149f87ea610d8d.mp4" id="video0"></video>
-								<i id="icon-close" class="iconfont icon-close"></i>
-								<div class="bofang">
-									<i id="iconvideo_" class="iconfont iconvideo_"></i>
+							<div class="adapt-addVideo">
+								<div>
+									<!--上传按钮-->
+									<a href="javascript:;" class="a-upload" id="a-upload">
+										<input class="form-control" type="file" accept="video/mp4" value="上传" style="height:100%; " id="video" name="video" />
+									</a>
+									<!--展示视频-->
+									<div class="shiPing-cont">
+										<video style="width: 100%; height: 100%;" src="../../img/7004e5f1e64f882b26149f87ea610d8d.mp4" id="video0"></video>
+										<i id="icon-close" class="iconfont icon-close"></i>
+										<div class="bofang">
+											<i id="iconvideo_" class="iconfont iconvideo_"></i>
+										</div>
+									</div>
 								</div>
 							</div>
+							
 						</div>
 					</li>
 					<li class="mui-table-view-cell" style="background: #FFFFFF;">
