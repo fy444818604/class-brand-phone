@@ -436,7 +436,7 @@
 
 			function bindListener() {
 				//给所有的 ul li重新绑定移除事件
-				$(".addLI li  i").unbind().click(function() {
+				$("#addLi li  i").unbind().click(function() {
 					//直接通过.remove() 方法移除掉li元素,页面自动就会刷新
 					$(this).parent().parent().remove();
 				});

@@ -150,10 +150,18 @@
 								membersT = data.data.classDetail.total;
 								classNameT = data.data.classDetail.className;
 
-								window.localStorage.setItem('classSlogan', classSlogan)
+								if (notBlank(classSlogan)) {
+									window.localStorage.setItem('classSlogan', classSlogan)
+								} else {
+									window.localStorage.setItem('classSlogan', "");
+								}
 								window.localStorage.setItem('teacherT', teacherT)
 								window.localStorage.setItem('membersT', membersT)
-								window.localStorage.setItem('classNameT', classNameT)
+								if (notBlank(classNameT)) {
+									window.localStorage.setItem('classNameT', classNameT)
+								} else {
+									window.localStorage.setItem('classNameT', "")
+								}
 							}
 						}
 					});
@@ -196,6 +204,30 @@
 				/*	}*/
 				classInformation(1);
 			})(mui);
+
+			function notBlank(data) {
+				var isTrue = true;
+
+				if (!data) {
+					isTrue = false;
+				}
+				if (data == '') {
+					isTrue = false;
+				}
+				if (data == null) {
+					isTrue = false;
+				}
+				if (data == undefined) {
+					isTrue = false;
+				}
+				if (data == 'null') {
+					isTrue = false;
+				}
+				if (data == 'undefined') {
+					isTrue = false;
+				}
+				return isTrue;
+			}
 		</script>
 	</body>
 </html>
