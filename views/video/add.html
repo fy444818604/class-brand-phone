@@ -434,6 +434,10 @@
 			var insert = function() {
 				if ($('#content').val() != "" && level != 0 && boardIds != "" && formData.getAll('inputVideo').length > 0) {
 					var _this = this;
+					var mask = mui.createMask(function(){
+						return false
+					})
+					mask.show()
 					formData.append("token", window.localStorage.getItem('token'));
 					formData.append("title", $('#content').val());
 					formData.append("level", level);
@@ -447,6 +451,7 @@
 						cache: false,
 						timeout: 10000, //超时时间设置为10秒；
 						success: function(data) {
+							mask.close()
 							if (data.code == -3) {
 								mui.openWindow({
 									id: 'login',

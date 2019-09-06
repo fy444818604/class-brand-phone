@@ -146,11 +146,14 @@
 									var html = document.querySelector('#OA_task_1').innerHTML;
 									for (var i = 0; i < con.length; i++) {
 
-										var face = "../../img/home_btn_praise.png";
-										if (con[i].recognitionObjectType == 1 && con[i].userFace) {
+										if (con[i].recognitionObjectType == 1) {
 											var face = con[i].userFace;
-										} else if (con[i].recognitionObjectType == 2 && con[i].classIcon) {
-											var face = con[i].classIcon;
+										} else  {
+											if(con[i].classIcon == null){
+												var face = '../../img/class_placeholder.jpg';
+											}else{
+												var face = con[i].classIcon;
+											}
 										}
 										var icon = "../../img/home_btn_praise.png";
 										if (con[i].recognitionIcon) {
@@ -165,11 +168,11 @@
 												</div>
 												<div class="mui-slider-handle">
 													<div class="mui-table-cell">
-														<div class="title-list"><img src="` +
+														<div class="title-list"><img src="${con[i].recognitionObjectType == 2&&con[i].classIcon == null?'':severAddress}` +
 											face +
 											`"/>${con[i].recognitionName}</div>
 														<div class="flex">
-															<div class="list-left"><img src="` +
+															<div class="list-left"><img src="${severAddress}` +
 											icon +
 											`"/></div>
 															<div>
@@ -227,11 +230,14 @@
 									var html = document.querySelector('#OA_task_2').innerHTML;
 
 									for (var i = 0; i < con.length; i++) {
-										var face = "../../img/home_btn_praise.png";
-										if (con[i].recognitionObjectType == 1 && con[i].userFace) {
+										if (con[i].recognitionObjectType == 1) {
 											var face = con[i].userFace;
-										} else if (con[i].recognitionObjectType == 2 && con[i].classIcon) {
-											var face = con[i].classIcon;
+										} else  {
+											if(con[i].classIcon == null){
+												var face = '../../img/class_placeholder.jpg';
+											}else{
+												var face = con[i].classIcon;
+											}
 										}
 										var icon = "../../img/home_btn_praise.png";
 										if (con[i].recognitionIcon) {
@@ -246,11 +252,11 @@
 												</div>
 												<div class="mui-slider-handle">
 													<div class="mui-table-cell">
-														<div class="title-list"><img src="` +
+														<div class="title-list"><img src="${con[i].recognitionObjectType == 2&&con[i].classIcon == null?'':severAddress}` +
 											face +
 											`"/>${con[i].recognitionName}</div>
 														<div class="flex">
-															<div class="list-left"><img src="` +
+															<div class="list-left"><img src="${severAddress}` +
 											icon +
 											`"/></div>
 															<div>
