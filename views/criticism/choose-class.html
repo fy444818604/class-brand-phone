@@ -178,13 +178,14 @@
 						if (data.code == 200) {
 							document.querySelector('#OA_task_1').innerHTML = '';
 							var con = data.data;
+							console.log(con)
 							var html = '';
 							for (var i = 0; i < con.length; i++) {
 								var html;
 								html += '	<li data-ids = "' + con[i].id +
 									'" class="mui-table-view-cell mui-indexed-list-item mui-radio mui-left">' +
 									'<input class="radio" name="radio" data-text="' + con[i].text + '" type="radio" value="' + con[i].id + '" />' +
-									'<img src="'+severAddress+'/'+con[i].icon+'"/>' +
+									'<img src="../../img/class_placeholder.jpg"/>' +
 									'<div class="choose-wrap">'+
 									'<span>' + con[i].text + '</span>' +
 									'</div>'+
