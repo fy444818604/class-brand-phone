@@ -1,7 +1,7 @@
 {
     "@platforms" : [ "android", "iPhone", "iPad" ],
-    "id" : "H5EFF0C7C", /*应用的标识，创建应用时自动生成，勿手动修改*/
-    "name" : "class-brand-phone", /*应用名称，程序桌面图标名称*/
+    "id" : "H5828AF2C", /*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name" : "班牌", /*应用名称，程序桌面图标名称*/
     "version" : {
         "name" : "1.0.0", /*应用版本名称*/
         "code" : "83"
@@ -118,9 +118,9 @@
                 "android" : {
                     "mdpi" : "", /*普通屏程序图标，分辨率：48x48*/
                     "ldpi" : "", /*大屏程序图标，分辨率：48x48*/
-                    "hdpi" : "", /*高分屏程序图标，分辨率：72x72*/
-                    "xhdpi" : "", /*720P高分屏程序图标，分辨率：96x96*/
-                    "xxhdpi" : ""
+                    "hdpi" : "C:/Users/Administrator/Desktop/UI/班牌_images/school propaganda.png", /*高分屏程序图标，分辨率：72x72*/
+                    "xhdpi" : "D:/QQ/date/2668236239/FileRecv/ic_launcher.png", /*720P高分屏程序图标，分辨率：96x96*/
+                    "xxhdpi" : "D:/QQ/date/2668236239/FileRecv/ic_launcher(1).png"
                 }
             },
             "splashscreen" : {
@@ -155,5 +155,6 @@
                 }
             }
         }
-    }
+    },
+    "fullscreen" : false
 }

@@ -66,6 +66,7 @@
 				line-height: 3.5rem;
 				border-bottom: 1px solid #ebebeb;
 			}
+
 			/*anniu*/
 			.add-classHonours {
 				width: 100%;
@@ -75,6 +76,7 @@
 				left: 0rem;
 				border-radius: 0rem;
 			}
+
 			/*上传*/
 			.a-upload {
 				height: 100%;
@@ -101,7 +103,8 @@
 				filter: alpha(opacity=0);
 				cursor: pointer
 			}
-			.adapt{
+
+			.adapt {
 				position: absolute;
 				top: 0px;
 				left: 0px;
@@ -113,7 +116,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../../index.html"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">新增个人荣誉</h1>
 		</header>
 		<div class="mui-content">
@@ -129,7 +132,7 @@
 							<input id="imgUrl" type="hidden" />
 						</div>
 					</div>
-					
+
 				</div>
 				<!--描述-->
 				<div class="describe">
@@ -149,7 +152,8 @@
 					</div>
 					<div class="" style="margin-top: 1.033rem;">
 						<label>表彰说明</label>
-						<textarea class="textarea" id="userHonorRemark" maxlength="200" rows="8" cols="8" contenteditable="true" placeholder="请输入表彰说明内容"></textarea>
+						<textarea class="textarea" id="userHonorRemark" maxlength="200" rows="8" cols="8" contenteditable="true"
+						 placeholder="请输入表彰说明内容"></textarea>
 					</div>
 				</div>
 			</div>
@@ -168,7 +172,12 @@
 			var type = getQueryString("type");
 
 			var mask = mui.createMask();
-
+			document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'index',
+					url: '../../../index.html'
+				});
+			})
 			if (type == 1) {
 				nickName.value = window.localStorage.getItem('nickName')
 				userHonorIcon.setAttribute('src', severAddress + window.localStorage.getItem('userHonorIcon'))
@@ -214,7 +223,7 @@
 							if (data.code == -3) {
 								//跳转登录页面
 								mui.openWindow({
-									id: 'loginout',
+									id: 'login',
 									url: "../login.html"
 								});
 								return;
@@ -242,7 +251,7 @@
 					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
 					window.localStorage.setItem('userHonorRemark', userHonorRemark.value)
 					mui.openWindow({
-						id: 'index',
+						id: 'classSet-user-honor-studentAdd',
 						url: '../user-honor/studentAdd.html?userHonorId=' + userHonorId + "&type=" + type
 					});
 				});
@@ -254,12 +263,12 @@
 
 			//添加、编辑个人荣誉
 			function operateUserHonor() {
-				
+
 				if (!notBlank(window.localStorage.getItem('workId'))) {
 					mui.alert("请选择对象");
 					return;
 				}
-				
+
 				if (!notBlank(userHonorName.value)) {
 					mui.alert("请输入表彰事项");
 					return;
@@ -269,12 +278,12 @@
 					mui.alert("请输入表彰说明");
 					return;
 				}
-				
-				if (!notBlank( document.getElementById("imgUrl").value)) {
+
+				if (!notBlank(document.getElementById("imgUrl").value)) {
 					mui.alert("请上传表彰图标");
 					return;
 				}
-				
+
 				if (notBlank(userHonorId)) {
 					mui.ajax('/phone/userhonor/update.do', {
 						data: {
@@ -293,7 +302,7 @@
 							if (data.code == -3) {
 								//跳转登录页面
 								mui.openWindow({
-									id: 'loginout',
+									id: 'login',
 									url: "../login.html"
 								});
 								return;
@@ -301,7 +310,7 @@
 
 							if (data.code == 200) {
 								mui.openWindow({
-									id: 'index',
+									id: 'classSet-user-honor-index',
 									url: '../user-honor/index.html'
 								});
 							} else {
@@ -330,7 +339,7 @@
 						success: function(data) {
 							if (data.code == 200) {
 								mui.openWindow({
-									id: 'index',
+									id: 'classSet-user-honor-index',
 									url: '../user-honor/index.html'
 								});
 							} else {

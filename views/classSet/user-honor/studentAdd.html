@@ -88,7 +88,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../../index.html"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">选择表彰对象</h1>
 		</header>
 		<div class="mui-content">
@@ -126,6 +126,12 @@
 			(function($) {
 				existingTeacher('');
 			}(mui))
+			document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'index',
+					url: '../../../index.html'
+				});
+			})
 			//查询现有学生接口
 			function existingTeacher(str) {
 				mui.ajax('/phone/user/selectstudentlistbyclassid.do', {
@@ -141,7 +147,7 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;
@@ -217,7 +223,7 @@
 						window.localStorage.setItem('nickName', checkedText[0])
 						window.localStorage.setItem('workId', checkedValues[0])
 						mui.openWindow({
-							id: 'userHonorAdd',
+							id: 'classSet-user-honor-userHonorAdd',
 							url: 'userHonorAdd.html?type=' + type + '&userHonorId=' + userHonorId
 						});
 					} else {

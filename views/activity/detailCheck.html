@@ -43,7 +43,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class="mui-action-menu mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
+			<a class="mui-action-menu mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">查看报名人</h1>
 		</header>
 		<div class="mui-content">
@@ -91,7 +91,7 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;
@@ -120,6 +120,12 @@
 				//活动id
 				var id = window.location.href.split('&type=')[0].split('id=')[1];
 				search(id)
+				document.querySelector('.mui-pull-right').addEventListener('tap',function(){
+					mui.openWindow({
+						id: 'index',
+						url: '../../index.html'
+					});
+				})
 			})
 		</script>
 	</body>

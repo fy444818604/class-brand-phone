@@ -124,8 +124,8 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="../index.html"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../../index.html"></a>
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left mui-action-back"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">班级荣誉</h1>
 		</header>
 		<div class="mui-content">
@@ -166,7 +166,12 @@
 			mui.ready(function() {
 				listSearch();
 
-
+				document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+					mui.openWindow({
+						id: 'index',
+						url: '../../../index.html'
+					});
+				})
 				//编辑班级荣誉
 				mui(".mui-content").on("tap", ".icon-del", function() {
 					var id = this.getAttribute("id");
@@ -189,7 +194,7 @@
 					window.localStorage.setItem('classHonorRemark', ids[3])
 					//修改/添加班级荣誉
 					mui.openWindow({
-						id: 'classHonor',
+						id: 'classSet-class-honor-ClassHonorAdd',
 						url: 'ClassHonorAdd.html?classHonorId=' + ids[0]
 					});
 				});
@@ -201,7 +206,7 @@
 					window.localStorage.removeItem('classHonorIcon')
 					window.localStorage.removeItem('classHonorRemark')
 					mui.openWindow({
-						id: 'classHonor',
+						id: 'classSet-class-honor-ClassHonorAdd',
 						url: 'ClassHonorAdd.html'
 					});
 				})
@@ -225,7 +230,7 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;
@@ -278,7 +283,7 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;

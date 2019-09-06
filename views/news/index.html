@@ -84,8 +84,8 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" target="_blank" href="../../index.html"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">新闻</h1>
 		</header>
 		<div class="mui-content">
@@ -129,7 +129,12 @@
 				$('#scroll2').scroll({
 					indicators: true //是否显示滚动条
 				});
-
+				document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+					mui.openWindow({
+						id: 'index',
+						url: '../../index.html'
+					});
+				})
 				var curr = 1;
 				var count = 1;
 				var curr1 = 1;
@@ -151,7 +156,7 @@
 							success: function(data) {
 								if (data.code == -3) {
 									mui.openWindow({
-										id: 'index',
+										id: 'login',
 										url: '../login.html'
 									});
 									return;
@@ -203,7 +208,7 @@
 							success: function(data) {
 								if (data.code == -3) {
 									mui.openWindow({
-										id: 'index',
+										id: 'login',
 										url: '../login.html'
 									});
 									return;
@@ -253,7 +258,7 @@
 						success: function(data) {
 							if (data.code == -3) {
 								mui.openWindow({
-									id: 'index',
+									id: 'login',
 									url: '../login.html'
 								});
 								return;
@@ -305,14 +310,14 @@
 					mui(".mui-content").on('tap', '.mui-table-view-cell', function(event) {
 						var id = this.dataset.id
 						mui.openWindow({
-							id: 'index',
+							id: 'news-detail',
 							url: './detail.html?id=' + id
 						});
 					})
 
 					document.querySelector('#add').addEventListener('tap', function() {
 						mui.openWindow({
-							id: 'index',
+							id: 'news-add',
 							url: './add.html'
 						});
 					})

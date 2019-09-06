@@ -87,8 +87,8 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a href="../../index.html" class="mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">视频</h1>
 		</header>
 		<div class="mui-content">
@@ -140,6 +140,12 @@
 				$('#scroll').scroll({
 					indicators: true //是否显示滚动条
 				});
+				document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+					mui.openWindow({
+						id: 'index',
+						url: '../../index.html'
+					});
+				})
 				// 班级通知查询
 				var listSearch = function() {
 					var _this = this;
@@ -157,7 +163,7 @@
 							success: function(data) {
 								if (data.code == -3) {
 									mui.openWindow({
-										id: 'index',
+										id: 'login',
 										url: '../login.html'
 									});
 									return;
@@ -214,7 +220,7 @@
 							success: function(data) {
 								if (data.code == -3) {
 									mui.openWindow({
-										id: 'index',
+										id: 'login',
 										url: '../login.html'
 									});
 									return;
@@ -269,7 +275,7 @@
 						success: function(data) {
 							if (data.code == -3) {
 								mui.openWindow({
-									id: 'index',
+									id: 'login',
 									url: '../login.html'
 								});
 								return;
@@ -317,13 +323,13 @@
 					mui(".mui-content").on('tap', '.video-name', function(event) {
 						var id = this.dataset.id
 						mui.openWindow({
-							id: 'index',
+							id: 'video-detail',
 							url: './detail.html?id=' + id
 						});
 					})
 					document.querySelector('#add').addEventListener('tap', function() {
 						mui.openWindow({
-							id: 'index',
+							id: 'video-add',
 							url: './add.html'
 						});
 					})

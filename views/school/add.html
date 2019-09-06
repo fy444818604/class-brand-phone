@@ -201,13 +201,18 @@
 				top: 77px;
 				bottom: 47px;
 			}
+			#color-picker{
+				position: relative;
+				top: 0;
+				margin-top: 20px;
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">发校宣</h1>
 		</header>
 		<div class="mui-content">
@@ -413,7 +418,7 @@
 					<div class="obje-generations">
 						<div class="mui-input-row mui-checkbox  mui-left parent-input">
 							<label style="text-align: left;">全选</label>
-							<input id="parent-input" name="zhege " type="checkbox">
+							<input id="parent-input" name="zhege" type="checkbox">
 						</div>
 					</div>
 					<ul id="grade" class="obje-grade">
@@ -426,7 +431,7 @@
 			</div>
 		</div>
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.js"></script>
 		<script src="../../js/mui.picker.min.js"></script>
 		<script src="../../js/colorpicker.js"></script>
 		<script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
@@ -434,6 +439,12 @@
 			(function($) {
 				mui.init();
 				mui('.mui-scroll-wrapper').scroll();
+				document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+					mui.openWindow({
+						id: 'index',
+						url: '../../index.html'
+					});
+				})
 				var obj = document.getElementById("picker");
 				var a = Colorpicker.create({
 					el: "color-picker",
@@ -666,7 +677,7 @@
 						success: function(data) {
 							if (data.code == -3) {
 								mui.openWindow({
-									id: 'index',
+									id: 'login',
 									url: '../login.html'
 								});
 								return;
@@ -675,7 +686,7 @@
 							for (var i = 0; i < data.data.length; i++) {
 								html +=
 									`<li>
-											<img src="${'http://192.168.38.209:8080'+data.data[i].background_url}" alt="">
+											<img src="${severAddress}${data.data[i].background_url}" alt="">
 											<div class="img-select">
 												<img src="../../img/select.png" alt="">
 											</div>
@@ -700,10 +711,9 @@
 						contentType: false,
 						cache: false,
 						success: function(data) {
-							console.log(data);
 							if (data.code == -3) {
 								mui.openWindow({
-									id: 'index',
+									id: 'login',
 									url: '../login.html'
 								});
 								return;
@@ -755,7 +765,7 @@
 					var backgroundColor = '';
 					var backgroundUrl = '';
 					if (document.querySelector('#obj-select').dataset.values != undefined) {
-						var boardIds = document.querySelector('#obj-select').dataset.values.split(',')
+						var boardIds = document.querySelector('#obj-select').dataset.values
 					} else {
 						mui.alert('请选择对象')
 					}
@@ -781,7 +791,7 @@
 					} else if (backgroundType == 4) {
 						backgroundUrl = document.querySelector('.live-input').value
 					} else {
-						backgroundUrl = document.querySelector('.school-bg').childNodes
+						backgroundUrl = bgImg().replace(severAddress,'')
 					}
 					if (backgroundType != 3) {
 						mui.ajax('/phone/insertschoolpropaganda.do', {
@@ -806,14 +816,14 @@
 							success: function(data) {
 								if (data.code == 200) {
 									mui.openWindow({
-										id: 'index1',
+										id: 'school-index',
 										url: './index.html'
 									});
 									return;
 								}
 								if (data.code == -3) {
 									mui.openWindow({
-										id: 'index',
+										id: 'login',
 										url: '../login.html'
 									});
 									return;
@@ -846,8 +856,15 @@
 							success: function(data) {
 								if (data.code == -3) {
 									mui.openWindow({
-										id: 'index',
+										id: 'login',
 										url: '../login.html'
+									});
+									return;
+								}
+								if (data.code == 200) {
+									mui.openWindow({
+										id: 'school-index',
+										url: './index.html'
 									});
 									return;
 								}
@@ -870,7 +887,7 @@
 					success: function(data) {
 						if (data.code == -3) {
 							mui.openWindow({
-								id: 'index',
+								id: 'login',
 								url: '../login.html'
 							});
 							return;
@@ -951,6 +968,8 @@
 			})
 			//确定
 			$('.obje-bnt-rnt').on('tap', function() {
+				boardNames = [];
+				boardIds = [];
 				$('.liAktv').each(function() {
 					boardIds.push($(this).attr('data-ids'));
 					boardNames.push($(this).find('div').text());

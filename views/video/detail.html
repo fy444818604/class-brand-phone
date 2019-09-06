@@ -238,7 +238,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">发布图片</h1>
 		</header>
 		<div class="mui-content add-notice">
@@ -295,6 +295,12 @@
 		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
+			document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'index',
+					url: '../../index.html'
+				});
+			})
 			var search = function(id) {
 				mui.ajax('/phone/selectnoticedetail.do', {
 					data: {
@@ -308,7 +314,7 @@
 					success: function(data) {
 						if (data.code == -3) {
 							mui.openWindow({
-								id: 'index',
+								id: 'login',
 								url: '../login.html'
 							});
 							return;
@@ -333,7 +339,7 @@
 					success: function(data) {
 							if (data.code == -3) {
 								mui.openWindow({
-									id: 'index',
+									id: 'login',
 									url: '../login.html'
 								});
 								return;
@@ -357,7 +363,7 @@
 					success: function(data) {
 						if (data.code == -3) {
 							mui.openWindow({
-								id: 'index',
+								id: 'login',
 								url: '../login.html'
 							});
 							return;

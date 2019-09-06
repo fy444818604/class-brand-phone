@@ -59,7 +59,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../../index.html"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">选择科目</h1>
 		</header>
 		<div class="mui-content">
@@ -170,6 +170,12 @@
 			var cancel = document.querySelector('.cancel');
 			var determine = document.querySelector('.determine');
 			var sloganAdd = document.getElementById('sloganAdd')
+			document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'index',
+					url: '../../../index.html'
+				});
+			})
 			//添加
 			mui('.mui-content').on('tap', '.addSubiects', function() {
 				sloganAdd.style.display = "block";
@@ -242,14 +248,14 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;
 						}
 						if (data.code == 200) {
 							mui.openWindow({
-								id: 'index',
+								id: 'classSet-following-teacher-index',
 								url: '../following-teacher/index.html'
 							});
 						} else {
@@ -275,7 +281,7 @@
 					success: function(data) {
 						if (data.code == 200) {
 							mui.openWindow({
-								id: 'index',
+								id: 'classSet-following-teacher-index',
 								url: '../following-teacher/index.html'
 							});
 						} else {

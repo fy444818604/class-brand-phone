@@ -59,7 +59,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../../index.html"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">选择职位</h1>
 		</header>
 		<div class="mui-content">
@@ -259,6 +259,12 @@
 					mui.alert('不能为空')
 				}
 			})
+			document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+				mui.openWindow({
+					id: 'index',
+					url: '../../../index.html'
+				});
+			})
 
 		})
 
@@ -291,14 +297,14 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;
 						}
 						if (data.code == 200) {
 							mui.openWindow({
-								id: 'index',
+								id: 'classSet-class-committee-index',
 								url: '../class-committee/index.html'
 							});
 						} else {
@@ -325,14 +331,14 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;
 						}
 						if (data.code == 200) {
 							mui.openWindow({
-								id: 'index',
+								id: 'classSet-class-committee-index',
 								url: '../class-committee/index.html'
 							});
 						} else {

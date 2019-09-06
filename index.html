@@ -193,7 +193,7 @@
 						success: function(data) {
 							if (data.code == -3) {
 								mui.openWindow({
-									id: 'index',
+									id: 'login',
 									url: 'views/login.html'
 								});
 								return;
@@ -207,7 +207,7 @@
 
 					mui(".card").on('tap', '.class-left', function() {
 						mui.openWindow({
-							id: 'index',
+							id: 'classSet-index',
 							url: 'views/classSet/index.html'
 						});
 					})
@@ -223,49 +223,49 @@
 			})(mui);
 			mui("#notice").on('tap', '.notice', function() {
 				mui.openWindow({
-					id: 'index',
+					id: 'notice-index',
 					url: 'views/notice/index.html'
 				});
 			})
 			mui("#notice").on('tap', '.news', function() {
 				mui.openWindow({
-					id: 'index',
+					id: 'news-index',
 					url: 'views/news/index.html'
 				});
 			})
 			mui("#notice").on('tap', '.picture', function() {
 				mui.openWindow({
-					id: 'index',
+					id: 'picture-index',
 					url: 'views/picture/index.html'
 				});
 			})
 			mui("#notice").on('tap', '.video', function() {
 				mui.openWindow({
-					id: 'index',
+					id: 'video-index',
 					url: 'views/video/index.html'
 				});
 			})
 			mui("#notice").on('tap', '.activity', function() {
 				mui.openWindow({
-					id: 'index',
+					id: 'activity-index',
 					url: 'views/activity/index.html'
 				});
 			})
 			mui("#notice").on('tap', '.praise', function() {
 				mui.openWindow({
-					id: 'index',
+					id: 'praise-index',
 					url: 'views/praise/index.html'
 				});
 			})
 			mui("#notice").on('tap', '.criticism', function() {
 				mui.openWindow({
-					id: 'index',
+					id: 'criticism-index',
 					url: 'views/criticism/index.html'
 				});
 			})
 			mui("#notice").on('tap', '.bulletin', function(e) {
 				e.detail.gesture.preventDefault();
-				mui.prompt('', '请输入授权密码', '授权密码', ['取消', '确认'], function(e) {
+				mui.prompt(' ', '请输入授权密码', '授权密码', ['取消', '确认'], function(e) {
 					if (e.index == 1) {
 						checkPassword(e.value);
 					}
@@ -273,7 +273,7 @@
 			})
 			mui("#notice").on('tap', '.school', function(e) {
 				e.detail.gesture.preventDefault();
-				mui.prompt('', '请输入授权密码', '授权密码', ['取消', '确认'], function(e) {
+				mui.prompt(' ', '请输入授权密码', '授权密码', ['取消', '确认'], function(e) {
 					if (e.index == 1) {
 						checkSchoolPassword(e.value);
 					}
@@ -291,14 +291,14 @@
 					success: function(data) {
 						if (data.code == -3) {
 							mui.openWindow({
-								id: 'index',
+								id: 'login',
 								url: '../login.html'
 							});
 							return;
 						}
 						if (data.code == 200) {
 							mui.openWindow({
-								id: 'index',
+								id: 'bulletin-index',
 								url: 'views/bulletin/index.html?check=' + password
 							});
 						} else {
@@ -320,14 +320,14 @@
 					success: function(data) {
 						if (data.code == -3) {
 							mui.openWindow({
-								id: 'index',
+								id: 'login',
 								url: '../login.html'
 							});
 							return;
 						}
 						if (data.code == 200) {
 							mui.openWindow({
-								id: 'index',
+								id: 'school-index',
 								url: 'views/school/index.html'
 							});
 						} else {
@@ -349,7 +349,7 @@
 					success: function(data) {
 						if (data.code == -3) {
 							mui.openWindow({
-								id: 'index',
+								id: 'login',
 								url: '../login.html'
 							});
 							return;

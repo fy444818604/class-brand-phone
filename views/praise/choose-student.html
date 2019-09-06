@@ -159,7 +159,7 @@
 					success: function(data) {
 						if (data.code == -3) {
 							mui.openWindow({
-								id: 'index',
+								id: 'login',
 								url: '../login.html'
 							});
 							return;
@@ -238,7 +238,7 @@
 					var id = $("input[type='checkbox']:checked").val()!=undefined?$("input[type='checkbox']:checked").val():"";
 					var text = $("input[type='checkbox']:checked").attr('data-text')!=undefined?$("input[type='checkbox']:checked").attr('data-text'):"";
 					mui.openWindow({
-						id: 'index',
+						id: 'praise-add',
 						url: './add.html?id=' + id + '&text=' + text + '&type=1&level=' + level + '&content=' + content +
 							'&remark=' + remark + '&icon=' + icon
 					});

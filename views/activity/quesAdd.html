@@ -112,7 +112,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../index.html"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">创建问卷</h1>
 		</header>
 		<div class="mui-content">
@@ -229,7 +229,7 @@
 					<div class="mui-input-row Hauto mt12" id="queAdd">
 						<div class="quesDiv mui-input-row Hauto mt12" style="padding: 6px 0px;">
 							<p class="addLI-title">
-								<input type="text" class="quesTitle"  placeholder="请输入题目内容" maxlength="40">
+								<input type="text" class="quesTitle" placeholder="请输入题目内容" maxlength="40">
 							</p>
 							<ul class="addLI">
 
@@ -332,7 +332,7 @@
 								if (data.code == -3) {
 									//跳转登录页面
 									mui.openWindow({
-										id: 'loginout',
+										id: 'login',
 										url: "../login.html"
 									});
 									return;
@@ -360,7 +360,12 @@
 					operateActive();
 				})
 
-
+				document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+					mui.openWindow({
+						id: 'index',
+						url: '../../index.html'
+					});
+				})
 
 
 			})(mui);
@@ -433,7 +438,7 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;
@@ -612,14 +617,14 @@
 						if (data.code == -3) {
 							//跳转登录页面
 							mui.openWindow({
-								id: 'loginout',
+								id: 'login',
 								url: "../login.html"
 							});
 							return;
 						}
 						if (data.code == 200) {
 							mui.openWindow({
-								id: 'index',
+								id: 'activity-index',
 								url: '../activity/index.html'
 							});
 						} else {

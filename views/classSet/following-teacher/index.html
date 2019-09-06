@@ -108,8 +108,8 @@
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="../index.html"></a>
-			<a class=" mui-icon mui-icon-home mui-pull-right" href="../../../index.html"></a>
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left mui-action-back"></a>
+			<a class=" mui-icon mui-icon-home mui-pull-right"></a>
 			<h1 class="mui-title">科任老师</h1>
 		</header>
 		<div class="mui-content">
@@ -148,6 +148,12 @@
 				$('#scroll').scroll({
 					indicators: true //是否显示滚动条
 				});
+				document.querySelector('.mui-pull-right').addEventListener('tap', function() {
+					mui.openWindow({
+						id: 'index',
+						url: '../../../index.html'
+					});
+				})
 				// 班级活动查询
 				var listSearch = function() {
 					var _this = this;
@@ -204,7 +210,7 @@
 							if (data.code == -3) {
 								//跳转登录页面
 								mui.openWindow({
-									id: 'loginout',
+									id: 'login',
 									url: "../login.html"
 								});
 								return;
@@ -226,7 +232,7 @@
 				var updateTeacher = function(id) {
 					var ids = id.split("&");
 					mui.openWindow({
-						id: 'teacherUpdate',
+						id: 'classSet-following-teacher-teacherAdd',
 						url: 'teacherAdd.html?classTeacherId=' + ids[0] + '&workId=' + ids[1] + '&subjectName=' + encodeURI(ids[2])
 					});
 				}
@@ -252,7 +258,7 @@
 					mui(".mui-content").on('tap', '.add-slogan', function() {
 						//打开选择老师
 						mui.openWindow({
-							id: 'teacherUpdate',
+							id: 'classSet-following-teacher-teacherAdd',
 							url: 'teacherAdd.html'
 						});
 					})
