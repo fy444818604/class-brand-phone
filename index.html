@@ -280,6 +280,7 @@
 				});
 			})
 			var checkPassword = function(password) {
+				console.log(password)
 				mui.ajax('/phone/checkpushpassword.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
@@ -289,6 +290,7 @@
 					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
+						console.log(data)
 						if (data.code == -3) {
 							mui.openWindow({
 								id: 'login',
@@ -363,16 +365,6 @@
 					error: function(xhr, type, errorThrown) {}
 				});
 			}
-
-			mui.ready(function() {
-				// checkWeChat();
-				// document.querySelector('.classRnt').addEventListener('tap', function() {
-				// 	mui.openWindow({
-				// 		id: 'index',
-				// 		url: 'views/weChat/index.html'
-				// 	});
-				// })
-			});
 		</script>
 	</body>
 </html>

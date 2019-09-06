@@ -206,6 +206,9 @@
 				top: 0;
 				margin-top: 20px;
 			}
+			#item3{
+				min-height: calc(100vh - 200px);
+			}
 		</style>
 	</head>
 
@@ -845,6 +848,10 @@
 						form.append('countDownEndTime', countDownEndTime)
 						form.append('token', window.localStorage.getItem('token'))
 						form.append('file', document.querySelector('#bg-video-upload').files[0])
+						var mask = mui.createMask(function(){
+							return false
+						})
+						mask.show()
 						mui.ajax('/phone/propagandainsertvideo.do', {
 							data: form,
 							dataType: 'json', //服务器返回json格式数据
@@ -867,6 +874,9 @@
 										url: './index.html'
 									});
 									return;
+								}else{
+									mask.close();
+									mui.alert(data.msg)
 								}
 							},
 							error: function(xhr, type, errorThrown) {}

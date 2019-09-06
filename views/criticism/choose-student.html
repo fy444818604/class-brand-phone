@@ -138,9 +138,7 @@
 			var workId = window.localStorage.getItem("workId");
 			var userHonorId = getQueryString("userHonorId");
 			var type = getQueryString("type");
-
 			mui.init();
-
 			//参数接收
 			function GetRequest() {
 				var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
@@ -153,10 +151,6 @@
 					}
 				}
 			}
-
-
-
-
 			(function($) {
 				GetRequest();
 				existingTeacher('');
@@ -236,11 +230,7 @@
 				var list = document.getElementById('list');
 				var done = document.getElementById('done');
 				var search = document.getElementById('search');
-				//calc hieght
 				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
-				//create
-				//				window.indexedList = new mui.IndexedList(list);
-				//点击完成
 				mui(".anniu").on('tap', '#done', function() {
 					var url = decodeURI(decodeURI(location.search)); //获取url中"?"符后的字串，使用了两次decodeRUI解码
 					var theRequest = new Object();
