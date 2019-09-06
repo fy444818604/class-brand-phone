@@ -268,7 +268,7 @@
 
 			(function($) {
 				mui.init();
-				objectData();
+				// objectData();
 				var result = document.querySelector('#timeSelect');
 				result.addEventListener('tap', function() {
 					var _self = this;
@@ -301,7 +301,7 @@
 						document.querySelector('#level-select').innerHTML = level
 						mui('#level').popover('toggle');
 						document.getElementById("activeLevel").value = ids[1];
-
+							
 					}
 				})
 				mui("#mode").on('tap', 'a', function() {
@@ -313,17 +313,19 @@
 						mui('#mode').popover('toggle');
 						document.getElementById("activeChoose").value = ids[1];
 						document.getElementById("activeChooseCount").value = ids[2];
+						objectData();
 					}
 				});
 				var objTchu = document.getElementById('objTchu')
 				document.querySelector('.objetAdd').addEventListener('tap', function() {
 					//判断是不是选择了级别
+					
 					if (notBlank(activeLevel.value)) {
 						//判断是不是有选择班牌的权限
 						mui.ajax('/phone/active/jugeboardpower.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
-								activeLevel: activeLevel.value
+								activeLevel: document.getElementById("activeLevel").value
 							},
 							dataType: 'json', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型
@@ -426,10 +428,11 @@
 
 			//班级数据
 			function objectData() {
+				mui.alert( document.getElementById("activeLevel").value);
 				mui.ajax('/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						level: activeLevel.value
+						level: document.getElementById("activeLevel").value
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
