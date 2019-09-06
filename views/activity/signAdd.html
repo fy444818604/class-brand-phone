@@ -297,7 +297,7 @@
 
 			(function($) {
 				mui.init();
-				objectData();
+				// objectData();
 				var result = document.querySelector('#timeSelect');
 				result.addEventListener('tap', function() {
 					var _self = this;
@@ -330,7 +330,7 @@
 						document.querySelector('#level-select').innerHTML = level
 						mui('#level').popover('toggle');
 						document.getElementById("activeLevel").value = ids[1];
-
+						objectData();
 					}
 				})
 				mui("#mode").on('tap', 'a', function() {
@@ -352,7 +352,7 @@
 						mui.ajax('/phone/active/jugeboardpower.do', {
 							data: {
 								token: window.localStorage.getItem('token'),
-								activeLevel: activeLevel.value
+								activeLevel: document.getElementById("activeLevel").value
 							},
 							dataType: 'json', //服务器返回json格式数据
 							type: 'get', //HTTP请求类型
@@ -445,10 +445,11 @@
 
 			//班级数据
 			function objectData() {
+				console.log( document.getElementById("activeLevel").value);
 				mui.ajax('/phone/selectboard.do', {
 					data: {
 						token: window.localStorage.getItem('token'),
-						level: activeLevel.value
+						level: document.getElementById("activeLevel").value
 					},
 					dataType: 'json', //服务器返回json格式数据
 					type: 'post', //HTTP请求类型
