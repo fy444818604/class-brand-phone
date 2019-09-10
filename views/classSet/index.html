@@ -148,7 +148,8 @@
 								return;
 							}
 							if (data.code == 200) {
-								className.innerText = data.data.classDetail.className;
+								// console.log(data);
+;								className.innerText = data.data.classDetail.className;
 								teacher.innerText = '班主任：' + data.data.classDetail.nickName
 								members.innerText = '班级成员：' + data.data.classDetail.total + '人'
 								classSlogan = data.data.classDetail.classSlogan;
@@ -157,8 +158,10 @@
 								classNameT = data.data.classDetail.className;
 
 								if (notBlank(classSlogan)) {
+									// console.log(22);
 									window.localStorage.setItem('classSlogan', classSlogan)
 								} else {
+									// console.log(11);
 									window.localStorage.setItem('classSlogan', "");
 								}
 								window.localStorage.setItem('teacherT', teacherT)
